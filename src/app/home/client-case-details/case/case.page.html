@@ -1,0 +1,313 @@
+<ion-content (click)="closeDropdowns()">
+    <div class="case-details-wrapper">
+        <div class="details-form-wrap" *ngIf="admission && admission.case">
+            <!-- edit button -->
+            <div class="form-block edit-wrap" *ngIf="mode !='edit' && showEditBtn">
+                <button class="edit-btn" (click)="changeMode('edit')">Edit</button>
+            </div>
+            <!-- <div class="all-case-info-wrap" *ngFor="let info of admission.case.admissionInfo; let i = index"> -->
+            <div class="all-case-info-wrap">
+                <!-- Admission Number -->
+                <div class="form-block">
+                    <div class="input-block">
+                        <div class="form-input-title">
+                            Admission Number
+                        </div>
+                        <div class="form-input preview">
+                            <!-- <input type="text" [(ngModel)]="info.admissionNumber"> -->
+                            <input type="text" [value]="admission.case.admissionNumber" disabled readonly
+                                placeholder="-">
+                            <!-- <div>{{admission.case.admissionNumber}}</div> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Hospital Case Number -->
+                <div class="form-block">
+                    <div class="input-block">
+                        <div class="form-input-title">
+                            Hospital Case Number
+                        </div>
+                        <div class="form-input" [ngClass]="{'preview':mode != 'edit'}">
+                            <!-- <input type="text" [(ngModel)]="info.hospitalCaseName"> -->
+                            <input type="text" [(ngModel)]="admission.case.hospitalCaseName" placeholder="-">
+                        </div>
+                    </div>
+                </div>
+                <!-- Diagnosis-->
+                <div class="form-block">
+                    <div class="input-block">
+                        <div class="form-input-title">
+                            Diagnosis
+                        </div>
+                        <div class="form-input" [ngClass]="{'preview':mode != 'edit'}">
+                            <!-- <input type="text" [(ngModel)]="info.diagnosis"> -->
+                            <input type="text" [(ngModel)]="admission.case.diagnosis" placeholder="-">
+                            <!-- <div class="caret" (click)="openDropdown('diagnosis')">
+            <i class="fa fa-fw fa-angle-down"></i>
+          </div>
+          <div class="dropdown-list" *ngIf="showDiagnosisDropdown">
+            <ul>
+              <li *ngFor="let data of diagnosisList" (click)="selectData('diagnosis',data)">{{data}}</li>
+            </ul>
+          </div> -->
+                            <!-- <div class="dropdown-icon">
+          </div> -->
+                            <!-- <span class="diagnosis-selection"></span> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Facilities -->
+                <div class="form-block">
+                    <div class="input-block">
+                        <div class="form-input-title">
+                            Facilities
+                        </div>
+                        <div class="form-input" [ngClass]="{'preview':mode != 'edit'}">
+                            <!-- <div class="selected-label" (click)="openDropdown(info, 'facility')"> -->
+                            <div class="selected-label" (click)="openDropdown('facility' , $event)">
+                                {{admission.case.facilities}}</div>
+                            <span class="dropdown-icon"></span>
+                            <!-- <span [class]="'facilities-selection'+i"></span> -->
+                            <div class="dropdown-list" *ngIf="admission && admission.case.showFacilityDropdown">
+                                <ul>
+                                    <li class="dropdown-input">
+                                        <input type="text" [(ngModel)]="nameToSearch" (click)="openSearch($event)"
+                                            (input)="searchFacility()" placeholder="Search facility">
+                                    </li>
+                                    <ng-container *ngFor="let name of allFacilities; let j = index">
+                                        <li *ngIf="name.show" (click)="selectFacility(name, j)"
+                                            [ngClass]="{'selected':name.isSelected}">
+                                            {{name.name}}
+                                        </li>
+                                        <!-- <li *ngIf="name.show" (click)="selectFacility(name, j, i)"
+                    [ngClass]="{'selected':name.isSelected, 'disabled': name.isSelected && admission.case.selectedRowIndex !== j}">
+                    {{name.name}}
+                  </li> -->
+                                    </ng-container>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Surgical Code -->
+                <div class="form-block">
+                    <div class="input-block">
+                        <div class="form-input-title surgical-code-title">
+                            Surgical Code
+                        </div>
+                        <div class="form-input-wrap" *ngIf="admission && admission.case">
+                            <div class="surgical-code" *ngFor="let code of admission.case.surgicalCodes; let i=index">
+                                <div class="form-surgical-input" [ngClass]="{'preview':mode != 'edit'}">
+                                    <!-- <div class="selected-label" (click)="openDropdown(info, 'surgical-code')"> -->
+                                    <div class="selected-label" (click)="openSurgicalCodeDropdown(code , $event)">
+                                        {{code.code}}</div>
+                                    <span class="dropdown-icon"></span>
+                                    <div class="dropdown-list" *ngIf="code.showDropdown">
+                                        <ul>
+                                            <li class="dropdown-input">
+                                                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search surgical code"
+                                                    (input)="searchSurgicalCode()" (click)="openSearch($event)"
+                                                    placeholder="Search">
+                                            </li>
+                                            <ng-container *ngFor="let name of allSurgicalCode; let j = index">
+                                                <!-- <li *ngIf="name.show" (click)="selectSurgicalCode(name, j, i)"
+                      [ngClass]="{'selected':name.isSelected}">
+                      {{name.name}}
+                    </li> -->
+                                                <li *ngIf="name.show" (click)="selectSurgicalCode(name, j, i)"
+                                                    [ngClass]="{'selected':name.isSelected && code.selectedRowIndex === j}">
+                                                    {{name.code}}
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                    <!-- <span class="surgical-code-selection{{i}}"></span> -->
+                                </div>
+                                <button (click)="deleteSurgicalCode(code, i)" class="close-button"
+                                    *ngIf="i>0 && mode=='edit'"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-block" *ngIf="mode==='edit'">
+                    <div class="input-block">
+                        <div class="form-input-title">
+                        </div>
+                        <div class="form-input add-new-btn-wrap" (click)="addNewSurgicalCode()">
+                            <button>Add New</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- add new -->
+            <!-- <div class="form-block" *ngIf="mode=='edit'">
+      <div class="input-block">
+        <button class="add-new-btn" (click)="addNew()">Add New</button>
+      </div>
+    </div> -->
+            <!-- radio buttons -->
+            <div class="radio-wrapper">
+                <!-- Inpatient -->
+                <div class="radio-input">
+                    <div class="radio-btn">
+                        <div class="radio-preview"
+                            [ngClass]="admission.case.patientType=='inpatient' ? 'selected-radio-border' : ''"
+                            *ngIf="mode === 'preview'">
+                            <div class="radio-selected" *ngIf="admission.case.patientType=='inpatient'"></div>
+                        </div>
+                        <input type="radio" name="patientType" id="" class="patient-radio"
+                            (click)="selectPatientType('inpatient')" [checked]="admission.case.patientType=='inpatient'"
+                            *ngIf="mode === 'edit'">
+                    </div>
+                    <div class="radio-label" (click)="selectPatientType('inpatient')">
+                        <p>Inpatient</p>
+                    </div>
+                </div>
+                <!-- Day Surgery -->
+                <div class="radio-input">
+                    <div class="radio-btn">
+                        <div class="radio-preview"
+                            [ngClass]="admission.case.patientType=='day-surgery' ? 'selected-radio-border' : ''"
+                            *ngIf="mode === 'preview'">
+                            <div class="radio-selected" *ngIf="admission && admission.case.patientType=='day-surgery'">
+                            </div>
+                        </div>
+                        <input type="radio" name="patientType" id="" class="patient-radio"
+                            (click)="selectPatientType('day-surgery')"
+                            [checked]="admission.case.patientType=='day-surgery'" *ngIf="mode === 'edit'">
+                    </div>
+                    <div class="radio-label" (click)="selectPatientType('day-surgery')">
+                        <p>Day Surgery</p>
+                    </div>
+                </div>
+                <!-- Outpatient -->
+                <div class="radio-input">
+                    <div class="radio-btn">
+                        <div class="radio-preview"
+                            [ngClass]="admission.case.patientType=='outpatient' ? 'selected-radio-border' : ''"
+                            *ngIf="mode === 'preview'">
+                            <div class="radio-selected" *ngIf="admission && admission.case.patientType=='outpatient'">
+                            </div>
+                        </div>
+                        <input type="radio" name="patientType" id="" class="patient-radio"
+                            (click)="selectPatientType('outpatient')"
+                            [checked]="admission.case.patientType=='outpatient'" *ngIf="mode === 'edit'">
+                    </div>
+                    <div class="radio-label" (click)="selectPatientType('outpatient')">
+                        <p>Outpatient</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date Admission -->
+            <div class="form-block" *ngIf="admission && admission.case && admission.case.patientType !== 'outpatient'">
+                <!-- <div class="form-block"> -->
+
+                <div class="date-wrap">
+                    <div class="form-input-title">
+                        Admission Date
+                    </div>
+                    <div class="date-input">
+                        <div class="date-input-wrap">
+                            <ion-datetime id="admissionDatepicker"
+                                (ionChange)="changeDateFormat('admission-date', admissionDate)"
+                                [ngModelOptions]="{standalone: true}" [(ngModel)]="admissionDate"
+                                displayFormat="DD/MM/YYYY" [hidden]="true">
+                            </ion-datetime>
+                            <input readonly type='text' class='reg-input' placeholder="Admission Date"
+                                id="admission-date" [ngClass]="{'preview':mode != 'edit'}" name="admission-date"
+                                (mouseleave)="(this.type='text')" max="date" [value]="admission.case.admissionDate"
+                                onclick="document.getElementById('admissionDatepicker').click()">
+                            <ion-icon name="calendar" class="calendar" [ngClass]="{'preview':mode != 'edit'}"
+                                onclick="document.getElementById('admissionDatepicker').click()">
+                            </ion-icon>
+                        </div>
+                        <div class="time-input-wrap">
+                            <ion-datetime id="timepicker" displayFormat="hh:mm a" pickerFormat="hh mm a"
+                                (ionChange)="changeDateFormat('admission-time', admissionTime)"
+                                [(ngModel)]="admissionTime" [ngModelOptions]="{standalone: true}" [hidden]="true"
+                                minuteValues="0,15,30,45">
+                            </ion-datetime>
+                            <input readonly type='text' class='reg-input' placeholder="Admission Time"
+                                [ngClass]="{'preview':mode != 'edit'}" (mouseleave)="(this.type='text')" max="date"
+                                onclick="document.getElementById('timepicker').click()"
+                                [value]="admission.case.admissionTime">
+                            <div class="caret" onclick="document.getElementById('timepicker').click()"
+                                [ngClass]="{'preview':mode != 'edit'}">
+                                <!-- <i class="fa fa-fw fa-angle-down"></i> -->
+                                <div class="dropdown-icon">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- admissionTime Discharge -->
+            <div class="form-block" *ngIf="admission && admission.case && admission.case.patientType !== 'outpatient'">
+
+                <div class="date-wrap">
+                    <div class="form-input-title">
+                        Discharge Date
+                    </div>
+                    <div class="date-input">
+                        <div class="date-input-wrap">
+                            <ion-datetime mode="ios" id="dischargeDatepicker"
+                                (ionChange)="changeDateFormat('discharge-date', dischargeDate)"
+                                displayFormat="DD/MM/YYYY" [hidden]="true" [(ngModel)]="dischargeDate"
+                                [ngModelOptions]="{standalone: true}">
+                            </ion-datetime>
+                            <input readonly type='text' class='reg-input' placeholder="Discharge Date"
+                                id="discahrge-date" name="dischargeDatepicker" (mouseleave)="(this.type='text')"
+                                max="date" [ngClass]="{'preview':mode != 'edit'}"
+                                onclick="document.getElementById('dischargeDatepicker').click()"
+                                [value]="admission.case.dischargeDate" [disabled]="disableDischargeDate">
+                            <ion-icon name="calendar" class="calendar"
+                                [ngClass]="{'preview':mode != 'edit' || disableDischargeDate}"
+                                onclick="document.getElementById('dischargeDatepicker').click()">
+                            </ion-icon>
+                        </div>
+                        <div class="time-input-wrap">
+                            <ion-datetime mode="ios" id="discharge-timepicker"
+                                (ionChange)="changeDateFormat('discharge-time', dischargeTime)"
+                                [(ngModel)]="dischargeTime" displayFormat="hh:mm a" pickerFormat="hh mm a"
+                                minuteValues="0,15,30,45" [hidden]="true" [ngModelOptions]="{standalone: true}">
+                            </ion-datetime>
+                            <input readonly type='text' class='reg-input' placeholder="Discharge Time"
+                                [ngClass]="{'preview':mode != 'edit'}" (mouseleave)="(this.type='text')" max="date"
+                                onclick="document.getElementById('discharge-timepicker').click()"
+                                [value]="admission.case.dischargeTime" [disabled]="disableDischargeDate">
+                            <div class="caret dropdown-icon"
+                                onclick="document.getElementById('discharge-timepicker').click()"
+                                [ngClass]="{'preview':mode != 'edit'}" [hidden]="disableDischargeDate">
+                                <!-- <i class="fa fa-fw fa-angle-down"></i> -->
+                                <div class="dropdown-icon" style="margin-right: 0;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Warded Number -->
+            <div class="form-block" *ngIf="admission && admission.case && admission.case.patientType !== 'outpatient'">
+                <div class="input-block">
+                    <div class="form-input-title">
+                        Ward Number
+                    </div>
+                    <div class="form-input" [ngClass]="{'preview':mode != 'edit'}">
+                        <input type="text" [(ngModel)]="admission.case.wardNumber">
+                    </div>
+                </div>
+            </div>
+
+            <!-- save -->
+            <div class="form-block" *ngIf="mode=='edit'">
+                <div class="input-block">
+                    <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ion-content>

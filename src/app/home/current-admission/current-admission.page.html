@@ -1,0 +1,139 @@
+<ion-content>
+  <div class="admission-date-range-blk">
+    <span class="date-label">Date</span>
+    <div class="date-sub-blk">
+      <!-- <span class="date-value">30 Apr, 2020</span> -->
+      <ion-datetime id="case-start-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+        (click)="dateClicked('start-date')" [(ngModel)]="admissionDateFrom" [ngModelOptions]="{standalone: true}">
+      </ion-datetime>
+      <ion-icon name="calendar" class="calendar" onclick="document.getElementById('case-start-date').click()">
+      </ion-icon>
+    </div>
+    <span class="date-label">to</span>
+    <div class="date-sub-blk">
+      <!-- <span class="date-value">01 July, 2020</span> -->
+      <ion-datetime id="case-end-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+        (click)="dateClicked('end-date')" [(ngModel)]="admissionDateTo" [ngModelOptions]="{standalone: true}"
+        max="2099-10-31">
+      </ion-datetime>
+      <ion-icon name="calendar" class="calendar" onclick="document.getElementById('case-end-date').click()">
+      </ion-icon>
+    </div>
+  </div>
+  <div class="current-admission-container">
+    <div class="current-admission-table">
+      <div class="current-admission-header-row">
+        <div class="current-admission-table-head current-admission-col-1-width">
+          <span class="current-admission-table-head-span">Patient Name</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByPatientNameDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'patientName' && sortingObject.order == 'desc')}">
+            </div>
+            <div class="arrow-down" (click)="sortByPatientNameAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'patientName' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-2-width">
+          <span class="current-admission-table-head-span">Case</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByCaseDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'case' && sortingObject.order == 'desc')}"></div>
+            <div class="arrow-down" (click)="sortByCaseAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'case' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-3-width">
+          <span class="current-admission-table-head-span">Type</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByTypeDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'type' && sortingObject.order == 'desc')}"></div>
+            <div class="arrow-down" (click)="sortByTypeAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'type' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-4-width">
+          <span class="current-admission-table-head-span">Facilities</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByFacilitiesDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'facilities' && sortingObject.order == 'desc')}">
+            </div>
+            <div class="arrow-down" (click)="sortByFacilitiesAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'facilities' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-5-width">
+          <span class="current-admission-table-head-span">Ward No</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByWardNoDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'wardNo' && sortingObject.order == 'desc')}"></div>
+            <div class="arrow-down" (click)="sortByWardNoAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'wardNo' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-6-width">
+          <span class="current-admission-table-head-span">Admission Date/Time</span>
+          <div class="arrow-wrapper">
+            <div class="arrow-up" (click)="sortByAdmissionDateDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'date' && sortingObject.order == 'desc')}"></div>
+            <div class="arrow-down" (click)="sortByAdmissionDateAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'date' && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+        <div class="current-admission-table-head current-admission-col-7-width">
+          <span class="current-admission-table-head-span">Doctors</span>
+          <!-- <div class='arrow-wrapper'>
+            <div class="arrow-up" (click)="sortByDoctorsDesc()"
+              [ngClass]="{'selected-desc': (sortingObject.type == 'doctors' && sortingObject.order == 'desc')}">
+            </div>
+            <div class="arrow-down" (click)="sortByDoctorsAsc()"
+              [ngClass]="{'selected-asc': (sortingObject.type == 'doctors' && sortingObject.order == 'asc')}"></div>
+          </div> -->
+        </div>
+      </div>
+      <div class="current-admission-main-content" *ngIf="!admissionsPresent">
+        <p class="no-cases-msg">No cases present!</p>
+      </div>
+      <div class="current-admission-main-content" *ngIf="admissionsPresent">
+        <ng-container *ngFor="let admission of allAdmissions;">
+          <!-- <div class="current-admission-main-row" [ngClass]="admission.highlight == true ? 'highlight-bg' : ''"> -->
+          <div class="current-admission-main-row" *ngIf="admission.highlight == false"
+            [ngClass]="admission.highlight == true ? 'highlight-bg' : ''">
+            <div class="current-admission-table-main-content current-admission-col-1-width">
+              <span class="current-admission-table-main-content-span">{{admission.patientName}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-2-width">
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission.case !== ''">{{admission.case}}</span>
+              <span class="current-admission-table-main-content-span" *ngIf="admission.case === ''">-</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-3-width">
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission.type !== ''">{{admission.type}}</span>
+              <span class="current-admission-table-main-content-span" *ngIf="admission.type == ''">-</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-4-width">
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission.facilities != ''">{{admission.facilities}}</span>
+              <span class="current-admission-table-main-content-span" *ngIf="admission.facilities == ''">-</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-5-width">
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission.wardNumber !== ''">{{admission.wardNumber}}</span>
+              <span class="current-admission-table-main-content-span" *ngIf="admission.wardNumber === ''">-</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.admissionDate}}</span>
+              <span class="current-admission-table-main-content-span">{{admission.admissionTime}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-7-width">
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission && admission.doctors && admission.doctors.length > 0">{{admission.doctors}}</span>
+              <span class="current-admission-table-main-content-span"
+                *ngIf="admission && admission.doctors && admission.doctors.length == 0">-</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ion-content>

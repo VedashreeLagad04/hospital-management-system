@@ -1,0 +1,577 @@
+<ion-content>
+  <div class="registration-wrapper">
+    <form class="registration-form" name="form" #f="ngForm" [hidden]="!editPage" (click)="closeAllDropdown()">
+      <div class="registration-container">
+        <div class="registration-name regFormInput" ngClass="{'has-warning': !form.fullname.isValid}">
+          <div class="input-label-wrap">
+            <label class="input-label">Full Name <br />
+              <span> (as in NRIC/FIN/Foreign ID) </span>
+            </label>
+          </div>
+          <input type="text" class="reg-input text-transform" placeholder="Name" [(ngModel)]="user.name" #name="ngModel"
+            name="fullname" oninput="this.value = this.value.replace(/[^a-zA-Z .]/g, '').replace(/(\..*)\./g, '$1');"
+            required disabled />
+          <div *ngIf="name.touched && errorNameMsg" class="errmsg">
+            <span>{{errorNameMsg}}</span>
+          </div>
+        </div>
+        <div class="registration-nric regFormInput" *ngIf='user.nationality != "foreigner"'
+          ngClass="{'has-warning': !form.nric.isValid}">
+          <div class="input-label-wrap">
+            <label class="input-label">NRIC/FIN </label>
+          </div>
+          <div class="input-wrap">
+            <input type="text" class="reg-input" placeholder="nric" [(ngModel)]="user.nric" id="nric" #nric="ngModel"
+              name="nric" required disabled />
+            <div *ngIf="nric.touched && errorNricMsg" class="errmsg">
+              <span>{{errorNricMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput" *ngIf='user.nationality === "foreigner"'>
+          <div class="input-label-wrap">
+            <label class="input-label">Foreign ID </label>
+          </div>
+          <div class="input-wrap">
+            <input type="text" class="reg-input" placeholder="Foreign ID" [(ngModel)]="user.foreignId" name="foreignId"
+              #foreignId="ngModel" required (focusout)="checkIfPresent('foreignId')" disabled />
+            <div *ngIf="foreignId.touched && errorForeignIdMsg" class="errmsg">
+              <span>{{errorForeignIdMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput" *ngIf='user.nationality === "foreigner"'>
+          <div class="input-label-wrap">
+            <label class="input-label">Passport Number</label>
+          </div>
+          <div class="input-wrap">
+            <input type="text" class="reg-input" placeholder="Passport Number" [(ngModel)]="user.passportNumber"
+              name="passportNumber" #passportNumber="ngModel" required (focusout)="checkIfPresent('passportNumber')" />
+            <div *ngIf="passportNumber.touched && errorPassportNumberMsg" class="errmsg">
+              <span>{{errorPassportNumberMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Gender </label>
+          </div>
+          <div class="dropdown-input-box">
+            <div class="dropdown-input" (click)="openDropdown($event,'gender')">
+              <p class="dropdown-title text-transform">{{user.gender}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showGenderDropdown">
+              <li (click)="selectGender('Male')">Male</li>
+              <li (click)="selectGender('Female')">Female</li>
+            </ul>
+          </div>
+          <!-- <div *ngIf="gender.touched && errorGenderMsg" class="errmsg">
+              <span>{{errorGenderMsg}}</span>
+            </div> -->
+        </div>
+        <div class="registration-dob regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Date of Birth</label>
+          </div>
+          <div class="registration-input-div">
+            <ion-datetime mode="ios" id="dobDatepicker" (ionChange)="changeDateFormat();validateDate()"
+              [(ngModel)]="dateOfBirth" displayFormat="DD/MM/YYYY" [hidden]="true" disabled
+              [ngModelOptions]="{standalone: true}">
+            </ion-datetime>
+            <input readonly type="text" class="reg-input" id="dob" value="{{user.dateOfBirth}}" disabled
+              placeholder="Date of birth" name="dateOfBirth" (mouseleave)="(this.type='text')" max="date"
+              onclick="document.getElementById('dobDatepicker').click()" />
+            <!-- <ion-icon name="calendar" class="calendar" onclick="document.getElementById('dobDatepicker').click()">
+              </ion-icon> -->
+          </div>
+          <div *ngIf="errordobMsg" class="errmsg">
+            <span>{{errordobMsg}}</span>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Email Address</label>
+          </div>
+          <div class="input-wrap">
+            <input type="email" class="reg-input" placeholder="Email" [(ngModel)]="user.email" name="email"
+              #email="ngModel" (focusout)="validateEmail()" (input)="validateEmail()" required />
+            <div *ngIf="email.touched && errorEmailMsg" class="errmsg">
+              <span>{{errorEmailMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Contact Number (M)</label>
+          </div>
+          <div class="input-wrap">
+            <div class="registration-contact">
+              <!-- <img src="./assets/images/800px-National_Flag_of_Singapore.svg.png" /> -->
+              <label name="contact">+65 </label>
+              <input type="text" class="reg-input contact-input" placeholder="Contact Number (M)"
+                [(ngModel)]="user.contactNo" #contactNo="ngModel" name="contactNo" maxlength="8"
+                (input)="validateMobileNo()" required />
+            </div>
+            <div *ngIf="contactNo.touched && errorContactMsg" class="errmsg">
+              <span>{{errorContactMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Contact Number (H)</label>
+          </div>
+          <div class="input-wrap">
+            <div class="registration-contact">
+              <!-- <img src="./assets/images/800px-National_Flag_of_Singapore.svg.png" /> -->
+              <label name="contact">+65 </label>
+              <input type="text" class="reg-input contact-input" placeholder="Contact Number (H)"
+                [(ngModel)]="user.homeContactNo" #homeContactNo="ngModel" name="homeContactNo" maxlength="8"
+                (input)="validateHomeContactNo()"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+            </div>
+            <div *ngIf="homeContactNo.touched && errorHomeContactMsg" class="errmsg">
+              <span>{{errorHomeContactMsg}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Nationality </label>
+          </div>
+          <div class="dropdown-input-box">
+            <div class="dropdown-input" (click)="openDropdown($event,'nationality')">
+              <p class="dropdown-title">{{nationality}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showNationalityDropdown">
+              <li (click)="selectNationality('Singaporean / Singapore PR')">
+                Singaporean / Singapore PR
+              </li>
+              <li (click)="selectNationality('Long-term Pass')">
+                Long-term Pass
+              </li>
+              <li (click)="selectNationality('foreigner')">Foreigner</li>
+            </ul>
+          </div>
+          <div class="regFormInput" [hidden]='user.nationality !== "foreigner"'>
+            <div class="input-label-wrap">
+              <label class="input-label">Country </label>
+            </div>
+            <span class="profile-country-selection"></span>
+          </div>
+        </div>
+        <div class="reg-address regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-main-label">Residential Address </label>
+          </div>
+          <textarea class="reg-input textarea text-transform" #address="ngModel" [(ngModel)]="user.address"
+            name="address" id="" placeholder="address"></textarea>
+        </div>
+        <div class="regFormInput">
+          <div class="row">
+            <div class="input-label-wrap">
+              <label class="input-label">Weight </label>
+            </div>
+            <div class="registration-contact">
+              <input type="text" class="reg-input1" placeholder="Weight kg" [(ngModel)]="user.weight" name="weight"
+                (input)="calculateBmi()" (focusout)="calculateBmi()" #weight="ngModel"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+              <label class="weight" name="weight" *ngIf="kgLabel==true">kg</label>
+            </div>
+            <div class="input-label-wrap">
+              <label class="input-label">Height </label>
+            </div>
+            <div class="registration-contact">
+              <input type="text" class="reg-input1" placeholder="Height cm" [(ngModel)]="user.height" name="height"
+                (input)="calculateBmi()" (focusout)="calculateBmi()" #height="ngModel"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+              <label name="weight" class="weight" *ngIf="cmLabel==true">cm</label>
+            </div>
+            <div class="input-label-wrap">
+              <label class="input-label">BMI </label>
+            </div>
+            <input type="text" class="reg-input" placeholder="BMI" [(ngModel)]="user.bmi" name="bmi" #bmi="ngModel"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+          </div>
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">Next-of-Kin (NOK)</label>
+          </div>
+          <input type="text" class="reg-input" placeholder="NOK" [(ngModel)]="user.nok" name="nok" #nok="ngModel"
+            required />
+          <!-- <div *ngIf="nok.touched && errorNokMsg" class="errmsg">
+              <span>{{errorNokMsg}}</span>
+            </div> -->
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">NOK Relationship</label>
+          </div>
+          <input type="text" class="reg-input" placeholder="NOK Relationship" [(ngModel)]="user.nokRelationship"
+            name="nokRelationship" #nokRelationship="ngModel" required />
+          <!-- <div *ngIf="nokReletionship.touched && errorNokReletionshipMsg" class="errmsg">
+              <span>{{errorNokReletionshipMsg}}</span>
+            </div> -->
+        </div>
+        <div class="regFormInput">
+          <div class="input-label-wrap">
+            <label class="input-label">NOK Contact Number</label>
+          </div>
+          <div class="registration-contact">
+            <!-- <img src="./assets/images/800px-National_Flag_of_Singapore.svg.png" /> -->
+            <label name="contact">+65 </label>
+            <input type="text" class="reg-input contact-input" placeholder="Contact Number (H)"
+              [(ngModel)]="user.nokContact" #nokContact="ngModel" name="nokContact" maxlength="8"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+          </div>
+          <!-- <div *ngIf="nokContact.touched && errorNokContactMsg" class="errmsg">
+              <span>{{errorNokContactMsg}}</span>
+            </div> -->
+        </div>
+        <div class="regFormInput" *ngIf="user && user.drugAllergy">
+          <div class="input-label-wrap">
+            <label class="input-label">Drug Allergy</label>
+          </div>
+          <div class="food-div">
+            <div class="radio-div">
+              <input type="radio" id="drugYes" name="drugYes" value="Yes" class="radio1"
+                [(ngModel)]="user.drugAllergyAnswer" />
+              <label for="drugYes">Yes</label>
+              <input type="radio" id="drugNo" name="drugNo" value="No" class="radio" (click)="resetDrugAllergy()"
+                [(ngModel)]="user.drugAllergyAnswer" />
+              <label for="drugNo">No</label>
+            </div>
+            <div class="food" *ngIf="user.drugAllergyAnswer === 'Yes'">
+              <div class="allergy-input-wrap" *ngFor="let drug of user.drugAllergy;let i=index">
+                <input type="text" class="allergy-input" placeholder="Drug Allergy" [(ngModel)]="drug.allergy"
+                  [ngModelOptions]="{standalone: true}" />
+                <button (click)="deleteDrug(i)" class="close-button" *ngIf="i > 0"></button>
+              </div>
+            </div>
+          </div>
+          <div class="button" *ngIf="user.drugAllergyAnswer === 'Yes'">
+            <div class="drug-btn-wrapper" (click)="addDrug()">
+              <button class="drug-btn">Add Drug Allergy</button>
+            </div>
+          </div>
+          <!-- <div *ngIf="drugAllergy.touched && errorDrugAllergyMsg" class="errmsg">
+              <span>{{errorDrugAllergyMsg}}</span>
+            </div> -->
+        </div>
+        <div class="regFormInput" *ngIf="user && user.foodAllergy">
+          <div class="input-label-wrap">
+            <label class="input-label">Food Allergy</label>
+          </div>
+          <div class="food-div">
+            <div class="radio-div">
+              <input type="radio" id="foodYes" name="foodYes" value="Yes" class="radio1"
+                [(ngModel)]="user.foodAllergyAnswer" />
+              <label for="foodYes">Yes</label>
+              <input type="radio" id="foodNo" name="foodNo" value="No" class="radio" (click)="resetFoodAllergy()"
+                [(ngModel)]="user.foodAllergyAnswer" />
+              <label for="foodNo">No</label>
+            </div>
+            <div class="food" *ngIf="user.foodAllergyAnswer === 'Yes'">
+              <div class="allergy-input-wrap" *ngFor="let food of user.foodAllergy;let i=index">
+                <input type="text" class="allergy-input" placeholder="Food Allergy" [(ngModel)]="food.allergy"
+                  [ngModelOptions]="{standalone: true}" />
+                <button (click)="deleteFood(i)" class="close-button" *ngIf="i > 0"></button>
+              </div>
+            </div>
+          </div>
+          <div class="button" *ngIf="user.foodAllergyAnswer === 'Yes'">
+            <div class="drug-btn-wrapper" (click)="addFood()">
+              <button class="drug-btn">Add Food Allergy</button>
+            </div>
+          </div>
+          <!-- <div *ngIf="foodAllergy.touched && errorFoodAllergyMsg" class="errmsg">
+              <span>{{errorFoodAllergyMsg}}</span>
+            </div> -->
+        </div>
+        <div class="regFormInput">
+          <div class="row">
+            <div class="radio-gender-item habits">
+              <div class="habits-label-block">
+                <input class="form-radio-input" type="checkbox" id="smoker" name="smoker" #smoker="ngModel"
+                  [(ngModel)]="user.smoker" value="yes" [checked]='user.smoker ==="smoker"' />
+                <label for="smoker" class="checkbox-label">Smoker</label>
+              </div>
+              <div class="flagValue" *ngIf="user.smoker">
+                <label class="declare-label">Declared in Policy</label>
+                <input class="form-radio-input" id="smoker-yes" type="radio" name="smokerValue" #smokerValue="ngModel"
+                  [(ngModel)]="user.smokerValue" value="Declared in Policy"
+                  [checked]='user.smokerValue ==="Declared in Policy"' />
+                <label for="smoker-yes" class="radio-label">Yes</label>
+                <input class="form-radio-input" id="smoker-no" type="radio" name="smokerValue" #smokerValue="ngModel"
+                  [(ngModel)]="user.smokerValue" value="Not Declared in Policy"
+                  [checked]='user.smokerValue ==="Not Declared in Policy"' />
+                <label for="smoker-no" class="radio-label">No</label>
+              </div>
+            </div>
+            <div class="radio-gender-item col-6 habits">
+              <div class="habits-label-block">
+                <input class="form-radio-input" id="drinker" type="checkbox" name="drinker" #drinker="ngModel"
+                  [(ngModel)]="user.drinker" value="yes" [checked]='user.drinker ==="drinker"' />
+                <label for="drinker" class="checkbox-label">Drinker</label>
+              </div>
+              <div class="flagValue" *ngIf="user.drinker">
+                <label class="declare-label">Declared in Policy</label>
+                <input class="form-radio-input" id="drinkerValueYes" type="radio" name="drinkerValue"
+                  #drinkerValue="ngModel" [(ngModel)]="user.drinkerValue" value="Declared in Policy"
+                  [checked]='user.drinkerValue ==="yes"' />
+                <label for="drinkerValueYes" class="radio-label">Yes</label>
+                <input class="form-radio-input" id="drinkerValueNo" type="radio" name="drinkerValue"
+                  #drinkerValue="ngModel" [(ngModel)]="user.drinkerValue" value="Not Declared in Policy"
+                  [checked]='user.drinkerValue ==="no"' />
+                <label for="drinkerValueNo" class="radio-label">No</label>
+              </div>
+            </div>
+          </div>
+          <!-- <div *ngIf="gender.touched && errorGenderMsg" class="errmsg">
+              <span>{{errorGenderMsg}}</span>
+            </div> -->
+        </div>
+        <div class="signature-block" *ngIf="user && user.guardian === true">
+          <input type="checkbox" id="requireParent" name="requireParent" [checked]="user.guardian === true" />
+          <label class="signature-text">Require Parent/Guardian signature for all forms</label>
+          <div class="exclaim">
+            <button class="exclaim-button exclaim-button--small" (click)="openPopover()">
+              <div class="popover-wrapper" *ngIf="isExclaimOpen">
+                <span>By default, patient below the age of 21, will require
+                  parent/guardian signature for all forms. Ticking this box will
+                  require parent/guardian signature regardless of age.</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="registration-container">
+        <div class="registration-button">
+          <button class="submit-button reg-button" type="submit" (click)="updateProfile()">
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="client-info-wrapper" *ngIf="editPage == false">
+      <div class="edit-button"
+        *ngIf="loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management')">
+        <button class="reg-button" type="button" (click)="editMode()">
+          Edit
+        </button>
+      </div>
+      <span class="client-info-text">Client Profile</span>
+      <div class="client-info-container">
+        <div class="client-info-sub-blk1">
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Full Name
+              <span>(as in NRIC/FIN/Foreign ID)</span>
+            </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value text-transform">{{user.name}}</span>
+          </div>
+          <div class="client-info-label-wrap" *ngIf="user.nationality !== 'foreigner'">
+            <label class="client-info-label" *ngIf="user.nric && user.nric != ''">NRIC
+            </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value" *ngIf="user.nric && user.nric != ''">{{user.nric}}</span>
+          </div>
+          <div class="client-info-label-wrap" *ngIf="user.nationality === 'foreigner'">
+            <label class="client-info-label" *ngIf="user.foreignId && user.foreignId != ''">Foreign ID
+            </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value"
+              *ngIf="user.foreignId && user.foreignId != ''">{{user.foreignId}}</span>
+          </div>
+          <div class="client-info-label-wrap"
+            *ngIf="user.nationality === 'foreigner' && user.passportNumber && user.passportNumber != ''">
+            <label class="client-info-label">Passport Number </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value"
+              *ngIf="user.passportNumber && user.passportNumber != ''">{{user.passportNumber}}
+            </span>
+            <span class="client-info-blk1-value"
+              *ngIf="!user.passportNumber || (user.passportNumber && user.passportNumber == '')">-
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Gender </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value text-transform">{{user.gender}}</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Date of Birth </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value">{{user.dateOfBirth}}</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Email </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value">{{user.email}}</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Contact Number (Mobile) </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value">+65 {{user.contactNo}}</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Contact Number (Home) </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value" *ngIf="user.homeContactNo && user.homeContactNo!== ''">+65
+              {{user.homeContactNo}}</span>
+            <span class="client-info-blk1-value" *ngIf="!user.homeContactNo || user.homeContactNo=== ''">
+              -</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Nationality </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value text-transform"
+              *ngIf="user.nationality !== 'foreigner'">{{user.nationality}}</span>
+            <span class="client-info-blk1-value text-transform"
+              *ngIf="user.nationality === 'foreigner'">{{user.country}}</span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Address </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk1-value text-transform"
+              *ngIf="user.address && user.address.length !== 0">{{user.address}}</span>
+            <span class="client-info-blk2-value text-transform" *ngIf="!user.address || user.address.length === 0">
+              -
+            </span>
+          </div>
+        </div>
+        <div class="client-info-sub-blk2">
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Weight </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value" *ngIf="user.weight && user.weight.length !== 0">{{user.weight}} <label
+                class="height" name="weight">kg</label>
+            </span>
+            <span class="client-info-blk2-value" *ngIf="!user.weight || user.weight.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Height </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value" *ngIf="user.height && user.height.length !== 0">{{user.height}} <label
+                class="height" name="height">cm</label>
+            </span>
+            <span class="client-info-blk2-value" *ngIf="!user.height || user.height.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">BMI </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value" *ngIf="user.bmi && user.bmi.length !== 0">{{user.bmi}}</span>
+            <span class="client-info-blk2-value " *ngIf="!user.bmi || user.bmi.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Next-of-Kin (NOK) </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value" *ngIf="user.nok && user.nok.length !== 0">{{user.nok}}</span>
+            <span class="client-info-blk2-value " *ngIf="!user.nok || user.nok.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">NOK Relationship </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value"
+              *ngIf="user.nokRelationship && user.nokRelationship.length !== 0">{{user.nokRelationship}}</span>
+            <span class="client-info-blk2-value" *ngIf="!user.nokRelationship || user.nokRelationship.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">NOK Contact Number </label>
+            <span class="colon">:</span>
+            <span class="client-info-blk2-value" *ngIf="user.nokContact && user.nokContact.length !== 0">
+              +65 {{user.nokContact}}</span>
+            <span class="client-info-blk2-value" *ngIf="!user.nokContact || user.nokContact.length === 0">
+              -
+            </span>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Drug Allergy </label>
+            <span class="colon">:</span>
+            <div class="client-info-blk2-value" *ngIf="user.drugAllergy && user.drugAllergy.length > 0">
+              <ng-container *ngFor="let drug of user.drugAllergy;let i=index">
+                <span class="client-info-allergy-value" *ngIf="user.drugAllergyAnswer === 'Yes' && drug.allergy!== ''">
+                  {{drug.allergy}}
+                </span>
+                <span class="client-info-allergy-value "
+                  *ngIf="user.drugAllergyAnswer === 'Yes' && drug.allergy === ''">
+                  Yes
+                </span>
+                <span class="client-info-allergy-value"
+                  *ngIf="(user.drugAllergyAnswer === undefined || user.drugAllergyAnswer === null) && drug.allergy === ''">
+                  -
+                </span>
+                <!-- <span class="client-info-allergy-value text-transform"
+									*ngIf="drug.allergy!== '' && i < user.drugAllergy.length - 1">,</span> -->
+                <span *ngIf="user.drugAllergyAnswer=== 'No'"> No </span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Food Allergy </label>
+            <span class="colon">:</span>
+            <div class="client-info-blk2-value">
+              <ng-container *ngFor="let food of user.foodAllergy;let i=index">
+                <span class="client-info-allergy-value" *ngIf="user.foodAllergyAnswer === 'Yes' && food.allergy!== ''">
+                  {{food.allergy}}
+                </span>
+                <span class="client-info-allergy-value "
+                  *ngIf="user.foodAllergyAnswer === 'Yes' && food.allergy === ''">
+                  Yes
+                </span>
+                <span class="client-info-allergy-value "
+                  *ngIf="(user.foodAllergyAnswer === undefined || user.foodAllergyAnswer === null) && food.allergy === ''">
+                  -
+                </span>
+                <!-- <span class="client-info-allergy-value text-transform"
+									*ngIf="food.allergy!== '' && i < user.foodAllergy.length - 1">,</span> -->
+                <span *ngIf="user.foodAllergyAnswer === 'No'"> No </span>
+              </ng-container>
+            </div>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Smoker </label>
+            <span class="colon">:</span>
+            <div class="client-info-blk2-value">
+              <span *ngIf="!user.smoker">-</span>
+              <span *ngIf="user.smoker && user.smoker == true">Yes </span>
+              <span *ngIf="user.smoker && user.smoker == false">No</span>
+              <div *ngIf="user.smoker == true">
+                <span class="smoker-value">{{user.smokerValue}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="client-info-label-wrap">
+            <label class="client-info-label">Drinker </label>
+            <span class="colon">:</span>
+            <div class="client-info-blk2-value">
+              <span *ngIf="!user.drinker">- </span>
+              <span *ngIf="user.drinker && user.drinker == true">Yes </span>
+              <span *ngIf="user.drinker && user.drinker == false">No</span>
+              <div *ngIf="user.drinker == true">
+                <span class="smoker-value">{{user.drinkerValue}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

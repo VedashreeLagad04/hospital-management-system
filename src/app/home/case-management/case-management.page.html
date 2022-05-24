@@ -1,0 +1,259 @@
+<ion-content>
+  <div class="case-management-container">
+    <div class="case-management-search-blk">
+      <ion-icon name="search" class="search-icon"></ion-icon>
+      <input type="search" class="searchInput" [(ngModel)]="nameToSearch" (input)="applyFilters()"
+        placeholder="Search / filter" />
+      <ion-icon class="close-icon" (click)="servicesSearchTextChanged()" *ngIf="nameToSearch != ''" name="close">
+      </ion-icon>
+    </div>
+    <div class="case-management-check-box-main-blk">
+      <div class="checkbox-sub-blk checkbox-section-title">
+        <input class="case-checkbox" type="checkbox" id="checkbox14" (click)="showStatuswise('All')" />
+        <label for="checkbox14">All ({{showCases.length}})</label>
+      </div>
+    </div>
+    <div class="case-management-check-box-main-blk">
+      <div class="checkbox-sub-blk checkbox-section-title">
+        <label> Case Approval Status:</label>
+      </div>
+      <div class="checkbox-sub-blk">
+        <input class="case-checkbox" type="checkbox" id="checkbox1" (click)="showStatuswise('Pending Submission')" />
+        <label for="checkbox1">Pending Submission ({{pendingSubmissionCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk">
+        <input class="case-checkbox" type="checkbox" id="checkbox2" (click)="showStatuswise('Pending Approval')" />
+        <label for="checkbox2">Pending Approval ({{pendingApprovalCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox10"
+          (click)="showStatuswise('Resubmitted for approval')" />
+        <label for="checkbox10">Re-submission for Approval ({{resubmissionApprovalCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox11" (click)="showStatuswise('Temporary Approval')" />
+        <label for="checkbox11">Temporary Approval ({{temporaryApprovalCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox12" (click)="showStatuswise('Approved')" />
+        <label for="checkbox12">Approved ({{approvedCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox31"
+          (click)="showStatuswise('Drop off before consultation')" />
+        <label for="checkbox31">Drop off Before Consult ({{droppOffBeforeConsultCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox32"
+          (click)="showStatuswise('Drop off after consultation')" />
+        <label for="checkbox32">Drop off After Consult ({{droppOffAfterConsultCount}})</label>
+      </div>
+    </div>
+    <div class="case-management-check-box-main-blk">
+      <div class="checkbox-sub-blk checkbox-section-title">
+        <label> Admission Status:</label>
+      </div>
+      <div class="checkbox-sub-blk">
+        <input class="case-checkbox" type="checkbox" id="checkbox3" (click)="showStatuswise('Pending Admission')" />
+        <label for="checkbox3">Pending Admission ({{pendingAdmissionCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk">
+        <input class="case-checkbox" type="checkbox" id="checkbox4" (click)="showStatuswise('Admitted')" />
+        <label for="checkbox4">Admitted ({{admittedCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox5" (click)="showStatuswise('Discharge')" />
+        <label for="checkbox5">Discharged ({{dischargeCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox25" (click)="showStatuswise('outpatient')" />
+        <label for="checkbox25">Outpatient ({{outpatientCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox11" (click)="showStatuswise('Pending Consultation')" />
+        <label for="checkbox11">Pending Consultation ({{pendingConsultationCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox15" (click)="showStatuswise('Pending Follow Up')" />
+        <label for="checkbox15">Pending Follow Up
+          ({{pendingFollowUpCount}})</label>
+      </div>
+    </div>
+    <div class="case-management-check-box-main-blk">
+      <div class="checkbox-sub-blk checkbox-section-title">
+        <label> Documentation Status:</label>
+      </div>
+      <div class="checkbox-sub-blk">
+        <input class="case-checkbox" type="checkbox" id="checkbox20" (click)="showStatuswise('Pending Admission')" />
+        <label for="checkbox20">Pending Admission Documents ({{pendingAdmissionCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox21"
+          (click)="showStatuswise('discharge-docs-not-submitted')" />
+        <label for="checkbox21">Pending Discharge Documents ({{dischargeDocNotSubmittedCount}})</label>
+      </div>
+      <div class="checkbox-sub-blk margin-top">
+        <input class="case-checkbox" type="checkbox" id="checkbox22" (click)="showStatuswise('Open Date')" />
+        <label for="checkbox22">Completed ({{completedDocumentCount}})</label>
+      </div>
+    </div>
+    <div class="case-management-check-box-main-blk">
+      <div class="radio-div-wrapper">
+        <div class="radio-div">
+          <input type="radio" id="admission-radio" (click)="dateClicked('start-date');getDateRange()" value="admission"
+            name="date-radio" [(ngModel)]="dateType">
+          <label for="admission-radio">Admission Date</label>
+        </div>
+        <div class="radio-div">
+          <input type="radio" id="status-radio" (click)="dateClicked('end-date');getDateRange()" value="status"
+            name="date-radio" [(ngModel)]="dateType">
+          <label for="status-radio">Case Status Change Date</label>
+        </div>
+      </div>
+      <div class="date-wrapper">
+        <span class="date-label">Date</span>
+        <div class="date-sub-blk">
+          <!-- <span class="date-value">30 Apr, 2020</span> -->
+          <ion-datetime id="start-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+            (click)="dateClicked('start-date')" [(ngModel)]="filterDateFrom" [ngModelOptions]="{standalone: true}">
+          </ion-datetime>
+          <ion-icon name="calendar" class="calendar" onclick="document.getElementById('start-date').click()"></ion-icon>
+        </div>
+        <span class="date-label">to</span>
+        <div class="date-sub-blk">
+          <!-- <span class="date-value">01 July, 2020</span> -->
+          <ion-datetime id="end-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+            (click)="dateClicked('end-date')" [(ngModel)]="filterDateTo" [ngModelOptions]="{standalone: true}"
+            max="2099-10-31">
+          </ion-datetime>
+          <ion-icon name="calendar" class="calendar" onclick="document.getElementById('end-date').click()"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="case-management-table-wrapper">
+      <div class="case-management-table">
+        <div class="case-management-header-row">
+          <div class="case-management-table-head case-management-col-1-width">
+            <span class="case-management-table-head-span">Patient Name</span>
+            <div class="arrow-wrapper">
+              <ion-icon class="arrow" name="arrow-up" (click)="sortByPatientNameAsc()"
+                *ngIf="sortingObject.patientName == 'desc'">
+              </ion-icon>
+              <ion-icon class="arrow" name="arrow-down" (click)="sortByPatientNameDesc()"
+                *ngIf="sortingObject.patientName == 'asc'">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="case-management-table-head case-management-col-2-width">
+            <span class="case-management-table-head-span">Case</span>
+            <div class="arrow-wrapper">
+              <ion-icon class="arrow" name="arrow-up" (click)="sortByCaseNameAsc()"
+                *ngIf="sortingObject.caseName == 'desc'">
+              </ion-icon>
+              <ion-icon class="arrow" name="arrow-down" (click)="sortByCaseNameDesc()"
+                *ngIf="sortingObject.caseName == 'asc'">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="case-management-table-head case-management-col-3-width">
+            <span class="case-management-table-head-span">Status</span>
+          </div>
+          <div class="case-management-table-head case-management-col-4-width">
+            <span class="case-management-table-head-span">Consultant</span>
+            <div class="arrow-wrapper">
+              <ion-icon class="arrow" name="arrow-up" (click)="sortByConsultantAsc()"
+                *ngIf="sortingObject.consultant == 'desc'">
+              </ion-icon>
+              <ion-icon class="arrow" name="arrow-down" (click)="sortByConsultantDesc()"
+                *ngIf="sortingObject.consultant == 'asc'">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="case-management-table-head case-management-col-5-width">
+            <span class="case-management-table-head-span">Case Number</span>
+            <div class="arrow-wrapper">
+              <ion-icon class="arrow" name="arrow-up" (click)="sortByCaseNumberAsc()"
+                *ngIf="sortingObject.caseNumber == 'desc'">
+              </ion-icon>
+              <ion-icon class="arrow" name="arrow-down" (click)="sortByCaseNumberDesc()"
+                *ngIf="sortingObject.caseNumber == 'asc'">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="case-management-table-head case-management-col-6-width">
+            <span class="case-management-table-head-span">Date of Status Change</span>
+            <div class="arrow-wrapper">
+              <ion-icon class="arrow" name="arrow-up" (click)="sortByDateOfStatusChangeAsc()"
+                *ngIf="sortingObject.dateOfStatusChange == 'desc'">
+              </ion-icon>
+              <ion-icon class="arrow" name="arrow-down" (click)="sortByDateOfStatusChangeDesc()"
+                *ngIf="sortingObject.dateOfStatusChange == 'asc'">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="case-management-table-head case-management-col-7-width">
+            <span class="case-management-table-head-span">Referral source</span>
+          </div>
+        </div>
+        <div class="case-management-main-content" *ngIf="!casesPresent">
+          <p class="no-cases-msg">No cases present!</p>
+        </div>
+        <div class="case-management-main-content" *ngIf="casesPresent">
+          <ng-container *ngFor="let case of showCases; let i = index;">
+            <div class="case-management-main-row" *ngIf="case.show == true" (click)="setCaseAndRedirect(case, i)">
+              <div class="case-management-table-main-content case-management-col-1-width">
+                <span *ngIf="case.patientName || case.patientName != ''">{{case.patientName}}</span>
+                <span *ngIf="!case.patientName || case.patientName == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-2-width">
+                <span *ngIf="case.name || case.caseNumber != ''">{{case.name}}</span>
+                <span *ngIf="!case.name || case.name == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-3-width">
+                <span *ngIf="case.currentStatus || case.currentStatus != ''">{{case.currentStatus}}</span>
+                <span *ngIf="!case.currentStatus || case.currentStatus == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-4-width">
+                <span *ngFor="let consultant of case.consultants; let c = index">
+                  <span *ngIf="consultant !== ''">{{consultant}}</span>
+                  <span *ngIf="consultant === ''" style="text-align: center">
+                    -
+                  </span>
+                  <span *ngIf="c < case.consultants.length - 1"> , </span>
+                </span>
+                <span *ngIf="case.consultants.length === 0" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-5-width">
+                <span *ngIf="case.caseNumber || case.caseNumber != ''">{{case.caseNumber}}</span>
+                <span *ngIf="!case.dateOfStatusChange || case.dateOfStatusChange == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-6-width">
+                <span
+                  *ngIf="case.dateOfStatusChange || case.dateOfStatusChange != ''">{{case.dateOfStatusChange}}</span>
+                <span *ngIf="!case.dateOfStatusChange || case.dateOfStatusChange == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+              <div class="case-management-table-main-content case-management-col-7-width">
+                <span *ngIf="case.referralSource || case.referralSource != ''">{{case.referralSource}}</span>
+                <span *ngIf="!case.referralSource || case.referralSource == ''" style="text-align: center">
+                  -
+                </span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

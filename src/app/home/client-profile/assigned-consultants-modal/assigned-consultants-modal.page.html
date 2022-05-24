@@ -1,0 +1,29 @@
+<ion-content>
+  <div class="assignedConsultantsContainer">
+    <div class="close-icon-wrapper">
+      <p class="header">Assigned Consultants</p>
+      <ion-icon (click)="closeModal()" name="close-outline"></ion-icon>
+    </div>
+    <div class="detailsWrapper">
+      <div class="primary">
+        <div class="left">
+          <p>Primary Consultant : </p>
+        </div>
+        <div class="right">
+          <p>{{primaryConsultant}}</p>
+        </div>
+      </div>
+      <div class="primary">
+        <div class="left">
+          <p>Assigned Consultants : </p>
+        </div>
+        <div class="right" *ngIf="ifAssignedConsultants">
+          <p class="consultants" *ngFor="let consultant of assignedConsultants;let i=index">{{consultant}}</p>
+        </div>
+        <div class="right" *ngIf="!ifAssignedConsultants">
+          <p class="consultants">No Assigned Consultants</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

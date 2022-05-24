@@ -1,0 +1,144 @@
+<ion-content (click)="closePopover()">
+    <div class="case-submission-container">
+        <!-- <p class="case-approval-text">For Case Approval :</p> -->
+        <div class="if" *ngIf="ehealth && ehealth.caseSubmission">
+            <div class="title">
+                <p style="font-weight: bold; font-size: 1.6rem;">For Case Approval :</p>
+            </div>
+            <div class="case-submission-info-block" *ngFor="let obj of ehealth.caseSubmission.cc ; let i=index">
+                <div class="exclaim">
+                    <button class="exclaim-button exclaim-button--small" (click)="openPopover($event, 'CC')"
+                        *ngIf="i==0">
+                        <div class="popover-wrapper" *ngIf="isCcExclaimOpen">
+                            <span>Commercial Considerations</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="case-submission-input-label">
+                    <p *ngIf="i==0">CC:</p>
+                </div>
+                <div class="addition">
+                    <div class="case-submission-input-box" (click)="close()"
+                        [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager'&& loggedInUser.type !== 'Management')}">
+                        <input type="text" class="case-submission-info-input" [(ngModel)]="obj.CC">
+                    </div>
+                    <button (click)="addCC()" class="plus-button plus-button--small"
+                        *ngIf="i==0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                    <button (click)="removeCC(i)" class="close-button"
+                        *ngIf="i>0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                </div>
+            </div>
+        </div>
+        <div class="if" *ngIf="ehealth && ehealth.caseSubmission">
+            <div class="case-submission-info-block" *ngFor="let obj of ehealth.caseSubmission.mc ; let i=index">
+                <div class="exclaim">
+                    <button class="exclaim-button exclaim-button--small" *ngIf="i==0"
+                        (click)="openPopover($event, 'MC')">
+                        <div class="popover-wrapper" *ngIf="isMcExclaimOpen">
+                            <span>Medical Considerations</span>
+                        </div>
+                    </button>
+                </div>
+                <div class="case-submission-input-label">
+                    <p *ngIf="i==0">MC:</p>
+                </div>
+                <div class="addition">
+                    <div class="case-submission-input-box" (click)="close()"
+                        [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                        <input type="text" class="case-submission-info-input" [(ngModel)]="obj.MC">
+                    </div>
+                    <button (click)="addMC()" class="plus-button plus-button--small"
+                        *ngIf="i==0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                    <button (click)="removeMC(i)" class="close-button"
+                        *ngIf="i>0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                </div>
+            </div>
+        </div>
+        <div class="case-submission-info-block" *ngIf="ehealth && ehealth.caseSubmission">
+            <button class="exclaim-button exclaim-button--small" (click)="openPopover($event, 'AOL')">
+                <div class="popover-wrapper" *ngIf="isAolExclaimOpen">
+                    <span>Admission of Liability</span>
+                </div>
+            </button>
+            <div class="case-submission-input-label">
+                <p>AOL:</p>
+            </div>
+            <div class="case-submission-input-ao-box" (click)="close()"
+                [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                <input type="text" class="case-submission-info-input" [(ngModel)]="ehealth.caseSubmission.aolPercent">
+            </div>
+            <div class="ao-addition" *ngFor="let obj of ehealth.caseSubmission.aol ; let i=index">
+                <div class="case-submission-input-ao-box1"
+                    [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                    <input type="text" class="case-submission-info-input" [(ngModel)]="obj.AOL">
+                </div>
+                <button (click)="addAOL()" class="plus-button plus-button--small"
+                    *ngIf="i==0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                <button (click)="removeAOL(i)" class="close-button"
+                    *ngIf="i>0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+            </div>
+        </div>
+        <div class="case-submission-info-block" *ngIf="ehealth && ehealth.caseSubmission">
+            <button class="exclaim-button exclaim-button--small" (click)="openPopover($event, 'AOQ')">
+                <div class="popover-wrapper" *ngIf="isAoqExclaimOpen">
+                    <span>Admission of Quantum</span>
+                </div>
+            </button>
+            <div class="case-submission-input-label">
+                <p>AOQ:</p>
+            </div>
+            <div class="case-submission-input-ao-box" (click)="close()"
+                [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                <input type="text" class="case-submission-info-input" [(ngModel)]="ehealth.caseSubmission.aoqPercent">
+            </div>
+            <div class="ao-addition" *ngFor="let obj of ehealth.caseSubmission.aoq ; let i=index">
+                <div class="case-submission-input-ao-box1"
+                    [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                    <input type="text" class="case-submission-info-input" [(ngModel)]="obj.AOQ">
+                </div>
+                <button (click)="addAOQ()" class="plus-button plus-button--small"
+                    *ngIf="i==0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+                <button (click)="removeAOQ(i)" class="close-button"
+                    *ngIf="i>0 && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))"></button>
+            </div>
+        </div>
+        <div class="case-submission-info-block" *ngIf="ehealth && ehealth.caseSubmission">
+            <div class="case-submission-input-label1">
+                <p>Case Management Plan:</p>
+            </div>
+            <div class="case-submission-input-area case-submission-remark-area" (click)="close()"
+                [ngClass]="{'disabled' : (loggedInUser && loggedInUser.type !== 'agent' && loggedInUser.type !== 'Claims Manager' && loggedInUser.type !== 'Finance Manager' && loggedInUser.type !== 'Management')}">
+                <textarea class="case-submission-info-input" name="remark" id="remark" cols="30" rows="5"
+                    [(ngModel)]="ehealth.caseSubmission.plan"></textarea>
+            </div>
+        </div>
+        <div class="button"
+            *ngIf="loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management')">
+            <div class="calculation-btn-wrapper" (click)="openFileExplorer()">
+                <!-- <div class="calculation-btn-wrapper" (click)="uploadFile.click()"> -->
+                <button #uploadBtn class="save-btn">Upload Calculation</button>
+                <input #uploadFile type="file" hidden (change)="uploadFiles($event)" (click)="fileClick()" multiple
+                    accept="application/pdf" />
+            </div>
+            <div class="preview-btn-wrapper" (click)="openPreviewModal()"
+                [ngClass]="{'disabled' : ehealth.caseSubmission.pdfFiles.length === 0}"
+                *ngIf="ehealth && ehealth.caseSubmission && ehealth.caseSubmission.pdfFiles">
+                <button class="preview-btn" [ngClass]="{'disabled' : ehealth.caseSubmission.pdfFiles.length === 0}">
+                    Preview
+                </button>
+            </div>
+        </div>
+        <div class="buttons"
+            *ngIf="loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management')">
+            <div class="save-btn-wrapper" (click)="saveChanges()">
+                <button class="save-btn">Save Changes</button>
+                <!-- <button class="save-btn" [ngClass]="{'disabled' : saveButton == 'disabled'}">Save Changes</button> -->
+            </div>
+            <div class="save-btn-wrapper" (click)="submitForApproval()">
+                <button class="save-btn" [ngClass]="{'disabled' : saveButton == 'disabled'}">Submit for
+                    Approval</button>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

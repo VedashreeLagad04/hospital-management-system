@@ -1,0 +1,243 @@
+<ion-content>
+    <div class="case-folder-wrapper">
+        <div class="breadcrumbs-wrapper">
+            <app-breadcrumbs [clientDetails]="clientDetails" [caseDetails]="case"></app-breadcrumbs>
+        </div>
+        <div class="case-folder-left-container">
+            <div class="row margin-bottom">
+                <div class="tab-sub-blk disabled" [ngClass]="{'active': isFolderOpened == true}"
+                    (click)="uploadFile.click()">
+                    <div class="tab-icon-blk">
+                        <!-- <ion-icon name="document" class="tab-icon"></ion-icon> -->
+                        <img class="tab-icon" src="../../../assets/images/document.svg" *ngIf="!isFolderOpened" />
+                        <img class="tab-icon" src="../../../assets/images/document-enable.svg" *ngIf="isFolderOpened" />
+                    </div>
+                    <span class="tab-lable">Document</span>
+                    <input type="file" hidden #uploadFile (click)="fileClick()" (change)="uploadFiles($event)"
+                        [accept]="folderName === 'Medical Condition' ? 'image/*' : ''" />
+                    <!-- <input type="file" hidden #uploadFile (click)="fileClick()" (change)="uploadFiles($event)"
+            accept=".doc, .docx, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/pdf, image/*"> -->
+                </div>
+                <div class="tab-sub-blk disabled" *ngIf="isWeb === false" [ngClass]="{'active': isFolderOpened == true}"
+                    (click)="openCamera()">
+                    <div class="tab-icon-blk">
+                        <img class="tab-icon" src="../../../assets/images/camera.svg" *ngIf="!isFolderOpened" />
+                        <img class="tab-icon" src="../../../assets/images/camera-enable.svg" *ngIf="isFolderOpened" />
+                    </div>
+                    <span class="tab-lable">Camera</span>
+                </div>
+                <div class="tab-sub-blk disabled" [ngClass]="{'active': isFolderOpened == true}"
+                    (click)="uploadFile.click()">
+                    <div class="tab-icon-blk">
+                        <img class="tab-icon galleryImg" src="../../../assets/images/galleryIcon.png"
+                            *ngIf="!isFolderOpened" />
+                        <img class="tab-icon galleryImg" src="../../../assets/images/galleryIcon-enable.png"
+                            *ngIf="isFolderOpened" />
+                    </div>
+                    <span class="tab-lable">Gallery</span>
+                </div>
+            </div>
+            <div class="row" (click)="goToAllFolders()">
+                <div class="dropdown-arrow-wrapper" *ngIf="isFolderOpened">
+                    <!-- <span class="dropdown-arrow"></span> -->
+                    <span class="dropdown-icon"></span>
+                </div>
+                <div class="case-folder-text">
+                    Case Folder
+                    <span *ngIf="isFolderOpened"> \ </span>
+                    <span *ngIf="isFolderOpened"> {{folderName}}</span>
+                </div>
+            </div>
+            <div class="row case-folder-search-bar">
+                <ion-icon name="search" class="search-icon"></ion-icon>
+                <input type="text" class="searchInput" [ngClass]="{'disabled': (folderName == '')}" placeholder="Search"
+                    [(ngModel)]="nameToSearch" (input)="searchPdf()" />
+            </div>
+            <div class="file-names-wrap" [ngClass]="isFolderOpened ? 'change-height' : ''">
+                <div class="row" *ngIf="!isFolderOpened">
+                    <div class="case-folders-sub-blk" (click)="openFolder('admission')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Admission Document</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.admission}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('discharge')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Discharge Document</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.discharge}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('invoices')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Invoices</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.invoices}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('medical-report')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Medical Report</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.medicalReport}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('claims')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Claims</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.claims}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('chat-archive')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Chat archive</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date">{{lastUpdatedDates.chatArchive}}</span>
+                        </div>
+                    </div>
+                    <div class="case-folders-sub-blk" (click)="openFolder('medical-condition')">
+                        <div class="file-icon-name">
+                            <div class="file-icon">
+                                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                            </div>
+                            <div class="file-name">
+                                <span class="folder-name">Medical Condition</span>
+                            </div>
+                        </div>
+                        <div class="file-date-wrap">
+                            <span class="folder-date"></span>
+                        </div>
+                    </div>
+                    <!-- <div class="case-folders-sub-blk" *ngIf="isFolderOpened">
+            <img class="folder-icon" src="../../../assets/images/folder.svg" />
+            <span class="folder-name">{{folderName}}</span>
+            <span class="folder-date">7/11/19</span>
+          </div> -->
+                </div>
+                <div class="row" *ngIf="isFolderOpened">
+                    <div *ngFor="let file of fileNames" (click)="openFile(file)">
+                        <div class="case-folders-sub-blk" *ngIf="file.show">
+                            <div class="file-icon-name">
+                                <div class="file-icon">
+                                    <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                                    <img class="folder-icon" src="../../../assets/images/folder.svg" />
+                                </div>
+                                <div class="file-name">
+                                    <span class="folder-name"
+                                        [ngClass]="{'active-file' : currentFileObj && currentFileObj.fileName.includes(file.actualFilename)}">
+                                        {{file.fileName}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="file-date-wrap">
+                                <span class="folder-date">{{file.fileDate}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrap" *ngIf="!isFolderOpened">
+                <button class="discharge-btn"
+                    (click)="dataService.routeChange('client-case-folders/discharge-docs-checklist')">
+                    Discharge Docs Checklist
+                </button>
+            </div>
+        </div>
+        <div class="case-folder-right-container">
+            <!-- <div class="pdf-header-wrap" *ngIf="isFolderOpened">
+        <span class="page-text margin-right">Page</span>
+        <div class="number-blk">1</div>
+        <span class="of-text">of</span>
+        <div class="number-blk margin-right">5</div>
+        <div class="back-next-btn-blk">
+          <div class="back-arrow-wrapper">
+            <span class="back-arrow arrow"></span>
+          </div>
+        </div>
+        <div class="back-next-btn-blk">
+          <div class="next-arrow-wrapper">
+            <span class="next-arrow arrow"></span>
+          </div>
+        </div>
+      </div> -->
+            <div class="preview-container" *ngIf="currentFileObj">
+                <button class="btn export-btn" *ngIf="isWeb === false"
+                    (click)="shareToWhatsapp(currentFileObj.fileName)">
+                    Export
+                </button>
+                <button class="btn export-btn" *ngIf="isWeb === true" (click)="downloadFile()">
+                    Download
+                </button>
+                <div class="display-pdf" id="preview" *ngIf="currentFileObj.fileType === 'pdf'">
+                    <!-- <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" (on-progress)="onProgress($event)"
+            (after-load-complete)="afterLoadComplete($event)"> -->
+                    <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" [autoresize]="true"
+                        style="position: relative;display: block;width: 100%;height: 100%;max-width: 100%;"
+                        (on-progress)="onProgress($event)" (after-load-complete)="afterLoadComplete($event)">
+                    </pdf-viewer>
+                </div>
+
+                <div class="display-image" id="preview" *ngIf="currentFileObj.fileType === 'image'">
+                    <img class="doc-image" [src]="currentFileObj.fileName" alt="" (load)="afterLoadComplete($event)" />
+                </div>
+
+                <div class="display-docx" id="preview" *ngIf="currentFileObj.fileType === 'doc'">
+                    <ngx-doc-viewer [url]="currentFileObj.fileName" viewer="google" style="width: 100%; height: 100%"
+                        (loaded)="afterLoadComplete($event)">
+                    </ngx-doc-viewer>
+                </div>
+                <div class="display-pdf" id="zip" *ngIf="currentFileObj.fileType === 'zip'">
+                    <div class="file-name1" *ngFor="let file of zipFileList">
+                        <img class="tab-icon1" src="../../../assets/images/document.svg" />
+                        <span class="folder-name"> {{file}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,243 @@
+.header-height {
+  height: 5rem;
+  vertical-align: middle;
+  padding: 1rem 0;
+  font-family: "sf-pro";
+}
+.header-title {
+  padding: 1.3rem;
+  vertical-align: top;
+  font-weight: 600;
+  text-align: center;
+}
+.paddingLeft {
+  padding-left: 9rem;
+}
+.menu-icon-container {
+  width: 5% !important;
+  display: inline-block;
+}
+.back-arrow {
+  vertical-align: top;
+  cursor: pointer;
+}
+.back-arrow-icon {
+  margin: 0.5rem !important;
+  width: 4rem;
+  cursor: pointer;
+}
+.account-name {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.4rem;
+  color: #000000;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.account-type {
+  font-size: 1.2rem;
+  line-height: 1.4rem;
+  color: #76767a;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.account-img {
+  // position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  color: #76767a;
+  cursor: pointer;
+}
+ion-header {
+  background-color: #f5f5f5 !important;
+}
+.newheader-row {
+  height: 5rem;
+  width: 100%;
+  display: block;
+}
+.header-container {
+  margin: 0 auto;
+  max-width: 1164px;
+}
+.head-title {
+  display: block;
+}
+.newheader-row-menu {
+  // padding: 0rem 1.9rem;
+  font-size: 2.5rem;
+  color: #000000;
+}
+.title-text ion-icon {
+  margin-right: 8rem;
+  font-weight: 600;
+}
+.title-text {
+  color: #000000;
+  font-size: 1.7rem;
+  font-weight: 600 !important;
+  line-height: 2rem;
+  letter-spacing: 0.41px;
+}
+.header-title-text {
+  display: inline-block;
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  line-height: 2rem;
+  vertical-align: top;
+  margin-left: 0.5rem;
+  color: #3e3e3e;
+  cursor: pointer;
+}
+.header-title-img {
+  display: inline-block;
+  width: 3.6rem;
+  cursor: pointer;
+}
+.page-title {
+  font-size: 1.7rem;
+  line-height: 2rem;
+  letter-spacing: -0.41px;
+  color: #000000;
+  font-weight: 700;
+}
+.logoutOption {
+  width: 40%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 111111;
+}
+.menu-list {
+  background: #f5f5f5;
+}
+.menu-list ion-item {
+  --background: #EDEDED;
+    width: calc(100% - 3rem);
+    margin: 1.5rem 1.5rem 0 1.5rem;
+  border-radius: 0.8rem;
+  height: 4.5rem;
+  display: inline-block;
+}
+.menu-item ion-label {
+  text-overflow: inherit;
+  overflow: visible;
+  letter-spacing: 0;
+  font-family: "sf-pro-light";
+  // padding-bottom: 1rem;
+  vertical-align: top;
+}
+.menu-item ion-icon {
+  width: 4rem;
+}
+ion-item {
+  font-weight: 100 !important;
+}
+.my-menu > ion-content.hydrated {
+  --background: #f5f5f5 !important;
+}
+.my-menu {
+  --width: 30rem;
+}
+.client-body {
+  border-top-right-radius: 100%;
+  border-top-left-radius: 100%;
+  background-color: #afafbb;
+  height: 2rem;
+  width: 4rem;
+  margin: auto;
+  padding: 0.2rem;
+}
+.client-head {
+  border-radius: 1rem;
+  height: 2rem;
+  width: 50%;
+  background-color: #afafbb;
+  margin: auto;
+  margin-bottom: 0.5rem;
+}
+.client-img {
+  width: 4rem;
+  position: absolute;
+  right: 2rem;
+  height: 4rem;
+  top: 15%;
+  overflow-y: hidden;
+  margin-right: 0;
+}
+.menu-icon {
+  width: 4rem;
+  height: 3.5rem;
+  margin: 0;
+}
+.logout-wrap {
+  display: inline-block;
+  vertical-align: middle;
+  height: 4rem;
+}
+.logout-wrap > img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  height: 100%;
+}
+.rotate-img {
+  -webkit-transform: rotate(15deg);
+  -moz-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  -o-transform: rotate(15deg);
+  transform: rotate(15deg);
+  width: 85%;
+}
+.calendar-img,
+.case-img {
+  padding-top: 0.6rem;
+}
+// @media (max-width: 769px) {
+//   .header-title {
+//     padding: 1.3rem;
+//   }
+// }
+.nav-btn {
+  display: inline-block;
+  width: 7.8rem;
+  background: #fbfbfb;
+  border: 0.5px solid #d4d4d4;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 1.2rem;
+  color: #5b5b5b;
+  line-height: 2.2rem;
+  cursor: pointer;
+}
+.nav-btn:first-child {
+  margin-right: 1.2rem;
+}
+.nav-btn-icon {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  vertical-align: middle;
+  text-align: center;
+}
+.nav-btn-icon > ion-icon {
+  display: inline-block;
+  font-size: 2rem;
+  line-height: 2rem;
+  text-align: center;
+  color: #AEAEB2;
+}
+.nav-btn-label {
+  display: inline-block;
+  width: calc(100% - 2rem);
+  text-align: center;
+}
+.hide {
+  visibility: hidden;
+}
+.nav-btn-wrap {
+  width: 20%;
+}

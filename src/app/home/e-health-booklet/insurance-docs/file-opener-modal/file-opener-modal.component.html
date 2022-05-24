@@ -1,0 +1,25 @@
+<div class="progress-bar-container" *ngIf="showProgressBar">
+  <div class="progress-bar">
+    <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+    <span class="upload-percent">Uploading...{{uploadPercent}} %</span>
+  </div>
+</div>
+
+<div class="file-container">
+
+  <span class="title">My Documents</span>
+  <div class="input-container">
+    <div class="input-sub-container" *ngFor="let doc of docs; index as i;">
+      <img class="file-icon" src="../../assets/images/insurance-docs/document.png" alt="">
+      <input class="file-name" id="{{doc.name}}" type="text" [(ngModel)]="doc.name" spellcheck="false"
+        (keyup)="this.docNameUpdate.next($event)" />
+      <!-- <span id="file{{i}}" class="error" *ngIf = "validate[i]">file name already exists</span>
+    <span id="file{{i}}" class="error" *ngIf = "doc.name == ''">file name cannot be blank</span> -->
+    </div>
+  </div>
+
+  <div class="submit-btn-container">
+    <ion-button class="upload-btn" (click)="uploadFiles()">Upload</ion-button>
+    <!-- <ion-button class="upload-btn" (click) = "makePdf()">UploadPDF</ion-button> -->
+  </div>
+</div>

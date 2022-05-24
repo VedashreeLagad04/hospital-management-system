@@ -1,0 +1,472 @@
+<ion-content (click)="close()">
+    <div class="calculator-container">
+        <div class="section">
+            <div class="left-container">
+                <!-- <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Patient Name</p>
+                    </div>
+                    <div class="calc-input-box">
+                        <div class="calc-info-input" (click)="openPatientDropdown()">
+                            <p class="dropdown-title">{{insurance.patientName}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="showPatientDropdown">
+                            <li *ngFor="let patientName of patientNames" (click)="selectPatientName(patientName)">
+                                {{patientName}}</li>
+                        </ul>
+                    </div>
+                </div> -->
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Consultant Name</p>
+                    </div>
+                    <div class="calc-input-box">
+                        <div class="calc-info-input" (click)="openConsultantDropdown($event)">
+                            <p class="dropdown-title">{{insurance.consultantName}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="showConsultantDropdown">
+                            <li *ngFor="let consultantName of consultantNames"
+                                (click)="selectConsultantName(consultantName.name)">
+                                {{consultantName.name}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="right-container">
+                <!-- <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Consultant Name</p>
+                    </div>
+                    <div class="calc-input-box">
+                        <div class="calc-info-input" (click)="openConsultantDropdown()">
+                            <p class="dropdown-title">{{insurance.consultantName}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="showConsultantDropdown">
+                            <li *ngFor="let consultantName of consultantNames" (click)="selectConsultantName(consultantName)">
+                                {{consultantName}}</li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="section">
+            <div class="title">
+                <h1>Insurer Information</h1>
+            </div>
+            <div class="left-container">
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Insurer</p>
+                    </div>
+                    <div class="calc-input-box">
+                        <div class="calc-info-input" (click)="openInsurerDropdown($event)">
+                            <p class="dropdown-title">{{insurance.insurerInformation.insurer}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="showInsurerDropdown">
+                            <li *ngFor="let insurer of insurers" (click)="selectInsurer(insurer)">
+                                {{insurer.insurer}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Policy Activated</p>
+                    </div>
+                    <div class="calc-input-box">
+                        <div class="calc-info-input" (click)="openPolicyDropdown($event)">
+                            <p class="dropdown-title">{{insurance.insurerInformation.policyActivated}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="showPolicyDropdown">
+                            <ng-container *ngIf="policies.length > 0">
+                                <p class='item-inner-header'>Main Plans</p>
+                                <li *ngFor="let policy of policies" (click)="selectPolicy('main', policy)">
+                                    {{policy.mainPlanName}}
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="riderPolicies.length > 0">
+                                <p class='item-inner-header'>Rider Plans</p>
+                                <li *ngFor="let rider of riderPolicies" (click)="selectPolicy('rider', rider)">
+                                    {{rider.riderPlanName}}
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Number Of Day Stay</p>
+                    </div>
+                    <div class="calc-input-box"
+                        [ngClass]="{'disabled': medisaveData && medisaveData.type === 'Daysurgery'}"
+                        [tabindex]="medisaveData && medisaveData.type === 'Daysurgery' ? '-1' : ''">
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" (input)="calculateMedisaveTotal()"
+                            [(ngModel)]="insurance.insurerInformation.numberOfDayStay"
+                            [disabled]="medisaveData && medisaveData.type === 'Daysurgery'">
+                    </div>
+                </div>
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Medisave Withdrawal Limit</p>
+                    </div>
+                    <div class="calc-input-box" (click)="openCalculator()">
+                        <p class="medisave">{{insurance.insurerInformation.medisaveLimit}}</p>
+                        <img class="tabel-icon" src="../../../assets/images/table_chart.svg" alt="table-icon">
+                    </div>
+                </div>
+            </div>
+            <div class="right-container">
+                <div class="calc-info-block">
+                    <div class="calc-input-label">
+                        <p>Surgical Code</p>
+                    </div>
+                    <div class="surgical-block">
+                        <div class="surgical-input-box" *ngFor="let obj of insurance.surgicalCodes ; let i=index">
+                            <div class="calc-info-input" (click)="openSurgicalCodeDropdown($event, obj, i)">
+                                <p class="dropdown-title">{{obj.code}}</p>
+                                <div class="dropdown-arrow-wrapper">
+                                    <span class="dropdown-arrow"></span>
+                                </div>
+                            </div>
+                            <ul class="calc-type-dropdown" *ngIf="obj.showSurgicalCodeDropdown">
+                                <li class="dropdown-input">
+                                    <input type="text" [(ngModel)]="codeToSearch" (input)="searchSurgicalCode()"
+                                        placeholder="Search" (click)="enterValue($event)">
+                                </li>
+                                <ng-container *ngFor="let code of showSurgicalCodes; let j = index">
+                                    <li [ngClass]="{'selected':code.isSelected, 'disabled':code.isSelected && obj.selectedRowIndex !== j}"
+                                        (click)="selectSurgicalCode(code,obj, j, i)" *ngIf="code.show">
+                                        {{code.code}}
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="left-container">
+                <div class="title">
+                    <h1>BASIC</h1>
+                </div>
+                <div class="calc-info-block" *ngFor="let basic of parameters.basicParameters ; let i=index">
+                    <div class="calc-input-label">
+                        <p>{{basic.parameter}}</p>
+                    </div>
+                    <div class="calc-input-box" *ngIf="basic.type==='User Input (Currency)'">
+                        <span class="dollar">$</span>
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" (focusout)="calculate('basic')"
+                            [(ngModel)]="basic.selected">
+                    </div>
+                    <div class="disabled-calc-input-box" *ngIf="basic.type==='Formula'">
+                        <input type="number" [disabled]="basic.type==='Formula'" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" class="calc-info-input"
+                            [(ngModel)]="basic.selected">
+                    </div>
+                    <button class="exclaim-button exclaim-button--small" *ngIf="basic.type==='Formula'"
+                        (click)="openPopover($event,basic,i,'basic')">
+                        <div class="popover-wrapper" *ngIf="basic.isExclaimOpen">
+                            <span>{{basic.formulaId}}</span>
+                        </div>
+                    </button>
+                    <div class="calc-input-box" *ngIf="basic.type==='dropdown'">
+                        <div class="calc-info-input" (click)="openDropdown($event,basic,i,'basic')">
+                            <p class="dropdown-title">{{basic.selected}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="basic.showDropdown">
+                            <li *ngFor="let value of basic.fieldValues" (click)="selectValue(basic,value,'basic')">
+                                {{value.value}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="right-container"
+                *ngIf="parameters && parameters.riderParameters && parameters.riderParameters.length > 0">
+                <div class="title">
+                    <h1>RIDER</h1>
+                </div>
+                <div class="calc-info-block" *ngFor="let rider of parameters.riderParameters ; let i=index">
+                    <div class="calc-input-label">
+                        <p>{{rider.parameter}}</p>
+                    </div>
+                    <div class="calc-input-box" *ngIf="rider.type==='User Input (Currency)'">
+                        <span class="dollar">$</span>
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" (focusout)="calculate('rider')"
+                            [(ngModel)]="rider.selected">
+                    </div>
+                    <div class="disabled-calc-input-box" *ngIf="rider.type==='Formula'">
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" [disabled]="rider.type==='Formula'"
+                            [(ngModel)]="rider.selected">
+                    </div>
+                    <button class="exclaim-button exclaim-button--small" *ngIf="rider.type==='Formula'"
+                        (click)="openPopover($event,rider,i,'rider');">
+                        <div class="popover-wrapper" *ngIf="rider.isExclaimOpen">
+                            <span>{{rider.formulaId}}</span>
+                        </div>
+                    </button>
+                    <div class="calc-input-box" *ngIf="rider.type==='dropdown'">
+                        <div class="calc-info-input" (click)="openDropdown($event,rider,i,'rider')">
+                            <p class="dropdown-title">{{rider.selected}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="rider.showDropdown">
+                            <li *ngFor="let value of rider.fieldValues" (click)="selectValue(rider,value,'rider')">
+                                {{value.value}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="additional-plan-container">
+                <div class="title">
+                    <h1>Additional Plan</h1>
+                </div>
+                <div class="additional-block" *ngFor="let obj of insurance.additionalPlans ; let i=index">
+                    <div class="calc-info-block1">
+                        <div class="calc-input-label">
+                            <p>Plan Name</p>
+                        </div>
+                        <div class="calc-input-box">
+                            <input type="text" class="calc-info-input" [(ngModel)]="obj.planName">
+                        </div>
+                    </div>
+                    <div class="calc-info-block1">
+                        <div class="calc-input-label">
+                            <p>Deductible</p>
+                        </div>
+                        <div class="calc-input-box">
+                            <input type="number" class="calc-info-input" min="0" max="999999999"
+                                onKeyPress="if(this.value.length==7) return false;" (focusout)="calculateTotal()"
+                                [(ngModel)]="obj.deductible">
+                        </div>
+                        <button (click)="deletePlan(i)" class="close-button" *ngIf="i>0"></button>
+                    </div>
+                </div>
+                <div class="additional-block">
+                    <div class="calc-info-block1"></div>
+                    <div class="calc-info-block1">
+                        <div class="calc-input-label">
+                            <p>Total Deductible</p>
+                        </div>
+                        <div class="disabled-calc-input-box1">
+                            <input type="number" class="calc-info-input" min="0" max="999999999"
+                                onKeyPress="if(this.value.length==7) return false;" disabled
+                                [(ngModel)]="insurance.additionalPlanTotal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="save-btn-wrap" (click)="addPlan()">
+                <button>Add Plan</button>
+            </div>
+        </div>
+        <div class="section">
+            <div class="left-container">
+                <div class="title">
+                    <h1>Payout</h1>
+                </div>
+                <div class="calc-info-block" *ngFor="let payout of parameters.payoutParameters ; let i=index">
+                    <div class="calc-input-label">
+                        <p>{{payout.parameter}}</p>
+                    </div>
+                    <div class="calc-input-box" *ngIf="payout.type==='User Input (Currency)'">
+                        <span class="dollar">$</span>
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" (focusout)="calculate('payout')"
+                            [(ngModel)]="payout.selected">
+                    </div>
+                    <div class="disabled-calc-input-box" *ngIf="payout.type==='Formula'">
+                        <input type="number" class="calc-info-input" min="0" max="999999999"
+                            onKeyPress="if(this.value.length==7) return false;" [disabled]="payout.type==='Formula'"
+                            [(ngModel)]="payout.selected">
+                    </div>
+                    <button class="exclaim-button exclaim-button--small" *ngIf="payout.type==='Formula'"
+                        (click)="openPopover($event,payout,i,'payout')">
+                        <div class="popover-wrapper" *ngIf="payout.isExclaimOpen">
+                            <span>{{payout.formulaId}}</span>
+                        </div>
+                    </button>
+                    <div class="calc-input-box" *ngIf="payout.type==='dropdown'">
+                        <div class="calc-info-input" (click)="openDropdown($event,payout,i,'payout')">
+                            <p class="dropdown-title">{{payout.selected}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="calc-type-dropdown" *ngIf="payout.showDropdown">
+                            <li *ngFor="let value of payout.fieldValues" (click)="selectValue(payout,value,'payout')">
+                                {{value.value}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="save-btn-wrap" *ngIf="isWeb === true" (click)="generatePdfAndDownload()"
+                [ngClass]="{'disabled': (!insurance.insurerInformation.insurer || insurance.insurerInformation.insurer === '') || (!insurance.insurerInformation.policyActivated || insurance.insurerInformation.policyActivated === '')}">
+                <button
+                    [disabled]="(!insurance.insurerInformation.insurer || insurance.insurerInformation.insurer === '') || (!insurance.insurerInformation.policyActivated || insurance.insurerInformation.policyActivated === '')">
+                    Generate Document</button>
+            </div>
+            <div class="save-btn-wrap" *ngIf="isWeb === false" (click)="generatePdfAndShare()"
+                [ngClass]="{'disabled': (!insurance.insurerInformation.insurer || insurance.insurerInformation.insurer === '') || (!insurance.insurerInformation.policyActivated || insurance.insurerInformation.policyActivated === '')}">
+                <button
+                    [disabled]="(!insurance.insurerInformation.insurer || insurance.insurerInformation.insurer === '') || (!insurance.insurerInformation.policyActivated || insurance.insurerInformation.policyActivated === '')">
+                    Share Document</button>
+            </div>
+        </div>
+    </div>
+
+    <!--------------------------------------------- pdf ----------------------------------------------->
+
+    <div class="calculator-container" hidden>
+        <div id="isp-pdf-wrap">
+            <div class="section">
+                <div class="left-container">
+                    <!-- <div class="calc-info-block">
+                        <p class="pdf-input-label">Patient Name</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.patientName}}</p>
+                    </div>
+                </div>
+                <div class="right-container"> -->
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Consultant Name</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.consultantName}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="title">
+                    <h1>Insurer Information</h1>
+                </div>
+                <div class="left-container">
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Insurer</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.insurerInformation.insurer}}</p>
+                    </div>
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Policy Activated</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.insurerInformation.policyActivated}}</p>
+                    </div>
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Number Of Day Stay</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.insurerInformation.numberOfDayStay}}</p>
+                    </div>
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Medisave Withdrawal Limit</p>
+                        <span class="colon">:</span>
+                        <p class="pdf-info-input">{{insurance.insurerInformation.medisaveLimit}}</p>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <div class="calc-info-block">
+                        <p class="pdf-input-label">Surgical Code</p>
+                        <span class="colon">:</span>
+                        <div class="pdf-info-input1">
+                            <p *ngFor="let obj of insurance.surgicalCodes ; let i=index">{{obj.code}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="left-container">
+                    <div class="title">
+                        <h1>BASIC</h1>
+                    </div>
+                    <div class="calc-info-block" *ngFor="let basic of parameters.basicParameters ; let i=index">
+                        <p class="pdf-input-label">{{basic.parameter}}</p>
+                        <span class="colon">:</span>
+                        <span class="dollar">$</span>
+                        <p class="pdf-info-input"> {{basic.selected}}</p>
+                    </div>
+                </div>
+                <div class="right-container">
+                    <div class="title">
+                        <h1>RIDER</h1>
+                    </div>
+                    <div class="calc-info-block" *ngFor="let rider of parameters.riderParameters ; let i=index">
+                        <p class="pdf-input-label">{{rider.parameter}}</p>
+                        <span class="colon">:</span>
+                        <span class="dollar">$</span>
+                        <p class="pdf-info-input"> {{rider.selected}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="additional-plan-container">
+                    <div class="title">
+                        <h1>Additional Plan</h1>
+                    </div>
+                    <div class="additional-block" *ngFor="let obj of insurance.additionalPlans ; let i=index">
+                        <div class="calc-info-block1">
+                            <p class="pdf-input-label">Plan Name</p>
+                            <span class="colon">:</span>
+                            <p class="pdf-info-input">{{obj.planName}}</p>
+                        </div>
+                        <div class="calc-info-block1">
+                            <p class="pdf-input-label">Deductible</p>
+                            <span class="colon">:</span>
+                            <p class="pdf-info-input">{{obj.deductible}}</p>
+                        </div>
+                    </div>
+                    <div class="additional-plan-total">
+                        <div class="calc-info-block1">
+                        </div>
+                        <div class="calc-info-block1">
+                            <p class="pdf-input-label">Total</p>
+                            <span class="colon">:</span>
+                            <p class="pdf-info-input">{{insurance.additionalPlanTotal}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="left-container">
+                    <div class="title">
+                        <h1>Payout</h1>
+                    </div>
+                    <div class="calc-info-block" *ngFor="let payout of parameters.payoutParameters ; let i=index">
+                        <p class="pdf-input-label">{{payout.parameter}}</p>
+                        <span class="colon">:</span>
+                        <span class="dollar">$</span>
+                        <p class="pdf-info-input"> {{payout.selected}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

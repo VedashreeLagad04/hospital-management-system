@@ -1,0 +1,81 @@
+<ion-content>
+  <div class="menu-wrapper">
+    <div class="main-container">
+      <div class="menu-list" lines="none">
+        <ion-item detail="false" button class="menu-item" menuClose="main" (click)='changeRoute("client", "new")'>
+          <ion-label>Client</ion-label>
+          <div class="client-img" slot="end">
+            <div class="client-head"></div>
+            <div class="client-body"></div>
+          </div>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item" menuClose="main" (click)='changeRoute("client", "offline")'>
+          <ion-label>Offline Client</ion-label>
+          <div class="client-img" slot="end">
+            <div class="client-head"></div>
+            <div class="client-body"></div>
+          </div>
+        </ion-item>
+        <!-- <ion-item detail="false" button class="menu-item" lines="none" (click)='changeRoute("case-management")'
+          *ngIf="loggedInUser && (loggedInUser.type=='agent' || loggedInUser.type== 'Management' || loggedInUser.type== 'Claims Manager')"> -->
+        <ion-item detail="false" button class="menu-item" lines="none" (click)='changeRoute("case-management", null)'>
+          <div class="menu-icon" slot="end">
+            <img class="case-img" src="./assets/images/folder-svgrepocase-com.svg" />
+          </div>
+          <ion-label> Case Management</ion-label>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item" (click)='changeRoute("claims-management", null)'
+          *ngIf="loggedInUser && (loggedInUser.type == 'Claims Manager' || loggedInUser.type == 'Claims User' || loggedInUser.type == 'Finance Manager' || loggedInUser.type === 'Management')">
+          <div class="menu-icon" slot="end">
+            <img class="case-img" src="./assets/images/folder-svgrepocase-com.svg" />
+          </div>
+          <ion-label>Claims Management</ion-label>
+        </ion-item>
+        <!-- <ion-item detail="false" button class="menu-item">
+          <div class="menu-icon" slot='end'>
+            <img class="rotate-img" src="/assets/images/004-notification-1.svg">
+          </div>
+          <ion-label>Notification </ion-label>
+        </ion-item> -->
+        <!-- <ion-item detail="false" button class="menu-item">
+          <div class="menu-icon calendar-img" slot='end'>
+            <img src="/assets/images/calendar.svg">
+          </div>
+          <ion-label>Appointment</ion-label>
+        </ion-item> -->
+        <ion-item detail="false" button class="menu-item" (click)='changeRoute("current-admission", null)'>
+          <div class="menu-icon" slot="end">
+            <img src="/assets/images/hospital.svg" />
+          </div>
+          <ion-label>Current Admission</ion-label>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item" (click)='changeRoute("isp-calculations", null)'>
+          <ion-label>ISP Calculation</ion-label>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item" (click)='changeRoute("insurance-calculator", null)'>
+          <ion-label>Insurance Calculator</ion-label>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item"
+          *ngIf="loggedInUser && ((loggedInUser.type == 'Finance Manager')|| (loggedInUser.type == 'Finance User' || loggedInUser.type === 'Management'))"
+          (click)='changeRoute("invoices", null)'>
+          <ion-label>Invoices</ion-label>
+        </ion-item>
+        <ion-item detail="false" button class="menu-item" (click)='changeRoute("generate-report", null)'
+          *ngIf="loggedInUser && ((loggedInUser.type == 'Finance Manager') || (loggedInUser.type == 'Management'))">
+
+          <ion-label>Generate Report</ion-label>
+        </ion-item>
+        <!-- <ion-item detail="false" button class="menu-item">
+
+          <ion-label>Movement Report</ion-label>
+        </ion-item> -->
+        <ion-item detail="false" button class="menu-item" (click)="logout()">
+          <div class="menu-icon logout-wrap" slot="end">
+            <img src="/assets/images/log-out-outline.svg" />
+          </div>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+</ion-content>

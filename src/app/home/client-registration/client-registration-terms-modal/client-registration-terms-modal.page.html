@@ -1,0 +1,65 @@
+<ion-content>
+  <div class="terms-wrapper">
+    <div class="terms-container">
+      <div class="terms-header-title row">
+        <div class="col-10">
+          <h6>Confirmation: Letter of Consent</h6>
+          <!-- <h6 *ngIf='mode==="consent"'>Confirmation: Letter of Consent</h6> -->
+        </div>
+        <div class="col-2 right-text">
+          <ion-icon class="close-modal" (click)="dismiss()" name="close"></ion-icon>
+        </div>
+      </div>
+      <div class="conditionsDiv">
+        <div class='policyLetter-container'>
+          <div class="letter-content">
+            <p class='agreed'>Agreed By:</p>
+            <p>
+              <label class='letter-label'>Parent/Guardian Name</label>
+              <input class="letter-input" type="text" [(ngModel)]="consentDetails.name" (focusin)='closeDropDown()' />
+            </p>
+            <div *ngIf='mode==="engagement"'>
+              <label class='letter-label'>Relationship </label>
+              <!-- <input class="letter-input"
+                [value]="consentDetails.relation" type="text"  /> -->
+              <div class="dropdown-input-box">
+                <div class="dropdown-input" (click)="openDropdown()">
+                  <p class="dropdown-title text-transform">{{consentDetails.relation}}</p>
+                  <div class="dropdown-arrow-wrapper">
+                    <span class="dropdown-arrow"></span>
+                  </div>
+                </div>
+                <ul class="case-type-dropdown" *ngIf="showGenderDropdown">
+                  <li (click)="selectGender('Father')">Father</li>
+                  <li (click)="selectGender('Mother')">Mother</li>
+                  <li (click)="selectGender('Guardian')">Guardian</li>
+                </ul>
+              </div>
+            </div>
+            <p *ngIf='getguardianRelation'>
+              <label class='letter-label'>Guardian Relation</label>
+              <input class="letter-input" type="text" [(ngModel)]="consentDetails.guardianRelation" />
+            </p>
+            <p *ngIf='mode==="consent"'>
+              <label class='letter-label'>NRIC/FIN/Foreign ID</label>
+              <input class="letter-input" type="text" [(ngModel)]="consentDetails.nric" (focusout)="validateNric()" />
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="registration-button">
+        <button class="button reg-button" id="next2" type="button" *ngIf='mode==="engagement"'
+          (click)="goToPreviewPage()">Next</button>
+        <button class="button reg-button" id="next2" type="button" *ngIf='mode==="consent"'
+          (click)="goToPreviewSignature()">Next</button>
+        <!-- <button id="next1" class="button reg-button" type="button" *ngIf="part1" (click)="formStep(2)">Next</button>
+      <button class="button reg-button" id="next2" type="button" *ngIf="part2" (click)="formStep(3)">Next</button>
+      <button class="button reg-button" id="next2" type="button" *ngIf="part3" (click)="formStep(4)">Next</button> -->
+        <!-- <button class="submit-button reg-button" *ngIf="mode==='consent'" (click)="submitRegistration()"
+      ngClass="disableButton:checkbox == false">Create
+      Client Profile</button> -->
+      </div>
+
+    </div>
+  </div>
+</ion-content>

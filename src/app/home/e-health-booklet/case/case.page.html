@@ -1,0 +1,152 @@
+<!-- ! for ipad -->
+<ion-content (click)="closeDropdown()">
+    <div class="case-add-container" *ngIf="case">
+        <div class="edit-button"
+            *ngIf="pageMode === 'case-info' && (loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management'))">
+            <button class="reg-button" type="button" (click)="editMode()">Edit</button>
+        </div>
+        <div class="case-info-wrapper">
+            <!-- ? Referral Source -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Referral Source</span>
+                </div>
+                <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info' || lockReferer}">
+                    <div class="case-info-input" (click)="openSourceTypeDropdown($event)">
+                        <div class="dropdown-label">
+                            <p class="dropdown-title">{{case.referralSource}}</p>
+                        </div>
+                        <div class="dropdown-arrow-wrapper">
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                    </div>
+                    <ul class="case-type-dropdown" *ngIf="showSourceTypeDropdown">
+                        <li class="dropdown-input">
+                            <input type="text" [(ngModel)]="nameToSearch" placeholder="Search source"
+                                (input)="referralSources = dataService.searchFromDropdownList(referralSources, nameToSearch, 'source')"
+                                (click)="dataService.enterValue($event)">
+                        </li>
+                        <ng-container *ngFor="let source of referralSources">
+                            <li *ngIf="source.show" (click)="selectSourceType(source.source)">
+                                {{source.source}}</li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <!-- ? Referrer -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Referrer</span>
+                </div>
+                <div class="case-input-box"
+                    [ngClass]="{'disable': pageMode === 'case-info' || case.referralSource === '' || lockReferer }"
+                    *ngIf="referrerMode === 'dropdown'">
+                    <div class="case-info-input" (click)="openReferrerDropdown($event)">
+                        <div class="dropdown-label">
+                            <p class="dropdown-title">{{case.referrer}}</p>
+                        </div>
+                        <div class="dropdown-arrow-wrapper">
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                    </div>
+                    <ul class="case-type-dropdown" *ngIf="showReferrerDropdown">
+                        <li class="dropdown-input">
+                            <input type="text" [(ngModel)]="nameToSearch" placeholder="Search code or name"
+                                (input)="referrers = dataService.searchFromDropdownList(referrers, nameToSearch, 'name', 'code')"
+                                (click)="dataService.enterValue($event)">
+                        </li>
+                        <ng-container *ngFor="let referrer of referrers">
+                            <li *ngIf="referrer.show" (click)="selectReferrer(referrer)">{{referrer.code}} -
+                                {{referrer.name}}</li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info'}"
+                    *ngIf="referrerMode === 'input'">
+                    <input type="text" class="case-info-input" [disabled]="pageMode === 'case-info'"
+                        [(ngModel)]="case.referrer" placeholder="Base on source">
+                </div>
+            </div>
+            <!-- ? case number -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Case Number</span>
+                </div>
+                <div class="case-input-box1 disable">
+                    <input type="text" class="case-info-input" disabled [(ngModel)]="case.caseNumber">
+                </div>
+            </div>
+            <!-- ? case type -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Case Type</span>
+                </div>
+                <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info'}">
+                    <div class="case-info-input" (click)="openCaseTypeDropdown($event)">
+                        <div class="dropdown-label">
+                            <p class="dropdown-title">{{case.type}}</p>
+                        </div>
+                        <div class="dropdown-arrow-wrapper">
+                            <span class="dropdown-arrow"></span>
+                        </div>
+                    </div>
+                    <ul class="case-type-dropdown" *ngIf="showCaseTypeDropdown">
+                        <li class="dropdown-input">
+                            <input type="text" [(ngModel)]="nameToSearch" placeholder="Search case type"
+                                (input)="caseTypes = dataService.searchFromDropdownList(caseTypes, nameToSearch, 'type')"
+                                (click)="dataService.enterValue($event)">
+                        </li>
+                        <ng-container *ngFor="let type of caseTypes">
+                            <li *ngIf="type.show" (click)="selectCaseType(type.type)">{{type.type}}</li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+            <!-- ? case name -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Case Name</span>
+                </div>
+                <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info'}">
+                    <input type="text" class="case-info-input" [disabled]="pageMode === 'case-info'"
+                        [(ngModel)]="case.name">
+                </div>
+            </div>
+            <!-- ? case description -->
+            <!-- <div class="case-info-block">
+        <div class="case-input-label">
+          <p>Case Description</p>
+        </div>
+        <div class="case-input-box case-description-area" [ngClass]="{'disable': pageMode === 'case-info'}">
+          <textarea class="case-info-input" name="" id="" cols="30" rows="4" placeholder="Enter Description"
+            [(ngModel)]="case.description"></textarea>
+        </div>
+      </div> -->
+            <!-- ? pre-existing condition -->
+            <!-- <div class="case-info-block">
+        <div class="case-input-label">
+          <p>Pre-Existing Condition</p>
+        </div>
+        <div class="case-input-box case-description-area" [ngClass]="{'disable': pageMode === 'case-info'}">
+          <textarea class="case-info-input" name="" id="" cols="30" rows="10" placeholder="Enter Description"
+            [(ngModel)]="case.preExistingCondition"></textarea>
+        </div>
+      </div> -->
+            <!-- ? Current Symptoms and Complaints -->
+            <div class="case-info-block">
+                <div class="case-input-label">
+                    <span>Current Symptoms and Complaints</span>
+                </div>
+                <div class="case-input-box case-description-area" [ngClass]="{'disable': pageMode === 'case-info'}">
+                    <textarea id="case-description-area" class="case-info-input" [disabled]="pageMode === 'case-info'"
+                        name="" cols="30" rows="10" placeholder="Enter Description"
+                        [(ngModel)]="case.currentComplaints ">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="pageMode == 'edit'">
+            <button class="save-btn">Save Changes</button>
+        </div>
+    </div>
+</ion-content>

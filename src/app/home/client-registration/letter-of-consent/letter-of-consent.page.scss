@@ -1,0 +1,200 @@
+.consent-container {
+    margin: 0 auto;
+    max-width: 661px;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+}
+.consent-container-reload {
+    max-width: 760px !important;
+}
+.consent-container-first {
+    max-width: 661px !important;
+}
+.consent-wrapper {
+    padding: 4rem 0;
+}
+.consent-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.consent-container-reload .consent-content {
+    margin: 0 auto;
+}
+.consent-content {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    width: 60rem;
+}
+.consent-point {
+    margin-bottom: 2rem;
+    line-height: 2.2rem;
+}
+.consent-form {
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+.consent-form .consent {
+    padding: 1.5rem 5rem;
+}
+.form-title {
+    padding: 1rem 2rem;
+    border-bottom: 0.5px solid #7e7e7e;
+}
+.consent {
+    padding: 1.5rem 0rem;
+    font-size: 1.7rem;
+}
+input.patient-name,
+input.patient-nric {
+    border: none;
+    border-bottom: 1px solid #000000;
+    width: 25%;
+    outline: none;
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.user-info input.patient-name,
+.user-info input.patient-nric {
+    border: 1px solid #7e7e7e;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    text-align: left;
+    background: #e5e5e5;
+    font-weight: 400;
+    line-height: 2.2rem;
+    font-size: 1.6rem;
+}
+.user-parent-info input.patient-name,
+.user-parent-info input.patient-nric {
+    background: #fbfbfb;
+    border: 1px solid #7e7e7e;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    width: 100%;
+    text-align: left;
+    font-weight: 400;
+    line-height: 2.2rem;
+    font-size: 1.6rem;
+}
+.user-info,
+.user-parent-info {
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+}
+.authoriser-info {
+    margin-top: 3rem;
+}
+.radio-relation-item {
+    display: inline-block;
+    padding: 1.4rem;
+    color: #000000;
+    font-size: 1.4rem;
+    vertical-align: text-top;
+    padding-left: 0rem;
+}
+.radio-relation {
+    width: 20%;
+    display: inline-block;
+    color: #000000;
+    vertical-align: text-top;
+    font-size: 1.4rem;
+}
+.relation {
+    margin-top: 4rem;
+}
+.radio-label {
+    margin-left: 0.5rem;
+}
+.consent-select {
+    width: 18%;
+    display: inline-block;
+    color: #aeaeb2;
+    border: 0.5px solid #7e7e7e;
+    background: #fff;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+}
+.consent-to {
+    margin: 3rem 0;
+}
+.consent-to h6 {
+    font-weight: 600;
+    font-size: 1.7rem;
+}
+.new-address {
+    margin-top: 2rem;
+}
+.consent-checkbox {
+    width: 100%;
+    display: block;
+    margin: 1.5rem 0;
+    font-size: 1.7rem;
+    line-height: 2.2rem;
+    padding: 0 2rem;
+}
+.consent-checkbox label {
+    margin-left: 1rem;
+}
+.consent-check {
+    display: block;
+    color: #000000;
+}
+.consent-details {
+    margin: 3rem 0;
+}
+.other-option {
+    border: 0.5px solid #7e7e7e;
+    margin-left: 1rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    width: 30rem;
+    display: inline-block;
+}
+.registration-container {
+    max-width: 400px;
+    margin: auto;
+    padding-top: 0rem;
+}
+.reg-button:disabled {
+    opacity: 0.7;
+}
+.reg-button {
+    background-color: #eeeef0;
+    color: #007aff;
+    padding: 0.7rem;
+    width: 100%;
+    border-radius: 1.8rem;
+    bottom: 6rem;
+    line-height: 2.2rem;
+    font-size: 1.6rem;
+}
+.consent-agreed {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    margin: 3rem 0;
+    text-transform: capitalize;
+}
+p.agreed-title {
+    margin-bottom: 1rem;
+}
+.consent-sign {
+    height: 11rem;
+    width: 100%;
+    /* vertical-align: top; */
+    display: inline-block;
+    border: 0.5px solid #D4D4D4;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+}
+.consent-agreed div {
+    vertical-align: top;
+}
+.consent-sign img {
+    object-fit: cover;
+    vertical-align: middle;
+}

@@ -1,0 +1,2036 @@
+<ion-content>
+  <div class="medical-wrapper">
+    <div class="medical-container">
+      <div id="gastro-container" class="medical-type" *ngIf='activetab==="gastroenterology"'>
+        <!-- code for gastroenterology -->
+        <div class="ent1-container" *ngIf="MedicalConditions && MedicalConditions.gastroenterology">
+          <div class="buttons">
+            <div [ngClass]="gastroMode == 'checklist' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+              (click)="gastroChangeMode('checklist')">
+              <button [ngClass]="gastroMode == 'checklist' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                Checklist
+              </button>
+            </div>
+            &nbsp;
+            <div [ngClass]="gastroMode == 'diagram' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+              (click)="gastroChangeMode('diagram')">
+              <button [ngClass]="gastroMode == 'diagram' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                Diagrams
+              </button>
+            </div>
+          </div>
+          <div class="gastro-checklist-container" [ngClass]="agentMode == 'disable' ? 'disabled' : ''"
+            *ngIf="gastroMode == 'checklist'">
+            <p class="title">Checklist For Gastrointestinal/Colorectal</p>
+            <div class="ent-info-block">
+              <div class="ent-input-checkbox">
+                <p>1)Any Symptoms:</p>
+              </div>
+              <div class="checkbox-div">
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro1" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.gastricPain" />
+                  <label for="Gastro1">Gastric pain</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro2" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.bloodInStool" /><label for="Gastro2"> Blood in
+                    stool</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro3" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.bloating" /><label for="Gastro3"> Bloating</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro4" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.vomitting" /><label for="Gastro4"> Vomitting</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro5" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.weightLoss" /><label for="Gastro5"> Weight
+                    loss</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro6" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.changeOfStool" /><label for="Gastro6"> Change of
+                    stool habits</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro7" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.stomachPain" /><label for="Gastro7"> Stomach
+                    discomfort / pain</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro8" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.heartBurning" /><label for="Gastro8"> Heart burning
+                    sensation</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="Gastro9" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.gastroenterology.sourTaste" /><label for="Gastro9"> Sour taste in
+                    throat / mouth</label>
+                </div>
+              </div>
+            </div>
+            <div class="ent-info-block1">
+              <div class="ent-input-checkbox1">
+                <p>
+                  2) Is this the
+                  <input type="radio" id="gastroFirstTime" name="gastroFirstTime" value="firstTime" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.gastroenterology.symptom" />
+                  <label for="gastroFirstTime">First time</label> or
+                  <input type="radio" id="gastroRecurring" name="gastroRecurring" value="recurring" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.gastroenterology.symptom" />
+                  <label for="gastroRecurring">Recurring</label> of
+                  above-mentioned symptoms?
+                </p>
+                <p>
+                  &nbsp; &nbsp; &nbsp;If recurring, kindly elaborate on first
+                  date of symptoms and frequency
+                </p>
+                <div class="medical-input-box ortho-remark-area gastro-textarea">
+                  <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                    [(ngModel)]="MedicalConditions.gastroenterology.elaboration"></textarea>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="ent-info-block1">
+              <div class="ent-input-checkbox1">
+                <p>
+                  3) Are you above 50 years old
+                  <input type="radio" id="fiftyYes" name="fiftyYes" value="yes" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.gastroenterology.aboveFifty" />
+                  <label for="fiftyYes">Yes</label>
+                  <input type="radio" id="fiftyNo" name="fiftyNo" value="no" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.gastroenterology.aboveFifty" />
+                  <label for="fiftyNo">No</label>
+                </p>
+              </div>
+            </div>
+            <!-- <div class="ent-info-block1">
+                            <div class="ent-input-checkbox1">
+                                <p>4) Do you prefer to do the Bowel preparation at
+                                    <input type="radio" id="bowelYes" name="bowelYes" value="home" class="checkbox1" [(ngModel)]="MedicalConditions.gastroenterology.bowelPreparation">
+                                    <label for="bowelYes">Home</label> or at
+                                    <input type="radio" id="bowelNo" name="bowelNo" value="daySurgeryCenter" class="checkbox1" [(ngModel)]="MedicalConditions.gastroenterology.bowelPreparation">
+                                    <label for="bowelNo">Day Surgery-center</label>
+                                </p>
+                            </div>
+                        </div> -->
+            <hr />
+            <div class="ent-info-block">
+              <p class="sub-title">Bowel Preparation</p>
+              <hr />
+              <div class="ent-input-label">
+                <p>
+                  4) Foods/Fluids fasting will be required
+                  <b> at least 8 hours before procedure.</b>
+                </p>
+              </div>
+
+              <hr />
+              <div class="ent-input-label">
+                <p>
+                  5) Avoid milk products, fibre-rich food (eg. Fruits,
+                  Vegetables, Nuts, Wholegrain, Brown rice), red-coloured liquid
+                  (eg. Red wine, Ribena), <b> 3 days before procedure.</b>
+                </p>
+              </div>
+            </div>
+            <div class="ent-info-block">
+              <p class="sub-title">Additional Information</p>
+              <hr />
+              <div class="ent-input-label">
+                <p>
+                  6) It is not advisable for you to drive after the procedure.
+                </p>
+              </div>
+
+              <hr />
+              <div class="ent-input-label">
+                <p>
+                  7) Vitamins and Supplements (eg. Probiotics) are not
+                  claimable, a separate invoice will be issued from consultation
+                  and related medication for outpatient/follow-up consultations.
+                </p>
+              </div>
+            </div>
+            <div class="ortho-info-block">
+              <div class="ortho-input-label">
+                <p>Remarks</p>
+              </div>
+              <div class="medical-input-box ortho-remark-area">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.gastroenterology.remarks"></textarea>
+              </div>
+            </div>
+            <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+              <button class="save-btn">Save Changes</button>
+            </div>
+          </div>
+          <div class="gastro-diagram-container" *ngIf="gastroMode == 'diagram'">
+            <div class="ortho-ig-container">
+              <div class="buttons-wrap"
+                *ngIf="(loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))">
+                <div class="circle-erase-wrap"
+                  [ngClass]="MedicalConditions.gastroenterology.anatomyImage.mode === 'preview' ? 'btn-disabled' : ''">
+                  <div class="circle-wrap" (click)="drawCircleOnAnatomyCanvas()">
+                    <span class="circle-border"></span>
+                  </div>
+                  <div class="circle-wrap"
+                    (click)="clearAnatomyCanvasAndRedrawImage(MedicalConditions.gastroenterology.anatomyImage)">
+                    <!-- <span class="eraser"></span> -->
+                    <img class="eraser" src="assets/images/eraser.png" alt="" />
+                  </div>
+                </div>
+                <div class="edit-save-wrap">
+                  <div class="edit-wrap" style="width: 9rem"
+                    (click)="clearAnatomyImage(MedicalConditions.gastroenterology.anatomyImage)"
+                    [ngClass]="MedicalConditions.gastroenterology.anatomyImage.mode === 'preview' ? 'btn-disabled' : ''">
+                    <span>Clear Image</span>
+                  </div>
+                  <div class="edit-wrap" (click)="editAnatomyImage(MedicalConditions.gastroenterology.anatomyImage)"
+                    [ngClass]="MedicalConditions.gastroenterology.anatomyImage.mode === 'edit' ? 'btn-disabled' : ''">
+                    <span>Edit</span>
+                  </div>
+                  <div class="edit-wrap"
+                    [ngClass]="MedicalConditions.gastroenterology.anatomyImage.mode === 'preview' ? 'btn-disabled' : ''"
+                    (click)="saveAnatomyImageToAws(MedicalConditions.gastroenterology.anatomyImage)">
+                    <span>Save</span>
+                  </div>
+                </div>
+              </div>
+              <div id="anatomy-img" class="images-div">
+                <img src="../../../../assets/images/anatomy_of_human_body.png"
+                  *ngIf="MedicalConditions.gastroenterology.anatomyImage.mode === 'preview' && MedicalConditions.gastroenterology.anatomyImage.fileUploadKey === ''" />
+                <img [src]="getImageUrl(MedicalConditions.gastroenterology.anatomyImage.fileUploadKey)"
+                  crossorigin="anonymous"
+                  *ngIf="MedicalConditions.gastroenterology.anatomyImage.mode === 'preview' && MedicalConditions.gastroenterology.anatomyImage.fileUploadKey !== ''" />
+                <canvas id="anatomy-canvas" width="450" height="530"
+                  [ngClass]="MedicalConditions.gastroenterology.anatomyImage.mode === 'edit' ? 'display-block' : 'display-none'"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="medical-type" *ngIf='activetab==="orthopaedic"'>
+        <!-- code for orthopaedic -->
+        <div class="ortho-container">
+          <div id="ortho-container">
+            <div class="buttons">
+              <div [ngClass]="mode == 'checklist' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+                (click)="checklist()">
+                <button [ngClass]="mode == 'checklist' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                  Checklist
+                </button>
+              </div>
+              &nbsp;
+              <div [ngClass]="mode == 'diagram' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+                (click)="diagram()">
+                <button [ngClass]="mode == 'diagram' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                  Diagrams
+                </button>
+              </div>
+            </div>
+            <!-- <div class="sub-ortho-container" *ngIf="mode==='diagram'"> -->
+            <div class="sub-ortho-container" [ngClass]="mode==='diagram' ? 'display-block': 'display-none'">
+              <ng-container>
+                <div class="ortho-ig-container"
+                  *ngFor="let img of MedicalConditions.orthopaedic.uploadedImages ; let i=index">
+                  <div class="buttons-wrap"
+                    *ngIf="(i < 2) && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))">
+                    <div class="circle-erase-wrap" [ngClass]="img.mode === 'preview' ? 'btn-disabled' : ''">
+                      <div class="circle-wrap" (click)="drawCircleOnCanvas(i)">
+                        <span class="circle-border"></span>
+                      </div>
+                      <div class="circle-wrap" (click)="clearCanvasAndRedrawImage(img, i)">
+                        <!-- <span class="eraser"></span> -->
+                        <img class="eraser" src="assets/images/eraser.png" alt="" />
+                      </div>
+                    </div>
+                    <div class="edit-save-wrap">
+                      <div class="edit-wrap" style="width: 9rem" (click)="clearImage(img, i)"
+                        [ngClass]="img.mode === 'preview' ? 'btn-disabled' : ''">
+                        <span>Clear Image</span>
+                      </div>
+                      <div class="edit-wrap" (click)="editImage(img, i)"
+                        [ngClass]="img.mode === 'edit' ? 'btn-disabled' : ''">
+                        <span>Edit</span>
+                      </div>
+                      <div class="edit-wrap" [ngClass]="img.mode === 'preview' ? 'btn-disabled' : ''"
+                        (click)="saveImageToAws(img, i)">
+                        <span>Save</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ? if i == 0 and fileUploadKey is empty string; -->
+                  <div id="skeleton-img" class="images-div" *ngIf="i === 0">
+                    <img src="../../../../assets/images/skeleton.png"
+                      *ngIf="img.mode === 'preview' && img.fileUploadKey === ''" />
+                    <!-- <canvas id="skeleton-canvas" width="450" height="530"
+                                            [ngClass]="img.mode === 'edit' ? 'display-block' : 'display-none'"></canvas>
+                                    </div>
+                                    <!-- ? if i === 0 and fileUploadKey is not empty 
+                                    <div class="images-div" *ngIf="i === 0 && img.fileUploadKey !== ''"> -->
+                    <img [src]="getImageUrl(img.fileUploadKey)" crossorigin="anonymous"
+                      *ngIf="img.mode === 'preview' && img.fileUploadKey !== ''" />
+                    <canvas id="skeleton-canvas" width="450" height="530"
+                      [ngClass]="img.mode === 'edit' ? 'display-block' : 'display-none'"></canvas>
+                  </div>
+                  <!-- ? if i == 1 and fileUploadKey is empty string; -->
+                  <div id="muscle-img" class="images-div" *ngIf="i === 1">
+                    <img src="../../../../assets/images/muscle.png"
+                      *ngIf="img.mode === 'preview' && img.fileUploadKey === ''" />
+                    <!-- <canvas id="muscle-canvas" width="450" height="594"
+                                            [ngClass]="img.mode === 'edit' ? 'display-block' : 'display-none'"></canvas>
+                                    </div>
+                                    <!-- ? if i == 1 and fileUploadKey is not empty string;
+                                    <div class="images-div" *ngIf="i === 1 && img.fileUploadKey !== ''"> -->
+                    <img [src]="getImageUrl(img.fileUploadKey)" crossorigin="anonymous"
+                      *ngIf="img.mode === 'preview' && img.fileUploadKey !== ''" />
+                    <canvas id="muscle-canvas" width="450" height="594"
+                      [ngClass]="img.mode === 'edit' ? 'display-block' : 'display-none'"></canvas>
+                  </div>
+                  <!-- ? all images other than first two -->
+                  <div class="images-div uploaded-img" *ngIf="i > 1 && img.fileUploadKey !== ''">
+                    <img [src]="getImageUrl(img.fileUploadKey)" crossorigin="anonymous" />
+                    <div class="delete-btn" *ngIf="i > 1">
+                      <button class="delete-images-btn" (click)="deleteImages(img.fileUploadKey,i)"
+                        *ngIf="agentMode == 'enable'"></button>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+              <!-- <div class="ortho-ig-container" *ngFor="let img of MedicalConditions.orthopaedic.uploadedImages ; let i=index">
+                                        <div class="images-div">
+                                            <img [src]="getImageUrl(img.fileUploadKey)">
+                                        </div>
+                                        <div class="delete-btn">
+                                            <button class="delete-images-btn" (click)="deleteImages(img.fileUploadKey,i)" *ngIf="agentMode == 'enable'"></button>
+                                        </div>
+                                    </div> -->
+            </div>
+            <div class="sub-ortho-container" *ngIf="mode==='checklist'"
+              [ngClass]="agentMode == 'disable' ? 'disabled' : ''">
+              <!-- <div  class="margin"> -->
+              <div>
+                <p class="sub-title"><b> Medical Condition Checklist </b></p>
+                <p class="sub-title">
+                  please answer the following questions to the best of your
+                  knowledge
+                </p>
+              </div>
+              <div class="ent-input-label2">
+                <p>Body part: Kindly Circle</p>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>
+                    Is this the First time or Recurring pain of the same area?
+                    If recurring, kindly elaborate on first date of symptoms and
+                    frequency
+                  </p>
+                </div>
+                <div class="radio-div">
+                  <div class="radio-input-wrap">
+                    <input type="radio" id="orthoFirstTime" value="firstTime" class="ortho-checkbox"
+                      [(ngModel)]="MedicalConditions.orthopaedic.symptom" />
+                    <label for="orthoFirstTime">First Time</label>
+                  </div>
+                  <div class="radio-input-wrap">
+                    <input type="radio" id="orthoRecurring" value="recurring" class="ortho-recurring-checkbox"
+                      [(ngModel)]="MedicalConditions.orthopaedic.symptom" />
+                    <label for="orthoRecurring">Recurring</label>
+                  </div>
+                </div>
+                <div class="medical-input-box ortho-remark-area ortho-textarea">
+                  <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                    [(ngModel)]="MedicalConditions.orthopaedic.elaboration"></textarea>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>
+                    Kindly advise what is the pain score (least 1 -- most 10)
+                  </p>
+                </div>
+                <input type="number" class="vaccination1" min="1" max="10"
+                  [(ngModel)]="MedicalConditions.orthopaedic.painScore" pattern="/^-?\d+\.?\d*$/"
+                  onKeyPress="if(this.value.length==2) return false;" /><br />
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>Is there any movement restriction?</p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="restrictionYes" name="restrictionYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.movementRestriction" />
+                  <label for="restrictionYes">Yes</label>
+                  <input type="radio" id="restrictionNo" name="restrictionNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.movementRestriction" />
+                  <label for="restrictionNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>Is there any swelling at the affected area?</p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="swellingYes" name="swellingYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.swelling" />
+                  <label for="swellingYes">Yes</label>
+                  <input type="radio" id="swellingNo" name="swellingNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.swelling" />
+                  <label for="swellingNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>
+                    Is there any pain at the affected area during rainy/cold
+                    weather?
+                  </p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="painYes" name="painYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.pain" />
+                  <label for="painYes">Yes</label>
+                  <input type="radio" id="painNo" name="painNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.pain" />
+                  <label for="painNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>Is this a sport injury?</p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="sportYes" name="sportYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.sportInjury" />
+                  <label for="sportYes">Yes</label>
+                  <input type="radio" id="sportNo" name="sportNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.sportInjury" />
+                  <label for="sportNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>Where you involved in any accident?</p>
+                  <p>
+                    Kindly indicate Date, Time, Location, Witness(if any),
+                    details of accident
+                  </p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="accidentYes" name="accidentYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.accident" />
+                  <label for="accidentYes">Yes</label>
+                  <input type="radio" id="accidentNo" name="accidentNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.accident" />
+                  <label for="accidentNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>Was the accident reported to relevant authorities?</p>
+                  <p>If Yes, kindly provide the report</p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="reportingYes" name="reportingYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.reporting" />
+                  <label for="reportingYes">Yes</label>
+                  <input type="radio" id="reportingNo" name="reportingNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.reporting" />
+                  <label for="reportingNo">No</label>
+                </div>
+              </div>
+              <div class="ent-info-block1" *ngIf="agentMode === 'enable'">
+                <div class="question">
+                  <p>
+                    Kindly provide pictures of the following: location of the
+                    accident and/or body injury.
+                  </p>
+                </div>
+                <div class="upload-btn-wrapper" (click)="uploadFile.click()">
+                  <button #uploadBtn class="upload-btn">Upload Pictures</button>
+                  <input #uploadFile type="file" hidden (change)="uploadFiles($event)" accept="image/*"
+                    (click)="fileClick()" multiple />
+                </div>
+              </div>
+              <div class="ent-info-block1">
+                <div class="question">
+                  <p>11) Any third party was involved in the accident?</p>
+                </div>
+                <div class="radio-div">
+                  <input type="radio" id="thirdPartyYes" name="thirdPartyYes" value="yes" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.thirdParty" />
+                  <label for="thirdPartyYes">Yes</label>
+                  <input type="radio" id="thirdPartyNo" name="thirdPartyNo" value="no" class="ortho-checkbox1"
+                    [(ngModel)]="MedicalConditions.orthopaedic.thirdParty" />
+                  <label for="thirdPartyNo">No</label>
+                </div>
+              </div>
+              <hr />
+              <hr />
+              <div class="ent-info-block">
+                <p class="sub-title"><b> Additional Information</b></p>
+                <p class="sub-title">Please tick the checkbox to acknowledge</p>
+                <hr />
+                <div class="ortho-input-label">
+                  <p>
+                    Medical appliances- wheelchair, walking frame, crutches, any
+                    form of guard support, supplements, heat pack and scar
+                    creams are NOT claimable. A separate invoice will be issued
+                    from consultation and related medication for
+                    outpatient/follow-up consultations.
+                  </p>
+                </div>
+
+                <div class="discharge">
+                  <input type="checkbox" id="cardioDischarge" value="ok" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.cardioDischarge" />
+                </div>
+                <div class="ortho-input-label">
+                  <p>Physiotherapy may be provided/given</p>
+                </div>
+                <div class="discharge">
+                  <input type="checkbox" id="Physiotherapy" value="ok" class="ortho-checkbox"
+                    [(ngModel)]="MedicalConditions.orthopaedic.PhysiotherapyProvided" />
+                </div>
+              </div>
+              <div class="ortho-info-block">
+                <div class="ortho-input-label">
+                  <p>Remarks / Claims Strategy</p>
+                </div>
+                <div class="ortho-input-box ortho-remark-area">
+                  <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                    [(ngModel)]="MedicalConditions.orthopaedic.remarks"></textarea>
+                </div>
+              </div>
+              <div class="ortho-button">
+                <div class="ortho-save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+                  <button class="ortho-save-btn">Save Changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="medical-type" *ngIf='activetab==="cardiology"'>
+        <!-- code for cardiology -->
+        <div class="ent-container" [ngClass]="agentMode == 'disable' ? 'disabled' : '' ">
+          <p class="title">Checklist For Cardiology</p>
+          <div class="ent-info-block">
+            <div class="ent-input-checkbox">
+              <p>1)Any Symptoms:</p>
+            </div>
+            <div class="checkbox-div">
+              <div class="col-4">
+                <input type="checkbox" id="cardio1" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.fatigue" /><label for="cardio1"> Fatigue</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio2" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.Giddiness" /><label for="cardio2"> Giddiness</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio3" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.shortnessOfBreath" /><label for="cardio3"> Shortness of
+                  breath</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio4" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.fainting" /><label for="cardio4"> Fainting spells</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio5" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.chestPain" /><label for="cardio5"> Chest pain</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio6" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.painArmsAndLegs" /><label for="cardio6"> Pain in arms &
+                  legs</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio7" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.palpitation" /><label for="cardio7"> Palpitation</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio8" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.heartBurn" /><label for="cardio8"> Heart burn</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio9" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.swelling" /><label for="cardio9"> Swelling in lower
+                  legs</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio10" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.irregularHeartbeat" /><label for="cardio10"> Irregular
+                  heartbeat</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="cardio11" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.cardiology.numbness" /><label for="cardio11"> Numbness in arms &
+                  legs</label>
+              </div>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                2) Is this the
+                <input type="radio" id="firstTime" name="firstTime" value="firstTime" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.cardiology.symptom" />
+                <label for="firstTime">First time</label> or
+                <input type="radio" id="recurring" name="recurring" value="recurring" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.cardiology.symptom" />
+                <label for="recurring">Recurring</label> of above-mentioned
+                symptoms?<br />
+                &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                symptoms and frequency
+              </p>
+              <div class="medical-input-box ortho-remark-area gastro-textarea">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.cardiology.elaboration"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block">
+            <p class="sub-title">Additional Information</p>
+            <hr />
+            <div class="ent-input-label">
+              <p>
+                3) Vitamins and Supplements (e.g Omega 3) is not claimable, a
+                separate invoice will be issued from consultation and related
+                medication for outpatient/follow-up consultations.
+              </p>
+            </div>
+          </div>
+          <div class="ortho-info-block">
+            <div class="ortho-input-label">
+              <p>Remarks</p>
+            </div>
+            <div class="medical-input-box ortho-remark-area">
+              <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                [(ngModel)]="MedicalConditions.cardiology.remarks"></textarea>
+            </div>
+          </div>
+          <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+            <button class="save-btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div id="gynaec-container" class="medical-type" *ngIf='activetab==="gynaecology"'>
+        <!-- code for gynaecology -->
+        <div class="ent-container" [ngClass]="agentMode == 'disable' ? 'disabled' : '' ">
+          <p class="title">Checklist For Gynaecology</p>
+          <div class="ent-info-block">
+            <div class="ent-input-checkbox">
+              <p>1)Any Symptoms:</p>
+            </div>
+            <div class="checkbox-div">
+              <div class="col-4">
+                <input type="checkbox" id="gyno1" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.lowerAbdominalPain" /><label for="gyno1"> Lower abdominal
+                  pain</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno2" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.severeAbdominalPain" /><label for="gyno2">
+                  Severe lower abdominal pain during mensuration</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno3" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.abnormalDischarge" /><label for="gyno3"> Abnormal
+                  discharge</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno4" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.breastPain" /><label for="gyno4"> Breast pain</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno5" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.itchiness" /><label for="gyno5"> Itchiness in
+                  breasts/genital areas</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno6" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.abnormalBleeding" /><label for="gyno6"> Abnormal
+                  bleeding</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno7" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.irregularCycles" /><label for="gyno7"> Irregular
+                  mensuration cycles</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno8" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.burningSensation" /><label for="gyno8"> Burning sensation
+                  during urination</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno9" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.lumps" /><label for="gyno9">
+                  Unusual lump(s) in breasts/genital areas</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno10" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.painDuringSexualActivities" /><label for="gyno10"> Pain
+                  during sexual actvities</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="gyno11" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.gynaecology.lowerBackPain" /><label for="gyno11"> Lower back
+                  pain</label>
+              </div>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                2) Is this the
+                <input type="radio" id="gynaeFirstTime" name="gynaeFirstTime" value="firstTime" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.symptom" />
+                <label for="gynaeFirstTime">First time</label> or
+                <input type="radio" id="gynaeRecurring" name="gynaeRecurring" value="recurring" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.symptom" />
+                <label for="gynaeRecurring">Recurring</label> of above-mentioned
+                symptoms?<br />
+                &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                symptoms and frequency
+              </p>
+              <div class="medical-input-box ortho-remark-area gastro-textarea">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.gynaecology.elaboration"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="ent-input-label2">
+            <p>3) Kindly advise what is the pain score (least 1 -- most 10)</p>
+          </div>
+          <div class="score-div">
+            <input type="number" class="vaccination" [(ngModel)]="MedicalConditions.gynaecology.painScore" min="1"
+              max="10" pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" /><br />
+          </div>
+          <div class="ent-input-label2">
+            <p>4) When was your last menstruation cycle</p>
+          </div>
+          <div class="policy-input-box">
+            <ion-datetime style="padding: 0.3rem" id="lastCycle" (ionChange)="formatDate()" displayFormat="DD MMM YYYY"
+              [(ngModel)]="MedicalConditions.gynaecology.lastCycle">
+            </ion-datetime>
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('lastCycle').click()">
+            </ion-icon>
+          </div>
+          <div class="ent-input-label2">
+            <p>5) When was your last Pap Smear</p>
+          </div>
+          <div class="policy-input-box">
+            <ion-datetime style="padding: 0.3rem" id="lastPapSmear" (ionChange)="formatDate()"
+              displayFormat="DD MMM YYYY" [(ngModel)]="MedicalConditions.gynaecology.lastPapSmear">
+            </ion-datetime>
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('lastPapSmear').click()">
+            </ion-icon>
+          </div>
+          <div class="ent-input-label2">
+            <p>6) When was your last Mammogram</p>
+          </div>
+          <div class="policy-input-box">
+            <ion-datetime style="padding: 0.3rem" id="lastMammogram" (ionChange)="formatDate()"
+              displayFormat="DD MMM YYYY" [(ngModel)]="MedicalConditions.gynaecology.lastMammogram">
+            </ion-datetime>
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('lastMammogram').click()">
+            </ion-icon>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                7) Are you sexually active?
+                <input type="radio" id="gynoActiveYes" name="gynoActiveYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.sexuallyActive" />
+                <label for="gynoActiveYes">Yes</label>
+                <input type="radio" id="gynoActiveNo" name="gynoActiveNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.sexuallyActive" />
+                <label for="gynoActiveNo">No</label>
+              </p>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                8) Are you currently taking any form of hormonal/birth control
+                pills?
+                <input type="radio" id="pillsYes" name="pillsYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.medication" />
+                <label for="pillsYes">Yes</label>
+                <input type="radio" id="pillsNo" name="pillsNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.medication" />
+                <label for="pillsNo">No</label><br />
+                &nbsp; &nbsp;
+              </p>
+              <p>
+                If Yes, kindly state the medication
+                <input type="text" class="vaccination" [(ngModel)]="MedicalConditions.gynaecology.vaccination" />
+              </p>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                9) Do you prefer
+                <input type="radio" id="gynoMale" name="gynoMale" value="male" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.Gyno" />
+                <label for="gynoMale">Male</label> or
+                <input type="radio" id="gynoFemale" name="gynoFemale" value="female" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.Gyno" />
+                <label for="gynoFemale">Female</label> urologist.
+              </p>
+
+              <p class="other">
+                In the event your preferred gender of urologist is not
+                available, will you be able to accept another urologists.
+                <input type="radio" id="gynoChangeYes" name="gynoChangeYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.otherGyno" />
+                <label for="gynoChangeYes">Yes</label>
+                <input type="radio" id="gynoChangeNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.gynaecology.otherGyno" />
+                <label for="gynoChangeNo">No</label>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block">
+            <p class="sub-title">Additional Information</p>
+            <hr />
+            <div class="ent-input-label">
+              <p>
+                10) Vitamins, Supplements, Birth control pills, Vaccines are not
+                claimable, a separate invoice will be issued from consultation
+                and related medication for outpatient/follow-up consultations.
+              </p>
+            </div>
+          </div>
+          <div class="ortho-info-block">
+            <div class="ortho-input-label">
+              <p>Remarks</p>
+            </div>
+            <div class="medical-input-box ortho-remark-area">
+              <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                [(ngModel)]="MedicalConditions.gynaecology.remarks"></textarea>
+            </div>
+          </div>
+          <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+            <button class="save-btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div id="uro-container" class="medical-type" *ngIf='activetab==="urology"'>
+        <!-- code for urology -->
+        <div class="ent-container" [ngClass]="agentMode == 'disable' ? 'disabled' : '' ">
+          <p class="title">Checklist For Urology</p>
+          <div class="ent-info-block">
+            <div class="ent-input-checkbox">
+              <p>1)Any Symptoms:</p>
+            </div>
+            <div class="checkbox-div">
+              <div class="col-4">
+                <input type="checkbox" id="uro1" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.lowerAbdominalPain" /><label for="uro1"> Lower abdominal
+                  pain</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro2" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.abnormalDischarge" /><label for="uro2"> Abnormal
+                  discharge</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro3" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.breastPain" /><label for="uro3"> Breast pain</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro4" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.ichiness" /><label for="uro4"> Itchiness in breasts/genital
+                  areas</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro5" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.abnormalBleeding" /><label for="uro5"> Abnormal
+                  bleeding</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro6" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.irregularCycles" /><label for="uro6"> Irregular mensuration
+                  cycles</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro7" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.burningSensation" /><label for="uro7"> Burning sensation during
+                  urination</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro8" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.lumps" /><label for="uro8">
+                  Unusual lump(s) in breasts/genital areas</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro9" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.pain" /><label for="uro9"> Pain during sexual actvities</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="uro10" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.urology.lowerBackPain" /><label for="uro10"> Lower back pain</label>
+              </div>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                2) Is this the
+                <input type="radio" id="uroFirstTime" name="uroFirstTime" value="firstTime" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.symptom" />
+                <label for="uroFirstTime">First time</label> or
+                <input type="radio" id="uroRecurring" name="uroRecurring" value="recurring" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.symptom" />
+                <label for="uroRecurring">Recurring</label> of above-mentioned
+                symptoms?<br />
+                &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                symptoms and frequency
+              </p>
+              <div class="medical-input-box ortho-remark-area gastro-textarea">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.urology.elaboration"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="ent-input-label2">
+            <p>3) Kindly advise what is the pain score (least 1 -- most 10)</p>
+          </div>
+          <input type="number" class="vaccination1" [(ngModel)]="MedicalConditions.urology.painScore" min="1" max="10"
+            pattern="/^-?\d+\.?\d*$/" onKeyPress="if(this.value.length==2) return false;" />
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                4) Are you sexually active?
+                <input type="radio" id="uroActiveYes" name="uroActiveYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.sexuallyActive" />
+                <label for="uroActiveYes">Yes</label>
+                <input type="radio" id="uroActiveNo" name="uroActiveNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.sexuallyActive" />
+                <label for="uroActiveNo">No</label>
+              </p>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                5) Are you currently taking any form of hormonal?
+                <input type="radio" id="uroMedicationYes" name="uroMedicationYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.medication" />
+                <label for="uroMedicationYes">Yes</label>
+                <input type="radio" id="uroMedicationNo" name="uroMedicationNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.medication" />
+                <label for="uroMedicationNo">No</label><br />
+                &nbsp; &nbsp;
+              </p>
+              <p>
+                If Yes, kindly state the medication
+                <input type="text" class="vaccination" [(ngModel)]="MedicalConditions.urology.vaccination" />
+              </p>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                6) Do you prefer
+                <input type="radio" id="uroMale" name="uroMale" value="male" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.Gyno" />
+                <label for="uroMale">Male</label> or
+                <input type="radio" id="uroFemale" name="uroFemale" value="female" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.Gyno" />
+                <label for="uroFemale">Female</label> urologist.
+              </p>
+
+              <p class="other">
+                In the event your preferred gender of urologist is not
+                available, will you be able to accept another urologists.
+                <input type="radio" id="otherYes" name="otherYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.otherGyno" />
+                <label for="otherYes">Yes</label>
+                <input type="radio" id="otherNo" name="otherNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.urology.otherGyno" />
+                <label for="otherNo">No</label>
+              </p>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block">
+            <p class="sub-title">Additional Information</p>
+            <hr />
+            <div class="ent-input-label">
+              <p>
+                7) Vitamins, Supplements, Birth control pills, Vaccines are not
+                claimable, a separate invoice will be issued from consultation
+                and related medication for outpatient/follow-up consultations.
+              </p>
+            </div>
+          </div>
+          <div class="ortho-info-block">
+            <div class="ortho-input-label">
+              <p>Remarks</p>
+            </div>
+            <div class="medical-input-box ortho-remark-area">
+              <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                [(ngModel)]="MedicalConditions.urology.remarks"></textarea>
+            </div>
+          </div>
+          <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+            <button class="save-btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div id="ent-container" class="medical-type" *ngIf='activetab==="ent"'>
+        <!-- code for ent -->
+        <div class="ent1-container">
+          <div class="buttons">
+            <div [ngClass]="entMode == 'checklist' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+              (click)="checklist()">
+              <button [ngClass]="entMode == 'checklist' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                Checklist
+              </button>
+            </div>
+            &nbsp;
+            <div [ngClass]="entMode == 'stopBang' ? 'ortho-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+              (click)="entStopBang()">
+              <button [ngClass]="entMode == 'stopBang' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                StopBang Questionnaire
+              </button>
+            </div>
+            &nbsp;
+            <div [ngClass]="entMode == 'berlin' ? 'berlin-btn-wrapper-onclick' : 'ortho-btn-wrapper' "
+              (click)="entBerlin()">
+              <button [ngClass]="entMode == 'berlin' ? 'ortho-btn-onclick' : 'ortho-btn' ">
+                Berlin Questionnaire
+              </button>
+            </div>
+          </div>
+          <div class="ent-checklist-container"
+            [ngClass]="agentMode == 'disable' ? 'ent-checklist-container-disabled' : '' "
+            *ngIf="entMode === 'checklist'">
+            <p class="title">Checklist For Ear,Nose,Throat</p>
+            <div class="ent-info-block">
+              <div class="ent-input-checkbox">
+                <p>1)Any Symptoms:</p>
+              </div>
+              <div class="checkbox-div">
+                <div class="col-4">
+                  <input type="checkbox" id="ent1" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.lossOfHearing" /><label for="ent1"> Loss of
+                    hearing</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent2" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.ringingEars" /><label for="ent2"> Ringing in
+                    ears</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent3" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.painInEars" /><label for="ent3"> Pain in ears</label>
+                </div>
+              </div>
+            </div>
+            <div class="ent-info-block">
+              <div class="ent-input-checkbox">
+                <p>2)Any Symptoms:</p>
+              </div>
+              <div class="checkbox-div">
+                <div class="col-4">
+                  <input type="checkbox" id="ent4" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.runnyNose" /><label for="ent4"> Runny nose</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent5" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.bleedingNose" /><label for="ent5"> Nose bleed</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent6" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.blockedNose" /><label for="ent6"> Blocked nose</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent7" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.lossOfSmell" /><label for="ent7"> Loss of smell</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent8" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.difficultyInBreathing" /><label for="ent8"> Difficulty
+                    in breathing</label>
+                </div>
+              </div>
+            </div>
+            <div class="ent-info-block">
+              <div class="ent-input-checkbox">
+                <p>3)Any Symptoms:</p>
+              </div>
+              <div class="checkbox-div">
+                <div class="col-4">
+                  <input type="checkbox" id="ent9" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.lossOfTaste" /><label for="ent9"> Loss of taste</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent10" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.lossOfVoice" /><label for="ent10"> Loss of
+                    voice</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent11" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.soreThroat" /><label for="ent11"> Sore throat</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent12" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.dizziness" /><label for="ent12"> Dizziness</label>
+                </div>
+                <div class="col-4">
+                  <input type="checkbox" id="ent13" value="value1" class="checkbox"
+                    [(ngModel)]="MedicalConditions.ent.checklist.insomnia" /><label for="ent13"> Insomnia</label>
+                </div>
+              </div>
+            </div>
+            <div class="ent-info-block1">
+              <div class="ent-input-checkbox1">
+                <p>
+                  4) Is this the
+                  <input type="radio" id="entFirstTime" name="entFirstTime" value="firstTime" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.checklist.symptom" />
+                  <label for="entFirstTime">First time</label> or
+                  <input type="radio" id="entRecurring" name="entRecurring" value="recurring" class="checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.checklist.symptom" />
+                  <label for="entRecurring">Recurring</label> of above-mentioned
+                  symptoms?<br />
+                  &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                  symptoms and frequency
+                </p>
+                <div class="medical-input-box ortho-remark-area gastro-textarea">
+                  <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                    [(ngModel)]="MedicalConditions.ent.elaboration"></textarea>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <hr />
+            <div class="ent-info-block">
+              <p class="sub-title">Additional Information</p>
+              <hr />
+              <div class="ent-input-label">
+                <p>
+                  5) Medical appliances (e.g. CPAP machine), Vitamins,
+                  Supplements, Vaccines, Allergy test(s) are not claimable, a
+                  separate invoice will be issued from consultation and related
+                  medication for outpatient/follow-up consultations.
+                </p>
+              </div>
+            </div>
+            <div class="ortho-info-block">
+              <div class="ortho-input-label">
+                <p>Remarks</p>
+              </div>
+              <div class="medical-input-box ortho-remark-area">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.ent.checklist.remarks"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="ent-question-container"
+            [ngClass]="agentMode == 'disable' ? 'ent-question-container-disabled' : '' "
+            *ngIf="MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.stopBang && entMode === 'stopBang'">
+            <div class="input-div">
+              <div class="height">
+                <div class="age-input-label">
+                  <p>Name :</p>
+                </div>
+                <div class="input-box" *ngIf="user.name !== ''">
+                  <p>{{user.name}}</p>
+                </div>
+                <div class="input-box" *ngIf="user.name === ''">
+                  <p>-</p>
+                </div>
+              </div>
+              <div class="height">
+                <div class="input-label">
+                  <p>Height :</p>
+                </div>
+                <div class="input-box" *ngIf="user.height !== '' && user.height !== undefined">
+                  <p>{{user.height}} cm</p>
+                </div>
+                <div class="input-box" *ngIf="user.height === '' || user.height === undefined">
+                  <p>-</p>
+                </div>
+              </div>
+              <div class="height">
+                <div class="input-label">
+                  <p>Weight :</p>
+                </div>
+                <div class="input-box" *ngIf="user.weight !== '' && user.weight !== undefined">
+                  <p>{{user.weight}} Kg</p>
+                </div>
+                <div class="input-box" *ngIf="user.weight === '' || user.weight === undefined">
+                  <p>-</p>
+                </div>
+              </div>
+              <div class="height">
+                <div class="age-input-label">
+                  <p>Age :</p>
+                </div>
+                <div class="input-box">
+                  <p>{{age}}</p>
+                </div>
+              </div>
+              <div class="height">
+                <div class="input-label">
+                  <p>Gender :</p>
+                </div>
+                <div class="input-box" *ngIf="user.gender !== ''">
+                  <p>{{user.gender}}</p>
+                </div>
+                <div class="input-box" *ngIf="user.gender === ''">
+                  <p>-</p>
+                </div>
+              </div>
+            </div>
+            <div class="stop-container">
+              <div class="ent-header">
+                <h1>STOP</h1>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>
+                    Do you SNORE loudly (louder than talking or loud enough to
+                    be heard through closed doors)?
+                  </p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="snoreYes" name="snoreYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.snore" (change)="calculateScore()" />
+                  <label for="snoreYes">Yes</label>
+                  <input type="radio" id="snoreNo" name="snoreYes" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.snore" (change)="calculateScore()" />
+                  <label for="snoreNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>
+                    Do you often feel TIRED, fatigued, or sleepy during daytime?
+                  </p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="tiredYes" name="tiredYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.tired" (change)="calculateScore()" />
+                  <label for="tiredYes">Yes</label>
+                  <input type="radio" id="tiredNo" name="tiredNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.tired" (change)="calculateScore()" />
+                  <label for="tiredNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>
+                    Has anyone OBSERVED you stop breathing during your sleep?
+                  </p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="observeYes" name="observeYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.observed" (change)="calculateScore()" />
+                  <label for="observeYes">Yes</label>
+                  <input type="radio" id="observeNo" name="observeNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.observed" (change)="calculateScore()" />
+                  <label for="observeNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>
+                    Do you have or are you being treated for high blood
+                    PRESSURE?
+                  </p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="pressureYes" name="pressureYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.pressure" (change)="calculateScore()" />
+                  <label for="pressureYes">Yes</label>
+                  <input type="radio" id="pressureNo" name="pressureNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.pressure" (change)="calculateScore()" />
+                  <label for="pressureNo">No</label>
+                </div>
+              </div>
+            </div>
+            <div class="bang-container">
+              <div class="ent-header">
+                <h1>BANG</h1>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>BMI more than 35kg/m2?</p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="bmiYes" name="bmiYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.bmi" (change)="calculateScore()" />
+                  <label for="bmiYes">Yes</label>
+                  <input type="radio" id="bmiNo" name="bmiNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.bmi" (change)="calculateScore()" />
+                  <label for="bmiNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>AGE over 50 years old?</p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="ageYes" name="ageYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.age" (change)="calculateScore()" />
+                  <label for="ageYes">Yes</label>
+                  <input type="radio" id="ageNo" name="ageNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.age" (change)="calculateScore()" />
+                  <label for="ageNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>NECK circumference > 16 inches (40cm)?</p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="neckYes" name="neckYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.neck" (change)="calculateScore()" />
+                  <label for="neckYes">Yes</label>
+                  <input type="radio" id="neckNo" name="neckNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.neck" (change)="calculateScore()" />
+                  <label for="neckNo">No</label>
+                </div>
+              </div>
+              <div class="ent-question-wrapper">
+                <div class="ent-question">
+                  <p>GENDER: Male?</p>
+                </div>
+                <div class="ent-radio-div">
+                  <input type="radio" id="genderYes" name="genderYes" value="yes" class="ent-checkbox"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.gender" (change)="calculateScore()" />
+                  <label for="genderYes">Yes</label>
+                  <input type="radio" id="genderNo" name="genderNo" value="no" class="ent-checkbox1"
+                    [(ngModel)]="MedicalConditions.ent.stopBang.gender" (change)="calculateScore()" />
+                  <label for="genderNo">No</label>
+                </div>
+              </div>
+              <div class="score">
+                <p class="left">Total Score</p>
+                <p class="colon">:</p>
+                <p class="total-score">
+                  {{MedicalConditions.ent.stopBang.totalScore}}
+                </p>
+                <p class="high-risk" *ngIf="this.MedicalConditions.ent.stopBang.risk === 'High risk of OSA'">
+                  {{this.MedicalConditions.ent.stopBang.risk}}
+                </p>
+                <p class="intermediate" *ngIf="this.MedicalConditions.ent.stopBang.risk === 'Intermediate risk of OSA'">
+                  {{this.MedicalConditions.ent.stopBang.risk}}
+                </p>
+                <p class="low-risk" *ngIf="this.MedicalConditions.ent.stopBang.risk === 'Low risk of OSA'">
+                  {{this.MedicalConditions.ent.stopBang.risk}}
+                </p>
+                <p class="no-risk"
+                  *ngIf="!MedicalConditions.ent.stopBang.risk || MedicalConditions.ent.stopBang.risk === ''">
+                  -
+                </p>
+              </div>
+              <div class="info">
+                <p>High risk of OSA: Yes 5 - 8</p>
+                <p>Intermediate risk of OSA: Yes 3 - 4</p>
+                <p>Low risk of OSA: Yes 0 - 2</p>
+              </div>
+            </div>
+          </div>
+          <div class="ent-question-container"
+            [ngClass]="agentMode == 'disable' ? 'ent-question-container-disabled' : '' "
+            *ngIf="MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.berlin && entMode === 'berlin'">
+            <div class="category-container">
+              <div class="ent-header">
+                <h1>CATEGORY 1</h1>
+              </div>
+              <div class="number">
+                <p>1.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>Do you snore?</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="snoreYes" name="snoreYes" (change)="calculateCategory1Score()" value="yes"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.snore" />
+                    <label for="snoreYes">Yes</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="snoreNo" name="snoreNo" (change)="calculateCategory1Score()" value="no"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.snore" />
+                    <label for="snoreNo">No</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="snoreDn" name="snoreDn" (change)="calculateCategory1Score()"
+                      value="dont know" class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.snore" />
+                    <label for="snoreDn">Don't Know</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number" *ngIf="MedicalConditions && MedicalConditions.ent.berlin.snore === 'yes'">
+                <p>1A.</p>
+              </div>
+              <div class="berlin-question-wrapper"
+                *ngIf="MedicalConditions && MedicalConditions.ent.berlin.snore === 'yes'">
+                <div class="berlin-question">
+                  <p>You snoring is:</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="type1" name="type1" (change)="calculateCategory1Score()"
+                      value="Slightly louder than breathing" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoreType" />
+                    <label for="type1">Slightly louder than breathing</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="type2" name="type2" (change)="calculateCategory1Score()"
+                      value="As loud as talking" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoreType" />
+                    <label for="type2">As loud as talking</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="type3" name="type3" (change)="calculateCategory1Score()"
+                      value="Louder than talking" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoreType" />
+                    <label for="type3">Louder than talking</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number">
+                <p>2.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>How often do you snore?</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="frequency1" name="frequency1" (change)="calculateCategory1Score()"
+                      value="Almost every day" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringFrequency" />
+                    <label for="frequency1">Almost every day</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="frequency2" name="frequency2" (change)="calculateCategory1Score()"
+                      value="3-4 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringFrequency" />
+                    <label for="frequency2">3-4 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="frequency3" name="frequency3" (change)="calculateCategory1Score()"
+                      value="1-2 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringFrequency" />
+                    <label for="frequency3">1-2 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="frequency4" name="frequency4" (change)="calculateCategory1Score()"
+                      value="1-2 times per month" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringFrequency" />
+                    <label for="frequency4">1-2 times per month</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="frequency5" name="frequency5" (change)="calculateCategory1Score()"
+                      value="Rarely or never" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringFrequency" />
+                    <label for="frequency5">Rarely or never</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number">
+                <p>3.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>Has your snoring ever bothered other people?</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="botheredYes" name="botheredYes" (change)="calculateCategory1Score()"
+                      value="yes" class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.snoringBothered" />
+                    <label for="botheredYes">Yes</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="botheredNo" name="botheredNo" (change)="calculateCategory1Score()"
+                      value="no" class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.snoringBothered" />
+                    <label for="botheredNo">No</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="botheredDn" name="botheredDn" (change)="calculateCategory1Score()"
+                      value="dont know" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.snoringBothered" />
+                    <label for="botheredDn">Don't Know</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number">
+                <p>4.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>
+                    Has anyone noticed that you stop breathing during your
+                    sleep?
+                  </p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="breathing1" name="breathing1" (change)="calculateCategory1Score()"
+                      value="Almost every day" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.stopBreathing" />
+                    <label for="breathing1">Almost every day</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="breathing2" name="breathing2" (change)="calculateCategory1Score()"
+                      value="3-4 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.stopBreathing" />
+                    <label for="breathing2">3-4 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="breathing3" name="breathing3" (change)="calculateCategory1Score()"
+                      value="1-2 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.stopBreathing" />
+                    <label for="breathing3">1-2 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="breathing4" name="breathing4" (change)="calculateCategory1Score()"
+                      value="1-2 times per month" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.stopBreathing" />
+                    <label for="breathing4">1-2 times per month</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="breathing5" name="breathing5" (change)="calculateCategory1Score()"
+                      value="Rarely or never" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.stopBreathing" />
+                    <label for="breathing5">Rarely or never</label>
+                  </div>
+                </div>
+              </div>
+              <div class="score">
+                <p class="left">Score</p>
+                <p class="colon">:</p>
+                <p class="right"
+                  *ngIf="MedicalConditions.ent.berlin.category1Score && MedicalConditions.ent.berlin.category1Score !== ''">
+                  {{MedicalConditions.ent.berlin.category1Score}}
+                </p>
+                <p class="right"
+                  *ngIf="!MedicalConditions.ent.berlin.category1Score || MedicalConditions.ent.berlin.category1Score === ''">
+                  -
+                </p>
+              </div>
+              <div class="score">
+                <p class="left">Category 1</p>
+                <p class="colon">:</p>
+                <p class="right"
+                  *ngIf="MedicalConditions.ent.berlin.category1 && MedicalConditions.ent.berlin.category1 !== ''">
+                  {{MedicalConditions.ent.berlin.category1}}
+                </p>
+                <p class="right"
+                  *ngIf="!MedicalConditions.ent.berlin.category1 || MedicalConditions.ent.berlin.category1 === ''">
+                  -
+                </p>
+              </div>
+            </div>
+            <div class="category-container">
+              <div class="ent-header">
+                <h1>CATEGORY 2</h1>
+              </div>
+              <div class="number">
+                <p>5.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>
+                    How often do you feel tired or fatigued after your sleep?
+                  </p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleep1" name="sleep1" (change)="calculateCategory2Score()"
+                      value="Almost every day" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredAfterSleeping" />
+                    <label for="sleep1">Almost every day</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleep2" name="sleep2" (change)="calculateCategory2Score()"
+                      value="3-4 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredAfterSleeping" />
+                    <label for="sleep2">3-4 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleep3" name="sleep3" (change)="calculateCategory2Score()"
+                      value="1-2 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredAfterSleeping" />
+                    <label for="sleep3">1-2 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleep4" name="sleep4" (change)="calculateCategory2Score()"
+                      value="1-2 times per month" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredAfterSleeping" />
+                    <label for="sleep4">1-2 times per month</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleep5" name="sleep5" (change)="calculateCategory2Score()"
+                      value="Rarely or never" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredAfterSleeping" />
+                    <label for="sleep5">Rarely or never</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number">
+                <p>6.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>
+                    During your waking time, do you feel tired, fatigued or not
+                    up to par?
+                  </p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="waking1" name="waking1" (change)="calculateCategory2Score()"
+                      value="Almost every day" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredDuringWaking" />
+                    <label for="waking1">Almost every day</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="waking2" name="waking2" (change)="calculateCategory2Score()"
+                      value="3-4 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredDuringWaking" />
+                    <label for="waking2">3-4 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="waking3" name="waking3" (change)="calculateCategory2Score()"
+                      value="1-2 times per week" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredDuringWaking" />
+                    <label for="waking3">1-2 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="waking4" name="waking4" (change)="calculateCategory2Score()"
+                      value="1-2 times per month" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredDuringWaking" />
+                    <label for="waking4">1-2 times per month</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="waking5" name="waking5" (change)="calculateCategory2Score()"
+                      value="Rarely or never" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.tiredDuringWaking" />
+                    <label for="waking5">Rarely or never</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number">
+                <p>7.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>
+                    Have you ever nodded off or fallen asleep while driving a
+                    vehicle?
+                  </p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="fallenAsleepYes" name="fallenAsleepYes" (change)="calculateCategory2Score()"
+                      value="yes" class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleep" />
+                    <label for="fallenAsleepYes">Yes</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="fallenAsleepNo" name="fallenAsleepNo" (change)="calculateCategory2Score()"
+                      value="no" class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleep" />
+                    <label for="fallenAsleepNo">No</label>
+                  </div>
+                </div>
+              </div>
+              <div class="number" *ngIf="MedicalConditions && MedicalConditions.ent.berlin.fallenAsleep === 'yes'">
+                <p>7A.</p>
+              </div>
+              <div class="berlin-question-wrapper"
+                *ngIf="MedicalConditions && MedicalConditions.ent.berlin.fallenAsleep === 'yes'">
+                <div class="berlin-question">
+                  <p>How often does this occur?</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleepFrequency1" name="sleepFrequency1" value="Almost every day"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleepFrequency" />
+                    <label for="sleepFrequency1">Almost every day</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleepFrequency2" name="sleepFrequency2" value="3-4 times per week"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleepFrequency" />
+                    <label for="sleepFrequency2">3-4 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleepFrequency3" name="sleepFrequency3" value="1-2 times per week"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleepFrequency" />
+                    <label for="sleepFrequency3">1-2 times per week</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleepFrequency4" name="sleepFrequency4" value="1-2 times per month"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleepFrequency" />
+                    <label for="sleepFrequency4">1-2 times per month</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="sleepFrequency5" name="sleepFrequency5" value="Rarely or never"
+                      class="ent-checkbox" [(ngModel)]="MedicalConditions.ent.berlin.fallenAsleepFrequency" />
+                    <label for="sleepFrequency5">Rarely or never</label>
+                  </div>
+                </div>
+              </div>
+              <div class="score">
+                <p class="left">Score</p>
+                <p class="colon">:</p>
+                <p class="right"
+                  *ngIf="MedicalConditions.ent.berlin.category2Score && MedicalConditions.ent.berlin.category2Score !== ''">
+                  {{MedicalConditions.ent.berlin.category2Score}}
+                </p>
+                <p class="right"
+                  *ngIf="!MedicalConditions.ent.berlin.category2Score || MedicalConditions.ent.berlin.category2Score === ''">
+                  -
+                </p>
+              </div>
+              <div class="score">
+                <p class="left">Category 2</p>
+                <p class="colon">:</p>
+                <p class="right"
+                  *ngIf="MedicalConditions.ent.berlin.category2 && MedicalConditions.ent.berlin.category2 !== ''">
+                  {{MedicalConditions.ent.berlin.category2}}
+                </p>
+                <p class="right"
+                  *ngIf="!MedicalConditions.ent.berlin.category2 || MedicalConditions.ent.berlin.category2 === ''">
+                  -
+                </p>
+              </div>
+            </div>
+            <div class="category-container">
+              <div class="ent-header">
+                <h1>CATEGORY 3</h1>
+              </div>
+              <div class="number">
+                <p>8.</p>
+              </div>
+              <div class="berlin-question-wrapper">
+                <div class="berlin-question">
+                  <p>Do you have high blood pressure?</p>
+                </div>
+                <div class="berlin-answer">
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="highBloodPressureYes" name="highBloodPressureYes"
+                      (change)="calculateCategory3Score()" value="yes" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.highBloodPressure" />
+                    <label for="highBloodPressureYes">Yes</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="highBloodPressureNo" name="highBloodPressureNo"
+                      (change)="calculateCategory3Score()" value="no" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.highBloodPressure" />
+                    <label for="highBloodPressureNo">No</label>
+                  </div>
+                  <div class="berlin-radio-div">
+                    <input type="radio" id="highBloodPressureDn" name="highBloodPressureDn"
+                      (change)="calculateCategory3Score()" value="dont know" class="ent-checkbox"
+                      [(ngModel)]="MedicalConditions.ent.berlin.highBloodPressure" />
+                    <label for="highBloodPressureDn">Don't Know</label>
+                  </div>
+                </div>
+              </div>
+              <div class="input-div">
+                <div class="height">
+                  <div class="input-label">
+                    <p>Height :</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.height !== '' && user.height !== undefined">
+                    <p>{{user.height}} cm</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.height === '' || user.height === undefined">
+                    <p>-</p>
+                  </div>
+                </div>
+                <div class="height">
+                  <div class="input-label">
+                    <p>Weight :</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.weight !== '' && user.weight !== undefined">
+                    <p>{{user.weight}} kg</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.weight === '' || user.weight === undefined">
+                    <p>-</p>
+                  </div>
+                </div>
+                <div class="height">
+                  <div class="age-input-label">
+                    <p>Age :</p>
+                  </div>
+                  <div class="input-box">
+                    <p>{{age}}</p>
+                  </div>
+                </div>
+                <div class="height">
+                  <div class="input-label">
+                    <p>Gender :</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.gender !== ''">
+                    <p>{{user.gender}}</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.gender === ''">
+                    <p>-</p>
+                  </div>
+                </div>
+                <div class="height">
+                  <div class="age-input-label">
+                    <p>BMI :</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.bmi !== '' && user.bmi !== undefined">
+                    <p>{{user.bmi}}</p>
+                  </div>
+                  <div class="input-box" *ngIf="user.bmi === '' || user.bmi === undefined">
+                    <p>-</p>
+                  </div>
+                </div>
+              </div>
+              <div class="category3-score">
+                <p class="left">Category 3</p>
+                <p class="colon">:</p>
+                <p class="right"
+                  *ngIf="MedicalConditions.ent.berlin.category3 && MedicalConditions.ent.berlin.category3 !== ''">
+                  {{MedicalConditions.ent.berlin.category3}}
+                </p>
+                <p class="right"
+                  *ngIf="!MedicalConditions.ent.berlin.category3 || MedicalConditions.ent.berlin.category3 === ''">
+                  -
+                </p>
+              </div>
+            </div>
+            <div class="ent-remark">
+              <p class="remark">Remarks :-</p>
+              <p class="berlin-high-risk"
+                *ngIf="MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.berlin && MedicalConditions.ent.berlin.remark === 'High Risk'">
+                {{MedicalConditions.ent.berlin.remark}}
+              </p>
+              <p class="berlin-low-risk"
+                *ngIf="MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.berlin && MedicalConditions.ent.berlin.remark === 'Low Risk'">
+                {{MedicalConditions.ent.berlin.remark}}
+              </p>
+              <p class="berlin-no-risk"
+                *ngIf="!MedicalConditions.ent.berlin.remark || MedicalConditions.ent.berlin.remark === ''">
+                -
+              </p>
+              <button class="exclaim-button exclaim-button--small" (click)="openModal()"></button>
+            </div>
+          </div>
+          <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+            <button class="save-btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="medical-type" *ngIf='activetab==="respiratory"'>
+        <!-- code for respiratory -->
+        <div class="ent-container" [ngClass]="agentMode == 'disable' ? 'disabled' : '' ">
+          <p class="title">Checklist For Respiratory</p>
+          <div class="ent-info-block">
+            <div class="ent-input-checkbox">
+              <p>1)Any Symptoms:</p>
+            </div>
+            <div class="checkbox-div">
+              <div class="col-4">
+                <input type="checkbox" id="respiratory1" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.difficultyInBreathing" /><label for="respiratory1">
+                  Difficulty in breathing</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory2" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.shortnessOfBreath" /><label for="respiratory2"> Shortness
+                  of breath</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory3" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.fever" /><label for="respiratory3"> Fever</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory4" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.flu" /><label for="respiratory4"> Flu</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory5" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.chronicCough" /><label for="respiratory5">
+                  Chronic cough(more than 2 weeks)</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory6" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.wheezes" /><label for="respiratory6"> Wheezes</label>
+              </div>
+              <div class="col-4">
+                <input type="checkbox" id="respiratory7" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.chestPain" /><label for="respiratory7"> Chest pains</label>
+              </div>
+              <div class="col-4 nested-input">
+                <input type="checkbox" id="respiratory8" value="value1" class="checkbox"
+                  [(ngModel)]="MedicalConditions.respiratory.phlegm" /><label for="respiratory8">
+                  Phlegm (Colour:<input type="text" class="colour"
+                    [(ngModel)]="MedicalConditions.respiratory.phlegmColour" />)</label>
+              </div>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                2) Is this the
+                <input type="radio" id="respiFirstTime" name="respiFirstTime" value="firstTime" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.respiratory.symptom" />
+                <label for="respiFirstTime">First time</label> or
+                <input type="radio" id="respiRecurring" name="respiRecurring" value="recurring" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.respiratory.symptom" />
+                <label for="respiRecurring">Recurring</label> of above-mentioned
+                symptoms?<br />
+                &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                symptoms and frequency
+              </p>
+              <div class="medical-input-box ortho-remark-area gastro-textarea">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.respiratory.elaboration"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                3) Have you done influenza A,B or C vaccination?
+                <input type="radio" id="influenzaYes" name="influenzaYes" value="yes" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.respiratory.influenza" />
+                <label for="influenzaYes">Yes</label> or
+                <input type="radio" id="influenzaNo" name="influenzaNo" value="no" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.respiratory.influenza" />
+                <label for="influenzaNo">No</label>
+              </p>
+              <div class="ent-input-label1">
+                <p>If yes, on</p>
+              </div>
+              <input type="text" class="vaccination" [(ngModel)]="MedicalConditions.respiratory.vaccination" />
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <div class="ent-info-block">
+            <p class="sub-title">Additional Information</p>
+            <hr />
+            <div class="ent-input-label">
+              <p>
+                3) Vitamins,Supplements,Vaccines are not claimable, a separate
+                invoice will be issued from consultation and related medication
+                for outpatient/follow-up consultations.
+              </p>
+            </div>
+          </div>
+          <div class="ortho-info-block">
+            <div class="ortho-input-label">
+              <p>Remarks</p>
+            </div>
+            <div class="medical-input-box ortho-remark-area">
+              <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                [(ngModel)]="MedicalConditions.respiratory.remarks"></textarea>
+            </div>
+          </div>
+          <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+            <button class="save-btn">Save Changes</button>
+          </div>
+        </div>
+      </div>
+      <div class="medical-type" *ngIf='activetab==="general"'>
+        <!-- code for general -->
+        <div class="ent-container" [ngClass]="agentMode == 'disable' ? 'disabled' : '' ">
+          <p class="title">Checklist For General Condition</p>
+          <div class="ent-info-block">
+            <div class="ent-input-label">
+              <p>1) Kindly state symptoms experienced:</p>
+            </div>
+            <div class="ent-input-box administration-comment-area">
+              <textarea class="ent-info-input" name="comment" id="comment" cols="15" rows="4" placeholder="Symptoms"
+                [(ngModel)]="MedicalConditions.general.symptoms"></textarea>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                2) Is this the
+                <input type="radio" id="generalFirstTime" name="generalFirstTime" value="firstTime" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.general.symptom" />
+                <label for="generalFirstTime">First time</label> or
+                <input type="radio" id="generalRecurring" name="generalRecurring" value="recurring" class="checkbox1"
+                  [(ngModel)]="MedicalConditions.general.symptom" />
+                <label for="generalRecurring">Recurring</label> of
+                above-mentioned symptoms?<br />
+                &nbsp; &nbsp; If recurring, kindly elaborate on first date of
+                symptoms and frequency
+              </p>
+              <div class="medical-input-box ortho-remark-area gastro-textarea">
+                <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                  [(ngModel)]="MedicalConditions.general.elaboration"></textarea>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                3) If Physiotherapy is required, kindly refer to "Checklist for
+                Physiotherapy"
+              </p>
+            </div>
+          </div>
+          <div class="ent-info-block1">
+            <div class="ent-input-checkbox1">
+              <p>
+                4) Vitamins,Supplements(eg. Omega 3,Pro biotics), Birth control
+                pills, Vaccines, Allergy test(s), Medical appliances - (eg. CPAP
+                machine, wheelchair, walking frame, crutches, any form of guard
+                support, supplements, heat pack and scar creams) are NOT
+                claimable. A separate invoice will be issued from consultation
+                and related medication for outpatient/follow-up consultations.
+              </p>
+            </div>
+          </div>
+          <div class="ortho-info-block">
+            <div class="ortho-input-label">
+              <p>Remarks</p>
+            </div>
+            <div class="medical-input-box ortho-remark-area">
+              <textarea class="ortho-info-input" name="remark" id="remark" cols="30" rows="5"
+                [(ngModel)]="MedicalConditions.general.remarks"></textarea>
+            </div>
+          </div>
+          <hr />
+          <hr />
+          <hr />
+          <hr />
+        </div>
+        <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="agentMode === 'enable'">
+          <button class="save-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

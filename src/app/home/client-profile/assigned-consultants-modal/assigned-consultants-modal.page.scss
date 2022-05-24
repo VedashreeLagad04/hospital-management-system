@@ -1,0 +1,45 @@
+.assignedConsultantsContainer {
+    padding: 2rem 3rem;
+}
+.close-icon-wrapper {
+    text-align: right;
+    margin-bottom: 5rem;
+}
+.header {
+    vertical-align: middle;
+    font-size: 2.4rem;
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    width: 95%;
+}
+ion-icon {
+    width: 3rem;
+    cursor: pointer;
+    height:3rem;
+    vertical-align: middle;
+}
+.primary {
+    margin-bottom: 2rem;
+}
+.left {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    width: 26%;
+}
+.right {
+    display: inline-block;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    width: 72%;
+    margin-left: 1rem;
+    vertical-align: top;
+    max-height: 20rem;
+    overflow-y: auto;
+}
+.consultants {
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+}

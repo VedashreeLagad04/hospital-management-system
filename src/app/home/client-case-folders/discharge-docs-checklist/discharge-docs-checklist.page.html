@@ -1,0 +1,123 @@
+<ion-content>
+  <div class="discharge-docs-checklist-wrapper">
+    <div class="breadcrumbs-wrapper">
+      <app-breadcrumbs [clientDetails]="clientDetails" [caseDetails]="case"></app-breadcrumbs>
+    </div>
+    <div class="discharge-docs-checklist-left-container">
+      <!-- <div class="row" *ngIf="!isFolderSelected"> -->
+      <div class="row" *ngIf="case && case.dischargeDocsChecklistCheckbox">
+        <div class="discharge-docs-checklist-sub-blk" (click)="selectFolder('discharge-summary')"
+          [ngClass]="folderName === 'Discharge Summary' ? 'active': ''">
+          <input type="checkbox" class="discharge-docs-checklist-checkbox"
+            [checked]="case.dischargeDocsChecklistCheckbox.dischargeSummary" />
+          <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+          <img class="folder-icon" src="../../../assets/images/document.svg" />
+          <span class="folder-name">
+            Discharge Summary
+            <span class="asterisk">*</span>
+          </span>
+        </div>
+        <div class="discharge-docs-checklist-sub-blk" (click)="selectFolder('interim-bill')"
+          [ngClass]="folderName === 'Interim Bill' ? 'active': ''">
+          <input type="checkbox" class="discharge-docs-checklist-checkbox"
+            [checked]="case.dischargeDocsChecklistCheckbox.interimBill" />
+          <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+          <img class="folder-icon" src="../../../assets/images/document.svg" />
+          <span class="folder-name">
+            Interim Bill
+            <span class="asterisk">*</span>
+          </span>
+        </div>
+        <div class="discharge-docs-checklist-sub-blk" (click)="selectFolder('hospitalisation-leave')"
+          [ngClass]="folderName === 'Hospitalisation Leave' ? 'active': ''">
+          <input type="checkbox" class="discharge-docs-checklist-checkbox"
+            [checked]="case.dischargeDocsChecklistCheckbox.hospitalisationLeave" />
+          <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+          <img class="folder-icon" src="../../../assets/images/document.svg" />
+          <span class="folder-name">Hospitalisation Leave</span>
+        </div>
+        <div class="discharge-docs-checklist-sub-blk" (click)="selectFolder('medical-report')"
+          [ngClass]="folderName === 'Medical Report' ? 'active': ''">
+          <input type="checkbox" class="discharge-docs-checklist-checkbox"
+            [checked]="case.dischargeDocsChecklistCheckbox.medicalReport" />
+          <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+          <img class="folder-icon" src="../../../assets/images/document.svg" />
+          <span class="folder-name">Medical Report</span>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 1.2rem;">
+        <div class="text-wrap">
+          <span class="asterisk">*</span>
+          Compulsory upload
+        </div>
+        <div class="next-btn-wrap">
+          <button class="next" (click)="goToCaseProfile()">Next</button>
+        </div>
+      </div>
+      <!-- <div class="row" *ngIf="isFolderSelected">
+        <div class="dropdown-arrow-wrapper" (click)="goToAllFolders()">
+          <ion-icon name="arrow-back" mode="ios"></ion-icon>
+        </div>
+        <div class="case-folder-text">{{folderName}}
+        </div>
+      </div> -->
+    </div>
+    <div class="discharge-docs-checklist-right-container">
+      <div class="file-upload-wrap" *ngIf="isFolderSelected && !isFileAlreadyUploaded">
+        <div class="right-container-heading">
+          <div class="container-heading">{{folderName}}</div>
+          <!-- <button class="btn export-btn" (click)="shareToWhatsapp()">Export to Whatsapp</button> -->
+        </div>
+        <div class="upload-admission-white-bg">
+          <div class="upload-admission-form-blk" (click)="inputFile.click()">
+            <span class="upload-admission-form-text">
+              Click here to upload <br> {{folderName}}
+            </span>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 1.2rem;">
+          <div class="text-wrap">
+            <!-- <span class="asterisk">*</span> -->
+            Please upload only pdf
+          </div>
+        </div>
+        <div class="row" style="text-align: center;">
+          <input class="hide" type="file" #inputFile (change)="uploadFiles($event)" (click)="fileClick()"
+            accept="application/pdf" />
+          <button class="btn upload-btn" (click)="inputFile.click()">Upload</button>
+          <button class="btn upload-btn" (click)="openCamera()" *ngIf="!isWeb">Camera</button>
+          <button class="btn upload-btn" (click)="inputFile.click()">Gallery</button>
+        </div>
+      </div>
+      <div class="file-upload-wrap" *ngIf="isFolderSelected && isFileAlreadyUploaded">
+        <div class="preview-container" *ngIf="currentFileObj">
+          <div class="right-container-heading">
+            <div class="container-heading">{{folderName}}</div>
+            <button class="btn export-btn" *ngIf="isWeb === false"
+              (click)="shareToWhatsapp(currentFileObj.fileName)">Export</button>
+            <button class="btn export-btn" *ngIf="isWeb === true" (click)="downloadFile()">Download</button>
+            <button class="btn export-btn delete-btn" (click)="delete(currentFileObj)">
+              Delete</button>
+          </div>
+          <div class="display-pdf" id="preview" *ngIf="currentFileObj.fileType === 'pdf'">
+            <!-- <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" (on-progress)="onProgress($event)"
+              (after-load-complete)="afterLoadComplete($event)"> -->
+            <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" (on-progress)="onProgress($event)"
+              (after-load-complete)="afterLoadComplete($event)">
+            </pdf-viewer>
+          </div>
+
+          <div class="display-image" id="preview" *ngIf="currentFileObj.fileType === 'image'">
+            <img class="doc-image" [src]="currentFileObj.fileName" alt="" (load)="afterLoadComplete($event)">
+          </div>
+
+          <div class="display-docx" id="preview" *ngIf="currentFileObj.fileType === 'doc'">
+            <ngx-doc-viewer [url]="currentFileObj.fileName" viewer="google" style="width:100%;height:100%;"
+              (loaded)="afterLoadComplete($event)">
+            </ngx-doc-viewer>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

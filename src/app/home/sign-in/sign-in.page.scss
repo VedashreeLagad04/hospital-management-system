@@ -1,0 +1,164 @@
+.login-page-wrapper {
+  background: #ffffff;
+  height: 100%;
+}
+.login-page-header {
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  padding-top: 10rem;
+}
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+.login-page-header-img {
+  display: block;
+  text-align: center;
+  margin: 1.4rem;
+  position: relative;
+}
+// todo try to use class selector instead of element selector
+.login-page-header-img ion-icon {
+  color: #28a0cd;
+  position: absolute;
+  font-size: 3.1rem;
+  width: 3.1rem;
+  font-weight: 700;
+  text-shadow: 0 0 6rem #00000029;
+  transform: translate(-50%, 50%);
+  top: 12%;
+  left: 50%;
+}
+.input-container {
+  margin: 8rem 0;
+}
+.login-text {
+  display: block;
+}
+.login-text input {
+  width: 100%;
+  font-family: "sf-pro", sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  padding: 0.7rem 1rem;
+  background: #7676801f;
+  border-radius: 1rem;
+  border: none;
+  color: #3c3c4399;
+}
+.login-password-input {
+  margin-bottom: 4rem;
+}
+
+.password-input {
+  width: 92% !important;
+  font-family: "sf-pro", sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  background: fixed !important;
+  padding: 0rem !important;
+  border: none;
+  color: #3c3c4399;
+}
+
+.password {
+  width: 100%;
+  font-family: "sf-pro", sans-serif;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  padding: 0.7rem 1rem;
+  background: #7676801f;
+  border-radius: 1rem;
+  border: none;
+  color: #3c3c4399;
+}
+.login-input {
+  margin-bottom: 4rem;
+}
+.errmsg {
+  padding: 0.7rem;
+}
+.login-text input::placeholder {
+  font-family: "sf-pro", sans-serif;
+  font-size: 1.7rem;
+  padding: 0 0.5rem;
+  color: #3c3c4399;
+}
+input:focus {
+  outline: none;
+  border-bottom: 1px solid #cacbc8;
+}
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.login-button {
+  color: #007aff;
+  font-size: 1.4rem;
+  font-weight: 400;
+  background-color: #eeeef0;
+  width: 100%;
+  border-radius: 2rem;
+  padding: 0.9rem;
+}
+.login-fingerprint {
+  text-align: center;
+  padding: 8rem 0 5rem 0;
+}
+
+.login-fingerprint-img {
+  vertical-align: bottom;
+  margin: 2rem;
+}
+// todo try to use class selector instead of element selector
+.login-fingerprint p {
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #3e3e3e;
+  font-family: "sf-pro", sans-serif;
+}
+.eye-icon {
+  vertical-align: middle;
+  cursor: pointer;
+}
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .login-page-header {
+    padding-top: 2rem;
+  }
+  .login-input {
+    margin-bottom: 2.5rem;
+  }
+  .input-container {
+    margin: 20% 0;
+  }
+  .login-page-header-img {
+    display: block;
+    text-align: center;
+    position: relative;
+  }
+  .main-container {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
+@media (min-width: 1365px) and (max-width: 1920px) {
+  // .login-page-header {
+  //   padding-top: 13rem;
+  // }
+  .login-input {
+    margin-bottom: 2.5rem;
+  }
+  .input-container {
+    margin: 20% 0;
+  }
+  .login-page-header-img {
+    display: block;
+    text-align: center;
+    position: relative;
+  }
+  .main-container {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}

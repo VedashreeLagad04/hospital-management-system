@@ -1,0 +1,106 @@
+<ion-content>
+    <div class="status-resubmission-container">
+        <div class="status-resubmission-sub-container">
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label" style="width:100%">
+                    <h5><b>Approved Status</b></h5>
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Date</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value">
+                    {{caseStatus.date}}
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Case Process Status</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value">
+                    {{caseStatus.status}}
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Amendment Section</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value">
+                    <ng-container
+                        *ngIf='caseStatus && caseStatus.amendmentSection && caseStatus.amendmentSection.length > 0'>
+                        <span *ngFor="let section of caseStatus.amendmentSection; let i = index">
+                            {{section}}
+                            <span *ngIf='i < (caseStatus.amendmentSection.length-1)'>,</span>
+                        </span>
+                    </ng-container>
+                    <ng-container
+                        *ngIf='caseStatus && caseStatus.amendmentSection && caseStatus.amendmentSection.length == 0'>
+                        <span>-</span>
+                    </ng-container>
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Comments</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value">
+                    {{caseStatus.comments}}
+                </div>
+            </div>
+        </div>
+        <div class="status-resubmission-sub-container" *ngIf="caseStatus.status !== 'Resubmitted for approval'">
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <h5><b>Resubmission</b></h5>
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Date</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value" 
+                *ngIf="ehealth && ehealth.caseResubmission && ehealth.caseResubmission.date != ''">
+                    {{ehealth.caseResubmission.date}}
+                </div>
+                <div class="status-resubmission-value" 
+                *ngIf="ehealth && ehealth.caseResubmission && ehealth.caseResubmission.date == ''">
+                    -
+                </div>
+            </div>
+            <div class="status-resubmission-info-block">
+                <div class="status-resubmission-input-label">
+                    <p>Comments</p>
+                </div>
+                <div class="colon">
+                    <p>:</p>
+                </div>
+                <div class="status-resubmission-value" *ngIf="ehealth && ehealth.caseResubmission && ehealth.caseResubmission.comments != ''">
+                    {{ehealth.caseResubmission.comments}}
+                </div>
+                <div class="status-resubmission-value" *ngIf="ehealth && ehealth.caseResubmission && ehealth.caseResubmission.comments == ''">
+                    -
+                </div>
+            </div>
+        </div>
+        <div class="add-btn-wrapper" (click)="openResubmissionModal()" [ngClass]="disableResubmission ? 'disabled' : ''"
+            *ngIf="caseStatus.status !== 'Resubmitted for approval' && caseStatus.status !== 'Pending Approval'">
+            <button class="add-btn" [ngClass]="disableResubmission ? 'disabled' : ''">Resubmit</button>
+        </div>
+    </div>
+</ion-content>

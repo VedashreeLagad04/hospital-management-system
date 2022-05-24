@@ -1,0 +1,382 @@
+.calculator-container {
+    // max-width: 1920px;
+    padding: 3rem;
+    // height: 100%;
+}
+
+.additional-plan-container {
+    width: 70%;
+}
+
+.left-container {
+    width: 50%;
+    display: inline-block;
+}
+.item-inner-header {
+    font-size: 1.2rem;
+    color: #afafbb;
+    padding: 0.5rem 1rem;
+}
+.right-container {
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.section {
+    margin-bottom: 2rem;
+}
+
+.calc-info-block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+.calc-info-block1 {
+    display: inline-block;
+    width: 50%;
+    margin-bottom: 1.2rem;
+    text-align: left;
+}
+
+.calc-input-label {
+    display: inline-block;
+    width: calc(22.3% - 0.9rem);
+    vertical-align: middle;
+    margin-right: 0.9rem;
+    font-size: 1.4rem;
+}
+
+.pdf-input-label {
+    display: inline-block;
+    width: 30%;
+    vertical-align: middle;
+    margin-right: 0.9rem;
+    font-size: 1.4rem;
+}
+
+.calc-input-box {
+    display: inline-block;
+    width: 55%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.8rem;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.surgical-input-box {
+    display: inline-block;
+    width: 100%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.8rem;
+    position: relative;
+    vertical-align: middle;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+}
+
+.disabled-calc-input-box {
+    display: inline-block;
+    width: 55%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.8rem;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #e5e5e5 0% 0% no-repeat padding-box;
+    pointer-events: none;
+}
+
+.disabled-calc-input-box1 {
+    display: inline-block;
+    width: 55%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.8rem;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    background: #e5e5e5 0% 0% no-repeat padding-box;
+    pointer-events: none;
+}
+
+.calc-info-input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 95%;
+    outline: none;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}
+
+.pdf-info-input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 30%;
+    outline: none;
+    font-size: 1.4rem;
+}
+
+.pdf-info-input1 {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 40%;
+    outline: none;
+    vertical-align: text-top;
+    font-size: 1.4rem;
+}
+
+.dropdown-title {
+    display: inline-block;
+    width: 97%;
+    margin: 0rem;
+}
+
+.dropdown-arrow-wrapper {
+    display: inline-block;
+    width: 3%;
+    text-align: center;
+    vertical-align: text-bottom;
+}
+
+.dropdown-arrow {
+    border: solid #a4afb7;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+ul.calc-type-dropdown {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    left: 0;
+    padding: 1rem 0.8rem;
+    top: 2.8rem;
+    z-index: 10;
+    max-height: 26rem;
+    overflow-y: auto;
+    font-size: 1.4rem;
+}
+
+ul.calc-type-dropdown li {
+    padding: 0.5rem;
+}
+
+.title {
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.save-btn-wrap {
+    width: 22%;
+    margin-top: 2rem;
+    background: #eeeef0;
+    border-radius: 1rem;
+    padding: 0.8rem 0;
+    text-align: center;
+}
+
+.save-btn-wrap > button {
+    color: #007aff;
+    font-size: 1.4rem;
+}
+.save-btn-wrap > button:disabled {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+.surgical-block {
+    width: 55%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.close-button {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #f27c7c;
+    border-radius: 100%;
+    background: -webkit-linear-gradient(
+            -45deg,
+            transparent 0%,
+            transparent 46%,
+            white 46%,
+            white 56%,
+            transparent 56%,
+            transparent 100%
+        ),
+        -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, white 46%, white 56%, transparent 56%, transparent
+                    100%);
+    background-color: #f27c7c;
+    margin-left: 0.7rem;
+    vertical-align: -webkit-baseline-middle;
+}
+
+.additional-plan-total {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+}
+
+.table-icon {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.medisave {
+    display: inline-block;
+    width: 91%;
+    margin: 0;
+}
+
+.exclaim-button {
+    border: 2px solid #aeaeb2;
+    background-color: #aeaeb2;
+    font-size: 16px;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 999px;
+    position: relative;
+    vertical-align: text-bottom;
+    &:before {
+        content: "";
+        display: block;
+        background-color: white;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:after {
+        content: "";
+        display: block;
+        background-color: white;
+        position: absolute;
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:before {
+        height: 0.7rem;
+        width: 0.3rem;
+    }
+    &:after {
+        height: 0.3rem;
+        width: 0.3rem;
+    }
+}
+
+.exclaim-button--small {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.popover-wrapper {
+    position: absolute;
+    width: 20rem;
+    background: #fff;
+    box-shadow: 0 0 14px #aeaeb2;
+    border-radius: 1rem;
+    z-index: 10;
+    top: -4rem;
+    left: -9.1rem;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    padding: 1rem 2rem;
+}
+
+.popover-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 48%;
+    margin-left: -5px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.popover-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.colon {
+    display: inline-block;
+    width: 5%;
+}
+
+.dollar {
+    display: inline-block;
+    width: 3%;
+    font-size: 1.4rem;
+    vertical-align: middle;
+}
+p {
+    font-size: 1.4rem;
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+    .calc-input-label {
+        width: calc(28.3% - 0.9rem);
+    }
+    .calc-info-input {
+        width: 94%;
+    }
+    .save-btn-wrap {
+        width: 25%;
+    }
+}
+
+@media (min-width: 1280px) and (max-height: 950px) {
+    .calculator-container {
+        padding: 3rem;
+        width: 70%;
+        margin: 0 auto;
+    }
+    .save-btn-wrap {
+        width: 15%;
+    }
+}
+
+@media (min-width: 1441px) {
+    .calculator-container {
+        padding: 3rem;
+        width: 70%;
+        margin: 0 auto;
+    }
+    .save-btn-wrap {
+        width: 15%;
+    }
+}

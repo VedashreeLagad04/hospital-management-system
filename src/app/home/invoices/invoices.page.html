@@ -1,0 +1,130 @@
+<ion-content (click)="close()">
+    <div class="container">
+        <button class="new-invoice-btn" *ngIf='addNew' (click)='showNewInvoiceRow()'> New Invoice</button>
+        <button class='new-invoice-btn' *ngIf='showEdit' (click)='editInvoice()'> Edit</button>
+        <div class="parent">
+            <div class="row-header">
+                <div class="doctor">Doctor</div>
+                <div class="column">Invoice No.</div>
+                <div class="datetime">Invoice Date</div>
+                <div class="column">Invoice Amount</div>
+                <div class="column">GST</div>
+                <div class="column">Total Invoice Amount</div>
+                <div class="datetime">Receipt Date</div>
+                <div class="column">Tranche</div>
+                <div class="actionDiv"></div>
+            </div>
+            <div class="case-management-main-content" *ngIf="!invoicesPresent">
+                <p class="no-cases-msg">No invoices present!</p>
+            </div>
+            <div class="row-content non-empty" *ngIf="invoicesPresent">
+                <div class='invoice-row' *ngFor='let invoice of invoices;let i = index;'>
+                    <div class="doctor">
+                        <input placeholder=' - ' type='text' [(ngModel)]='invoice.doctor' maxlength="4"
+                            [ngClass]='invoice.editMode?"newRow":"autoFilled"' [disabled]='!invoice.editMode'>
+                    </div>
+                    <div class="column">
+                        <input placeholder=' - ' type='text' [ngClass]='invoice.editMode?"newRow":"autoFilled"'
+                            [(ngModel)]='invoice.invoiceNumber' maxlength="9"
+                            onKeyPress="if(this.value.length==9) return false;"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+                    <div class="datetime">
+                        <ion-datetime type='text' [ngClass]='invoice.editMode?"newRow":"autoFilled"' mode='ios'
+                            [(ngModel)]='invoice.invoiceDate' displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY"
+                            [tabindex]='-1 ? !invoice.editMode : ""'>
+                        </ion-datetime>
+                    </div>
+                    <div class="column">
+                        <input placeholder=' - ' class='right-text' [ngClass]='invoice.editMode?"newRow":"autoFilled"'
+                            [disabled]='!invoice.editMode' type='text' maxlength="9"
+                            (change)='setTwoNumberDecimal(invoice.amount,"amount","",i)'
+                            (input)='calculateTotal(i,invoice,"")'
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            [(ngModel)]='invoice.amount'>
+                    </div>
+                    <div class="column">
+                        <input placeholder=' - ' class='right-text' [ngClass]='invoice.editMode?"newRow":"autoFilled"'
+                            type='text' [disabled]='!invoice.editMode' maxlength="9"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (change)='setTwoNumberDecimal(invoice.gst,"gst","",i)'
+                            (input)='calculateTotal(i,invoice,"")' [(ngModel)]='invoice.gst'>
+                    </div>
+                    <div class="column">
+                        <input placeholder=' - ' class='right-text'
+                            [ngClass]='invoice.editMode?"autoFilled":"autoFilled"' type='text'
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            [(ngModel)]='invoice.totalAmount' disabled>
+                    </div>
+                    <div class="datetime">
+                        <ion-datetime type='text' [ngClass]='invoice.editMode?"newRow":"autoFilled"' mode='ios'
+                            [tabindex]='-1 ? !invoice.editMode : ""' [(ngModel)]='invoice.reciptDate'
+                            displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY">
+                        </ion-datetime>
+                    </div>
+                    <div class="column">
+                        <input placeholder=' - ' [ngClass]='invoice.editMode?"newRow":"autoFilled"' type='text'
+                            [disabled]='!invoice.editMode' [(ngModel)]='invoice.tranche'>
+                    </div>
+                    <div class='actionDiv' *ngIf='addNew'>
+                        <ion-icon class='action' name="md-more" md="md-more" (click)='openAction(i , $event)'>
+                        </ion-icon>
+                        <div class="action-content" *ngIf='invoice.takeAction'>
+                            <p class='actionName' (click)='editInvoiceRow(i)'>Edit</p>
+                            <p class='actionName' (click)='deleteInvoice(invoice.id)'>Delete</p>
+                        </div>
+                    </div>
+                    <div class='edit-buttons' *ngIf='invoice.editMode'>
+                        <button class='save-button' (click)='editInvoiceDetails(i)'>Save Changes</button>
+                        <button class='save-button' (click)='cancelProcess(i)'>Cancel</button>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row-content" *ngIf='showNewInvoice'>
+                <div class="doctor">
+                    <input placeholder=' - ' class='newRow' type='text' maxlength="4" [(ngModel)]='newInvoice.doctor'>
+                </div>
+                <div class="column">
+                    <input placeholder=' - ' class='newRow' type='text' [(ngModel)]='newInvoice.invoiceNumber'
+                        onKeyPress="if(this.value.length==9) return false;"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="datetime">
+                    <ion-datetime class='newRow' mode='ios' [(ngModel)]='newInvoice.invoiceDate'
+                        displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
+                </div>
+                <div class="column">
+                    <input placeholder=' - ' class='newRow right-text' type='text' maxlength="9"
+                        (change)='setTwoNumberDecimal(newInvoice.amount,"amount","new","")'
+                        (input)='calculateTotal(0,newInvoice,"new")' [(ngModel)]='newInvoice.amount'
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="column">
+                    <input placeholder=' - ' class='newRow right-text' type='text' maxlength="9"
+                        (change)='setTwoNumberDecimal(newInvoice.gst,"gst","new","")'
+                        (input)='calculateTotal(0,newInvoice,"new")' [(ngModel)]='newInvoice.gst'
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="column">
+                    <input placeholder=' - ' class='newRow autoFilled right-text' type='text'
+                        [(ngModel)]='newInvoice.totalAmount'
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" disabled>
+                </div>
+                <div class="datetime">
+                    <ion-datetime class='newRow' mode='ios' [(ngModel)]='newInvoice.reciptDate'
+                        displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY"></ion-datetime>
+                </div>
+                <div class="column">
+                    <input placeholder=' - ' class='newRow' type='text' [(ngModel)]='newInvoice.tranche'>
+                </div>
+                <div class='actionDiv'>
+                    <ion-icon class='cancelButton' name="close-circle-outline" (click)='cancelNewRow()'></ion-icon>
+                </div>
+            </div>
+        </div>
+        <div class="saveInvoice" *ngIf='showNewInvoice'>
+            <button class='save-button' (click)='addNewInvoice()'>Save Changes</button>
+        </div>
+    </div>
+</ion-content>

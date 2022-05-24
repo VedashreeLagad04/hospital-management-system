@@ -1,0 +1,242 @@
+.clientdetail-title {
+    color: #000000;
+    font-family: "Montserrat", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+  }
+  .back-arrow-icon {
+    font-size: 18px;
+    color: #3e3e3e;
+    font-weight: 600;
+  }
+  .case-name {
+    border: none;
+    // height: 2.2rem;
+    // margin-top: 5rem;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    padding-left: 0.8rem;
+    // color: #CACBC8;
+    width: 100%;
+    background: transparent;
+    outline: none;
+  }
+  .case-name::placeholder {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    // padding-left: 0.8rem;
+    color: #cacbc8;
+    outline: none;
+  }
+  .case-name-container {
+    // margin-top: 1.5rem;
+    margin-bottom: 4rem;
+    border-bottom: #cacbc8 0.1rem solid;
+  }
+  .case-description {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    padding-left: 0.8rem;
+    color: #cacbc8;
+  }
+  .description-textarea {
+    width: 100%;
+    height: 14rem;
+    resize: none;
+    // color: #CACBC8;
+    background: #fcfcfc;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    border: #cacbc8 1px solid;
+    border-radius: 0.8rem;
+    outline: none;
+    padding: 0.5rem;
+  }
+  .update-btn-wrapper {
+    width: 100%;
+    // margin: 0 auto;
+    margin-top: 30rem;
+  }
+  .apps-icon,
+  .fa-th {
+    font-size: 16px;
+    color: #3e3e3e;
+  }
+  .add-case-form {
+    margin: 3.5rem 0;
+  }
+  .update-btn {
+    display: inline-block;
+    width: 100%;
+    background: #3e3e3e;
+    border-radius: 1.8rem;
+    color: #ffffff;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: 0.9rem 0;
+    text-align: center;
+    outline: none;
+  }
+  // ? for ipad
+  .edit-case-btn-wrapper {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 2rem;
+  }
+  .edit-btn {
+    display: inline-block;
+    width: 48%;
+    color: #007aff;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    text-align: center;
+    vertical-align: middle;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    background: #eeeef0;
+    border: 1px solid #e5e5e5;
+  }
+  .case-add-container {
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    padding: 4rem 0 6rem 0;
+  }
+  .case-info-block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .case-info-block:last-child {
+    margin: 0;
+  }
+  .case-input-label {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .case-input-label > p {
+    display: inline-block;
+    width: 100%;
+  }
+  .case-input-box {
+    display: inline-block;
+    width: 100%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.6rem 1rem;
+    position: relative;
+  }
+  .case-description-area {
+    border-radius: 1rem;
+  }
+  .case-info-input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 100%;
+    outline: none;
+  }
+  textarea.case-info-input {
+    resize: none;
+  }
+  .dropdown-label {
+    display: inline-block;
+    width: 90%;
+  }
+  .dropdown-title {
+    display: inline-block;
+    width: 100%;
+  }
+  .dropdown-arrow-wrapper {
+    display: inline-block;
+    width: 10%;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .dropdown-arrow {
+    border: solid #a4afb7;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  ul.case-type-dropdown {
+    list-style: none;
+    position: absolute;
+    width: 100%;
+    margin: 0;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    left: 0;
+    padding: 1rem 0.8rem;
+    top: 3.5rem;
+    z-index: 10;
+  }
+  ul.case-type-dropdown li {
+    padding: 0.5rem;
+  }
+  ::-webkit-input-placeholder {
+    /* Edge */
+    font-family: "sf-pro-light-italic";
+    color: #aeaeb2;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    text-align: left;
+  }
+  :-ms-input-placeholder {
+    /* Internet Explorer */
+    font-family: "sf-pro-light-italic";
+    color: #aeaeb2;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    text-align: left;
+  }
+  ::placeholder,
+  .case-approval-title {
+    font-family: "sf-pro-light-italic";
+    color: #aeaeb2;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    text-align: left;
+  }
+  .case-approval-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin-top: 3.2rem;
+  }
+  .save-btn-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin-top: 4rem;
+    background: #eeeef0;
+    border-radius: 1.8rem;
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+  }
+  .save-btn {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+  }
+  .disable {
+    pointer-events: none;
+    background-color: #cdcdcd;
+    color: #000000;
+    border: none;
+  }

@@ -1,0 +1,165 @@
+<ion-content>
+  <div class="claims-management-container">
+    <div class="claims-management-search-blk">
+      <ion-icon name="search" class="search-icon"></ion-icon>
+      <input type="search" class="searchInput" [(ngModel)]="nameToSearch" (input)="applyFilter()"
+        placeholder="Search / filter" />
+      <ion-icon class="close-icon" (click)="servicesSearchTextChanged()" *ngIf="nameToSearch != ''" name="close">
+      </ion-icon>
+    </div>
+    <div class="claims-management-status-main-blk">
+      <div class="claims-management-status-sub-blk">
+        <span class="status-label">Status:</span>
+        <div class="check-box-blk1">
+          <div class="checkbox-sub-blk">
+            <input id='pending-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('status', 'Pending')">
+            <label for='pending-checkbox'>Pending</label>
+          </div>
+          <div class="checkbox-sub-blk">
+            <input id='partial-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('status', 'Partial Approval')">
+            <label for='partial-checkbox'>Partial</label>
+          </div>
+          <div class="checkbox-sub-blk">
+            <input id='approved-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('status', 'Approved')">
+            <label for='approved-checkbox'>Approved</label>
+          </div>
+          <div class="checkbox-sub-blk last-checkbox">
+            <input id='close-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('status', 'Close with partial approval')">
+            <label for='close-checkbox' class="last-checkbox-label">Close with partial approval</label>
+          </div>
+        </div>
+      </div>
+      <div class="claims-management-status-sub-blk">
+        <!-- <input id="zeroized" class='status-checkbox' type="checkbox"> -->
+        <label for='zeroized' class="status-label">Zeroized (Hospitalisation Bill)</label>
+        <div class="check-box-blk2">
+          <div class="checkbox-sub-blk">
+            <input id="zeroized-pending" class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('zeroized', 'Pending')">
+            <label for='zeroized-pending'>Pending</label>
+          </div>
+          <div class="checkbox-sub-blk">
+            <input id="partial" class='status-checkbox' type="checkbox" (click)="showStatuswise('zeroized', 'Partial')">
+            <label for='partial'>Partial</label>
+          </div>
+          <div class="checkbox-sub-blk">
+            <input id="full" class='status-checkbox' type="checkbox" (click)="showStatuswise('zeroized', 'Full')">
+            <label for='full'>Full</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="claims-management-status-main-blk">
+      <div class="claims-management-status-sub-blk">
+        <span class="status-label">Claims Status:</span>
+        <div class="check-box-blk1">
+          <div class="checkbox-sub-blk">
+            <input id='main-cliam-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('claims', 'Hospitalisation (Shield) Plan')">
+            <label for='main-cliam-checkbox'>Main Claims (Hospitalisation only)</label>
+          </div>
+          <div class="checkbox-sub-blk">
+            <input id='other-claim-checkbox' class='status-checkbox' type="checkbox"
+              (click)="showStatuswise('claims', 'Other Claims')">
+            <label for='other-claim-checkbox'>Other Claims</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="date-main-blk">
+      <!-- <input id='pending-checkbox' class='status-checkbox' type="checkbox" 
+      [(ngModel)]='dateFilter' (change)='getDateRange()'> -->
+      <span class="date-label">Date</span>
+      <div class="date-sub-blk" *ngIf="claimsDateFrom">
+        <!-- <span class="date-value">30 Apr, 2020</span> -->
+        <ion-datetime id="claims-start-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+          (click)="dateClicked('start-date')" [(ngModel)]="claimsDateFrom" [ngModelOptions]="{standalone: true}">
+        </ion-datetime>
+        <ion-icon name="calendar" class="calendar" onclick="document.getElementById('claims-start-date').click()"></ion-icon>
+      </div>
+      <span class="date-label">to</span>
+      <div class="date-sub-blk" *ngIf="claimsDateTo">
+        <!-- <span class="date-value">01 July, 2020</span> -->
+        <ion-datetime id="claims-end-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+          (click)="dateClicked('end-date')" [(ngModel)]="claimsDateTo" [ngModelOptions]="{standalone: true}"
+          max="2099-10-31"> </ion-datetime>
+        <ion-icon name="calendar" class="calendar" onclick="document.getElementById('claims-end-date').click()"></ion-icon>
+      </div>
+    </div>
+    <div class="claims-management-table-wrapper">
+      <div class="claims-management-table">
+        <div class="claims-management-header-row">
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Patient Name</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Case</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Policy</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Insurer</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Date of Adm.</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Facilities</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Status</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Approval Date</span>
+          </div>
+          <div class="claims-management-table-head claims-management-col-width">
+            <span class="claims-management-table-head-span">Zeroized</span>
+          </div>
+        </div>
+        <div class="claims-management-main-content" *ngIf="!claimsPresent">
+          <p class="no-cases-msg">No cases present!</p>
+        </div>
+        <div class="claims-management-main-content"
+          [ngClass]="loggedInUser && loggedInUser.type === 'Finance Manager' ? 'claims-management-main-content-disabled': ''"
+          *ngIf="claimsPresent">
+          <ng-container *ngFor="let claim of allClaims;">
+            <div class="claims-management-main-row" *ngIf="claim.show == true" (click)='setCaseAndRedirect(claim)'>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.patientName}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.case}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.policy}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.insurer}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.dateOfAdm}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.facilities}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.status}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.approvalDate}}</span>
+              </div>
+              <div class="claims-management-table-main-content claims-management-col-width">
+                <span class="claims-management-table-main-content-span">{{claim.zeroized}}</span>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,86 @@
+<ion-content (click)='closeAllAction()'>
+  <div class="appointment-list-wrapper">
+    <div class="appointment-container">
+      <div class="row" style="margin: 3.3rem 0;">
+        <div class="breadcrumbs-wrapper">
+          <app-breadcrumbs [clientDetails]="clientDetails" [caseDetails]="caseData"></app-breadcrumbs>
+        </div>
+        <div class="new-appointment">
+          <button class='button' (click)='changeRoute("add","","-1")'>+New Appointment</button>
+        </div>
+      </div>
+      <div class="appointment-list">
+        <div class="appintment-table">
+          <!-- <button class='col-2 button sync-btn' (click)='handleClientLoad()'>Sync to Google</button>
+          <button class='col-2 button sync-btn' (click)='handleSignoutClick()'>Google Logout</button> -->
+          <table>
+            <thead>
+              <th class='title'>Title</th>
+              <th class='type'>Type</th>
+              <th class='title'>Date & Time</th>
+              <th class='type'>Location Code</th>
+              <th class='list-action'> </th>
+            </thead>
+            <tbody>
+              <tr *ngFor='let event of eventArray;let i = index'>
+                <td class='title'>{{event.title}}</td>
+                <td class='type'>{{event.type}}</td>
+                <td class='title'>{{event.showStartDate}}
+                  <p>{{event.startTime.timeInFormat}} - {{event.endTime.timeInFormat}}</p>
+                </td>
+                <td class='type'>{{event.location}}</td>
+                <td class="list-action" (click)='openAction($event,i)'>
+                  <!-- <ion-icon name="ios-more"></ion-icon> -->
+                  <!-- <ion-icon name="ellipsis-horizontal"></ion-icon> -->
+                  <img class="more-img" src="../../../../assets/images/more.png" alt="">
+
+                  <div class='actionList' *ngIf='event && event.showAction'>
+                    <ul>
+                      <li (click)='openMemoModal($event, event)'>Memo</li>
+                      <li (click)='changeRoute("edit",event.id,event.eventId)'>Edit</li>
+                      <li (click)='shareSocialMedia(event)' *ngIf="!isWeb">Share</li>
+                      <li (click)='deleteApppointment($event, event, i)' class="deleteAction">Delete</li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <!-- <tr> 
+                  <td>Eve</td>
+                  <td>Jackson</td>
+                  <td>94</td>
+                  <td>50</td>
+                  <td>50</td>
+                </tr> -->
+            </tbody>
+          </table>
+        </div>
+        <div class="appointment-timeline ">
+          <div class="timeline-wrapper">
+            <div class="timeline" *ngFor="let event of timeline; let i = index">
+              <div class="timeline-date">
+                {{event.date}}
+              </div>
+              <div class="outterLine">
+                <div class="timeline-message arrow-left">
+                  <div class="pointer-base" [ngClass]='event.firstEvent === true ?"firstEvent":""'>
+                  </div>
+                  <div class="message-header" *ngFor="let eventTexts of event.value;">
+                    <p>
+                      {{eventTexts.activity}}
+                      <!-- <span>{{eventTexts.time}}</span> -->
+                    </p>
+                  </div>
+                  <div class="message-content">
+                    <!-- <p>{{event.activity}}</p>
+                    <p class="right-text time">{{event.time}}</p> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ion-content>

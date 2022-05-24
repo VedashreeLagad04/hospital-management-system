@@ -1,0 +1,221 @@
+<ion-content>
+  <div class="details-wrapper" (click)="closeAllDropdowns()">
+    <div class="template-input-wrap">
+      <!-- title -->
+      <div class="template-title">
+        <span class="template-label">Template</span>
+      </div>
+      <div class="template-input">
+        <div (click)="openTemplateDropdown($event)">{{template}}</div>
+        <span (click)="openTemplateDropdown($event)" class="dropdown-icon"></span>
+        <div class="dropdown-list" *ngIf="showTemplateDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" (input)="searchTemplate()"
+                (focusout)="servicesSearchTextFocusOut()" (focus)="servicesSearchTextChanged()">
+            </li>
+            <ng-container *ngFor="let temp of allTemplates; let j = index">
+              <li *ngIf="temp.show" (click)="selectTemplate(temp, j)"
+                [ngClass]="temp.name === template ? 'selected': ''">
+                {{temp.name}}
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="properties-wrap margin-top-9" *ngIf="loggedInUserType=='agent'">
+      <div id="export-info-pdf-wrap">
+        <div class="preview-title">
+          <span class="preview-label">Preview</span>
+        </div>
+        <div class="template-input">
+          <ul *ngIf="template == 'Referral'">
+            <li>
+              <label>Referral Source:</label>
+            </li>
+            <li>
+              <label>Surgical Code: </label>
+            </li>
+          </ul>
+          <ul *ngIf="template == 'Patient Information'">
+            <li>
+              {{this.clientDetails.name}} ({{this.clientDetails.gender}})
+            </li>
+            <li>
+              {{this.clientDetails.nric}} ({{this.clientDetails.nationality}})
+            </li>
+            <li>
+              {{this.clientDetails.dob}} ({{this.clientDetails.age}})
+            </li>
+            <li>
+              <label>Occupation:</label>
+            </li>
+            <li>
+              <label>Drug Allergy:</label>
+            </li>
+            <li>
+              <label>Food Allergy:</label>
+            </li>
+            <li *ngIf="this.clientDetails.smoker == false">Non smoker (Declared)</li>
+            <li *ngIf="this.clientDetails.smoker == true">Smoker (Declared)</li>
+            <li *ngIf="this.clientDetails.drinker == false">Non drinker (Declared)</li>
+            <li *ngIf="this.clientDetails.drinker == true">Drinker (Declared)</li>
+            <li>
+              <label>BMI: </label>
+              <span>{{this.clientDetails.bmi}} (Height: {{this.clientDetails.heightCm}} cm, Weight:
+                {{this.clientDetails.weight}} kg)</span>
+            </li>
+            <li>
+              <label>Contact: </label>
+              <span>{{this.clientDetails.countryCode}}{{this.clientDetails.contactNo}}</span>
+            </li>
+          </ul>
+          <ul *ngIf="template == 'NOK'">
+            <li>Name (relationship)</li>
+            <li>Contact</li>
+          </ul>
+          <ul *ngIf="template == 'Policy Activated'">
+            <div *ngFor="let policy of activatedPolicies.policy;" class="policy-wrapper">
+              <li>
+                <label>Policy: </label><span>{{policy.nameOfPolicy}}</span>
+              </li>
+              <li>
+                <label>Inception Date: </label><span>{{policy.basicInceptionDate}}</span>
+              </li>
+              <li>
+                <label>Paid to Date: </label><span>{{policy.riderInceptionDate}}</span>
+              </li>
+              <li>
+                <label>Any Pending Claim: </label>
+              </li>
+              <li>
+                <label>Exclusion in policy</label>
+              </li>
+            </div>
+          </ul>
+          <ul *ngIf="template == 'Medical Plan'">
+            <li>
+              <label>Pre-existing Condition:</label>
+            </li>
+            <li>
+              <label>Past Medical History</label>
+            </li>
+            <li>Management Plan</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="properties-wrap" *ngIf="loggedInUserType=='admin'">
+      <!-- Client Profile -->
+      <div class="info-block">
+        <!-- title -->
+        <div class="info-title">
+          <div class="checkbox">
+            <ion-checkbox (click)="isCheckboxClicked('client-profile')"
+              (ionChange)="selectBlock($event, 'client-profile')" [checked]="isClientProfileSelected">
+            </ion-checkbox>
+          </div>
+          <div class="checkbox-label">Client Profile</div>
+        </div>
+        <!-- properties -->
+        <div class="block-properties">
+          <div class="info-property" *ngFor="let data of clientProfileKeys">
+            <div class="checkbox">
+              <ion-checkbox (ionChange)="selectProperty($event,'client-profile', data)" [checked]="data.isSelected">
+              </ion-checkbox>
+            </div>
+            <div class="checkbox-label">{{data.key}}</div>
+          </div>
+          <!-- <div class="info-property">
+            <div class="checkbox">
+              <ion-checkbox ></ion-checkbox>
+            </div>
+            <div class="checkbox-label">Full Name</div>
+          </div>
+          <div class="info-property">
+            <div class="checkbox">
+              <ion-checkbox ></ion-checkbox>
+            </div>
+            <div class="checkbox-label">Full Name</div>
+          </div> -->
+        </div>
+      </div>
+      <!-- Case information -->
+      <div class="info-block">
+        <!-- title -->
+        <div class="info-title">
+          <div class="checkbox">
+            <ion-checkbox (click)="isCheckboxClicked('case-info')" (ionChange)="selectBlock($event, 'case-info')"
+              [checked]="isCaseInfoSelected"></ion-checkbox>
+          </div>
+          <div class="checkbox-label">Case Information</div>
+        </div>
+        <!-- properties -->
+        <div class="block-properties">
+          <div class="info-property" *ngFor="let data of caseInfoKeys">
+            <div class="checkbox">
+              <ion-checkbox (ionChange)="selectProperty($event,'case-info', data)" [checked]="data.isSelected">
+              </ion-checkbox>
+            </div>
+            <div class="checkbox-label">{{data.key}}</div>
+          </div>
+        </div>
+      </div>
+      <!-- Case Details -->
+      <div class="info-block">
+        <!-- title -->
+        <div class="info-title">
+          <div class="checkbox">
+            <ion-checkbox (click)="isCheckboxClicked('case-details')" (ionChange)="selectBlock($event, 'case-details')"
+              [checked]="isCaseDetailsSelected">
+            </ion-checkbox>
+          </div>
+          <div class="checkbox-label">Case Details</div>
+        </div>
+        <!-- properties -->
+        <div class="block-properties">
+          <div class="info-property" *ngFor="let data of caseDetailsKeys">
+            <div class="checkbox">
+              <ion-checkbox (ionChange)="selectProperty($event,'case-details', data)" [checked]="data.isSelected">
+              </ion-checkbox>
+            </div>
+            <div class="checkbox-label">{{data.key}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="rows-wrap">
+        <div class="a-row" *ngFor="let row of allRows;let r = index">
+          <div class="template-title">
+            <span class="template-label">Row {{r+1}}</span>
+          </div>
+          <div class="row-input-wrap template-input">
+            <div (click)="openRowsDropdown($event, row)">{{row.value}}</div>
+            <span class="dropdown-icon"></span>
+            <div class="dropdown-list" *ngIf="row.showDropDown">
+              <ul>
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" (input)="searchTemplate()"
+                    (focusout)="servicesSearchTextFocusOut()" (focus)="servicesSearchTextChanged()">
+                </li>
+                <ng-container *ngFor="let prop of allSelectedProperties; let p = index">
+                  <li *ngIf="prop.show" (click)="selectPropertyInRow(prop, p, r)"
+                    [ngClass]="{'selected':prop.key === row.value, 'disabled': prop.isSelectedInDropdown && row.selectedPropertyIndex !== p}">
+                    {{prop.key}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="copy-buttons-wrap">
+      <button class="copy-btn" (click)="shareSocialMedia()">Send to Whatsapp</button>
+      <button class="copy-btn copy-btn2" (click)="copyToClipboard('Text from clipboard!!!!!')">Copy to
+        Clipboard</button>
+      <button class="copy-btn copy-btn2" *ngIf="loggedInUserType==='admin'"
+        (click)="copyToClipboard('Text from clipboard!!!!!')">Save as Template</button>
+    </div>
+  </div>
+</ion-content>

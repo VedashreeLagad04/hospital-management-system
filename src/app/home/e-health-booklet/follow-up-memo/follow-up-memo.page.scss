@@ -1,0 +1,85 @@
+.memo-wrapper {
+    padding: 2rem 0;
+}
+.memo-container {
+    margin: 2rem auto;
+    max-width: 587px;
+}
+.sort-list {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: #3e3e3e;
+    margin-top: 3.2rem;
+}
+ion-icon.arrow {
+    color: #fbfbfb;
+    background: #007aff;
+    font-size: 1.9rem;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    margin-right: 0.3rem;
+}
+.memo {
+    width: 100%;
+    display: block;
+    margin: 2rem 0;
+    padding: 1.4rem 1.6rem;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    background: #fbfbfb;
+}
+.memoName {
+    font-size: 1.4rem;
+    line-height: 1.4rem;
+    margin-bottom: 1.5rem;
+}
+.memo-info {
+    width: 100%;
+    display: block;
+    vertical-align: top;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+}
+.info-label {
+    width: 38%;
+    display: inline-block;
+    vertical-align: top;
+}
+.colon {
+    padding-right: 0.5rem;
+}
+.info {
+    width: 58%;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 0.5rem;
+}
+.no-memos{
+    font-size: 2.4rem;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    padding: 40% 0;
+}
+.appointmentTitle {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.4rem;
+    font-family: 'sf-pro-bold';
+}
+@media screen and (max-width: 834px) {
+    .memo-container {
+        max-width: 500px;
+    }
+}
+@media screen and (min-width: 700px) and (max-width:830px) {
+    .memo-container {
+        max-width: 500px;
+    }
+    .info, .info-label{
+        width: 46%;
+    }
+}

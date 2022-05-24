@@ -1,0 +1,268 @@
+.case-list-wrapper {
+    padding-top: 4rem;
+}
+
+.clientdetail-title {
+    color: #3e3e3e;
+    font-family: "sf-pro", sans-serif;
+    text-transform: capitalize;
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 2.9rem;
+    text-align: left;
+    width: 100%;
+}
+
+.back-arrow-icon {
+    font-size: 18px;
+    color: #3e3e3e;
+    font-weight: 600;
+}
+
+.pendingDiv {
+    padding-top: 2px;
+}
+
+.pendingDiv .more {
+    color: #fff;
+    background-color: #a6a7a5;
+    font-size: 1.6rem;
+    border-radius: 50%;
+}
+
+.pendingDiv .checkmark {
+    color: #2ea5d2;
+}
+
+.checkmark,
+.rejected-icon {
+    vertical-align: middle;
+}
+
+.pendingDiv .rejected-icon {
+    color: red;
+}
+
+.apps-icon,
+.fa-th {
+    font-size: 16px;
+    color: #3e3e3e;
+}
+
+.col-5 {
+    margin-left: 1rem;
+}
+
+.add-button p {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    font-weight: 400;
+}
+
+.add-button {
+    border-radius: 1rem;
+    background: #fbfbfb;
+    padding: 0.85rem;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    display: inline-block;
+    color: #007aff;
+    font-weight: 500;
+    width: 16rem;
+    margin-left: 2rem;
+    cursor: pointer;
+}
+
+// .add-new-case-container {
+//   display: block;
+// }
+.case-details {
+    background: #fbfbfb;
+    border-radius: 1rem;
+    width: 94%;
+    // height: 12rem;
+    position: relative;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    position: relative;
+    border: 1px solid #d4d4d4;
+    cursor: pointer;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.apps-icon,
+.fa-th {
+    font-size: 16px;
+    color: #3e3e3e;
+}
+
+.case-details-container {
+    padding-top: 2.5rem;
+    margin: 0 auto;
+}
+
+.disable {
+    pointer-events: none;
+}
+
+.case-no {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    color: #3e3e3e;
+    text-align: left;
+    margin-bottom: 0.5rem;
+    height: 2.4rem;
+}
+
+.case-type {
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+}
+
+.case-type p {
+    color: #000000;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    text-align: left;
+}
+
+.case-name {
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+
+.folder-icon {
+    width: 35%;
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: right;
+    transform: translate(5%, 19%);
+}
+
+.status {
+    color: #007aff;
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+    text-align: left;
+    margin-top: 0.5rem;
+}
+
+.folder-icon img {
+    height: 5rem;
+}
+
+.case-details-main-container {
+    display: inline-block;
+    width: 75%;
+    // margin-bottom: 2.5rem;
+    // height: 7.5rem;
+}
+
+.details-text {
+    position: absolute;
+    bottom: 15%;
+    transform: translate(0%, 0%);
+    // padding: 0 1.8rem;
+}
+
+.details-text p {
+    font-size: 2rem;
+    line-height: 2.4rem;
+    color: #3e3e3e;
+}
+
+.case-img {
+    width: 8rem;
+    position: absolute;
+    bottom: 18%;
+    right: 5%;
+    transform: translate(10%, 40%);
+}
+
+.sort-list {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: #3e3e3e;
+    margin-top: 3.2rem;
+    width: 40%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+ion-icon.arrow {
+    color: #fbfbfb;
+    background: #007aff;
+    font-size: 1.9rem;
+    vertical-align: middle;
+    border-radius: 0.2rem;
+    margin-right: 0.3rem;
+}
+
+.actionDiv {
+    width: 6%;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 1rem;
+    position: relative;
+}
+
+.action {
+    font-size: 3rem;
+    color: #F27C7C;
+    cursor: pointer;
+}
+
+.action-content {
+    font-size: 2.4rem;
+    line-height: 2rem;
+    position: absolute;
+    padding: 0.5rem 1rem;
+    top: 45%;
+    left: 90%;
+    transform: translate(0%, 50%);
+    background: #fff;
+    border: 2px solid #ccc;
+    border-radius: 0.5rem;
+    width: 9rem;
+    z-index: 1;
+}
+
+.actionName {
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+}
+
+.info-icon {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0 1rem;
+    color: #8d8888;
+}
+.drop-off-reason {
+    position: absolute;
+    border: 1px solid #8d8888;
+    padding: 1rem;
+    max-height: 10rem;
+    max-width: 15rem;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+    background: white;
+    z-index: 9;
+    color: black;
+}
+
+.status p {
+    display: inline-block;
+    vertical-align: middle;
+}

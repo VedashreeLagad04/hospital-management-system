@@ -1,0 +1,449 @@
+<ion-content>
+  <div class="container">
+    <div class="buttons-wrap">
+      <div class="btn" *ngIf="isWeb === false" (click)="generatePdfAndShare()"
+        [ngClass]="{'disabled': !cashExposure || cashExposure === ''}">
+        <button [ngClass]="{'disabled':!cashExposure || cashExposure === ''}">
+          Share
+        </button>
+      </div>
+      <div class="btn" *ngIf="isWeb === true" (click)="generatePdfAndDownload()"
+        [ngClass]="{'disabled': !cashExposure || cashExposure === ''}">
+        <button [ngClass]="{'disabled':!cashExposure || cashExposure === ''}">
+          Download
+        </button>
+      </div>
+    </div>
+    <!-- <div class="input-block" *ngIf="cashExposure && cashExposure !== ''"> -->
+    <!-- <div class="input-block">
+			<button (click)="generatePdfAndShare()">Share</button>
+		</div> -->
+    <div class="row">
+      <div class="column">
+        <h3>Basic</h3>
+        <div class="input-block">
+          <label>Bill Size</label>
+          <input type="number" [(ngModel)]="billSize" (keyup)="calculateAfterProRationFactor()"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="trimInput()" />
+        </div>
+        <div class="input-block">
+          <label>Pro-ration Factor</label>
+          <input type="number" [(ngModel)]="proRationFactor" (keyup)="calculateAfterProRationFactor()"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="trimInput()" />
+        </div>
+        <div class="input-block">
+          <label>Basic Deductible</label>
+          <input type="number" [(ngModel)]="basicDeductible" (keyup)="calculateBasicCoInsuranceBasicPayout()"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="trimInput()" />
+        </div>
+        <div *ngIf="closeBreakdown">
+          <div class="input-block">
+            <label>After Pro-ration Factor</label>
+            <input type="number" class="highlight" [(ngModel)]="afterProRationFactor" readonly readonly />
+          </div>
+          <div class="input-block">
+            <label>10% co-insurance</label>
+            <input type="number" class="highlight" [(ngModel)]="basicCoInsurance" readonly />
+          </div>
+        </div>
+        <div class="input-block">
+          <label>Basic Payout</label>
+          <input type="number" class="highlight" [(ngModel)]="basicPayout" disabled />
+        </div>
+      </div>
+      <div class="column">
+        <h3>Rider</h3>
+        <div class="input-block">
+          <label>Non-payable Deductible</label>
+          <input type="number" (focusout)="trimInput()" [(ngModel)]="nonPayableDeductible"
+            onKeyPress="if(this.value.length==10) return false;" (keyup)="calculateRiderPayout()" />
+        </div>
+        <div class="input-block">
+          <label>Non-payable co-insurance</label>
+          <input type="number" (focusout)="trimInput()" [(ngModel)]="nonPayableCoInsurance"
+            onKeyPress="if(this.value.length==10) return false;" (keyup)="calculateRiderPayout()" />
+        </div>
+        <div class="input-block">
+          <label>Co-payment</label>
+          <input type="number" (focusout)="trimInput()" [(ngModel)]="coPayment" (keyup)="calculateRiderPayout()"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div *ngIf="closeBreakdown">
+          <div class="input-block">
+            <label>Basic Deductible</label>
+            <input type="number" (focusout)="trimInput()" class="highlight" [(ngModel)]="basicDeductible" disabled />
+          </div>
+          <div class="input-block">
+            <label>10% co-insurance</label>
+            <input type="number" (focusout)="trimInput()" class="highlight" [(ngModel)]="basicCoInsurance" disabled />
+          </div>
+        </div>
+        <div class="input-block">
+          <label>Rider Payout</label>
+          <input type="number" (focusout)="trimInput()" class="highlight" [(ngModel)]="riderPayout" disabled />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column additional-plan-column" *ngFor="let newPlan of additionalPlans;let i = index">
+        <h3>
+          Additional Plan {{i+1}}
+          <ion-icon name="close-circle" class="delete-plan" (click)="deleteAdditionalPlan(i)"></ion-icon>
+        </h3>
+        <div class="input-block">
+          <label>Plan Type</label>
+          <!-- <select name="type">
+					  <option value="type1">Personal Accident Plan</option>
+					  <option value="type2">Type2</option>
+					  <option value="type3">Type3</option>
+					  <option value="type4">T4pe1</option>
+					</select> -->
+          <div class="select-box" (click)="openTypeDropdown(i)">
+            <div class="input">
+              <p class="dropdown-title">{{newPlan.planType}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="newPlan.showTypeDropdown">
+              <li (click)='selectPlanType("Personal Accident Plan",i)'>
+                Personal Accident Plan
+              </li>
+              <li (click)='selectPlanType("Hospital Income Plan",i)'>
+                Hospital Income Plan
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="input-block">
+          <label>Medical Reimbursement</label>
+          <input type="number" [(ngModel)]="newPlan.medicalReimbursement"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="trimNewPlan(i,'medicalReimbursement')" />
+        </div>
+        <div class="input-block" *ngIf='newPlan.planType ==="Personal Accident Plan"'>
+          <label>Mobility Aids</label>
+          <input type="number" [(ngModel)]="newPlan.mobilityAids" (focusout)="trimNewPlan(i,'mobilityAids')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Daily Hospital Income</label>
+          <input type="number" [(ngModel)]="newPlan.dailyAllowance" (focusout)="trimNewPlan(i,'dailyAllowance')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Daily Hospital Income Factor</label>
+          <input type="number" [(ngModel)]="newPlan.dailyIncomeFactor" (focusout)="calculatePayoutAmount(i,'daily')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Daily Hospital Income Payout</label>
+          <input type="number" disabled class="highlight" [(ngModel)]="newPlan.dailyIncomePayout" />
+        </div>
+        <div class="input-block">
+          <label>Daily Accidental Hospital Income</label>
+          <input type="number" [(ngModel)]="newPlan.dailyAccidentalInput"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="trimNewPlan(i,'dailyAccidentalInput')" />
+        </div>
+        <div class="input-block">
+          <label>Daily Accidental Hospital Income Factor</label>
+          <input type="number" [(ngModel)]="newPlan.dailyAccidentalFactor"
+            onKeyPress="if(this.value.length==10) return false;" (focusout)="calculatePayoutAmount(i,'accidental')" />
+        </div>
+        <div class="input-block">
+          <label>Daily Accidental Hospital Income Payout</label>
+          <input type="number" disabled class="highlight" [(ngModel)]="newPlan.dailyAccidentalIncomePayout" />
+        </div>
+        <div class="input-block">
+          <label>Weekly Indemnity</label>
+          <input type="number" [(ngModel)]="newPlan.weeklyIndemnity" (focusout)="trimNewPlan(i,'weeklyIndemnity')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Weekly Indemnity Factor</label>
+          <input type="number" [(ngModel)]="newPlan.weeklyFactor" (focusout)="calculatePayoutAmount(i,'weekly')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Weekly Indemnity Payout</label>
+          <input type="number" disabled class="highlight" [(ngModel)]="newPlan.weeklyPayout" />
+        </div>
+        <div class="input-block">
+          <label>Get Well Benefit</label>
+          <input type="number" [(ngModel)]="newPlan.getWellBenefit" (focusout)="trimNewPlan(i,'getWellBenefit')"
+            onKeyPress="if(this.value.length==10) return false;" />
+        </div>
+        <div class="input-block">
+          <label>Claimable Amount</label>
+          <input type="number" disabled class="highlight" [(ngModel)]="newPlan.claimableAmount" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <div class="input-block">
+            <button (click)="addAdditionalPlan()">
+              <!-- <span *ngIf="showAdditionalPlan"> - </span> -->
+              <span> + </span> Additional Plan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <h3>Payment</h3>
+        <div class="input-block">
+          <label>Medisave Withdrawal Limit</label>
+          <input type="number" (focusout)="trimInput()" class="width60" [(ngModel)]="withdrawalLimit"
+            (keyup)="calculateCashExposure()" onKeyPress="if(this.value.length==10) return false;" />
+          <button class="calculator" (click)="openCalculator()">
+            Calculator
+          </button>
+        </div>
+        <div class="input-block" *ngIf="closeBreakdown">
+          <label>Total Payout by insurer</label>
+          <input type="number" (focusout)="totalPayoutByInsurer = totalPayoutByInsurer.toFixed(2)" class="highlight"
+            [(ngModel)]="totalPayoutByInsurer" disabled />
+        </div>
+        <div class="input-block" *ngIf="closeBreakdown">
+          <label>Non Payout by insurer</label>
+          <input type="number" (focusout)="trimInput()" class="highlight" [(ngModel)]="nonPaymentByInsurer" disabled />
+        </div>
+        <div class="input-block">
+          <label>Cash Exposure</label>
+          <input type="number" (focusout)="trimInput()" class="highlight" [(ngModel)]="cashExposure" disabled />
+        </div>
+        <div class="input-block" *ngIf="closeBreakdown">
+          <button (click)="closeViewBreakdown('close')">Close breakdown</button>
+        </div>
+        <div class="input-block" *ngIf="!closeBreakdown">
+          <button (click)="closeViewBreakdown('view')">View breakdown</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="display: inline-block; width: 100%; padding: 2rem" hidden>
+    <div id="isp-pdf-wrap">
+      <div class="row" style="text-align: center">
+        <h3>ISP Calculation</h3>
+      </div>
+      <div class="row">
+        <div class="column left-col">
+          <h3>Basic</h3>
+          <div class="input-block avoid">
+            <label>Bill Size</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{billSize}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Pro-ration Factor</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">{{proRationFactor}} %</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Basic Deductible</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{basicDeductible}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>After Pro-ration Factor</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{afterProRationFactor}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>10% co-insurance</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{basicCoInsurance}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Basic Payout</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{basicPayout}} </label>
+          </div>
+        </div>
+        <div class="column right-col">
+          <h3>Rider</h3>
+          <div class="input-block avoid">
+            <label>Non-payable Deductible</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{nonPayableDeductible}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Non-payable co-insurance</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{nonPayableCoInsurance}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Co-payment</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{coPayment}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Basic Deductible</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{basicDeductible}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>10% co-insurance</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{basicCoInsurance}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Rider Payout</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{riderPayout}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column" *ngFor="let newPlan of additionalPlans;let i = index">
+          <h3>Additional Plan {{i+1}}</h3>
+          <div class="input-block avoid">
+            <label>Plan Type</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">{{newPlan.planType}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Medical Reimbursement</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.medicalReimbursement}}</label>
+          </div>
+          <div class="input-block avoid" *ngIf='newPlan.planType ==="Personal Accident Plan"'>
+            <label>Mobility Aids</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.mobilityAids}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Hospital Income</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyAllowance}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Income Factor</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyIncomeFactor}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Income Payout</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyIncomePayout}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Accidental Hospital Income</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyAccidentalInput}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Accidental Hospital Factor</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyAccidentalFactor}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Daily Accidental Hospital Payout</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.dailyAccidentalIncomePayout}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Weekly Indemnity</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.weeklyIndemnity}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Weekly Indemnity Factor</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.weeklyFactor}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Weekly Indemnity Payout</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.weeklyPayout}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Get Well Benefit</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.getWellBenefit}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Claimable Amount</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{newPlan.claimableAmount}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="column">
+          <h3>Payment</h3>
+          <div class="input-block avoid" *ngIf="calculatorData">
+            <label>Type</label>
+            <span class="colon">:</span>
+            <label class="text-align-right" *ngIf="calculatorData.type !== ''">{{calculatorData.type}}</label>
+            <label *ngIf="calculatorData.type === ''">-</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData">
+            <label>Number of days stay</label>
+            <span class="colon">:</span>
+            <label class="text-align-right"
+              *ngIf="calculatorData.noOfDays && calculatorData.noOfDays !== ''">{{calculatorData.noOfDays}}</label>
+            <label *ngIf="!calculatorData.noOfDays || calculatorData.noOfDays === ''">-</label>
+          </div>
+          <!-- <div class="input-block avoid" *ngIf="calculatorData">
+						<label style="width: 100%;">Maximum amount allowed for surgical procedure</label>
+					</div> -->
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table1.selectedCol !== ''">
+            <label>{{calculatorData.table1.selectedCol}}</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{calculatorData.table1.selectedAmt}}</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table1.selectedCol === ''">
+            <label>No value selected</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table2.selectedCol !== ''">
+            <label>{{calculatorData.table2.selectedCol}}</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{calculatorData.table2.selectedAmt}}</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table2.selectedCol === ''">
+            <label>No value selected</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table3.selectedCol">
+            <label>{{calculatorData.table3.selectedCol}}</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{calculatorData.table3.selectedAmt}}</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData && calculatorData.table3.selectedCol === ''">
+            <label>No value selected</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData">
+            <label></label>
+            <span class="colon"></span>
+            <label class="border"></label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData">
+            <label>Medisave Withdrawal Limit</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{withdrawalLimit}}</label>
+          </div>
+          <div class="input-block avoid" *ngIf="calculatorData">
+            <label></label>
+            <span class="colon"></span>
+            <label class="border"></label>
+          </div>
+          <div class="input-block avoid">
+            <label>Total Payout by insurer</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{totalPayoutByInsurer}}</label>
+          </div>
+          <div class="input-block avoid">
+            <label>Non Payout by insurer</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{nonPaymentByInsurer}}</label>
+          </div>
+          <div class="input-block font-bold">
+            <label>Cash Exposure</label>
+            <span class="colon">:</span>
+            <label class="text-align-right">$ {{cashExposure}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

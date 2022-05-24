@@ -1,0 +1,63 @@
+.caseResubmission-wrapper {
+    background-color: #cdcdcd;
+    padding: 3rem 4rem;
+    color: #000000;
+    height: 100%;
+}
+.modal-title {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+}
+.row{
+    position: relative;
+}
+.close-modal-wrap{
+    position: absolute;
+    right: -2.4rem;
+    top: -1.5rem;
+    text-align: right;
+}
+.close-modal {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #8e8e93;
+    border: none;
+    background: transparent;
+}
+.caseResubmission-main-blk{
+    margin-top: 3.6rem;
+}
+.remark-label{
+    display: block;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    color: #000000;
+    margin-bottom: 0.8rem;
+}
+.remark-textarea{
+    display: block;
+    width: 100%;
+    height: 13.3rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    padding: 1rem;
+    background: #FBFBFB 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7E7E7E;
+    border-radius: 0.5rem;
+    outline: none;
+}
+.resubmit-btn {
+    display: block;
+    width: 100%;
+    background-color: #eeeef0;
+    border-radius: 1.8rem;
+    color: #007AFF;
+    padding: 1rem 13.6rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    margin-top: 3rem;
+}
+.disable {
+    color: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,43 @@
+<ion-content>
+  <div class="login-page-wrapper">
+      <div class="main-container">
+          <div class="login-page-header">
+              <!-- <h1 class="login-page-title">premiumcare</h1>
+      <div class="login-page-header-img">
+        <img src="./assets/images/Logo.svg">
+      </div> -->
+              <div class="login-page-header-img">
+                  <!-- ! Premium care logo -->
+                  <!-- <img src="../../../assets/images/pc-written-logo.png" alt=""> -->
+                  <!-- ! demo logo -->
+                  <img src="../../../assets/images/demo-logo.png" alt="">
+              </div>
+          </div>
+          <div class="login-page-inputs input-container">
+              <div class="signin-form">
+                  <div class="login-text">
+                      <div class="login-input">
+                          <input placeholder="Username" type="text" [(ngModel)]="email" name="emailId" (focusout)='validateEmail()' />
+                          <p class="errmsg">{{emailError}}</p>
+                      </div>
+                      <div class="login-password-input">
+                          <div class="password">
+                              <input placeholder="Password" class="password-input" [type]="fieldTextType ? 'password' : 'text'" [(ngModel)]="password" name="passwordText" (input)='validatePassword()'>
+                              <ion-icon class="eye-icon" name="eye" *ngIf="fieldTextType === true" (click)="togglePassword()"></ion-icon>
+                              <ion-icon class="eye-icon" name="eye-off" *ngIf="fieldTextType === false" (click)="togglePassword()"></ion-icon>
+                          </div>
+                          <p class="errmsg">{{passwordError}}</p>
+                      </div>
+                  </div>
+                  <button class="login-button submit" (click)="login()">Log In</button>
+              </div>
+          </div>
+          <!-- <div class="login-fingerprint">
+      <div class="login-fingerprint-img">
+        <img src="./assets/images/Fingerprint.svg">
+      </div>
+      <p>Login using fingerprint</p>
+    </div> -->
+      </div>
+  </div>
+</ion-content>

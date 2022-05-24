@@ -1,0 +1,577 @@
+<ion-content>
+  <div [ngClass]="mode == 'preview' ? 'travel-declaration-preview-container' : 'travel-declaration-container' "
+    *ngIf="ehealth && ehealth.travelDeclaration">
+    <div class="sign-button"
+      *ngIf="mode == 'preview' && loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management')">
+      <div class="sign-btn-wrapper" (click)="signForm()">
+        <button class="sign-btn">Sign Form</button>
+      </div>
+    </div>
+    <div class="travel-declaration-sub-container" [ngClass]="{'travel-declaration-sub-container': mode === 'preview'}">
+      <div id="travel-declrn-pdf-wrap">
+        <div class="title">
+          <h2>Travel Declaration Form</h2>
+        </div>
+        <div class="travel-info-block1" *ngIf="mode=='preview'">
+          <div class="travel-label">
+            <p>Name of Patient</p>
+          </div>
+          <div class="colon">
+            <p>:</p>
+          </div>
+          <div class="travel-preview-input-label font-bold" *ngIf="mode=='preview'">
+            {{ehealth.profile.name}}
+          </div>
+        </div>
+        <div class="travel-info-block1" *ngIf="mode=='preview'">
+          <div class="travel-label" *ngIf="ehealth.profile.nationality !== 'foreigner'">
+            <p>NRIC/FIN</p>
+          </div>
+          <div class="travel-label" *ngIf="ehealth.profile.nationality === 'foreigner'">
+            <p>Foreign Id</p>
+          </div>
+          <!-- <div class="travel-label" *ngIf="ehealth.profile.nationality === ' foreigner' && ehealth.profile.passportNumber && ehealth.profile.passportNumber != ''">
+                        <p>Passport Number</p>
+                    </div> -->
+          <div class="colon">
+            <p>:</p>
+          </div>
+          <div class="travel-preview-input-label font-bold"
+            *ngIf="mode=='preview' && ehealth.profile.nationality !== 'foreigner'">
+            {{ehealth.profile.nric}}
+          </div>
+          <div class="travel-preview-input-label font-bold"
+            *ngIf="mode=='preview' && ehealth.profile.nationality === 'foreigner'">
+            {{ehealth.profile.foreignId}}
+          </div>
+        </div>
+        <hr />
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>1.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>
+              Have you travelled abroad (i.e. to any countries outside of
+              Singapore) in the past 14 days?
+            </p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="abroadYes" name="abroad" #abroad="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.abroadTravel.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="abroadYes">Yes</label>
+              <input type="radio" id="abroadNo" name="abroad" #abroadNo="ngModel" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.abroadTravel.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="abroadNo">No</label>
+            </div>
+            <div class="if-yes" *ngIf="ehealth.travelDeclaration.abroadTravel.answer == 'Yes' && mode == 'edit'">
+              <div class="travel-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="travel-input-box1">
+                <div class="travel-info-input" (click)="openCountryDropdown1()">
+                  <!-- <p class="dropdown-title">{{selectedCountry1}}</p> -->
+                  <p class="dropdown-title">
+                    {{ehealth.travelDeclaration.abroadTravel.country}}
+                  </p>
+                  <div class="dropdown-arrow-wrapper">
+                    <span class="dropdown-arrow"></span>
+                  </div>
+                </div>
+                <ul class="case-type-dropdown" *ngIf="showCountryDropdown1">
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search country"
+                      (input)="allCountries = dataService.searchFromDropdownList(allCountries, nameToSearch, 'country')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let country of allCountries">
+                    <li *ngIf="country.show" (click)="selectCountry1(country.country)">
+                      {{country.country}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+              <div class="travel-input-sub-label">
+                <p>Date of Returned</p>
+              </div>
+              <div class="travel-input-box1">
+                <ion-datetime style="padding: 0.7rem" id="inceptionDate" displayFormat="DD MMM YYYY"
+                  [(ngModel)]="ehealth.travelDeclaration.abroadTravel.date"
+                  (ionChange)="showFormattedDate('abroad-travel', ehealth.travelDeclaration.abroadTravel.date, null)">
+                </ion-datetime>
+                <ion-icon name="calendar" class="calendar" onclick="document.getElementById('inceptionDate').click()">
+                </ion-icon>
+              </div>
+            </div>
+            <div class="preview-info"
+              *ngIf="mode == 'preview' && ehealth.travelDeclaration.abroadTravel.answer == 'Yes'">
+              <div class="travel-preview-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!ehealth.travelDeclaration.abroadTravel.country">-</p>
+                <p *ngIf="ehealth.travelDeclaration.abroadTravel.country">
+                  {{ehealth.travelDeclaration.abroadTravel.country}}
+                </p>
+              </div>
+              <div class="travel-preview-input-sub-label">
+                <p>Date of Returned</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!showDates.abroadTravel">-</p>
+                <p *ngIf="showDates.abroadTravel">{{showDates.abroadTravel}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>2.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>
+              Do you have flu-like symptoms (e.g. fever, cough, runny nose, sore
+              throat or loss of taste/ smell, etc.)?
+            </p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="fluYes" name="flu" #flu="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.flu.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="fluYes">Yes</label>
+              <input type="radio" id="fluNo" #flu="ngModel" name="flu" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.flu.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="fluNo">No</label>
+            </div>
+            <div class="if-yes" *ngIf="ehealth.travelDeclaration.flu.answer == 'Yes' && mode == 'edit'">
+              <div class="travel-input-sub-label">
+                <p>symptoms</p>
+              </div>
+              <div class="travel-input-box1 travel-remark-area">
+                <textarea class="travel-info-input" name="remark" id="remark" cols="30" rows="2"
+                  [(ngModel)]="ehealth.travelDeclaration.flu.symptoms"></textarea>
+              </div>
+            </div>
+            <div class="preview-info" *ngIf="mode == 'preview' && ehealth.travelDeclaration.flu.answer == 'Yes'">
+              <div class="travel-preview-input-sub-label">
+                <p>Symptoms</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!ehealth.travelDeclaration.flu.symptoms">-</p>
+                <p class="remarks" *ngIf="ehealth.travelDeclaration.flu.symptoms">
+                  {{ehealth.travelDeclaration.flu.symptoms}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>3.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>
+              Did you, in the past 14 days, come in close contact with someone
+              who is a confirmed COVID-19 case?
+            </p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="closeContactYes" name="closeContact" #closeContact="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.covid19.contact" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="closeContactYes">Yes</label>
+              <input type="radio" id="closeContactNo" name="closeContact" #closeContact="ngModel" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.covid19.contact" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="closeContactNo">No</label>
+            </div>
+            <div [ngClass]="mode == 'preview' ? 'travel-input-sub-preview-label1' : 'travel-input-sub-label1' ">
+              <p>Is part of a COVID-19 cluster</p>
+              <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+                <input type="radio" id="clusterYes" name="cluster" #cluster="ngModel" value="Yes"
+                  [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                  [(ngModel)]="ehealth.travelDeclaration.covid19.covidCluster" />
+                <label [ngClass]="{'radio-label': mode === 'edit'}" for="clusterYes">Yes</label>
+                <input type="radio" id="clusterNo" name="cluster" #cluster="ngModel" value="No"
+                  [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                  [(ngModel)]="ehealth.travelDeclaration.covid19.covidCluster" />
+                <label [ngClass]="{'radio-label': mode === 'edit'}" for="clusterNo">No</label>
+              </div>
+            </div>
+            <div [ngClass]="mode == 'preview' ? 'travel-input-sub-preview-label1' : 'travel-input-sub-label1' ">
+              <p>Was issued any mandated government control order</p>
+              <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+                <input type="radio" id="orderYes" name="order" #order="ngModel" value="Yes"
+                  [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                  [(ngModel)]="ehealth.travelDeclaration.covid19.governmentOrder" />
+                <label [ngClass]="{'radio-label': mode === 'edit'}" for="orderYes">Yes</label>
+                <input type="radio" id="orderNo" name="order" #order="ngModel" value="No"
+                  [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                  [(ngModel)]="ehealth.travelDeclaration.covid19.governmentOrder" />
+                <label [ngClass]="{'radio-label': mode === 'edit'}" for="orderNo">No</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>4.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>Have you returned from the Middle East in the past 14 days?</p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="eastYes" name="east" #east="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.middleEastTravel.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="eastYes">Yes</label>
+              <input type="radio" id="eastNo" name="east" #east="ngModel" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.middleEastTravel.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="eastNo">No</label>
+            </div>
+            <div class="if-yes" *ngIf="ehealth.travelDeclaration.middleEastTravel.answer == 'Yes' && mode=='edit'">
+              <div class="travel-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="travel-input-box1">
+                <div class="travel-info-input" (click)="openCountryDropdown4()">
+                  <!-- <p class="dropdown-title">{{selectedCountry4}}</p> -->
+                  <p class="dropdown-title">
+                    {{ehealth.travelDeclaration.middleEastTravel.country}}
+                  </p>
+                  <div class="dropdown-arrow-wrapper">
+                    <span class="dropdown-arrow"></span>
+                  </div>
+                </div>
+                <ul class="case-type-dropdown" *ngIf="showCountryDropdown4">
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search country"
+                      (input)="countries = dataService.searchFromDropdownList(countries, nameToSearch, 'country')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let country of countries">
+                    <li *ngIf="country.show" (click)="selectCountry4(country.country)">
+                      {{country.country}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+              <div class="travel-input-sub-label">
+                <p>Date of Returned</p>
+              </div>
+              <div class="travel-input-box1">
+                <ion-datetime style="padding: 0.7rem" id="inceptionDate" displayFormat="DD MMM YYYY"
+                  [(ngModel)]="ehealth.travelDeclaration.middleEastTravel.date"
+                  (ionChange)="showFormattedDate('middle-east-travel', ehealth.travelDeclaration.middleEastTravel.date, null)">
+                </ion-datetime>
+                <ion-icon name="calendar" class="calendar" onclick="document.getElementById('inceptionDate').click()">
+                </ion-icon>
+              </div>
+            </div>
+            <div class="preview-info"
+              *ngIf="mode == 'preview' && ehealth.travelDeclaration.middleEastTravel.answer == 'Yes'">
+              <div class="travel-preview-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!ehealth.travelDeclaration.middleEastTravel.country">
+                  -
+                </p>
+                <p *ngIf="ehealth.travelDeclaration.middleEastTravel.country">
+                  {{ehealth.travelDeclaration.middleEastTravel.country}}
+                </p>
+              </div>
+              <div class="travel-preview-input-sub-label">
+                <p>Date of Returned</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!showDates.middleEastTravel">-</p>
+                <p *ngIf="showDates.middleEastTravel">
+                  {{showDates.middleEastTravel}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>5.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>
+              Did you come in contact with someone who has returned from the
+              Middle East and he/she is not feeling well in the past 14 days?
+            </p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="contactEastYes" name="contactEast" #contactEast="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.middleEastContact.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="contactEastYes">Yes</label>
+              <input type="radio" id="contactEastNo" name="contactEast" #contactEast="ngModel" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.middleEastContact.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="contactEastNo">No</label>
+            </div>
+            <div class="if-yes" *ngIf="ehealth.travelDeclaration.middleEastContact.answer == 'Yes' && mode=='edit'">
+              <div class="travel-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="travel-input-box1">
+                <div class="travel-info-input" (click)="openCountryDropdown5()">
+                  <!-- <p class="dropdown-title">{{selectedCountry5}}</p> -->
+                  <p class="dropdown-title">
+                    {{ehealth.travelDeclaration.middleEastContact.country}}
+                  </p>
+                  <div class="dropdown-arrow-wrapper">
+                    <span class="dropdown-arrow"></span>
+                  </div>
+                </div>
+                <ul class="case-type-dropdown" *ngIf="showCountryDropdown5">
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search source"
+                      (input)="countries = dataService.searchFromDropdownList(countries, nameToSearch, 'country')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let country of countries">
+                    <li *ngIf="country.show" (click)="selectCountry5(country.country)">
+                      {{country.country}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+            <div class="preview-info"
+              *ngIf="mode == 'preview' && ehealth.travelDeclaration.middleEastContact.answer == 'Yes'">
+              <div class="travel-preview-input-sub-label">
+                <p>Country</p>
+              </div>
+              <div class="colon">
+                <p>:</p>
+              </div>
+              <div class="travel-preview-input-label">
+                <p *ngIf="!ehealth.travelDeclaration.middleEastContact.country">
+                  -
+                </p>
+                <p *ngIf="ehealth.travelDeclaration.middleEastContact.country">
+                  {{ehealth.travelDeclaration.middleEastContact.country}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>6.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-preview-label1' : 'travel-input-label1' ">
+            <p>
+              Have you done your routine and/or travel vaccination prior to
+              travel?
+            </p>
+            <div [ngClass]="mode == 'preview' ? 'blue' : 'radio-div' ">
+              <input type="radio" id="vaccineYes" #vaccine="ngModel" value="Yes"
+                [ngClass]="mode == 'preview' ? 'preview-radio' : 'radio1' "
+                [(ngModel)]="ehealth.travelDeclaration.travelVaccination.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="vaccineYes">Yes</label>
+              <input type="radio" id="vaccineNo" #vaccine="ngModel" value="No"
+                [ngClass]="mode == 'preview' ? 'preview-radio1' : 'radio' "
+                [(ngModel)]="ehealth.travelDeclaration.travelVaccination.answer" />
+              <label [ngClass]="{'radio-label': mode === 'edit'}" for="vaccineNo">
+                No</label>
+            </div>
+            <div class="if-yes" *ngIf="ehealth.travelDeclaration.travelVaccination.answer == 'Yes' && mode=='edit'">
+              <div class="addition"
+                *ngFor="let obj of ehealth.travelDeclaration.travelVaccination.vaccines ; let i=index">
+                <div class="travel-input-sub-label">
+                  <p>Type of Vaccination</p>
+                </div>
+                <div class="travel-input-box1">
+                  <div class="travel-info-input" (click)="openVaccineDropdown(obj)">
+                    <p class="dropdown-title">{{obj.type}}</p>
+                    <div class="dropdown-arrow-wrapper">
+                      <span class="dropdown-arrow"></span>
+                    </div>
+                  </div>
+                  <ul class="case-type-dropdown" *ngIf="obj.showVaccineDropdown">
+                    <li class="dropdown-input">
+                      <input type="text" [(ngModel)]="nameToSearch" placeholder="Search source"
+                        (input)="vaccines = dataService.searchFromDropdownList(vaccines, nameToSearch, 'vaccine')"
+                        (click)="dataService.enterValue($event)">
+                    </li>
+                    <ng-container *ngFor="let vaccine of vaccines">
+                      <li *ngIf="vaccine.show" (click)="selectVaccine(vaccine.vaccine,obj)">
+                        {{vaccine.vaccine}}
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+                <button (click)="delete(i)" class="close-button" *ngIf="i>0 && mode=='edit'"></button>
+                <div class="travel-input-sub-label">
+                  <p>Date of Vaccination</p>
+                </div>
+                <div class="travel-input-box1">
+                  <ion-datetime style="padding: 0.7rem" id="inceptionDate" displayFormat="DD MMM YYYY"
+                    [(ngModel)]="obj.date" (ionChange)="showFormattedDate('vaccination', obj.date, i)">
+                  </ion-datetime>
+                  <ion-icon name="calendar" class="calendar" onclick="document.getElementById('inceptionDate').click()">
+                  </ion-icon>
+                </div>
+              </div>
+              <div class="vaccine-btn-wrapper" (click)="add()" *ngIf="mode=='edit'">
+                <button class="vaccine-btn">Add another vaccination</button>
+              </div>
+            </div>
+            <ng-container
+              *ngIf="mode === 'preview' && ehealth.travelDeclaration.travelVaccination.answer == 'Yes' && ehealth.travelDeclaration.travelVaccination.vaccines">
+              <div class="details avoid"
+                *ngFor="let obj of ehealth.travelDeclaration.travelVaccination.vaccines ; let i=index">
+                <div class="preview-info">
+                  <div class="travel-preview-input-sub-label">
+                    <p>Type of Vaccination</p>
+                  </div>
+                  <div class="colon">
+                    <p>:</p>
+                  </div>
+                  <div class="travel-preview-input-label">
+                    <p *ngIf="!obj.type">-</p>
+                    <p *ngIf="obj.type">{{obj.type}}</p>
+                  </div>
+                  <div class="travel-preview-input-sub-label">
+                    <p>Date of Vaccination</p>
+                  </div>
+                  <div class="colon">
+                    <p>:</p>
+                  </div>
+                  <div class="travel-preview-input-label">
+                    <p *ngIf="!obj.date">-</p>
+                    <p *ngIf="obj.date">{{obj.date}}</p>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <div class="number">
+            <p>7.</p>
+          </div>
+          <div [ngClass]="mode == 'preview' ? 'travel-input-sub-preview-label2' : 'travel-input-sub-label2' ">
+            <p>Remarks</p>
+          </div>
+          <div class="colon" *ngIf="mode == 'preview'">
+            <p>:</p>
+          </div>
+          <div class="travel-preview-input-label" *ngIf="mode == 'preview'">
+            <p *ngIf="!ehealth.travelDeclaration.remarks">-</p>
+            <p class="remarks" *ngIf="ehealth.travelDeclaration.remarks">
+              {{ehealth.travelDeclaration.remarks}}
+            </p>
+          </div>
+          <div class="travel-input-box travel-remark-area" *ngIf="mode == 'edit'">
+            <textarea class="travel-info-input" name="remark" id="remark" cols="30" rows="2"
+              [(ngModel)]="ehealth.travelDeclaration.remarks"></textarea>
+          </div>
+        </div>
+        <div class="avoid" [ngClass]="mode == 'preview' ? 'travel-info-preview-block' : 'travel-info-block' ">
+          <p style="width: 100%; margin-bottom: 1rem">
+            By signing this form, I declare that all the above information is
+            correct and accurate to the best of my knowledge
+          </p>
+          <div class="signature-box" [ngClass]="mode == 'preview' ? 'disable' : '' " (click)="checkGuardian()">
+            <div class="signature-label-box">
+              <div class="signature-label">
+                <p *ngIf="ehealth.profile.guardian == false">
+                  Client's Signature
+                </p>
+                <p *ngIf="ehealth.profile.guardian == true">
+                  Parent/Guardian Signature
+                </p>
+              </div>
+            </div>
+            <div class="signature-img-wrap">
+              <div class="signature-img">
+                <img [src]="pdf.signature" alt="signature" *ngIf="pdf.signature != ''" />
+              </div>
+              <div class="cross-button">
+                <button class="cross"></button>
+                <div class="line"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="client-details avoid" *ngIf="mode=='preview' && pdf.signature !== ''">
+          <div class="travel-info-block1">
+            <div class="travel-label">
+              <p *ngIf="ehealth.profile.guardian == false">Client Name</p>
+              <p *ngIf="ehealth.profile.guardian == true">
+                Parent/Guardian Name
+              </p>
+            </div>
+            <div class="colon">
+              <p>:</p>
+            </div>
+            <div class="travel-preview-input-label" *ngIf="pdf.signature !== '' && ehealth.profile.guardian == false">
+              {{ehealth.profile.name}}
+            </div>
+            <div class="travel-preview-input-label" *ngIf="pdf.signature !== '' && ehealth.profile.guardian == true">
+              {{consentDetails.name}}
+            </div>
+          </div>
+          <div class="travel-info-block1" *ngIf="ehealth.profile.guardian == true">
+            <div class="travel-label">
+              <p>Relationship</p>
+            </div>
+            <div class="colon">
+              <p>:</p>
+            </div>
+            <div class="travel-preview-input-label" *ngIf="pdf.signature !== ''">
+              {{consentDetails.relation}}
+            </div>
+          </div>
+          <div class="travel-info-block1">
+            <div class="travel-label">
+              <p>Date</p>
+            </div>
+            <div class="colon">
+              <p>:</p>
+            </div>
+            <div class="travel-preview-input-label">{{pdf.date}}</div>
+          </div>
+          <div class="travel-info-block1">
+            <div class="travel-label">
+              <p>Time</p>
+            </div>
+            <div class="colon">
+              <p>:</p>
+            </div>
+            <div class="travel-preview-input-label">{{pdf.time}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="save-button">
+      <div class="save-btn-wrapper" (click)="exportPdf()" *ngIf="mode == 'edit'"
+        [ngClass]="(!clientType || (clientType && clientType === 'new')) && (pdf.signature === '') ? 'disable': ''">
+        <button class="save-btn"
+          [ngClass]="(!clientType || (clientType && clientType === 'new')) && (pdf.signature === '') ? 'disable': ''">
+          Submit Form
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

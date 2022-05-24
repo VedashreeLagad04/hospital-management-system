@@ -1,0 +1,527 @@
+<ion-content>
+  <div id="activePoliciesContainer" [ngClass]="{'edit-container':mode === 'edit'}" (click)="closeAllDropdowns()">
+    <div class="active-policies-container">
+      <div class="button"
+        *ngIf="mode == 'preview' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager' || loggedInUser.type === 'Management'))">
+        <div class="edit-btn-wrapper" (click)="edit()">
+          <button class="edit-btn">Edit</button>
+        </div>
+      </div>
+      <div class="addition" [id]="'policy-' + i" *ngFor="let obj of policy.activePolicies ; let i=index">
+        <div class="active-policies-line" *ngIf="i>0"></div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>{{i+1}}. Type of Plan</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview' || i==0}">
+            <div class="policy-info-input" (click)="openPlanDropdown(obj, $event)">
+              <p class="dropdown-title">{{obj.planType}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="obj.showPlanDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search plan type"
+                  (input)="insurerDetails = dataService.searchFromDropdownList(insurerDetails, nameToSearch, 'planType')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let plan of insurerDetails">
+                <li *ngIf="plan.show" (click)="selectPlan(plan,obj)">
+                  {{plan.planType}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          <button (click)="delete(i)" class="close-button" *ngIf="i>0 && mode=='edit'"></button>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Insurer</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <div class="policy-info-input" (click)="openInsurerDropdown(obj, $event,i)">
+              <p class="dropdown-title">{{obj.insurer}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="obj.showInsurerDropdown">
+              <ng-container *ngIf="insurers.length !== 0">
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" placeholder="Search insurer"
+                    (input)="insurers[i] = dataService.searchFromDropdownList(insurers[i], nameToSearch, 'insurer')"
+                    (click)="dataService.enterValue($event)">
+                </li>
+                <ng-container *ngFor="let insurer of insurers[i]">
+                  <li *ngIf="insurer.show" (click)="selectInsurer(insurer.insurer,obj,i)">
+                    {{insurer.insurer}}
+                  </li>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="insurers.length == 0">
+                <li>No insurer added!</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Main Plan Name</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview' || obj.insurer == ''}">
+            <div class="policy-info-input" (click)="openMainPlanDropdown(obj, $event, i)">
+              <p class="dropdown-title">{{obj.mainPlanName}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="obj.showMainPlanDropdown">
+              <ng-container *ngIf="mainPlanNames.length > 0">
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" placeholder="Search main plan name"
+                    (input)="mainPlanNames[i] = dataService.searchFromDropdownList(mainPlanNames[i], nameToSearch, 'planName')"
+                    (click)="dataService.enterValue($event)">
+                </li>
+                <ng-container *ngFor="let mainPlanName of mainPlanNames[i]">
+                  <li *ngIf="mainPlanName.show" (click)="selectMainPlan(mainPlanName.planName,obj)">
+                    {{mainPlanName.planName}}
+                  </li>
+                </ng-container>
+              </ng-container>
+              <ng-container *ngIf="mainPlanNames.length == 0">
+                <li>No plans added!</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Inception Date</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <ion-datetime style="padding: 0.3rem" id="inceptionDate" max="2099-12-31" displayFormat="DD MMM YYYY"
+              [(ngModel)]="obj.mainInceptionDate">
+            </ion-datetime>
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('inceptionDate').click()">
+            </ion-icon>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Paid to Date</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <ion-datetime style="padding: 0.3rem" id="paidDate" max="2099-12-31" displayFormat="DD MMM YYYY"
+              [(ngModel)]="obj.mainPaidDate">
+            </ion-datetime>
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('paidDate').click()">
+            </ion-icon>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Frequency of Payment</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <div class="policy-info-input" (click)="openFrequencyDropdown(obj, $event)">
+              <p class="dropdown-title">{{obj.mainFrequencyOfPayment}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="obj.showFrequencyDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search frequency of payment"
+                  (input)="frequencies = dataService.searchFromDropdownList(frequencies, nameToSearch, 'frequency')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let frequency of frequencies">
+                <li *ngIf="frequency.show" (click)="selectFrequency(frequency.frequency,obj)">
+                  {{frequency.frequency}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Mode of Payment</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <div class="policy-info-input" (click)="openModeDropdown(obj, $event)">
+              <p class="dropdown-title">{{obj.mainModeOfPayment}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="obj.showModeDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search mode of payment"
+                  (input)="modes = dataService.searchFromDropdownList(modes, nameToSearch, 'mode')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let mode of modes">
+                <li *ngIf="mode.show" (click)="selectMode(mode.mode,obj)">
+                  {{mode.mode}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Change of Insurer</p>
+          </div>
+          <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="radio" id="mainChangeYes{{i}}" name="mainChangeYes{{i}}" value="Yes" class="radio1"
+              [(ngModel)]="obj.mainChangeOfInsurer" />
+            <label for="mainChangeYes{{i}}">Yes</label>
+            <input type="radio" id="mainChangeNo{{i}}" name="mainChangeNo{{i}}" value="No" class="radio"
+              [(ngModel)]="obj.mainChangeOfInsurer" />
+            <label for="mainChangeNo{{i}}">No</label>
+          </div>
+        </div>
+        <div class="policy-info-block" *ngIf="obj.mainChangeOfInsurer == 'Yes'">
+          <div class="policy-input-label"></div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="text" class="policy-info-input" placeholder="Reason"
+              [(ngModel)]="obj.mainChangeOfInsurerReason" />
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Upgrade of Plan</p>
+          </div>
+          <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="radio" id="mainUpgradeYes{{i}}" name="mainUpgradeYes{{i}}" value="Yes" class="radio1"
+              [(ngModel)]="obj.mainUpgradeOfPlan" />
+            <label for="mainUpgradeYes{{i}}">Yes</label>
+            <input type="radio" id="mainUpgradeNo{{i}}" name="mainUpgradeNo{{i}}" value="No" class="radio"
+              [(ngModel)]="obj.mainUpgradeOfPlan" />
+            <label for="mainUpgradeNo{{i}}">No</label>
+          </div>
+        </div>
+        <div class="policy-info-block" *ngIf="obj.mainUpgradeOfPlan == 'Yes'">
+          <div class="policy-input-label"></div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="text" class="policy-info-input" placeholder="Reason"
+              [(ngModel)]="obj.mainUpgradeOfPlanReason" />
+          </div>
+        </div>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Pending Claim</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}"
+            *ngIf="obj.mainPendingClaim && obj.mainPendingClaim !== ''">
+            <input type="text" class="policy-info-input" [(ngModel)]="obj.mainPendingClaim" />
+          </div>
+          <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="radio" id="mainPendingClaimYes{{i}}" name="mainPendingClaimYes{{i}}" value="Yes" class="radio1"
+              [(ngModel)]="obj.mainPendingClaimAnswer" />
+            <label for="mainPendingClaimYes{{i}}">Yes</label>
+            <input type="radio" id="mainPendingClaimNo{{i}}" name="mainPendingClaimNo{{i}}" value="No" class="radio"
+              [(ngModel)]="obj.mainPendingClaimAnswer" />
+            <label for="mainPendingClaimNo{{i}}">No</label>
+          </div>
+        </div>
+        <ng-container *ngIf="obj.mainPendingClaimAnswer === 'Yes'">
+          <div class="policy-info-block" *ngFor="let claim of obj.mainPendingClaimsArr; let c = index">
+            <div class="policy-input-label"></div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="text" class="policy-info-input" placeholder="Reason" [(ngModel)]="claim.claim" />
+            </div>
+            <button (click)="addPendingClaim('main', obj)" class="plus-button plus-button--small"
+              *ngIf="c === 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+            <button (click)="removePendingClaim('main', obj, c)" class="close-button"
+              *ngIf="c > 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+          </div>
+        </ng-container>
+        <div class="policy-info-block">
+          <div class="policy-input-label">
+            <p>Exclusion / Moratorium</p>
+          </div>
+          <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}"
+            *ngIf="obj.mainExclusion && obj.mainExclusion !== ''">
+            <input type="text" class="policy-info-input" [(ngModel)]="obj.mainExclusion" />
+          </div>
+          <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+            <input type="radio" id="mainExclusionYes{{i}}" name="mainExclusionYes{{i}}" value="Yes" class="radio1"
+              [(ngModel)]="obj.mainExclusionAnswer" />
+            <label for="mainExclusionYes{{i}}">Yes</label>
+            <input type="radio" id="mainExclusionNo{{i}}" name="mainExclusionNo{{i}}" value="No" class="radio"
+              [(ngModel)]="obj.mainExclusionAnswer" />
+            <label for="mainExclusionNo{{i}}">No</label>
+          </div>
+        </div>
+        <ng-container *ngIf="obj.mainExclusionAnswer === 'Yes'">
+          <div class="policy-info-block" *ngFor="let exclusion of obj.mainExclusionArr; let c = index">
+            <div class="policy-input-label"></div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="text" class="policy-info-input" placeholder="Reason" [(ngModel)]="exclusion.exclusion" />
+            </div>
+            <button (click)="addExclusion('main', obj)" class="plus-button plus-button--small"
+              *ngIf="c === 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+            <button (click)="removeExclusion('main', obj, c)" class="close-button"
+              *ngIf="c > 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+          </div>
+        </ng-container>
+        <div class="policy-info-block">
+          <div class="policy-input-remarks-label">
+            <p>Remarks</p>
+          </div>
+          <div class="policy-input-box1 policy-remark-area" [ngClass]="{'disabled': mode === 'preview'}">
+            <textarea class="policy-info-input" name="remark" id="remark" cols="30" rows="4"
+              [(ngModel)]="obj.mainRemarks"></textarea>
+          </div>
+        </div>
+
+        <!--------------------------------------------RIDER--------------------------------------------------->
+        <div class="rider" *ngIf="i == 0">
+          <div class="active-policies-line"></div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Rider Plan Name</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview' || obj.insurer == ''}">
+              <!-- <input type="text" class="policy-info-input" [(ngModel)]="obj.riderPlanName"> -->
+              <div class="policy-info-input" (click)="openRiderNameDropdown(obj, $event)">
+                <p class="dropdown-title">{{obj.riderPlanName}}</p>
+                <div class="dropdown-arrow-wrapper">
+                  <span class="dropdown-arrow"></span>
+                </div>
+              </div>
+              <ul class="case-type-dropdown" *ngIf="obj.showRiderNameDropdown">
+                <ng-container *ngIf="allRiderNames.length > 0">
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search rider plan name"
+                      (input)="allRiderNames = dataService.searchFromDropdownList(allRiderNames, nameToSearch, 'planName')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let name of allRiderNames">
+                    <li *ngIf="name.show" (click)="selectRiderName(name.planName,obj)">
+                      {{name.planName}}
+                    </li>
+                  </ng-container>
+                </ng-container>
+                <ng-container *ngIf="allRiderNames.length === 0">
+                  <li>No plans added!</li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Inception Date</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <ion-datetime style="padding: 0.3rem" id="inceptionDate" max="2099-12-31" displayFormat="DD MMM YYYY"
+                [(ngModel)]="obj.riderInceptionDate">
+              </ion-datetime>
+              <ion-icon name="calendar" class="calendar" onclick="document.getElementById('inceptionDate').click()">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Paid to Date</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <ion-datetime style="padding: 0.3rem" id="paidDate" max="2099-12-31" displayFormat="DD MMM YYYY"
+                [(ngModel)]="obj.riderPaidDate">
+              </ion-datetime>
+              <ion-icon name="calendar" class="calendar" onclick="document.getElementById('paidDate').click()">
+              </ion-icon>
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Frequency of Payment</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <div class="policy-info-input" (click)="openRiderFrequencyDropdown(obj, $event)">
+                <p class="dropdown-title">{{obj.riderFrequencyOfPayment}}</p>
+                <div class="dropdown-arrow-wrapper">
+                  <span class="dropdown-arrow"></span>
+                </div>
+              </div>
+              <ul class="case-type-dropdown" *ngIf="obj.showRiderFrequencyDropdown">
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" placeholder="Search frequency of payment"
+                    (input)="frequencies = dataService.searchFromDropdownList(frequencies, nameToSearch, 'frequency')"
+                    (click)="dataService.enterValue($event)">
+                </li>
+                <ng-container *ngFor="let frequency of frequencies">
+                  <li *ngIf="frequency.show" (click)="selectRiderFrequency(frequency.frequency,obj)">
+                    {{frequency.frequency}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Mode of Payment</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <div class="policy-info-input" (click)="openRiderModeDropdown(obj, $event)">
+                <p class="dropdown-title">{{obj.riderModeOfPayment}}</p>
+                <div class="dropdown-arrow-wrapper">
+                  <span class="dropdown-arrow"></span>
+                </div>
+              </div>
+              <ul class="case-type-dropdown" *ngIf="obj.showRiderModeDropdown">
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" placeholder="Search mode of payment"
+                    (input)="ridermodes = dataService.searchFromDropdownList(ridermodes, nameToSearch, 'mode')"
+                    (click)="dataService.enterValue($event)">
+                </li>
+                <ng-container *ngFor="let ridermode of ridermodes">
+                  <li *ngIf="ridermode.show" (click)="selectRiderMode(ridermode.mode,obj)">
+                    {{ridermode.mode}}
+                  </li>
+                </ng-container>
+              </ul>
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Copy of Policy Given</p>
+            </div>
+            <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="radio" id="riderCopyYes{{i}}" name="riderCopyYes{{i}}" value="Yes" class="radio1"
+                [(ngModel)]="obj.riderCopyOfPolicy" />
+              <label for="riderCopyYes{{i}}">Yes</label>
+              <input type="radio" id="riderCopyNo{{i}}" name="riderCopyNo{{i}}" value="No" class="radio"
+                [(ngModel)]="obj.riderCopyOfPolicy" />
+              <label for="riderCopyNo{{i}}">No</label>
+            </div>
+          </div>
+          <div class="policy-info-block" *ngIf="obj.riderCopyOfPolicy == 'No'">
+            <div class="policy-input-label"></div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="text" class="policy-info-input" placeholder="Reason"
+                [(ngModel)]="obj.riderCopyOfPolicyReason" />
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Change of Insurer</p>
+            </div>
+            <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="radio" id="riderChangeYes{{i}}" name="riderChangeYes{{i}}" value="Yes" class="radio1"
+                [(ngModel)]="obj.riderChangeOfInsurer" />
+              <label for="riderChangeYes{{i}}">Yes</label>
+              <input type="radio" id="riderChangeNo{{i}}" name="riderChangeNo{{i}}" value="No" class="radio"
+                [(ngModel)]="obj.riderChangeOfInsurer" />
+              <label for="riderChangeNo{{i}}">No</label>
+            </div>
+          </div>
+          <div class="policy-info-block" *ngIf="obj.riderChangeOfInsurer == 'Yes'">
+            <div class="policy-input-label"></div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="text" class="policy-info-input" placeholder="Reason"
+                [(ngModel)]="obj.riderChangeOfInsurerReason" />
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Upgrade of Plan</p>
+            </div>
+            <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="radio" id="riderUgradeYes{{i}}" name="riderUgradeYes{{i}}" value="Yes" class="radio1"
+                [(ngModel)]="obj.riderUpgradeOfPlan" />
+              <label for="riderUgradeYes{{i}}">Yes</label>
+              <input type="radio" id="riderUpgradeNo{{i}}" name="riderUpgradeNo{{i}}" value="No" class="radio"
+                [(ngModel)]="obj.riderUpgradeOfPlan" />
+              <label for="riderUpgradeNo{{i}}">No</label>
+            </div>
+          </div>
+          <div class="policy-info-block" *ngIf="obj.riderUpgradeOfPlan == 'Yes'">
+            <div class="policy-input-label"></div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="text" class="policy-info-input" placeholder="Reason"
+                [(ngModel)]="obj.riderUpgradeOfPlanReason" />
+            </div>
+          </div>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Pending Claim</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}"
+              *ngIf="obj.riderPendingClaim && obj.riderPendingClaim !== ''">
+              <input type="text" class="policy-info-input" [(ngModel)]="obj.riderPendingClaim" />
+            </div>
+            <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="radio" id="riderPendingClaimYes{{i}}" name="riderPendingClaimYes{{i}}" value="Yes"
+                class="radio1" [(ngModel)]="obj.riderPendingClaimAnswer" />
+              <label for="riderPendingClaimYes{{i}}">Yes</label>
+              <input type="radio" id="riderPendingClaimNo{{i}}" name="riderPendingClaimNo{{i}}" value="No" class="radio"
+                [(ngModel)]="obj.riderPendingClaimAnswer" />
+              <label for="riderPendingClaimNo{{i}}">No</label>
+            </div>
+          </div>
+          <ng-container *ngIf="obj.riderPendingClaimAnswer === 'Yes'">
+            <div class="policy-info-block" *ngFor="let claim of obj.riderPendingClaimArr; let c = index">
+              <div class="policy-input-label"></div>
+              <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+                <input type="text" class="policy-info-input" placeholder="Reason" [(ngModel)]="claim.claim" />
+              </div>
+              <button (click)="addPendingClaim('rider', obj)" class="plus-button plus-button--small"
+                *ngIf="c === 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+              <button (click)="removePendingClaim('rider', obj, c)" class="close-button"
+                *ngIf="c > 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+            </div>
+          </ng-container>
+          <div class="policy-info-block">
+            <div class="policy-input-label">
+              <p>Exclusion / Moratorium</p>
+            </div>
+            <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}"
+              *ngIf="obj.riderExclusion && obj.riderExclusion !== ''">
+              <input type="text" class="policy-info-input" [(ngModel)]="obj.riderExclusion" />
+            </div>
+            <div class="radio-div" [ngClass]="{'disabled': mode === 'preview'}">
+              <input type="radio" id="riderExclusionYes{{i}}" name="riderExclusionYes{{i}}" value="Yes" class="radio1"
+                [(ngModel)]="obj.riderExclusionAnswer" />
+              <label for="riderExclusionYes{{i}}">Yes</label>
+              <input type="radio" id="riderExclusionNo{{i}}" name="riderExclusionNo{{i}}" value="No" class="radio"
+                [(ngModel)]="obj.riderExclusionAnswer" />
+              <label for="riderExclusionNo{{i}}">No</label>
+            </div>
+          </div>
+          <ng-container *ngIf="obj.riderExclusionAnswer === 'Yes'">
+            <div class="policy-info-block" *ngFor="let exclusion of obj.riderExclusionArr; let c = index">
+              <div class="policy-input-label"></div>
+              <div class="policy-input-box" [ngClass]="{'disabled': mode === 'preview'}">
+                <input type="text" class="policy-info-input" placeholder="Reason" [(ngModel)]="exclusion.exclusion" />
+              </div>
+              <button (click)="addExclusion('rider', obj)" class="plus-button plus-button--small"
+                *ngIf="c === 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+              <button (click)="removeExclusion('rider', obj, c)" class="close-button"
+                *ngIf="c > 0 && mode === 'edit' && (loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager'))"></button>
+            </div>
+          </ng-container>
+          <div class="policy-info-block">
+            <div class="policy-input-remarks-label">
+              <p>Remarks</p>
+            </div>
+            <div class="policy-input-box1 policy-remark-area" [ngClass]="{'disabled': mode === 'preview'}">
+              <textarea class="policy-info-input" name="remark" id="remark" cols="30" rows="4"
+                [(ngModel)]="obj.riderRemarks"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="add-btn-wrapper" (click)="add()" *ngIf="mode === 'edit'">
+        <button class="add-btn">Add new policy</button>
+      </div>
+      <div class="btn-container">
+        <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="mode === 'edit'">
+          <button class="save-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

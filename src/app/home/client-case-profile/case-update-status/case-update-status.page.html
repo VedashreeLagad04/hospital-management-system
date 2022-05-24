@@ -1,0 +1,95 @@
+<ion-content>
+  <div class="confirmation-wrapper">
+    <div class="row">
+      <div class="modal-title col-10">
+        <h4>Update Case Status</h4>
+      </div>
+      <div class="col-2 right-text">
+        <ion-icon class="close-modal" (click)="dismiss('')" name="close"></ion-icon>
+      </div>
+    </div>
+    <div class="container-small">
+      <div class="content-data">
+        <div class="status-change">
+          <div class="status-wrapper">
+            <div class="status-label">
+              <p>Case Status:</p>
+            </div>
+            <div class="status-dropdown-btn-wrapper">
+              <div class="status-dropdown-btn" (click)="openStatusDropdown()">
+                <div class="dropdown-status">{{newStatus}}</div>
+                <div class="caret">
+                  <!-- <span class="arrow-down"></span> -->
+                  <i class="fa fa-fw fa-angle-down"></i>
+                </div>
+              </div>
+              <div class="dropdown-list" *ngIf="showStatusDropdown">
+                <ul class="dropdown">
+                  <li (click)="agentSelectStatus(statusObj)" [ngClass]='{"disabledStatus":!statusObj.allow}'
+                    *ngFor="let statusObj of status">{{statusObj.value}}</li>
+                  <!-- <li>Reject</li>
+                    <li>Other</li> -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="drop-off"
+          *ngIf='caseStatus.status === "Drop off before consultation" || caseStatus.status==="Drop off after consultation"'>
+          <textarea name="" id="" cols="30" rows="5" placeholder="Reason for drop off"
+            [(ngModel)]="dropOffReason"></textarea>
+        </div>
+        <div class="discharged-status" *ngIf='caseStatus.status === "Admitted" || caseStatus.status==="Discharge"'>
+          <div class="amend-box status-wrapper">
+            <ion-checkbox class='amend-checkbox' name='check' [(ngModel)]='check'>
+            </ion-checkbox>
+            <label for='check' (click)='check=!check'>
+              <span *ngIf='caseStatus.status==="Admitted"'>Amend admission date and time</span>
+              <span *ngIf='caseStatus.status==="Discharge"'>Amend discharge date and time</span>
+
+            </label>
+          </div>
+          <div class="admission-details status-wrapper">
+            <div class="status-label">
+              <p>
+                <span *ngIf='caseStatus.status==="Discharge"'>Discharge</span>
+                <span *ngIf='caseStatus.status==="Admitted"'>Admission</span>
+                Date
+              </p>
+            </div>
+            <div class='admission-date' [ngClass]="{'disabledDate':!check}">
+              <ion-datetime id="dobDatepicker" class='date-input' [(ngModel)]='admissionDateTime.date'
+                displayFormat="DD MMM YYYY" pickerFormat="DD MMM YYYY"
+                (ionChange)="changeDateFormat(admissionDateTime.date)" mode='ios'>
+              </ion-datetime>
+              <!-- <ion-datetime id="dobDatepicker" class='date-input' [(ngModel)]='admissionDateTime.date'
+                displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY" mode='ios'>
+              </ion-datetime> -->
+              <img class="calendar-icon" src="assets/images/calender.png"
+                onclick="document.getElementById('dobDatepicker').click()">
+            </div>
+          </div>
+          <div class="admission-details status-wrapper">
+            <div class="status-label">
+              <p>
+                <span *ngIf='caseStatus.status==="Discharge"'>Discharge</span>
+                <span *ngIf='caseStatus.status==="Admitted"'>Admission</span>
+                Time
+              </p>
+            </div>
+            <div class="admission-date" [ngClass]="{'disabledDate':!check}">
+              <ion-datetime mode='ios' id="startTimepicker" class='date-input' [(ngModel)]='admissionDateTime.time'
+                displayFormat="hh:mm a" minuteValues="0,15,30,45" pickerFormat="hh:mm a" doneText='Select'>
+              </ion-datetime>
+              <img class="calendar-icon" src="assets/images/calender.png"
+                onclick="document.getElementById('startTimepicker').click()">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="save-button">
+        <button class="submit-button reg-button" (click)="updateStatus()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

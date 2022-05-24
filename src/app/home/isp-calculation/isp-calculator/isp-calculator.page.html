@@ -1,0 +1,119 @@
+<ion-content>
+  <div class="calculator-wrapper">
+    <div class="row">
+      <div class="col-2 close-modal-wrap">
+        <ion-icon
+          class="close-modal"
+          (click)="dismiss()"
+          name="close"
+        ></ion-icon>
+      </div>
+      <div class="modal-title col-10">
+        <i>
+          <h4>Medisave Calculator</h4>
+        </i>
+      </div>
+    </div>
+    <div class="calculator-main-blk">
+      <div class="radio-main-blk">
+        <div class="radio-sub-blk">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="medisave-radio"
+              [checked]='surgeryType=="inpatient"'
+              value="inpatient"
+              [(ngModel)]="surgeryType"
+              (change)="typeChange()"
+            />
+            Inpatient</label
+          >
+        </div>
+        <div class="radio-sub-blk">
+          <label class="radio-label">
+            <input
+              type="radio"
+              name="medisave-radio"
+              [checked]='surgeryType=="daysurgery"'
+              value="daysurgery"
+              [(ngModel)]="surgeryType"
+              (change)="typeChange()"
+            />
+            Day Surgery
+          </label>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <label class="input-blk-label">Number of Day Stay</label>
+        <input
+          type="number"
+          class="input-blk"
+          [(ngModel)]="noOfDays"
+          min="1"
+          [tabindex]="surgeryType === 'daysurgery' ? '-1' : ''"
+          [ngClass]='surgeryType =="daysurgery"?"disabled":""'
+          (input)="calculateTotal()"
+          (change)="calculateTotal()"
+        />
+      </div>
+      <div class="table-main-blk">
+        <p class="table-title">Maximum amount allowed for surgical procedure</p>
+        <p class="tip">Capped at {{capLimit}}</p>
+        <div class="table-wrapper" id="tableContent">
+          <div
+            class="table-container"
+            *ngFor="let total of totalContent; let j = index;"
+          >
+            <div class="table-header-wrap">
+              <div class="table-header-cell-blk" (click)="deselectAll(j)">
+                <span>#NA</span>
+              </div>
+              <div class="table-header-cell-blk">
+                <span>A</span>
+              </div>
+              <div class="table-header-cell-blk">
+                <span>B</span>
+              </div>
+              <div class="table-header-cell-blk">
+                <span>C</span>
+              </div>
+            </div>
+            <div
+              class="table-content-wrap"
+              *ngFor="let data of total.content; let i = index;"
+            >
+              <div class="table-content-cell-blk">
+                <span>{{i+1}}</span>
+              </div>
+              <div
+                class="table-content-cell-blk"
+                (click)="addBlueBackground(i, 'a',j)"
+                [ngClass]="{'blueBackground': data.aShowBlue === true}"
+              >
+                <span>{{data.a}}</span>
+              </div>
+              <div
+                class="table-content-cell-blk"
+                (click)="addBlueBackground(i, 'b',j)"
+                [ngClass]="{'blueBackground': data.bShowBlue === true}"
+              >
+                <span>{{data.b}}</span>
+              </div>
+              <div
+                class="table-content-cell-blk"
+                (click)="addBlueBackground(i, 'c',j)"
+                [ngClass]="{'blueBackground': data.cShowBlue === true}"
+              >
+                <span>{{data.c}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <label class="input-blk-label">Medisave Withdrawal Limit </label>
+        <input class="input-blk disabled" [(ngModel)]="finalLimit" disabled />
+      </div>
+    </div>
+  </div>
+</ion-content>

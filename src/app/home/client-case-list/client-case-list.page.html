@@ -1,0 +1,116 @@
+<ion-content (click)="closeAll()">
+    <div class="case-list-wrapper">
+        <div class="container-large">
+            <div class="row">
+                <div class="col-7">
+                    <h1 class="clientdetail-title">
+                        {{clientDetails.name}}
+                        <!-- <span class="pendingDiv">
+              <ion-icon class="more" name="ios-more" *ngIf="clientDetails.currentStatus == 'pending'">
+              </ion-icon>
+              <ion-icon class="checkmark" name="checkmark-circle" *ngIf="clientStatus == 'Verified'">
+              </ion-icon>
+              <ion-icon class="rejected-icon" name="close-circle" *ngIf="clientStatus == 'Rejected'">
+              </ion-icon>
+            </span> -->
+                    </h1>
+                </div>
+                <div class="col-5 right-text"
+                    *ngIf="(loggedInUser && (loggedInUser.type == 'agent' || loggedInUser.type == 'Claims Manager' || loggedInUser.type == 'Finance Manager')) && allowToCreateCase">
+                    <div class="add-button">
+                        <p (click)="goToLetterOfEngagement()">New Case</p>
+                        <!-- <p (click)="createNewCase()">
+              New Case
+            </p> -->
+                        <!-- <p (click)="dataService.routeChange('/client-case-add/'+ clientId+'/-1')">
+              New Case
+            </p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <p class="sort-list" (click)="sortAdmissionDateAsc()" *ngIf="sortFlag==='asc'">
+                    <ion-icon class="arrow" name="arrow-up"> </ion-icon> Sort by Admission Date
+                </p>
+                <p class="sort-list" (click)="sortAdmissionDateDesc()" *ngIf="sortFlag==='desc'">
+                    <ion-icon class="arrow" name="arrow-down"> </ion-icon>
+                    Sort by Admission Date
+                </p>
+                <p class="sort-list" (click)="sortByNameAsc()" *ngIf="sortNameFlag==='asc'">
+                    <ion-icon class="arrow" name="arrow-up"></ion-icon>
+                    Sort by Case Name
+                </p>
+                <p class="sort-list" (click)="sortByNameDesc()" *ngIf="sortNameFlag==='desc'">
+                    <ion-icon class="arrow" name="arrow-down"> </ion-icon>
+                    Sort by Case Name
+                </p>
+            </div>
+            <div class="case-details-container">
+                <div *ngIf="isCaseAvailable">
+                    <div *ngFor="let case of caseList;let i=index">
+                        <div class="case-details" (click)="openCaseDetails(case)">
+                            <div class="case-details-main-container">
+                                <div class="case-no">
+                                    <p class="case-name" *ngIf="case.name.length !==0">
+                                        {{case.name}}
+                                    </p>
+                                    <p class="case-name" *ngIf="case.name.length ===0">-</p>
+                                </div>
+                                <div class="case-type">
+                                    <p *ngIf="case.admissionDate">
+                                        Admission Date : {{case.admissionDate}}
+                                    </p>
+                                    <p *ngIf="!case.admissionDate">Admission Date : -</p>
+                                </div>
+                                <div class="case-type">
+                                    <p *ngIf="case.diagnosis">Diagnosis : {{case.diagnosis}}</p>
+                                    <p *ngIf="!case.diagnosis">Diagnosis : -</p>
+                                </div>
+                                <div class="status"
+                                    [ngClass]="{'red': case.currentStatus === 'Drop off before consultation' || case.currentStatus === 'Drop off after consultation'}">
+                                    <p>Status: <span>{{case.currentStatus}}</span></p>
+                                    <ion-icon name="information-circle-outline" (click)="showReason($event,i)"
+                                        *ngIf="(case.currentStatus === 'Drop off before consultation' || case.currentStatus === 'Drop off after consultation') && (case.dropOffReason && case.dropOffReason !== '')"
+                                        class="info-icon"></ion-icon>
+                                    <p *ngIf="case.showReason" class="drop-off-reason">{{case.dropOffReason}}</p>
+                                </div>
+                                <div class="case-img">
+                                    <img src="./assets/images/folder-svgrepocase-com.svg" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actionDiv"
+                            *ngIf="(loggedInUser && (loggedInUser.type == 'agent' || loggedInUser.type == 'Claims Manager' || loggedInUser.type == 'Finance Manager'|| loggedInUser.type == 'Management')) && (case.currentStatus === 'Pending' || case.currentStatus === 'Pending Submission') ">
+                            <ion-icon class="action" *ngIf="caseCount === 1"
+                                (click)="deleteCaseAndCommonEhealth(case,i)" name="close-circle"></ion-icon>
+                            <ion-icon class="action" *ngIf="caseCount > 1" (click)="deleteCase(case,i)"
+                                name="close-circle"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="case-details" *ngIf='!isCaseAvailable'>
+          <div class="case-details-main-container">
+            <div class="case-no">
+              <p class="case-name">-</p>
+            </div>
+            <div class="case-type">
+              <p>Admission Date : -</p>
+            </div>
+            <div class="case-type">
+              <p>Diagnosis : -</p>
+            </div>
+          </div>
+          <div class="details-text">
+            <div class="status">
+              <div>Status: <span>-</span></div>
+            </div>
+          </div>
+
+          <div class="case-img">
+            <img src="./assets/images/folder-svgrepocase-com.svg" />
+          </div>
+        </div> -->
+            </div>
+        </div>
+    </div>
+</ion-content>

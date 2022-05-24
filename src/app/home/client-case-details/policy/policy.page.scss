@@ -1,0 +1,176 @@
+ion-content {
+    height: 100% !important;
+}
+.policy-wrapper {
+    width: 70.24%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    padding: 3rem 0;
+}
+.edit-wrap {
+    display: inline-block;
+    width: 100%;
+    text-align: right;
+    margin-bottom: 2rem;
+    padding: 0 2.6rem;
+}
+.add-edit-btn {
+    display: inline-block;
+    color: #fbfbfb;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    width: 14.8rem;
+    color: #007aff;
+    text-align: center;
+    padding: 0.8rem 0;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+.all-policy-wrap,
+.add-btn-wrap {
+    display: inline-block;
+    width: 100%;
+}
+.all-policy-wrap {
+    margin-bottom: 3rem;
+}
+.all-policy-wrap:last-child {
+    margin-bottom: 0;
+}
+.add-btn-wrap {
+    // margin-top: 3rem;
+    text-align: left;
+}
+.add-btn-wrap > .add-edit-btn {
+    width: 13.8rem;
+}
+.policy-title {
+    display: inline-block;
+    width: 100%;
+    font-family: "sf-pro-bold";
+    letter-spacing: -0.38px;
+    text-align: left;
+}
+.policy-info-wrap {
+    display: inline-block;
+    width: 100%;
+    border: 1px solid #d4d4d4;
+    background: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 1.7rem 2rem 2rem;
+    margin-top: 1.2rem;
+}
+.info-row {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+.checkbox-wrap {
+    display: inline-block;
+    margin-right: 2rem;
+}
+.radio-btn {
+    display: inline-block;
+    vertical-align: middle;
+}
+.radio-btn > input {
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    vertical-align: middle;
+    pointer-events: none;
+    cursor: pointer;
+}
+.checkbox-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1rem;
+    width: 8rem;
+    cursor: pointer;
+    background: unset !important;
+}
+.info-title {
+    display: inline-block;
+    width: 33.33%;
+    vertical-align: middle;
+}
+.info-input {
+    display: inline-block;
+    position: relative;
+    width: 66.66%;
+    vertical-align: middle;
+}
+.info-input > input,
+.policy-name-selection,
+.selected-label {
+    display: inline-block;
+    width: 100%;
+    background-color: #e5e5e5;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    outline: none;
+    pointer-events: none;
+}
+.edit-input {
+    pointer-events: unset !important;
+    background-color: #FBFBFB;
+}
+.info-input > input,
+.selected-label {
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+}
+.save-btn-wrap {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 4rem;
+}
+button.save-btn {
+    display: inline-block;
+    width: 62.5%;
+    background: #eeeef0;
+    border-radius: 1.8rem;
+    color: #007aff;
+    font-size: 1.5rem;
+    line-height: 2.1rem;
+    padding: 0.8rem 0;
+}
+.radio-btn > label {
+    pointer-events: none;
+}
+@media (max-width:834px) {
+    .policy-wrapper {
+        width: 85.24%;
+    }
+}
+@media screen and (min-width: 1024px) and (max-width:1440px) {
+    .policy-wrapper {
+        width: 75.24%;
+    }
+}
+@media screen and (min-width: 1025px) and (max-width:1440px) {
+    .dropdown-list {
+        top: 50px;
+    }
+}
+
+@media (min-width:1280px) and (max-height: 950px) {
+    .policy-wrapper {
+        max-width: 60%;
+    }
+    .dropdown-list {
+        top: 32px;
+    }
+}
+
+@media (min-width:1441px) {
+    .policy-wrapper {
+        max-width: 65%;
+    }
+    .dropdown-list {
+        top: 32px;
+    }
+}

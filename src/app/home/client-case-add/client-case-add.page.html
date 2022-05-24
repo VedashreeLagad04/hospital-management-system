@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="case-add-container">
+    <div class="case-info-wrapper">
+      <!-- ? case type -->
+      <div class="case-info-block">
+        <div class="case-input-label">
+          <p>Case Type</p>
+        </div>
+        <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info'}">
+          <div class="case-info-input" (click)="openCaseTypeDropdown()">
+            <div class="dropdown-label">
+              <p class="dropdown-title">{{case.type}}</p>
+            </div>
+            <div class="dropdown-arrow-wrapper">
+              <span class="dropdown-arrow"></span>
+            </div>
+          </div>
+          <ul class="case-type-dropdown" *ngIf="showCaseTypeDropdown">
+            <li *ngFor="let type of caseTypes" (click)="selectCaseType(type)">{{type}}</li>
+          </ul>
+        </div>
+      </div>
+      <!-- ? case name -->
+      <div class="case-info-block">
+        <div class="case-input-label">
+          <p>Case Name</p>
+        </div>
+        <div class="case-input-box" [ngClass]="{'disable': pageMode === 'case-info'}">
+          <input type="text" class="case-info-input" [(ngModel)]="case.name">
+        </div>
+      </div>
+      <!-- ? case description -->
+      <div class="case-info-block">
+        <div class="case-input-label">
+          <p>Case Description</p>
+        </div>
+        <div class="case-input-box case-description-area" [ngClass]="{'disable': pageMode === 'case-info'}">
+          <textarea class="case-info-input" name="" id="" cols="30" rows="4" placeholder="Enter Description"
+            [(ngModel)]="case.description"></textarea>
+        </div>
+      </div>
+      <div class="case-approval-wrapper">
+        <!-- <div class="registration-check1 row" *ngIf="pageMode === 'add-case'">
+          <label> <input type="checkbox" class="reg-checkbox1" [(ngModel)]="checkbox1"
+              [ngModelOptions]="{standalone: true}" required>
+            I have agreed to Premium Care Privacy Policy</label>
+        </div> -->
+        <div class="save-btn-wrapper" (click)="openConsent()" *ngIf="pageMode === 'add-case'">
+          <button class="save-btn">Create Case</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

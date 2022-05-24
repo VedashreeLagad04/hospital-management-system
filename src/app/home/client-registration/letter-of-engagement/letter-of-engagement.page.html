@@ -1,0 +1,299 @@
+<ion-content>
+  <div class="engagement-wrapper">
+    <div class="engagement-container">
+      <div class="engagement-content-out" id='eventScroll' (scroll)='checkScroll($event)'>
+        <div id="loe-pdf-wrap">
+          <div class="engagement-date">
+            <p> Date: {{today}}</p>
+          </div>
+          <div class="engagement-title avoid">
+            <p> LETTER OF ENGAGEMENT FOR MEDICAL ADMINISTRATIVE SERVICES</p>
+          </div>
+          <div class="engagement-content">
+            <ol class='content-list'>
+              <li>
+                <div class='personal-details'>
+                  I <div class='patient-name-new'>
+                    <span class='patient'> {{clientDetails.name}}</span>
+                  </div>
+                  <div class='patient-name-new'>
+                    <span *ngIf="clientDetails.nationality !== 'foreigner'"> (NRIC NO.
+                      <span class='patient'> {{clientDetails.nric}} </span> ), of
+                    </span>
+                    <span *ngIf="clientDetails.nationality === 'foreigner'"> (Foreign Id.
+                      <span class='patient'> {{clientDetails.foreignId}} </span> ), of
+                    </span>
+                  </div>
+                  <div class='patient-name-new'>
+                    <span class='patient'> {{clientDetails.address}}</span>
+                  </div>
+                  <div class='patient-data'>
+                    hereby engage Premium
+                    Care SG
+                    Pte Ltd (“PCARE”) as my medical
+                    administrative servicer to provide an individual healthcare needs assessment, including but not
+                    limited
+                    to
+                    assisting me to ascertain the adequacy of my current medical and/or healthcare insurance coverage,
+                    as
+                    well
+                    as to
+                    facilitate any medical/health-check consultation and/or treatment (collectively, the “Services”).
+                    For
+                    the
+                    avoidance of doubt, the Services shall also include assisting me to procure adequate medical and/or
+                    healthcare
+                    insurance coverage where required, and to submit and process any insurance claims I may have arising
+                    from
+                    or
+                    connected with any medical/health-check consultation and/or treatment I may have, including but not
+                    limited
+                    to
+                    hospital admissions.
+                  </div>
+                </div>
+              </li>
+              <li> I hereby authorise PCARE to access, collect, use, disclose, process or
+                otherwise handle all my personal data for the following “Purposes”:
+                <ol class='sub-list'>
+                  <li class="avoid">To assist me to audit and determine
+                    the
+                    scope and extent of my current medical and healthcare insurance coverage by working with such
+                    licensed
+                    financial
+                    advisers as it is required to do so;
+                  </li>
+                  <li class="avoid"> To identify my healthcare and medical needs;
+                  </li>
+                  <li class="avoid">To assist me to
+                    procure the advice and expertise of licensed financial advisers to restructure my existing insurance
+                    coverage
+                    and/or propose further or other cost-effective insurance coverage as may be necessary;
+                  </li>
+                  <li class="avoid"> To manage and
+                    process
+                    all healthcare or medical and healthcare insurance applications and/or claims on my behalf;
+                  </li>
+                  <li class="avoid"> To identify and secure consultations with relevant medical specialists or
+                    consultants and allied
+                    healthcare professionals;
+                  </li>
+                  <li class="avoid"> To co-ordinate any specialty care arrangements, including travel, transport and
+                    lodging
+                    requirements
+                    as
+                    may
+                    be
+                    required to facilitate the procurement of medical/health-check consultation and/or treatment;
+                  </li>
+                  <li class="avoid"> To
+                    facilitate
+                    the provision of medical care and treatment from relevant medical specialists or consultants and
+                    allied
+                    healthcare professionals; and
+                  </li>
+                  <li class="avoid"> Any other purpose as may be reasonably required for the provision of the
+                    Services.</li>
+                  ​
+                </ol>
+              </li>
+              <li class="avoid"> I hereby authorise and consent to the disclosure and/or sharing of my personal data to
+                all such
+                relevant persons, including but not limited to PCARE’s healthcare Administrative managers, specialist
+                clinics,
+                hospitals, allied healthcare professionals, financial advisers and my employer for the abovementioned
+                Purposes
+                only. </li>
+              <li class="avoid"> I hereby declare that any personal data I may provide to PCARE is complete, accurate
+                and up to date
+                at
+                all times, and I shall promptly notify PCARE of any changes or updates, if any, to such personal data.
+              </li>
+              <li class="avoid"> For
+                the avoidance of doubt, “personal data” shall have the same meaning as ascribed and defined in the
+                Protection
+                of
+                Personal Data Act 2012 (No. 26 of 2012) (“PDPA”). I hereby acknowledge that my consent is granted to
+                PCARE
+                to
+                use my personal data for the provision of the Services, and/or for the Purposes, pursuant to the PDPA.
+              </li>
+              <li class="avoid"> I
+                further acknowledge and confirm that to facilitate the provision of the Services, and for the Purposes,
+                PCARE
+                may work with such licensed financial advisors as it shall deem fit and proper on my behalf or with me
+                in
+                order
+                to assist me to determine the adequacy of my current medical and healthcare insurance coverage, and/or
+                to
+                restructure the same if need be. Towards that end, I acknowledge that PCARE shall not at any time be
+                acting
+                as
+                a
+                financial adviser to me, nor shall PCARE be providing me with any financial advisory services as
+                prescribed
+                under the Financial Advisers Act (Cap. 110) in so doing.
+                <div class="engagement-title avoid">
+                  <p class='list-title'> Exclusion of Liability</p>
+                </div>
+              </li>
+              <li class="avoid"> Notwithstanding anything
+                herein contained, PCARE, its officers, employees or agents shall not be liable or be in any way
+                responsible
+                in
+                respect of any loss, damage or injury to any person or property howsoever caused or any special or
+                consequential
+                loss whatsoever arising from or in connection with this Letter of Engagement.
+                <div class="engagement-title avoid">
+                  <p class='list-title'>Indemnity</p>
+                </div>
+              </li>
+              <li class="avoid"> I hereby agree to
+                indemnify and keep indemnified PCARE and its representatives in full from all claims, demands, writs,
+                summons,
+                actions, suits, proceedings, judgments, decrees, orders as well as any losses, damages, costs and
+                expenses
+                of
+                any nature whatsoever arising from or in connection with this Letter of Engagement.
+              </li>
+              <li class="avoid"> In respect of any
+                expenses incurred by PCARE on my behalf pursuant to the provision of the Services for the Purposes, I
+                hereby
+                undertake to reimburse PCARE in full for the same upon demand (whether in writing or otherwise) and/or
+                from
+                such
+                insurance proceeds as I may receive arising from the insurance claims submitted on my behalf by PCARE
+                pursuant
+                to this Letter of Engagement.
+                <div class="engagement-title avoid">
+                  <p class='list-title'> Annual Membership Fee</p>
+                </div>
+              </li>
+              <li class="avoid"> In consideration for the provision of the Services,
+                I
+                hereby agree to pay to PCARE, if applicable, an Annual Membership Fee as may be prescribed by PCARE,
+                subject
+                to
+                the standard terms and conditions for such membership as may be stipulated by PCARE.
+                <div class="engagement-title avoid">
+                  <p class='list-title'> Termination</p>
+                </div>
+              </li>
+              <li class="avoid"> This
+                Letter
+                of Engagement may be terminated by either party upon providing seven (7) days’ prior written notice of
+                such
+                termination to the other party.</li>
+              <li class="avoid"> Notwithstanding Clause 11 above, I undertake that I shall not terminate
+                this
+                Letter of Engagement until after PCARE has processed, submitted and received full settlement of all
+                insurance
+                claims PCARE might have made on my behalf pursuant to the provision of the Services to me. I shall only
+                discharge PCARE and terminate this Letter of Engagement when there are no outstanding insurance claims
+                which
+                have been made by PCARE on my behalf pursuant to the provision of the Services to me.
+              </li>
+              <div class="engagement-title avoid">
+                <p class='list-title'> Miscellaneous</p>
+              </div>
+              <li class="avoid"> No
+                person who is not a party to this Letter of Engagement shall have any right under the Contracts (Rights
+                of
+                Third
+                Parties) Act (Cap. 53B) to enforce any of the terms of this Letter of Engagement.
+              </li>
+              <li class="avoid"> This Letter of
+                Engagement
+                shall be governed by and construed in accordance with the laws of Singapore, and both parties hereto
+                submit
+                to
+                the jurisdiction of the Courts of Singapore.</li>
+            </ol>
+          </div>
+          <div class="signature-wrap">
+            <div class="signature-box" (click)="takeConsent()">
+              <div class="signature-label-box">
+                <div class="signature-label">
+                  <p *ngIf="clientDetails && clientDetails.guardian === false">
+                    Client's Signature</p>
+                  <p *ngIf="clientDetails && clientDetails.guardian === true">
+                    Parent/Guardian Signature</p>
+                </div>
+              </div>
+              <div class="signature-img-wrap">
+                <div class="signature-img" *ngIf="loeSignature && loeSignature.signature != ''">
+                  <img [src]="loeSignature.signature" alt="signature"
+                    *ngIf="loeSignature.signature != '' && loeSignature.signature != null">
+                </div>
+                <div class="empty-signature-preview"
+                  *ngIf="!loeSignature || !loeSignature.signature || loeSignature.signature == ''">
+                </div>
+                <div class="cross-button">
+                  <button class="cross"></button>
+                  <div class="line">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="signature-info-wrap" *ngIf="loeSignature && loeSignature.signature != ''">
+              <div class="pre-info-block">
+                <div class="pre-input-label">
+                  <p *ngIf="clientDetails.guardian === false">Client Name</p>
+                  <p *ngIf="clientDetails.guardian === true">Parent/Guardian Name</p>
+                </div>
+                <div class="colon">
+                  <p>:</p>
+                </div>
+                <div class="pre-input-label1 capitalize-text">
+                  {{loeSignature.name }}
+                </div>
+              </div>
+              <div class="pre-info-block" *ngIf="clientDetails.guardian === true">
+                <div class="pre-input-label">
+                  <p>Relationship</p>
+                </div>
+                <div class="colon">
+                  <p>:</p>
+                </div>
+                <div class="pre-input-label1">
+                  {{loeSignature.relation }}
+                </div>
+              </div>
+              <div class="pre-info-block">
+                <div class="pre-input-label">
+                  <p>Date</p>
+                </div>
+                <div class="colon">
+                  <p>:</p>
+                </div>
+                <div class="pre-input-label1">
+                  {{loeSignature.date }}
+                </div>
+              </div>
+              <div class="pre-info-block">
+                <div class="pre-input-label">
+                  <p>Time</p>
+                </div>
+                <div class="colon">
+                  <p>:</p>
+                </div>
+                <div class="pre-input-label1">
+                  {{loeSignature.time }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="registration-container">
+      <div class="registration-check1 row">
+        <label> <input type="checkbox" class="reg-checkbox1" [(ngModel)]="privacyPolicy" required
+            [disabled]='!focusInFlag'>
+          <span>I have read and agree to Premium Care SG Pte. Ltd. Letter of Engagement</span></label>
+      </div>
+      <button id="next1" class="button reg-button" type="button" *ngIf="!editPage && !editMode && !isNextBtnClicked"
+        (click)="checkClientTypeAndThenAgreeToPolicy(privacyPolicy)">Next</button>
+    </div>
+  </div>
+</ion-content>

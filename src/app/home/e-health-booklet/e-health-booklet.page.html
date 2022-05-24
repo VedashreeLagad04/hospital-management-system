@@ -1,0 +1,232 @@
+<ion-content>
+    <div class="e-health-wrapper">
+        <div class="e-health-container" *ngIf="ehealth && ehealth.checkboxValue">
+            <div class="breadcrumbs-wrapper">
+                <app-breadcrumbs [clientDetails]="clientDetails" [caseDetails]="case"></app-breadcrumbs>
+            </div>
+            <div class="e-health-data">
+                <div class="e-health-menu">
+                    <div class="menu-list" *ngIf='!medicalTab'>
+                        <p class="heading"><b>Pre Case Submission</b></p>
+                        <div class="page" (click)='changeRoute("profile","profile",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.profileTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'profile'}">
+                                Profile
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("case","case",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.caseTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'case'}">
+                                Case
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("active-policies","policies",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.activePoliciesTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'policies'}">
+                                Active Policies
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("insurance-docs","insurance-docs",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.insuranceDocsTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'insurance-docs'}">
+                                Insurance Docs
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-history","medical-history",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.preExtgConditionTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'medical-history'}">
+                                Medical History
+                            </p>
+                        </div>
+                        <div class="page"
+                            (click)='changeRoute("medical-condition/gastroenterology","gastroenterology",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.medicalConditionTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'medical'}">
+                                Medical Condition
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("pre-admission-checklist","preadmission",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.preAdmChecklistTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'preadmission'}">
+                                Pre-adm. Checklist
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("preview","preview",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.previewTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'preview'}">
+                                Preview
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("case-submission","submission",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.caseSubmissionTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'submission'}">
+                                Case Submission
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("status-resubmission","statusResubmission",false)'>
+                            <!-- *ngIf="loggedInUser && loggedInUser.type && (loggedInUser.type !== 'Management')"> -->
+                            <!-- <div class="page" (click)='changeRoute("status-resubmission","statusResubmission",false)'
+                            *ngIf="case.currentStatus !== 'Approved'"> -->
+                            <p class='menu-item1' [ngClass]="{'activeMenu': activeTab === 'statusResubmission'}">
+                                Status & Resubmission
+                            </p>
+                        </div>
+                    </div>
+                    <div class="menu-list"
+                        *ngIf="!medicalTab && (loggedInUser && loggedInUser.type && (loggedInUser.type === 'admin') || (loggedInUser.type == 'Claims Manager') || (loggedInUser.type == 'Management'))">
+                        <p class="heading"><b>Case Aproval</b></p>
+                        <div class="page">
+                            <!-- <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"> -->
+                            <p class='menu-item1' (click)='changeRoute("approval-preview","approval-preview",false)'
+                                [ngClass]="{'activeMenu': activeTab === 'approval-preview'}">
+                                Approval Preview
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("case-approval","approval",false)'>
+                            <!-- <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"> -->
+                            <p class='menu-item1' [ngClass]="{'activeMenu': activeTab === 'approval'}">
+                                Case Approval
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="menu-list" *ngIf='!medicalTab'>
+                        <p class="heading"><b>Post Case Submission</b></p>
+                        <div class="page" (click)='changeRoute("letter-of-consent","letter-of-consent",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.letterOfConsentTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'letter-of-consent'}">
+                                Letter of Consent
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("travel-declaration","travel",false)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.travelDeclarationTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'travel'}">
+                                Travel Declaration
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("consultation-memo","consultationMemo",false)'>
+                            <p class='menu-item1' [ngClass]="{'activeMenu': activeTab === 'consultationMemo'}">
+                                Consultation Memo
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("export-info","export-info",false)'>
+                            <p class='menu-item1' [ngClass]="{'activeMenu': activeTab === 'export-info'}">
+                                Export Information
+                            </p>
+                        </div>
+                    </div>
+                    <div class="menu-list" *ngIf='medicalTab'>
+                        <p class='menu-item' (click)='changeRoute("active-policies","policies",false)'
+                            [ngClass]="{'activeMenu': activeTab === 'policies'}" style="margin: 0;">
+                            <ion-icon name="chevron-back"></ion-icon>
+                            Menu
+                        </p>
+                        <p style="font-size: 1.6rem; margin-bottom: 0.4rem;"
+                            [ngClass]="{'activeMenu': medicalTab == true}">Medication Condition</p>
+                        <div class="page"
+                            (click)='changeRoute("medical-condition/gastroenterology","gastroenterology",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.gastroTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'gastroenterology'}">
+                                Gastroenterology
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/orthopaedic","orthopaedic",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.orthoTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'orthopaedic'}">
+                                Orthopaedic
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/cardiology","cardiology",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.cardioTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'cardiology'}">
+                                Cardiology
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/gynaecology","gynaecology",true)'
+                            *ngIf="ehealth && ehealth.profile && (ehealth.profile.gender === 'female' || ehealth.profile.gender === 'Female')">
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.gynoTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'gynaecology'}">
+                                Gynaecology
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/urology","urology",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.uroTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'urology'}">
+                                Urology
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/ent","ent",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.entTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'ent'}">
+                                Ear, Nose, Throat
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/respiratory","respiratory",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.respiratoryTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'respiratory'}">
+                                Respiratory
+                            </p>
+                        </div>
+                        <div class="page" (click)='changeRoute("medical-condition/general","general",true)'>
+                            <input type="checkbox" class="profile" [ngClass]="{'disabled': mode === 'disabled'}"
+                                [checked]="ehealth.checkboxValue.generalTab == true">
+                            <p class='menu-item' [ngClass]="{'activeMenu': activeTab === 'general'}">
+                                General
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="e-health-content">
+                    <ion-router-outlet></ion-router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ! side-menu for case timeline -->
+    <ion-menu side="end" type="overlay" content-id="case-status-timeline" menuId="case-status-timeline"
+        class="timeline-menu"
+        *ngIf="loggedInUser && (loggedInUser.type === 'admin' || loggedInUser.type === 'Management')">
+        <ion-content id="case-status-timeline">
+            <div class="timeline-wrapper">
+                <div class="timeline">
+                    <div class="card">
+                        <div class="timeline-date-wrap">
+                            <span class="date-from">
+                                08 May 2020
+                            </span>
+                            <span> - </span>
+                            <span class="date-from">
+                                Today
+                            </span>
+                        </div>
+                        <div class="timeline-consultant-wrap">
+                            <span>Consultant: </span>
+                            <span>Tony Tan</span>
+                        </div>
+                    </div>
+                    <div class="border-div">
+                        <div class="border-right"></div>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+    </ion-menu>
+</ion-content>

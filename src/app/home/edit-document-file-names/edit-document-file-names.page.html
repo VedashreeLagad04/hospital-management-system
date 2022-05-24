@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="progress-bar-container" *ngIf="showProgressBar">
+    <div class="progress-bar">
+      <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+      <span class="upload-percent">Uploading...{{uploadPercent}} %</span>
+    </div>
+  </div>
+
+  <!-- <div class="file-container">
+    <div class="title-row">
+      <div class="title">
+        <h4>Upload Document</h4>
+      </div>
+      <div class="close-modal-wrap">
+        <ion-icon class="close-modal" (click)="dismiss()" name="close"></ion-icon>
+      </div>
+    </div>
+    <div class="input-container">
+      <div class="input-sub-container" *ngFor="let doc of file; index as i;">
+        <img class="file-icon" src="../../../assets/images/document.png" alt="">
+        <input class="file-name" id="{{doc.name}}" type="text" [(ngModel)]="doc.name" spellcheck="false"
+          (keyup)="this.docNameUpdate.next($event)" />
+      </div>
+    </div>
+
+    <div class="submit-btn-container">
+      <button class="upload-btn" (click)="uploadFiles()">Save & upload</button>
+    </div>
+  </div> -->
+  <div class="caseResubmission-wrapper" *ngIf="!showProgressBar">
+    <div class="row">
+      <div class="col-2 close-modal-wrap">
+        <ion-icon class="close-modal" (click)="dismiss()" name="close"></ion-icon>
+      </div>
+      <div class="modal-title col-10">
+        <i>
+          <h4>Upload Document</h4>
+        </i>
+      </div>
+    </div>
+    <div class="caseResubmission-main-blk">
+      <div class="input-sub-container" *ngFor="let doc of file; index as i;">
+        <img class="file-icon" src="../../../assets/images/document.png" alt="">
+        <input class="file-name" id="{{doc.name}}" type="text" [(ngModel)]="doc.name" spellcheck="false"
+          (keyup)="this.docNameUpdate.next($event)" />
+        <!-- <span id="file{{i}}" class="error" *ngIf = "validate[i]">file name already exists</span>
+			<span id="file{{i}}" class="error" *ngIf = "doc.name == ''">file name cannot be blank</span> -->
+      </div>
+      <div class="save-btn-wrap">
+        <button class="upload-btn" (click)="uploadFiles()">Save & upload</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

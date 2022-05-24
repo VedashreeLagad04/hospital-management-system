@@ -1,0 +1,125 @@
+<ion-content>
+  <div class="case-home-wrapper">
+    <div class="container-large">
+      <div class="case-content-header">
+        <app-breadcrumbs [clientDetails]="clientDetails"></app-breadcrumbs>
+        <!-- <div class="breadcrumb-wrap">
+          <h1 class="clientdetail-title" (click)="goToAllCases()">
+            Patient <ion-icon name="chevron-forward-outline" id="right-arrow"></ion-icon> {{clientDetails.name}}
+          </h1>
+        </div> -->
+        <div class="row">
+          <h1 class="clientdetail-title">{{caseData.name}}
+            <!-- <span class="pendingDiv">
+              <ion-icon class="more" name="ios-more" *ngIf="caseData.currentStatus == 'Pending Approval'">
+              </ion-icon>
+              <ion-icon class="checkmark" name="checkmark-circle" *ngIf="caseData.currentStatus == 'Verified'">
+              </ion-icon>
+              <ion-icon class="rejected-icon" name="close-circle" *ngIf="caseData.currentStatus == 'Rejected'">
+              </ion-icon>
+            </span> -->
+          </h1>
+        </div>
+        <div class="row case-status">
+          <div class="col-7">
+            <p>Case Status:
+              <span class="client-current-status"
+                *ngIf='caseData.currentStatus !=="Pending"'>{{caseData.currentStatus}}</span>
+              <!-- <span class="client-current-status" *ngIf='caseData.currentStatus ==="Pending"'>Not Submitted</span> -->
+              <span class="client-current-status" *ngIf='caseData.currentStatus ==="Pending"'>Pending Submission</span>
+            </p>
+          </div>
+          <div class="col-5 right-text"
+            *ngIf="loggedInUser && (loggedInUser.type == 'agent' || loggedInUser.type == 'Claims Manager' || loggedInUser.type == 'Finance Manager'|| loggedInUser.type == 'Management')">
+            <div *ngIf='caseData.currentStatus !=="Pending"'>
+              <div class="update-status-button" (click)='openUpadteStatusModal(caseData.currentStatus)'
+                [ngClass]="{'disabled' : (loggedInUser.type =='admin' || caseData.currentStatus =='Pending Approval')}">
+                <p class='update-button'>
+                  Update Status
+                </p>
+              </div>
+            </div>
+            <div *ngIf='caseData.currentStatus ==="Pending"'>
+              <div class="update-status-button" (click)='submitByAgent()'>
+                <p class='update-button'>
+                  Submit for Approval
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="clientdetail-row case-title-wrapper" *ngIf="caseData.caseDetails">
+          <div class="case-title">
+            <span>Case : </span>
+            <p class="case-name">{{caseData.caseDetails.name}}</p>
+          </div>
+        </div> <i class="fas fa-pen"></i>
+        <div class="clientdetail-row" *ngIf="caseData.currentStatus">
+          <div class="clientdetail-statusbar" [ngClass]="{'approved' : caseData.currentStatus == 'Approved'}"
+            (click)="updateCaseStatus()">
+            <span class="status-label">Status: </span>
+            <span class="client-current-status">{{caseData.currentStatus}}</span>
+            <!-- ? show pencil icon iff type is agent and account is approved -->
+        <!-- <span class="pencil-icon-wrapper" *ngIf="(loggedInUser.type === 'admin') || (loggedInUser.type === 'agent' &&
+               (caseData.currentStatus !== 'Rejected' && caseData.currentStatus !== 'Pending Approval'))">
+              <ion-icon name="create" class="pencil-icon"></ion-icon>
+            </span>
+          </div>
+        </div> -->
+      </div>
+      <div class="list-container">
+        <div class="details-div" (click)="changeRoute('details')">
+          <div class="details-text">
+            <p>Case Details</p>
+          </div>
+          <div class="details-img">
+            <img src="./assets/images/folder-svgrepocase-com.svg">
+          </div>
+        </div>
+        <div class="details-div" (click)="changeRoute('folders')">
+          <div class="details-text">
+            <p>Case Folders</p>
+          </div>
+          <div class="details-img">
+            <img src="./assets/images/folder-svgrepocase-com.svg">
+          </div>
+        </div>
+        <div class="details-div" (click)="changeRoute('appointment')">
+          <div class="details-text">
+            <p>Appointments</p>
+          </div>
+          <div class="details-img">
+            <img src="./assets/images/folder-svgrepocase-com.svg">
+          </div>
+        </div>
+        <div class="details-div" (click)="changeRoute('e-health-booklet')">
+          <div class="details-text">
+            <p>E-health Booklet</p>
+          </div>
+          <div class="details-img">
+            <img src="./assets/images/84da59fd47bafd08cc2423a3c36c2ae9.svg" />
+          </div>
+        </div>
+        <!-- <div class="row last-details-div">
+          <div class="details-div" (click)="changeRoute('information')"
+            [ngClass]='{"admin-details":loggedInUser.type=="admin"}'>
+            <div class="details-text">
+              <p>Case Information</p>
+            </div>
+            <div class="details-img">
+              <img src="./assets/images/folder-svgrepocase-com.svg">
+            </div>
+          </div>
+          <div class="details-div admin-details" (click)="changeRoute('administration')" *ngIf='loggedInUser.type=="admin"'>
+            <div class="details-text">
+              <p>Administration</p>
+            </div>
+            <div class="details-img">
+              <img src="./assets/images/folder-svgrepocase-com.svg">
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</ion-content>

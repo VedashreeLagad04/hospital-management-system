@@ -1,0 +1,183 @@
+<ion-content>
+  <!-- actual content -->
+  <div class="listing-wrapper">
+    <div class="listing-container">
+      <div class="row add-new">
+        <p class="add-heading col-7">Search client NRIC/FIN/Foreign ID</p>
+        <div class="nric-check">
+          <label>
+            <input type='checkbox' slot='start' [(ngModel)]="nricFlag" [checked]='nricFlag' (change)='nricChangeClick()'
+              [disabled]="hasSearchStarted">
+            NRIC/FIN </label>
+        </div>
+      </div>
+      <div class="row listing-searchbar">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <input type="search" class="searchInput" placeholder="Search" [(ngModel)]="nricToSearch"
+          (input)="disableNricCheckbox()" (keyup)="search(nricToSearch)" />
+        <ion-icon class="close-icon" (click)="clearSearchInput()" *ngIf="nricToSearch != '' && !hasSearchStarted"
+          name="close"></ion-icon>
+        <div class="search-btn-wrap" (click)="searchClient()" *ngIf="nricToSearch != '' && !hasSearchStarted">
+          <ion-icon name="search" class="search-btn"></ion-icon>
+        </div>
+      </div>
+      <div *ngIf="errorNricMsg" class="errmsg">
+        <span>{{errorNricMsg}}</span>
+      </div>
+      <div class="consultant-client-wrapper" [ngClass]="{'show': nricToSearch == ''}"
+        *ngIf="loggedInUser && loggedInUser.type === 'agent' && clientType !== 'offline'">
+        <div class="consultant-client-title-blk" (click)="openDropdown()">
+          <span class="consultant-client-title">Consultant's Client</span>
+          <div class="dropdown-block">
+            <div class="dropdown-arrow-wrapper" [ngClass]="{'extra-top' : isDropdownOpened}">
+              <span class="dropdown-arrow" [ngClass]="{'rotate': isDropdownOpened == true}"></span>
+            </div>
+          </div>
+        </div>
+        <div class="client-listing-blk" *ngIf="isDropdownOpened">
+          <div class="row client-listing-searchbar">
+            <ion-icon name="search" class="search-icon"></ion-icon>
+            <input type="text" class="searchInput" placeholder="Search" [(ngModel)]="nameToSearch"
+              (input)="searchFacility()" />
+          </div>
+          <div class="search-result">
+            <!-- <div class="search-client-list notFound">
+                <p>Client Not Found</p>
+              </div> -->
+            <ng-container *ngFor="let client of clientUsers;">
+              <!-- <div class="search-client-list row" *ngIf="client.show" (click)='redirect("/client-profile/"+client.id)'> -->
+              <div class="search-client-list row" *ngIf="client.show" (click)="setClientAndRoute(client)">
+                <div class="col-12">
+                  <h4 class='client-title'>{{client.name}}</h4>
+                </div>
+                <div class="col-12">
+                  <div class="col-6">
+                    <p>DOB : {{client.dateOfBirth}}</p>
+                  </div>
+                  <div class="col-6">
+                    <!-- <span class="list-search-status">
+                        {{client.currentStatus}}
+                      </span> -->
+                    <p>Gender : {{client.gender}}</p>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="search-result"
+        *ngIf="(loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager') || client) && (nricToSearch != '' && nricToSearch.length >=6)">
+        <div class="search-list notFound" *ngIf="notFound && (nricToSearch != '' && nricToSearch.length >=6)">
+          <p>Client Not Found</p>
+        </div>
+        <div class="search-list row" *ngIf="client && client.name" (click)='redirect("/client-profile/"+client.id)'>
+          <div class="col-12">
+            <h4 class='client-title'>{{client.name}}</h4>
+          </div>
+          <div class="col-12">
+            <div class="col-6">
+              <p>DOB : {{client.dateOfBirth}}</p>
+            </div>
+            <div class="col-6">
+              <!-- <span class="list-search-status">
+                {{client.currentStatus}}
+              </span> -->
+              <p>Gender : {{client.gender}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="listing-container"
+      *ngIf="(loggedInUser && (loggedInUser.type === 'agent' || loggedInUser.type === 'Claims Manager' || loggedInUser.type === 'Finance Manager') && notFound) && (nricToSearch != '' && nricToSearch.length >=6)">
+      <!-- <div class="or-section">
+          <p>or</p>
+        </div> -->
+      <div class="row listing-searchbar" *ngIf="clientType === 'new'">
+        <p class='add-button-title'>For new client, create client profile.</p>
+        <div class="add-buttons" (click)='createNewUser()'>
+          + Create New Client
+        </div>
+      </div>
+      <div class="row listing-searchbar" *ngIf="clientType === 'offline'">
+        <p class='add-button-title'>For new offline client, create client profile.</p>
+        <div class="add-buttons" (click)='createNewUser()'>
+          + Create New Offline Client
+        </div>
+      </div>
+    </div>
+    <div class="listing-container margin-top-40"
+      *ngIf="loggedInUser && loggedInUser.type === 'admin' || loggedInUser && loggedInUser.type === 'Management'">
+      <div class="or-section admin-or-section">
+        <p>Pending Approval</p>
+      </div>
+      <div class="search-result">
+        <div class="search-list row" *ngFor="let client of allPendingCases" (click)='setCaseAndRedirect(client)'>
+          <div class="col-12">
+            <h4>{{client.user.name}}</h4>
+          </div>
+          <div class="col-12">
+            <div class="col-6">
+              <!-- <p>NRIC : {{client.user.nric}}</p> -->
+              <p>DOB : {{client.user.dateOfBirth}}</p>
+            </div>
+            <div class="col-6">
+              <!-- <span class="list-search-status">
+                {{client.user.currentStatus}}
+              </span> -->
+              <!-- <p>Contact : {{client.user.contactNo}}</p> -->
+              <p>Gender : {{client.user.gender}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="content-header fixed-header">
+      <div class="search-row">
+        <div class="listing-searchbar">
+          <ion-icon name="search" class="search-icon"></ion-icon>
+          <input type="search " class="searchInput" placeholder="Search" />
+          <div class="search-settings" (click)='sortAlert()'>
+            <img src="./assets/images/2a1d2ccf56e7dae886db841e193e1443.svg"></div>
+        </div>
+        <div class="filter-list" *ngIf="filterList">
+          <ul>
+            <li><b>Sort By</b>
+              <ul class="filter-type">
+                <li>Id</li>
+                <li>Name</li>
+                <li>Status</li>
+              </ul>
+            </li>
+          </ul>
+  ​
+        </div>
+        <div class="listing-add right-text">
+          <div class="add-buttons" (click)='redirect("/client-registration")'>
+            + Add
+          </div>
+        </div>
+  ​
+      </div>
+    </div>
+    <div class="listing-wrapper">
+      <div class="listing-content">
+        <div class="list-row" *ngFor="let client of clientList; let i = index"
+          (click)="redirect('client-details/'+ client.id)">
+          <div class="col-3 list-Id" size="3"><span>{{client.accountId}}</span></div>
+          <div class="col-6 list-name" size="6">
+            <p>{{client.name}}</p>
+          </div>
+          <div class="col-3 list-status"
+            [ngClass]="{'verified' : client.currentStatus =='Verified' , 'pending' :client.currentStatus =='Pending', 'rejected' : client.currentStatus =='Rejected'}">
+            <span>{{client.currentStatus}}</span></div>
+        </div>
+      </div>
+    </div> -->
+  <!-- new design coding -->
+  <!-- <div>
+  ​
+    </div> -->
+</ion-content>

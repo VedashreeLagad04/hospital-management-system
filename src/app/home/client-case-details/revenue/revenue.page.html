@@ -1,0 +1,401 @@
+<ion-content (click)="closeAllDropdown(null)">
+    <div class="details-wrapper">
+        <div class="case-details-wrap">
+            <!-- left block -->
+            <div class="details-block">
+                <!-- Admission No. -->
+                <div class="details-row">
+                    <div class="details-title">
+                        Admission No.
+                    </div>
+                    <div class="details-value"
+                        *ngIf="admission && admission.case && admission.case.admissionNumber !== ''">
+                        {{admission.case.admissionNumber}}
+                    </div>
+                    <div class="details-value"
+                        *ngIf="admission && admission.case && admission.case.admissionNumber === ''">
+                        -
+                    </div>
+                </div>
+                <!-- Patient Name -->
+                <div class="details-row">
+                    <div class="details-title">
+                        Patient Name
+                    </div>
+                    <div class="details-value" *ngIf="patientData && patientData.name && patientData.name !== ''">
+                        {{patientData.name}}
+                    </div>
+                    <div class="details-value" *ngIf="patientData && patientData.name === ''">
+                        -
+                    </div>
+                </div>
+                <!-- Case Status -->
+                <div class="details-row">
+                    <div class="details-title">
+                        Case Status
+                    </div>
+                    <div class="details-value" *ngIf="caseData && caseData.currentStatus !== ''">
+                        {{caseData.currentStatus}}
+                    </div>
+                    <div class="details-value" *ngIf="caseData && caseData.currentStatus === ''">
+                        -
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-title">
+                        T1G Referrer
+                    </div>
+                    <div class="details-value" *ngIf="caseData && caseData.referrer !== ''">
+                        {{caseData.referrer}}
+                    </div>
+                    <div class="details-value" *ngIf="caseData && caseData.referrer === ''">
+                        -
+                    </div>
+                </div>
+            </div>
+            <!-- right block -->
+            <div class="details-block">
+                <!-- Admission Date -->
+                <div class="details-row">
+                    <div class="details-title">
+                        Admission Date
+                    </div>
+                    <div class="details-value" *ngIf="admission && admission.case">
+                        {{admission.case.admissionDate}}
+                    </div>
+                </div>
+                <!-- Discharge Date -->
+                <div class="details-row">
+                    <div class="details-title">
+                        Discharge Date
+                    </div>
+                    <div class="details-value"
+                        *ngIf="admission && admission.case && admission.case.dischargeDate && admission.case.dischargeDate !== ''">
+                        {{admission.case.dischargeDate}}
+                    </div>
+                    <div class="details-value"
+                        *ngIf="admission && admission.case && admission.case.dischargeDate && admission.case.dischargeDate === ''">
+                        -
+                    </div>
+                </div>
+                <!-- Case Status -->
+                <div class="details-row">
+                    <div class="details-title">
+                        In-House
+                    </div>
+                    <div class="details-value" *ngIf="assignedToAgentName !== ''">
+                        {{assignedToAgentName}}
+                    </div>
+                    <div class="details-value" *ngIf="assignedToAgentName === ''">
+                        -
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-title">
+                        Referrer Fee
+                    </div>
+                    <!-- <div class="details-value" *ngIf="assignedToAgentName"> -->
+                    <div class="details-value">
+                        <div class="bill-input-wrap"
+                            [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                            <input class="align" type="text"
+                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                                (focusout)="trim('referrer-fee')" [(ngModel)]="admission.revenue.referrerFee"
+                                [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                        </div>
+                    </div>
+                    <!-- <div class="details-value" *ngIf="assignedToAgentName === ''">
+                        -
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="total-hospital-bill-wrap">
+            <div class="bill-wrapper">
+                <div class="bill-title">
+                    Total Hospital Bill
+                    <span class="sub-head">(inclusive GST)</span>
+                </div>
+                <div class="bill-input-wrap"
+                    [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                    <span class="dollar">$</span>
+                    <input class="align" type="text" [(ngModel)]="admission.revenue.hospitalBill"
+                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                        (input)="calculateUnallocatedAmt()" (focusout)="trim('total-hospital-bill')"
+                        [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                </div>
+                <div class="error-msg-wrap" *ngIf="showErrorMsg">
+                    <p>Cannot be less than total of hospital bills</p>
+                </div>
+            </div>
+        </div>
+        <div class="all-bill-wrapper">
+            <div class="doctor-wise-bill-wrap">
+                <!-- headings -->
+                <div class="bill-headings-wrap">
+                    <div class="small-col">
+                        Type
+                    </div>
+                    <div class="name-col">
+                        Code
+                    </div>
+                    <div class="small-col">
+                        T Doctor
+                    </div>
+                    <div class="small-col">
+                        Bill Ref
+                    </div>
+                    <div class="small-col">
+                        Hospital Bill (GST)
+                    </div>
+                    <div class="small-col">
+                        GST
+                    </div>
+                    <div class="small-col">
+                        Billable Amount
+                        <!-- <span class="info-wrap" (click)="togglePopup()">
+            <ion-icon name="alert"></ion-icon>
+          </span>
+          <div class="popover-wrapper" *ngIf="showRevenueInfoPopup">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+              industry's standard dummy text ever since the 1500s..</p>
+          </div> -->
+                    </div>
+                    <div class="small-col">
+                        Non Billable Amt
+                    </div>
+                    <div class="small-col">
+                        Total Amount
+                    </div>
+                    <div class="small-col">
+                        TOL
+                    </div>
+                    <div class="small-col">
+                        PCARE
+                    </div>
+                    <div class="small-col">
+                        Remarks
+                    </div>
+                    <div class="more-icon-wrap">
+
+                    </div>
+                </div>
+                <!-- bill rows -->
+                <!-- doctros' rows -->
+                <!-- <div appDomChange (domChanged)="resetDropdown()" class="all-doctors-dom-change"> -->
+                <div class="bill-row" *ngFor="let doc of admission.revenue.individualBill; let i = index">
+                    <div class="small-col">
+                        {{doc.type}}
+                    </div>
+                    <div class="name-col" *ngIf="doc.type=='Hospital'"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <div class="selected-label" (click)="openDropdown($event, doc)"
+                            [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                            {{doc.code}}
+                        </div>
+                        <span class="dropdown-icon-wrap" (click)="openDropdown($event, doc)"
+                            [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                            <img src="../.././../../assets/images/chevron-down.svg">
+                        </span>
+                        <div class="dropdown-list" *ngIf="doc.showDropdown">
+                            <ul>
+                                <li class="dropdown-input">
+                                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search"
+                                        (input)="searchHospitalName(doc.type)" (click)="enterValue($event)">
+                                </li>
+                                <ng-container *ngFor="let name of allHospitals; let j = index">
+                                    <li *ngIf="name.show" (click)="selectDoc(name, j, i, doc.type)"
+                                        [ngClass]="{'selected':name.isHospitalSelected}">
+                                        {{name.code}}
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                        <!-- <span class="hospital-selection" *ngIf="doc.type=='Hospital'"></span>
+            <span class="doctor-selection{{i}}" *ngIf="doc.type=='Doctor'"></span> -->
+                    </div>
+                    <div class="name-col" *ngIf="doc.type=='Doctor'"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <div class="selected-label" (click)="openDropdown($event, doc)"
+                            [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                            {{doc.code}}</div>
+                        <!-- <span class="dropdown-icon"></span> -->
+                        <span class="dropdown-icon-wrap" (click)="openDropdown($event, doc)"
+                            [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                            <img src="../.././../../assets/images/chevron-down.svg">
+                        </span>
+                        <div class="dropdown-list" *ngIf="doc.showDropdown">
+                            <ul>
+                                <li class="dropdown-input">
+                                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search"
+                                        (input)="searchHospitalName(doc.type)" (click)="enterValue($event)">
+                                </li>
+                                <ng-container *ngFor="let name of allDoctors; let j = index">
+                                    <li *ngIf="name.show" (click)="selectDoc(name, j, i, doc.type)"
+                                        [ngClass]="{'selected':doc.code !== '-' && name.isDoctorSelected && doc.selectedRowIndex == j}">
+                                        {{name.doctorCode}}
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                        <!-- <span class="hospital-selection" *ngIf="doc.type=='Hospital'"></span>
+            <span class="doctor-selection{{i}}" *ngIf="doc.type=='Doctor'"></span> -->
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <input type="text" [(ngModel)]="doc.tDoctor"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <input type="text" [(ngModel)]="doc.tranche"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <!-- <input type="text" [(ngModel)]="doc.hospitalBill" (focusout)="showTotal('hospital-bill', doc.hospitalBill)"> -->
+                        <input type="text" [(ngModel)]="doc.hospitalBill"
+                            (keyup)="calculateTotal('hospital-bill',doc);calculateGst(i,doc)"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (change)="trimInput('hospital-bill',i);trimInput('gst',i);trimInput('nonBillableAmt',i)"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <!-- <input type="text" [(ngModel)]="doc.hospitalBill" (focusout)="showTotal('hospital-bill', doc.hospitalBill)"> -->
+                        <input type="text" [(ngModel)]="doc.gst"
+                            (keyup)=" calculateTotal('gst',doc);calculateTotalNonBillableAmt(i,doc)"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (change)="trimInput('gst',i)"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <input type="text" [(ngModel)]="doc.revenue"
+                            (keyup)="calculateTotal('revenue-case',doc);calculateTotalNonBillableAmt(i,doc)"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (focusout)="trimInput('revenue-case',i)"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col disabled">
+                        <!-- <input type="text" [(ngModel)]="doc.totalAmount"> -->
+                        <div>{{doc.nonBillableAmt}}</div>
+                    </div>
+                    <div class="small-col "
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <!-- <input type="text" [(ngModel)]="doc.totalAmount"> -->
+                        <input type="text" [(ngModel)]="doc.totalAmount" (keyup)="calculateTotal('Total-Amt',doc)"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (focusout)="trimInput('Total-Amt',i)"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+                        <input type="text" [(ngModel)]="doc.tolAmount" (keyup)="calculateTotal('tol-amt',doc)"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            (focusout)="trimInput('tol-amt',i)"
+                            [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')">
+                    </div>
+                    <div class="small-col disabled">
+                        <!-- <input type="text" [(ngModel)]="doc.totalAmount"> -->
+                        <div>{{doc.pcareAmount}}</div>
+                    </div>
+                    <!-- <div class="small-col"> -->
+                    <textarea name="" id="" class="small-col"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}"
+                        cols="50" [(ngModel)]="doc.remarks"
+                        [disabled]="(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')"></textarea>
+                    <!-- </div> -->
+                    <div class="more-icon-wrap" (click)="showMenuList(doc)" *ngIf="i > 1 && (loggedInUser &&
+                    loggedInUser.type=='Finance User' && admission.revenue.lockRevenue==false)">
+                        <button (click)="deleteDoctor(doc,i)" class="close-button"></button>
+                        <!-- <img src="../../../../assets/images/ellipsis-vertical.svg" alt=""> -->
+                        <!-- <div class="menu-list" *ngIf="doc.showMenu">
+            <ul>
+              <li>
+                <ion-icon name="trash"></ion-icon>
+                <span class="delete-icon-wrap" (click)="deleteDoctor(doc,i)">
+                  Delete
+                </span>
+              </li>
+            </ul>
+          </div> -->
+                        <!-- <ion-icon name="close-circle"></ion-icon> -->
+                    </div>
+                </div>
+                <!-- </div> -->
+                <!-- add doctor button -->
+                <div class="bill-row" *ngIf="((admission.revenue.individualBill.length - 1) < allDoctors.length)">
+                    <button class="add-doctor-btn" (click)="addDoctor()"
+                        [ngClass]="{disabled:(loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">Add
+                        Doctor</button>
+                </div>
+            </div>
+            <div class="total-wrap">
+                <!-- total -->
+                <div class="total-row">
+                    <div class="total-label">
+                        Total
+                    </div>
+                    <div class="total-cols bill-row">
+                        <div class="border-wrap">
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalHospitalBill"> -->
+                                <div>{{admission.revenue.totalHospitalBill}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalHospitalBill"> -->
+                                <div>{{admission.revenue.totalGst}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalRevenue"> -->
+                                <div>{{admission.revenue.totalRevenue}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalHospitalBill"> -->
+                                <div>{{admission.revenue.totalNonBillableAmt}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalTolAmount"> -->
+                                <div>{{admission.revenue.totalAmt}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalPcareAmount"> -->
+                                <div>{{admission.revenue.totalTolAmount}}</div>
+                            </div>
+                            <div class="small-col disabled" *ngIf="admission.revenue">
+                                <!-- <input type="text" [(ngModel)]="admission.revenue.totalTolAmount"> -->
+                                <div>{{admission.revenue.totalPcareAmount}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- unallocated -->
+            </div>
+            <div class="unallocated-div">
+                <div class="total-row">
+                    <div class="unallocated-label">
+                        Unallocated
+                    </div>
+                    <div class="unallocated-cols bill-row border-none">
+                        <div class="border-wrap border-none">
+                            <div class="small-col disabled" [ngClass]="showErrorMsg ? 'selected' : ''">
+                                <input type="text" [(ngModel)]="unallocatedAmount">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Lock button -->
+        <div class="lock-btn-wrap" (click)="lockRevenue()"
+            *ngIf="loggedInUser && loggedInUser.type == 'Finance Manager'">
+            <button>{{lockButtonText}}</button>
+        </div>
+        <!-- Save Changes button -->
+        <div class="save-btn-wrap" (click)="saveChanges()"
+            [ngClass]="{'margin-left': loggedInUser && loggedInUser.type == 'Finance User', 'disabled' : (loggedInUser && loggedInUser.type == 'Finance User' && admission.revenue.lockRevenue == true) || (loggedInUser && loggedInUser.type == 'Finance Manager')}">
+            <button>Save Changes</button>
+        </div>
+    </div>
+</ion-content>

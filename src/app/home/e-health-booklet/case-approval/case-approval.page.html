@@ -1,0 +1,298 @@
+<ion-content (click)="closeAllDropdowns()">
+  <div id="approval-preview-container" class="approval-container">
+    <div class="approval-info-block">
+      <div class="approval-input-label">
+        <p>Case Process Status</p>
+      </div>
+      <div class="approval-input-box">
+        <div class="approval-info-input" (click)="openDropdown($event, 'status')">
+          <p class="dropdown-title">{{selectedStatus}}</p>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showStatusDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search status"
+                (input)="Status = dataService.searchFromDropdownList(Status, nameToSearch, 'status')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let status of Status">
+              <li class="dropdown-input" *ngIf="status.show" (click)="selectStatus(status.status)">
+                {{status.status}}
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="approval-info-block">
+      <div class="approval-input-label">
+        <p>Amendment Section</p>
+      </div>
+      <div class="approval-input-box" [ngClass]="{'disabled':selectedStatus == 'Approved'}">
+        <!-- <span class="amendment-selection" [ngClass]="(selectedStatus == 'Approved') ? 'hidden' : ''"></span>
+        <span [ngClass]="(selectedStatus != 'Approved') ? 'hidden' : ''">-</span> -->
+        <div class="approval-info-input" (click)="openDropdown($event, 'amendment-section')">
+          <!-- <p class="dropdown-title">{{selectedAmendmentSection}}</p> -->
+          <div class="tags-wrapper">
+            <ul>
+              <li class="tags-label" *ngFor="let amendSection of caseStatus.amendmentSection; let s = index">
+                <!-- <span> -->
+                {{amendSection}}
+                <span *ngIf="s < caseStatus.amendmentSection.length - 1"> , </span>
+                <!-- </span> -->
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showAmendmentSectionDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <div class="btn-wrap" (click)="cancel('amend-section')">
+                Cancel
+              </div>
+              <div class="btn-wrap" (click)="done('amend-section')">
+                Done
+              </div>
+            </li>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search amendment section"
+                (input)="allAmendmentSection = dataService.searchFromDropdownList(allAmendmentSection, nameToSearch, 'name')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let section of allAmendmentSection; let t = index">
+              <li class="dropdown-input" *ngIf="section.show" (click)="stopEvent($event)">
+                <input type="checkbox" id="'section-{{t}}'" [(ngModel)]="section.selected" />
+                <label for="'section-{{t}}'" class="dropdown-checkbox-label">{{section.name}}</label>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="approval-info-block">
+      <div class="approval-input-label">
+        <p>Primary Consultant</p>
+      </div>
+      <div class="approval-input-box">
+        <div class="approval-info-input" (click)="openDropdown($event, 'primary-agent')">
+          <div class="tags-wrapper">
+            {{selectedPrimaryConsultant}}
+          </div>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showPrimaryAgentDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search primary consultant"
+                (input)="agentList = dataService.searchFromDropdownList(agentList, nameToSearch, 'name')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let agent of agentList; let a = index">
+              <li class="dropdown-input" *ngIf="agent.show" (click)="selectPrimaryConsultant($event, agent)">
+                <label for="'agent-{{a}}'" class="dropdown-checkbox-label">{{agent.name}} ({{agent.type}})</label>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <!-- ! assigned agents sidebar -->
+      <!-- <div class="exclaim">
+                <ion-menu-button menu="case-status-timeline">
+                    <span (click)="openPopover()">
+                        <ion-icon name="alert"></ion-icon>
+                    </span>
+                </ion-menu-button>
+            </div> -->
+    </div>
+    <div class="approval-info-block">
+      <div class="approval-input-label">
+        <p>Assigned Consultants</p>
+      </div>
+      <div class="approval-input-box">
+        <div class="approval-info-input" (click)="openDropdown($event, 'assigned-agent')">
+          <div class="tags-wrapper">
+            <ul>
+              <li class="tags-label" *ngFor="let agent of selectedAgents; let s = index">
+                {{agent.name}}
+                <span *ngIf="s < selectedAgents.length - 1"> , </span>
+              </li>
+            </ul>
+          </div>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showAssignedAgentDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <div class="btn-wrap" (click)="cancel('assigned-agent')">
+                Cancel
+              </div>
+              <div class="btn-wrap" (click)="done('assigned-agent')">
+                Done
+              </div>
+            </li>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search consultant"
+                (input)="agentList = dataService.searchFromDropdownList(agentList, nameToSearch, 'name')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let agent of agentList; let a = index">
+              <li class="dropdown-input" *ngIf="agent.show" (click)="checkIfAgentIsPrimaryConsultant(agent, $event)">
+                <input type="checkbox" id="'agent-{{a}}'" [checked]="agent.selected"
+                  [disabled]="agent.id === case.primaryConsultant ? true:false" />
+                <label class="dropdown-checkbox-label">{{agent.name}} ({{agent.type}})</label>
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+      <!-- ! assigned agents sidebar -->
+      <!-- <div class="exclaim">
+                <ion-menu-button menu="case-status-timeline">
+                    <span (click)="openPopover()">
+                        <ion-icon name="alert"></ion-icon>
+                    </span>
+                </ion-menu-button>
+            </div> -->
+    </div>
+    <!-- ? client requirement -->
+    <!-- service type -->
+    <div class="approval-info-block">
+      <div class="approval-input-label comments-label">
+        <p>Service Type</p>
+      </div>
+      <div class="approval-input-box">
+        <div class="approval-info-input" (click)="openDropdown($event, 'service-type')">
+          <p class="dropdown-title">{{case.serviceType}}</p>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showServiceTypeDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search service type"
+                (input)="serviceTypes = dataService.searchFromDropdownList(serviceTypes, nameToSearch, 'type')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let type of serviceTypes">
+              <li class="dropdown-input" *ngIf="type.show" (click)="selectServiceType(type.type)">
+                {{type.type}}
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- sales credit -->
+    <div class="approval-info-block">
+      <div class="approval-input-label comments-label">
+        <p>Sales Credit</p>
+      </div>
+      <div class="approval-input-box">
+        <div class="approval-info-input" (click)="openDropdown($event, 'sales-credit')">
+          <p class="dropdown-title">{{selectedSalesCredit}}</p>
+          <div class="dropdown-arrow-wrapper">
+            <span class="dropdown-arrow"></span>
+          </div>
+        </div>
+        <div class="dropdown-list" *ngIf="showSalesCreditDropdown">
+          <ul>
+            <li class="dropdown-input">
+              <input type="text" [(ngModel)]="nameToSearch" placeholder="Search sales credit"
+                (input)="salesCredit = dataService.searchFromDropdownList(salesCredit, nameToSearch, 'name')"
+                (click)="dataService.enterValue($event)">
+            </li>
+            <ng-container *ngFor="let credit of salesCredit">
+              <li class="dropdown-input" *ngIf="credit.show" (click)="selectSalesCredit(credit)">
+                {{credit.name}} ({{credit.type}})
+              </li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="approval-info-block"
+      *ngIf="selectedStatus && (selectedStatus === 'Resubmission for temporary approval' || selectedStatus === 'Resubmitted for approval')">
+      <div class="approval-input-label comments-label">
+        <p>Consultant's Comments</p>
+      </div>
+      <div class="approval-input-box consultant-comments">
+        <p *ngIf="consultantComments && consultantComments.length > 0">
+          {{consultantComments}}
+        </p>
+        <p *ngIf="!consultantComments || (consultantComments && consultantComments.length === 0)">
+          -
+        </p>
+      </div>
+    </div>
+    <div class="approval-info-block">
+      <div class="approval-input-label comments-label">
+        <p>Comments</p>
+      </div>
+      <div class="approval-input-box">
+        <textarea class="approval-info-input" name="remark" id="remark" cols="30" rows="6"
+          [(ngModel)]="caseStatus.comments"></textarea>
+      </div>
+    </div>
+    <div class="signature-info-block">
+      <div class="label">
+        <p>
+          Signed by:
+          <span *ngIf="caseStatus && caseStatus.signedBy && caseStatus.signedBy !== ''">{{caseStatus.signedBy}}</span>
+          <span *ngIf="caseStatus && caseStatus.signedBy && caseStatus.signedBy === ''">-</span>
+        </p>
+      </div>
+      <div class="signature-box approval-input-box" (click)="openSignatureModal()">
+        <div class="signature-label-box">
+          <div class="signature-label">
+            <p>Management's Signature</p>
+          </div>
+        </div>
+        <!-- <div class="line ">
+            </div> -->
+        <div class="signature-img-wrap">
+          <div class="signature-img">
+            <img [src]="caseStatus.signature" alt="signature"
+              *ngIf="caseStatus.signature && caseStatus.signature != ''" />
+          </div>
+          <div class="cross-button">
+            <button class="cross"></button>
+            <div class="line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="button">
+            <div class="save-btn-wrapper" (click)="saveChanges()"
+                [ngClass]="caseStatus.signature === '' ? 'btn-disable' : ''">
+                <button class="save-btn" [ngClass]="caseStatus.signature === '' ? 'btn-disable' : ''"
+                    [disabled]="caseStatus.signature == ''">Save Changes</button>
+            </div>
+        </div> -->
+    <div class="approval-info-block button">
+      <div class="approval-input-label comments-label">
+        <!-- <p>Comments</p> -->
+      </div>
+      <div class="approval-input-box save-btn-wrapper" (click)="saveChanges()"
+        [ngClass]="caseStatus.signature === '' ? 'btn-disable' : ''">
+        <button class="save-btn" [ngClass]="caseStatus.signature === '' ? 'btn-disable' : ''"
+          [disabled]="caseStatus.signature == ''">
+          Save Changes
+        </button>
+      </div>
+    </div>
+    <!-- <div class="save-btn-wrapper">
+            <button class="save-btn">View Pre-Admission Checklist</button>
+        </div> -->
+  </div>
+</ion-content>

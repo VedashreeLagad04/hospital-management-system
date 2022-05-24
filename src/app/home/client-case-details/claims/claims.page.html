@@ -1,0 +1,259 @@
+<ion-content>
+  <div class="claims-wrapper">
+    <!-- number of days since discharge -->
+    <div [ngClass]="mode == 'preview' ? 'preview-buttons' : 'edit-buttons' ">
+      <div class="number-of-days-wrapper">
+        <div class="title title1">Number of days since discharge</div>
+        <div class="value number-of-days-value">{{noOfDaysSinceDischarge}}</div>
+      </div>
+      <div class="edit-share-wrapper">
+        <!-- <div class="whatsapp-block" *ngIf="mode =='preview'">
+        <div class="edit-btn-wrapper">
+          <button class="edit-btn">Send To WhatsApp</button>
+        </div>
+      </div> -->
+        <!-- edit btn -->
+        <div class="edit-block" *ngIf="mode =='preview'">
+          <div class="edit-btn-wrapper">
+            <button class="edit-btn" (click)="changeMode()">Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- policies -->
+    <ng-container *ngIf="admission && admission.claims">
+      <div class="form-block policy-wrap" *ngFor="let policy of admission.claims; let i = index">
+        <!-- policy type -->
+        <div class="claims-row">
+          <div [ngClass]="i == 0 ? 'title title2' : 'type-title' ">Type:</div>
+          <div [ngClass]="i == 0 ? 'value policy-type-value' : 'value policy-type-value1' ">
+            {{policy.policyType}}
+          </div>
+        </div>
+        <!-- policy name -->
+        <div class="claims-row">
+          <div [ngClass]="i == 0 ? 'title title2' : 'type-title' ">Name:</div>
+          <div [ngClass]="i == 0 ? 'value policy-type-value' : 'value policy-type-value1' ">
+            {{policy.policyName}}
+          </div>
+        </div>
+        <!-- Total Hospital Bill -->
+        <div class="policy-row total-hospital-bill-row" *ngIf="policy && policy.totalHospitalBill != undefined && i==0">
+          <div class="approve-amt-col1">
+            <div class="title title2 medisave-title">Total Hospital Bill</div>
+            <div class="value">
+              <span class="dollar-icon">$</span>
+              <input type="text" [(ngModel)]="admission.revenue.hospitalBill" />
+            </div>
+          </div>
+        </div>
+        <div [ngClass]="i == 0 ? 'policy-row total-hospital-bill-row' : 'claims-row total-hospital-bill-row1'"
+          *ngIf="policy && i != 0">
+          <div class="approve-amt-col1">
+            <div class="title title2 medisave-title">Approve Amount</div>
+            <div class="value">
+              <span class="dollar-icon">$</span>
+              <input type="text" [(ngModel)]="policy.approveAmount" />
+            </div>
+          </div>
+        </div>
+        <!-- Last date of claims period -->
+        <div [ngClass]="i == 0 ? 'policy-row last-date-of-claims' : 'claims-row last-date-of-claims1'">
+          <div class="title title1">End of Claim Date</div>
+          <div class="value">{{policy.claimLastDate}}</div>
+        </div>
+        <!-- Approve Amount -->
+        <div [ngClass]="i == 0 ? 'policy-row' : 'claims-row' ">
+          <div class="approve-amt-row" *ngIf="i==0">
+            <div class="title">Financing Sources</div>
+          </div>
+          <div class="approve-amt-row">
+            <!--insurer-->
+            <div class="finance-amt-col1" *ngIf="policy && i==0">
+              <div class="title finance-title">Insurer</div>
+              <div class="value" [ngClass]="mode == 'edit'? 'edit-value':''">
+                <span class="dollar-icon">$</span>
+                <input type="text" [(ngModel)]="policy.amountInsurer" (focusout)="trimInput()" (keyup)="calculateCash()"
+                  min="0" />
+              </div>
+            </div>
+            <!-- medisave -->
+            <div [ngClass]="i == 0 ? 'finance-amt-col1' : 'claims-amt-col1' ">
+              <div class="title finance-title">Medisave</div>
+              <div class="value" *ngIf="mode=='edit'" [ngClass]="i>0 ? 'value2' : 'value1' ">
+                <span class="dollar-icon">$</span>
+                <input type="text" [(ngModel)]="policy.amountMedisave" (focusout)="trimInput()"
+                  (keyup)="calculateCash() ; calculateApproveAmt()" min="0" />
+              </div>
+              <div class="value" *ngIf="mode=='preview'"
+                [ngClass]="mode=='preview' && i>0 ? 'preview-value2' : 'new-value' ">
+                <span class="dollar-icon">$</span>
+                <input type="text" [(ngModel)]="policy.amountMedisave" (focusout)="trimInput()"
+                  (keyup)="calculateApproveAmt()" min="0" />
+              </div>
+            </div>
+            <!-- cash -->
+            <div [ngClass]="i == 0 ? 'finance-amt-col2' : 'claims-amt-col2' ">
+              <div class="title cash-title">Cash</div>
+              <div class="value" *ngIf="mode=='edit'" [ngClass]="i==0 ? 'cash-value1 edit-value-cash' : 'cash-value' ">
+                <span class="dollar-icon">$</span>
+                <input type="text" [(ngModel)]="policy.amountCash" (focusout)="trimInput()"
+                  (keyup)="calculateApproveAmt()" [disabled]="i === 0" />
+              </div>
+              <div class="value" *ngIf="mode=='preview'"
+                [ngClass]="mode=='preview' && i>0 ? 'preview-value1' : 'new-value1' ">
+                <span class="dollar-icon">$</span>
+                <input type="text" [(ngModel)]="policy.amountCash" (focusout)="trimInput()"
+                  (keyup)="calculateApproveAmt()" min="0" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Claims Status & Zeroized -->
+        <div class="claims-row">
+          <div class="claims-amt-col1">
+            <div class="title title2 claims-title">Claims Status</div>
+            <div class="value2" *ngIf="mode=='edit'" [ngClass]="i==0 ? 'value2' : 'dropdown-value' ">
+              <div class="selected-label" (click)="openDropdown(policy,'claim-status')">
+                <!-- {{doc.code}} -->
+                {{policy.claimsStatus}}
+              </div>
+              <span class="dropdown-icon" (click)="openDropdown(policy,'claim-status')"></span>
+              <div class="dropdown-list" *ngIf="policy.showStatusDropdown">
+                <ul>
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search claims status"
+                      (input)="allClaimsStatus = dataService.searchFromDropdownList(allClaimsStatus, nameToSearch, 'status')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let name of allClaimsStatus">
+                    <li (click)="selectFromDropdown(policy, name.status, 'claim-status')" *ngIf="name.show">
+                      {{name.status}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+            <div class="dropdown-value" *ngIf="mode=='preview'"
+              [ngClass]="mode=='preview' && i>0 ? 'preview-value2' : 'dropdown-value' ">
+              <div class="selected-label" (click)="openDropdown(policy,'claim-status')">
+                <!-- {{doc.code}} -->
+                {{policy.claimsStatus}}
+              </div>
+              <span class="dropdown-icon"></span>
+              <div class="dropdown-list" *ngIf="policy.showStatusDropdown">
+                <ul>
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search claims status"
+                      (input)="allClaimsStatus = dataService.searchFromDropdownList(allClaimsStatus, nameToSearch, 'status')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let name of allClaimsStatus">
+                    <li (click)="selectFromDropdown(policy, name.status, 'claim-status')" *ngIf="name.show">
+                      {{name.status}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="claims-amt-col2">
+            <div class="title title2 claims-title">Approved Date</div>
+            <div class="value" *ngIf="mode=='edit'"
+              [ngClass]="{'preview-value1':i!=0,'date-value1' : policy.claimsStatus === 'Approved', 'disabled':policy.claimsStatus !== 'Approved'}">
+              <ion-datetime mode="ios" style="padding: 0.3rem" id="approvedDate" max="2099-12-31"
+                displayFormat="DD MMM YYYY" [(ngModel)]="policy.approvedDate">
+              </ion-datetime>
+              <ion-icon name="calendar" class="calendar" onclick="document.getElementById('approvedDate').click()">
+              </ion-icon>
+            </div>
+            <div class="value" *ngIf="mode=='preview'"
+              [ngClass]="{'preview-value1':i!=0,'disabled':policy.claimsStatus !== 'Approved'}">
+              <ion-datetime mode="ios" style="padding: 0.3rem" id="approvedDate" max="2099-12-31"
+                displayFormat="DD MMM YYYY" [(ngModel)]="policy.approvedDate">
+              </ion-datetime>
+              <ion-icon name="calendar" class="calendar" onclick="document.getElementById('approvedDate').click()">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+        <!-- Approved Date & Zeroized Date -->
+        <div class="policy-row" *ngIf="i==0">
+          <div class="zeroized-amt-col1" *ngIf="policy && policy.zeroized != undefined">
+            <div class="title zeroized-title">Zeroized</div>
+            <div class="dropdown-value"
+              [ngClass]="{'edit-dropdown-value': mode == 'edit','dropdown-value': mode != 'edit'}">
+              <div class="selected-label" (click)="openDropdown(policy,'zeroized')">
+                <!-- {{doc.code}} -->
+                {{policy.zeroized}}
+              </div>
+              <span class="dropdown-icon" (click)="openDropdown(policy,'zeroized')"></span>
+              <div class="dropdown-list" *ngIf="policy.showZeroizedDropdown">
+                <ul>
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search zeroized status"
+                      (input)="allZeroizedTypes = dataService.searchFromDropdownList(allZeroizedTypes, nameToSearch, 'status')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let name of allZeroizedTypes">
+                    <li (click)="selectFromDropdown(policy, name.status, 'zeroized')" *ngIf="name.show">
+                      {{name.status}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="zeroized-amt-col2" *ngIf="policy && policy.zeroizedDate != undefined">
+            <div class="title title2 zeroized-title">Zeroized Date</div>
+            <div class="value"
+              [ngClass]="{'date-value1' : (mode=='edit' && policy.zeroized === 'Full'), 'disabled':policy.zeroized !== 'Full' }">
+              <ion-datetime mode="ios" style="padding: 0.3rem" id="zerozied" max="2099-12-31"
+                displayFormat="DD MMM YYYY" [(ngModel)]="policy.zeroizedDate">
+              </ion-datetime>
+              <ion-icon name="calendar" class="calendar" onclick="document.getElementById('zeroizedDate').click()">
+              </ion-icon>
+            </div>
+          </div>
+        </div>
+        <!-- remarks -->
+        <div class="claims-row">
+          <div class="remarks-row">
+            <div class="title">Remarks</div>
+          </div>
+          <div class="remarks-row">
+            <div class="value" [ngClass]="mode == 'edit'? 'edit-value':''">
+              <textarea name="" id="" [(ngModel)]="policy.remarks"></textarea>
+            </div>
+          </div>
+        </div>
+        <!-- upload manual file -->
+        <div class="policy-row upload-manual-file-row">
+          <div class="checkbox-wrap">
+            <input type="checkbox" [disabled]="mode=='preview'" [(ngModel)]="policy.toUploadFile" />
+            <!-- <input type="checkbox" [disabled]="mode=='preview'" (click)="selectToUploadFile($event, policy)"
+              [checked]="policy. policy.toUploadFile"> -->
+          </div>
+          <div class="upload-btn-wrap">
+            <button #uploadBtn class="upload-btn" (click)="uploadFile.click()"
+              [ngClass]="mode == 'edit'? 'edit-value':''">
+              Upload Manual Claims Form
+            </button>
+            <input #uploadFile type="file" hidden (click)="fileClick()" (change)="uploadFiles($event, i)"
+              accept="application/pdf" />
+          </div>
+          <div class="uplaod-date-wrap title" *ngIf="policy.showFileUploadDate && policy.showFileUploadDate !== ''">
+            Uploaded on: {{policy.showFileUploadDate}}
+          </div>
+          <div class="uplaod-date-wrap title" *ngIf="!policy.showFileUploadDate || policy.showFileUploadDate === ''">
+            Uploaded on: -
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="save-btn-wrap" *ngIf="mode =='edit'">
+      <button class="save-btn" (click)="saveChanges()">Save Changes</button>
+    </div>
+  </div>
+</ion-content>

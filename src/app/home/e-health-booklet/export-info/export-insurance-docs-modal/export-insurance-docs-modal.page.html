@@ -1,0 +1,32 @@
+<ion-content>
+  <div class="insurance-docs-container">
+    <span class="close-wrapper">
+      <ion-icon class="close-modal" (click)="closeModal()" name="close"></ion-icon>
+    </span>
+    <div class="all-files-wrapper">
+      <div class="all-file-names">
+        <div class="file" *ngFor="let file of files;let i = index">
+          <div class="checkbox-wrap">
+            <input type="checkbox" (click)="selectFile($event, file)" [checked]="file.fileName == selectedFile">
+          </div>
+          <div class="file-wrap" (click)="selectDoc(file.fileName)">
+            <div class="icon-wrap">
+              <img src="../../../../../assets/images/document.svg">
+            </div>
+            <div class="file-name-wrap">
+              <div class="file-name">{{file.fileName}}</div>
+              <div class="file-info-wrap">
+                <div class="file-size">{{file.fileSize}}</div>
+                <div class="file-date">{{file.fileDate}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-wrap">
+      <button *ngIf="isWeb === false" (click)="share()">Send</button>
+      <button (click)="download()" *ngIf="isWeb === true">Download</button>
+    </div>
+  </div>
+</ion-content>

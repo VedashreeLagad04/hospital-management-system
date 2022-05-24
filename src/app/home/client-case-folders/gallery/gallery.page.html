@@ -1,0 +1,104 @@
+<div class="progress-bar-container" *ngIf="showProgressBar">
+  <div class="progress-bar">
+    <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+    <span class="upload-percent">Uploading...{{uploadPercent}} %</span>
+  </div>
+</div>
+
+<div class="gallery-container">
+
+
+  <div class="header-container">
+
+    <ion-grid>
+
+      <ion-row>
+
+        <ion-col size="3">
+
+          <!-- <img (click)="goback()" class="close-btn" src="assets/images/insurance-docs/close.png" alt="close button"> -->
+
+        </ion-col>
+
+        <ion-col *ngIf="selectedImages.length != 0" size="6">
+
+          <!-- <input class="filename" name="filename" type="text" 
+              [(ngModel)] = "selectedImages[currentImageIndex].fileName" 
+              (keyup)="this.imageNameUpdate.next($event)"> -->
+
+        </ion-col>
+
+        <!-- <ion-col (click)="openFileModal()" size="3"> -->
+        <ion-col size="3">
+
+          <div class="submit-btn">
+            <span>Done</span>
+          </div>
+
+        </ion-col>
+
+
+
+      </ion-row>
+
+    </ion-grid>
+
+  </div>
+
+
+  <!--         <img (click)="goback()" class="close-btn" src="assets/images/insurance-docs/close.png" alt="close button">
+        <div *ngIf = "selectedImages.length != 0" class="file-name-container">
+          <input class="filename" name="filename" type="text" 
+              [(ngModel)] = "selectedImages[currentImageIndex].fileName" 
+              (ngModelChange)="this.x.next($event)">
+        </div>
+        <div class="submit-btn" (click)="uploadImages()">
+            <span>Done</span>
+        </div> -->
+
+
+  <div class="display-image-container">
+
+    <div class="display-image">
+
+      <img class="doc-image" [src]="currentImage.newURL" alt="">
+
+    </div>
+
+  </div>
+
+  <!--       <div class="footer-container">
+
+          <div class="selected-image">
+            <div class="a-selected-image inline-block" *ngFor="let image of selectedImages;let in = index" >
+              <img class="actual-image" [src]="image.newURL" alt="" (click)="showSelectedImage(image,in)">
+              <div class="selected-image-delete-icon inline-block">
+                <img src="assets/images/defects/white-close.svg" alt="" (click)="removeSelectedImage(image,in)">
+              </div>
+            </div>        
+
+            
+          </div>
+
+      </div> -->
+
+  <div class="footer-wrapper">
+    <div class="footer-content">
+      <div *ngIf="mode == 'edit'" [ngClass]="{'padding-top-footer': (mode == 'edit'),'primary-footer' : true}">
+
+        <div class="a-selected-image inline-block" *ngFor="let image of selectedImages;let in = index">
+          <img class="actual-image" [src]="image.newURL" alt="" (click)="showSelectedImage(image,in)">
+          <div class="selected-image-delete-icon inline-block">
+            <!-- <img src="assets/images/defects/white-close.svg" alt="" (click)="removeSelectedImage(image,in)"> -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+</div>

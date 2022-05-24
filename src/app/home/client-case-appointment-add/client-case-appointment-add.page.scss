@@ -1,0 +1,345 @@
+// ? for ipad
+// ? for calendar
+.calander-container {
+  max-width: 84rem;
+  margin: 0 auto;
+  position: relative;
+}
+.calander-wrapper {
+  padding-top: 4.4rem;
+}
+.sync-container {
+  position: absolute;
+  right: 0;
+  transform: translate(0%, 0%);
+}
+button.sync-btn {
+  padding: 0.7rem 2rem;
+  width: 20rem;
+  background: #fbfbfb;
+  border: 0.5px solid #d4d4d4;
+  border-radius: 1rem;
+  color: #007aff;
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
+.calendar-content {
+  width: 100%;
+  vertical-align: top;
+}
+#calendar .fc-day-grid-event {
+  margin: 0px !important;
+  border-radius: 0px !important;
+}
+.next-button {
+  background-color: #eeeef0;
+  color: #007aff;
+  padding: 0.7rem;
+  width: 100%;
+  border-radius: 1.8rem;
+  bottom: 6rem;
+  line-height: 2.2rem;
+  font-size: 1.6rem;
+  margin-bottom: 2.2rem;
+}
+.button-container {
+  padding-top: 1rem;
+  margin-top: 5rem;
+}
+.time-content {
+  width: 33rem;
+  display: inline-block;
+  margin-left: 4rem;
+}
+.time-wrapper:first-of-type {
+  margin-right: 1.5rem;
+}
+.time-wrapper {
+  display: inline-block;
+  height: 34rem;
+  width: 15rem;
+  border-radius: 1rem;
+  background: #ededed;
+  margin: 0.5rem 0.5rem;
+  padding: 1rem;
+}
+.time-wrapper h6 {
+  line-height: 2.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+.time {
+  vertical-align: middle;
+  margin: 60% auto;
+  border-top: 1px solid #7e7e7e;
+  border-bottom: 1px solid #7e7e7e;
+  padding: 1rem;
+  font-size: 2.4rem;
+  color: #000000;
+  line-height: 3rem;
+}
+.hr {
+  width: 47%;
+  text-align: center;
+  display: inline-block;
+}
+.meridium {
+  vertical-align: bottom;
+  display: inline-block;
+  margin: 1rem auto;
+  line-height: 2.4rem;
+  font-size: 2rem;
+  color: #aeaeb2;
+}
+.meridium .active {
+  color: #000000;
+}
+//? for form design
+.appointment-info-wrapper {
+  display: inline-block;
+  width: 100%;
+  padding: 4rem 0;
+}
+.appointment-info-block {
+  display: inline-block;
+  width: 100%;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  color: #000000;
+  margin-bottom: 1rem;
+}
+.appointment-info-block:last-child {
+  margin: 0;
+}
+.appointment-info-title {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.appointment-info-input {
+  display: inline-block;
+  position: relative;
+  background: #fbfbfb;
+  width: 100%;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.info-input {
+  display: inline-block;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.7rem 1rem;
+}
+// .appointment-type-dropdown-wrapper{
+//   display: inline-block;
+//   width: 100%;
+//   position: relative;
+// }
+.title-input {
+  background: #e5e5e5;
+}
+.appointment-type {
+  display: inline-block;
+  width: 90%;
+}
+.appointment-type-caret {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+  color: #a4afb7;
+}
+.appointment-type-dropdown {
+  position: absolute;
+  width: 100%;
+  border: 0.5px solid #7e7e7e;
+  background: #fbfbfb;
+  border-radius: 5px;
+  z-index: 10;
+}
+ul.type-list {
+  display: inline-block;
+  width: 100%;
+  list-style: none;
+  padding: 0.7rem 1rem;
+  margin: 0;
+}
+.comments-height {
+  height: 10.8rem;
+  border-radius: 1rem;
+}
+.comments-input {
+  height: 100%;
+  resize: none;
+  padding: 1rem;
+}
+::-webkit-input-placeholder {
+  /* Edge */
+  font-family: "sf-pro-light-italic";
+  color: #aeaeb2;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: left;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer */
+  font-family: "sf-pro-light-italic";
+  color: #aeaeb2;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: left;
+}
+::placeholder {
+  font-family: "sf-pro-light-italic";
+  color: #aeaeb2;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: left;
+}
+.save-btn-wrapper {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 1.5rem;
+  line-height: 2.1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+.save-btn {
+  display: inline-block;
+  width: 100%;
+  background: #eeeef0;
+  padding: 0.8rem;
+  border-radius: 1.8rem;
+  color: #007aff;
+}
+.view-info {
+  background: #cdcdcd !important;
+  border: none !important;
+  pointer-events: none;
+}
+.disable {
+  pointer-events: none;
+}
+.stepCss {
+  display: none;
+}
+.appointment-date,
+.appointment-time {
+  display: inline-block;
+  position: relative;
+  background: #fbfbfb;
+  width: 44%;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 5px;
+  margin-right: 2rem;
+  padding: 0.6rem;
+  height: 3.6rem;
+  margin-bottom: 1rem;
+}
+.appointment-time {
+  width: 35%;
+}
+.date-input {
+  padding: 0rem;
+  line-height: 2.2rem;
+  font-size: 1.6rem;
+  display: inline-block;
+  width: 85%;
+  vertical-align: middle;
+}
+img.calendar-icon {
+  height: 1.6rem;
+  display: inline-block;
+  right: 0;
+  vertical-align: middle;
+}
+// pop up
+.event-popUp {
+  width: 36rem;
+  display: block;
+  box-shadow: 0px 0px 20px #00000059;
+  background: #ffffff;
+  min-height: 10rem;
+  padding: 1rem 0;
+  border-radius: 1.5rem;
+  z-index: 111;
+}
+.event-details,
+.event-location {
+  width: 100%;
+  display: block;
+}
+.event-title {
+  width: 64%;
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #5b5b5b;
+  line-height: 1.4rem;
+}
+.square {
+  color: #007aff;
+  font-size: 2rem !important;
+  display: inline-block;
+  vertical-align: top;
+}
+.event-title .title {
+  font-size: 1.4rem;
+  color: #000000;
+  line-height: 1.6rem;
+  display: inline-block;
+  width: 85%;
+  margin-left: 0.5rem;
+}
+.event-time {
+  font-size: 1.2rem;
+  color: #5b5b5b;
+  line-height: 1.4rem;
+  padding: 0.5rem 1rem;
+  margin-left: 1.2rem;
+}
+.event-action {
+  display: inline-block;
+  width: 35%;
+  text-align: right;
+  vertical-align: top;
+}
+.event-action ion-icon {
+  font-size: 2rem;
+  color: #8e8e93;
+  margin-right: 0.5rem;
+  display: inline-block;
+}
+.event-location {
+  font-size: 1.2rem;
+  color: #5b5b5b;
+  line-height: 1.4rem;
+}
+.event-location .square {
+  color: #5b5b5b;
+  margin-right: 0.5rem;
+}
+#selectedEvent {
+  display: none;
+}
+.event-popUp :after {
+  content: " ";
+  position: absolute;
+  left: 0.9rem;
+  top: -0.9rem;
+  border-top: 1rem solid transparent;
+  border-right: 0.9rem solid #ffffff;
+  border-bottom: none;
+  border-left: 0.8rem solid transparent;
+  z-index: 5;
+  padding-left: 0.5rem;
+}
+@media (min-width: 1366px) {
+  .container-small {
+      max-width: 400px;
+  }
+}

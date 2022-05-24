@@ -1,0 +1,19 @@
+<div class="file-container">
+  <div class="file-header">
+    <div class="close-icon-wrap">
+      <ion-icon class="close-modal" (click)="closeModal()" name="close"></ion-icon>
+    </div>
+    <p class="title">Enter Filename</p>
+  </div>
+  <div class="input-container">
+    <div class="input-sub-container">
+      <img class="file-icon" src="../../../../assets/images/document.png" alt="">
+      <input class="file-name" type="text" [(ngModel)]="pdfFilename" spellcheck="false"
+        (keyup)="this.pdfFilenameUpdate.next($event)" />
+    </div>
+  </div>
+
+  <div class="submit-btn-container">
+    <button class="upload-btn" (click)="closeFileModal()">Upload</button>
+  </div>
+</div>

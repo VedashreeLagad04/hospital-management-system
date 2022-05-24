@@ -1,0 +1,146 @@
+<div id="report-wrapper">
+  <div id="date-export-btn-wrap">
+    <div class="admission-date-range-blk">
+      <span class="date-label">Date</span>
+      <div class="date-sub-blk">
+        <ion-datetime id="report-start-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+          (click)="dateClicked('start-date')" [(ngModel)]="admissionDateFrom" [ngModelOptions]="{standalone: true}">
+        </ion-datetime>
+        <ion-icon name="calendar" class="calendar" onclick="document.getElementById('report-start-date').click()">
+        </ion-icon>
+      </div>
+      <span class="date-label">to</span>
+      <div class="date-sub-blk">
+        <ion-datetime id="report-end-date" class="date-value" displayFormat="DD MMM YYYY" (ionChange)="getDateRange()"
+          (click)="dateClicked('end-date')" [(ngModel)]="admissionDateTo" [ngModelOptions]="{standalone: true}"
+          max="2099-10-31">
+        </ion-datetime>
+        <ion-icon name="calendar" class="calendar" onclick="document.getElementById('report-end-date').click()">
+        </ion-icon>
+      </div>
+    </div>
+    <div id="export-as-excel-btn" (click)="exportAsExcel()">
+      <button class="btn export-btn">Export as excel</button>
+    </div>
+  </div>
+
+  <div class="report-table-wrap">
+    <div class="current-admission-table">
+      <div class="current-admission-header-row">
+        <div class="current-admission-table-head current-admission-col-6-width" *ngFor="let col of reportColumns"
+          [ngClass]="{'extra-large-col': col.key === 'address' ||col.key === 'insurer' || col.key === 'medisave' || col.key === 'cash'}">
+          <span class="current-admission-table-head-span">{{col.header}}</span>
+          <div class="arrow-wrapper" *ngIf="!omitSortOption.includes(col.key)">
+            <div class="arrow-up" (click)="sortDesc(col.key)"
+              [ngClass]="{'selected-desc': (sortingObject.type == col.key && sortingObject.order == 'desc')}">
+            </div>
+            <div class="arrow-down" (click)="sortAsc(col.key)"
+              [ngClass]="{'selected-asc': (sortingObject.type == col.key && sortingObject.order == 'asc')}"></div>
+          </div>
+        </div>
+      </div>
+      <div class="current-admission-main-content" *ngIf="!admissionsPresent">
+        <p class="no-cases-msg">No cases present!</p>
+      </div>
+      <div class="current-admission-main-content" *ngIf="admissionsPresent">
+        <ng-container *ngFor="let admission of reportData;">
+          <div class="current-admission-main-row">
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.caseNumber}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.admissionNumber}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.clientName}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.nric}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.gender}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.dob}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.contact}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width extra-large-col">
+              <span class="current-admission-table-main-content-span">{{admission.address}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.email}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.policyActivated}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.typeOfAdmission}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.dateOfAdmission}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.dateOfDischarge}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.diagnosis}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.surgicalCode}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.facilities}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.doctor}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.totalHospitalBill}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.claimApprovalStatus}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.claimApprovalDate}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width extra-large-col">
+              <span class="current-admission-table-main-content-span">{{admission.insurer}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width extra-large-col">
+              <span class="current-admission-table-main-content-span">{{admission.medisave}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width extra-large-col">
+              <span class="current-admission-table-main-content-span">{{admission.cash}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.doctorFee}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.tol}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.pcare}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.tranche}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.referralSource}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.t1GReferrer}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.referrerFee}}</span>
+            </div>
+            <div class="current-admission-table-main-content current-admission-col-6-width">
+              <span class="current-admission-table-main-content-span">{{admission.serviceType}}</span>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

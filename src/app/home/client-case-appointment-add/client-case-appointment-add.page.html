@@ -1,0 +1,284 @@
+<ion-content (click)="closeDropdownAll()">
+  <div class="calander-wrapper" [ngClass]='step1 !== true ? "stepCss":""'>
+    <div class="calander-container">
+      <div class="breadcrumbs-wrapper">
+        <app-breadcrumbs [clientDetails]="patient" [caseDetails]="caseData"></app-breadcrumbs>
+      </div>
+      <!-- <div class='row'> -->
+      <!-- ! google sync button -->
+      <!-- <div class='sync-container'>
+                <button class='sync-btn' (click)='handleClientLoad()'> Sync </button>
+            </div> -->
+      <div class="calendar-content">
+        <div id="calendar"></div>
+      </div>
+      <div class="event-popUp" id="selectedEvent">
+        <div class="event-details">
+          <div class="event-title">
+            <ion-icon class="square" name="square"></ion-icon>
+            <p class="title">{{selectedEvent.title}}</p>
+          </div>
+          <div class="event-action">
+            <!-- <ion-icon name="md-list-box" (click)='comingSoonAlert()'></ion-icon>
+                        <ion-icon name="md-create" (click)='comingSoonAlert()'></ion-icon> -->
+            <ion-icon name="copy" (click)="copyToClipBoard(selectedEvent)"></ion-icon>
+            <ion-icon name="close" (click)="closeEventpopUp()"></ion-icon>
+          </div>
+        </div>
+        <div class="event-details">
+          <p class="event-time">{{selectedEvent.time}}</p>
+        </div>
+        <div class="event-location">
+          <ion-icon class="square" name="pin"></ion-icon>
+          {{selectedEvent.location}}
+        </div>
+        <div id="copy-info" [hidden]="true">
+          <div>Title: {{selectedEvent.title}}</div>
+          <div>
+            Date : {{selectedEvent.startDate}}
+            <span *ngIf="selectedEvent.startDate!== selectedEvent.endDate">- {{selectedEvent.endDate}}</span>
+          </div>
+          <div>Time: {{selectedEvent.time}}</div>
+          <div>Location: {{selectedEvent.location}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-small" [ngClass]='step2 !== true ?"stepCss":""'>
+    <div class="appointment-info-wrapper">
+      <div class="breadcrumbs-wrapper">
+        <app-breadcrumbs [clientDetails]="patient" [caseDetails]="caseData"></app-breadcrumbs>
+      </div>
+      <!-- title -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p>Title</p>
+        </div>
+        <div class="appointment-info-input title-input" [ngClass]="{'view-info': mode === 'view'}">
+          <input type="text" class="info-input" [(ngModel)]="appointment.title" readonly
+            [ngClass]="{'disable': mode === 'view'}" (focusout)="validateTitle()" (input)="validateTitle()" />
+        </div>
+        <div *ngIf="errorTitleMsg" class="errmsg">
+          <span>{{errorTitleMsg}}</span>
+        </div>
+      </div>
+      <!-- type -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p>Type of Appointment</p>
+        </div>
+        <div class="appointment-info-input" [ngClass]="{'view-info': mode === 'view'}">
+          <div class="info-input" (click)="showTypeDropdown($event)">
+            <!-- <div class="appointment-type-dropdown-wrapper"> -->
+            <div class="appointment-type">
+              <!-- {{selectedType}} -->
+              {{appointment.type}}
+            </div>
+            <div class="appointment-type-caret" *ngIf="mode !== 'view'">
+              <i class="fa fa-fw fa-angle-down"></i>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="appointment-type-dropdown" *ngIf="toShowTypeDropdown">
+            <ul class="type-list">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search appointment type"
+                  (input)="typeList = dataService.searchFromDropdownList(typeList, nameToSearch, 'type')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let type of typeList">
+                <li *ngIf="type.show" (click)="selectAppointmentType(type)">
+                  {{type.type}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- No of consultation -->
+      <div class="appointment-info-block" *ngIf='appointment.type=="Consultation"||appointment.type=="Follow-Up"'>
+        <div class="appointment-info-title">
+          <p>No of Consultation</p>
+        </div>
+        <div class="appointment-info-input" [ngClass]="{'view-info': mode === 'view'}">
+          <input type="text" class="info-input" [(ngModel)]="appointment.consultationNo"
+            [ngClass]="{'disable': mode === 'view'}" (input)="appendTitle()"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+        </div>
+      </div>
+      <!-- time -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p>Time</p>
+        </div>
+        <div class="row">
+          <div class="appointment-date" [ngClass]="{'view-info': mode === 'view'}">
+            <ion-datetime mode="ios" id="startDatepicker" [(ngModel)]="startDate" class="date-input"
+              displayFormat="DD MMM YYYY" pickerFormat="DD MM YYYY" doneText="Select"
+              (ionChange)='changeDateFormat(startDate,"start")'>
+            </ion-datetime>
+            <img class="calendar-icon" src="assets/images/calender.png"
+              onclick="document.getElementById('startDatepicker').click()" />
+          </div>
+          <div class="appointment-time" [ngClass]="{'view-info': mode === 'view'}" (click)='clickedItem("start")'>
+            <ion-datetime mode="ios" id="startTimepicker" (ionChange)="changeTimeFormat(start,'start');"
+              class="date-input" [(ngModel)]="start" displayFormat="hh:mm A" minuteValues="0,15,30,45"
+              pickerFormat="hh:mm A" doneText="Select" [ngModelOptions]="{standalone: true}">
+            </ion-datetime>
+          </div>
+          <!-- <div *ngIf="errorTimeMsg" class="errmsg">
+                        <span>{{errorTimeMsg}}</span>
+                    </div> -->
+        </div>
+        <div class="row">
+          <div class="appointment-date" [ngClass]="{'view-info': mode === 'view'}">
+            <ion-datetime id="endDatepicker" [(ngModel)]="endDate" class="date-input" displayFormat="DD MMM YYYY"
+              pickerFormat="DD MM YYYY" mode="ios" (ionChange)='changeDateFormat(endDate, "end")' doneText="Select">
+            </ion-datetime>
+            <img class="calendar-icon" src="assets/images/calender.png"
+              onclick="document.getElementById('endDatepicker').click()" />
+          </div>
+          <div class="appointment-time" [ngClass]="{'view-info': mode === 'view'}" (click)='clickedItem("end")'>
+            <ion-datetime mode="ios" id="endTimepicker" (ionChange)="changeTimeFormat(end,'end');" class="date-input"
+              [(ngModel)]="end" displayFormat="hh:mm A" minuteValues="0,15,30,45" pickerFormat="hh:mm A"
+              [ngModelOptions]="{standalone: true}" doneText="Select">
+            </ion-datetime>
+          </div>
+        </div>
+      </div>
+      <!-- Doctors Code -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p *ngIf="appointment.type !== 'Admission' && appointment.type !== 'Discharge'">
+            Doctor
+          </p>
+          <p *ngIf="appointment.type === 'Admission' || appointment.type === 'Discharge'">
+            Hospital
+          </p>
+        </div>
+        <div class="appointment-info-input" [ngClass]="{'view-info': mode === 'view'}">
+          <div class="info-input" (click)="showDoctorDropdown($event)">
+            <!-- <div class="appointment-type-dropdown-wrapper"> -->
+            <div class="appointment-type" *ngIf="appointment.type !== 'Admission' && appointment.type !== 'Discharge'">
+              <!-- {{selectedType}} -->
+              {{selectedDoctor}}
+            </div>
+            <div class="appointment-type" *ngIf="appointment.type === 'Admission' || appointment.type === 'Discharge'">
+              <!-- {{selectedType}} -->
+              {{selectedHospital}}
+            </div>
+            <div class="appointment-type-caret" *ngIf="mode !== 'view'">
+              <i class="fa fa-fw fa-angle-down"></i>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="appointment-type-dropdown"
+            *ngIf="toShowDoctorDropdown && (appointment.type !== 'Admission' && appointment.type !== 'Discharge')">
+            <ul class="type-list">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search doctor name"
+                  (input)="doctorList = dataService.searchFromDropdownList(doctorList, nameToSearch, 'doctorName')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let doctor of doctorList">
+                <li *ngIf="doctor.show" (click)="selectAppointmentDoctor(doctor)">
+                  {{doctor.doctorName}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          <div class="appointment-type-dropdown"
+            *ngIf="toShowDoctorDropdown && (appointment.type === 'Admission' || appointment.type === 'Discharge')">
+            <ul class="type-list">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search hospital name"
+                  (input)="hospitalList = dataService.searchFromDropdownList(hospitalList, nameToSearch, 'hospitalName')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let location of hospitalList">
+                <li *ngIf="location.show" (click)="selectAppointmentHospital(location)">
+                  {{location.hospitalName}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- location -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p>Location</p>
+        </div>
+        <div class="appointment-info-input" *ngIf="appointment.type !== 'Others'"
+          [ngClass]="{'view-info': mode === 'view'}">
+          <div class="info-input" (click)="showLocationDropdown($event)">
+            <!-- <div class="appointment-type-dropdown-wrapper"> -->
+            <div class="appointment-type">
+              <!-- {{selectedType}} -->
+              {{appointment.location}}
+            </div>
+            <div class="appointment-type-caret" *ngIf="mode !== 'view'">
+              <i class="fa fa-fw fa-angle-down"></i>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="appointment-type-dropdown"
+            *ngIf="toShowLocationDropdown && (appointment.type !== 'Admission' && appointment.type !== 'Discharge')">
+            <ul class="type-list">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search location"
+                  (input)="doctorsLocation = dataService.searchFromDropdownList(doctorsLocation, nameToSearch, 'location')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let location of doctorsLocation">
+                <li *ngIf="location.show" (click)="selectAppointmentLocation(location)">
+                  {{location.location}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+          <div class="appointment-type-dropdown"
+            *ngIf="toShowLocationDropdown && (appointment.type === 'Admission' || appointment.type === 'Discharge')">
+            <ul class="type-list">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search location"
+                  (input)="hospitalsLocation = dataService.searchFromDropdownList(hospitalsLocation, nameToSearch, 'location')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let location of hospitalsLocation">
+                <li *ngIf="location.show" (click)="selectAppointmentAddress(location)">
+                  {{location.location}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="appointment-info-input comments-height" *ngIf="appointment.type === 'Others'"
+          [ngClass]="{'view-info': mode === 'view'}">
+          <textarea class="info-input comments-input" placeholder="Enter Location" [(ngModel)]="appointment.location"
+            [ngClass]="{'disable': mode === 'view'}"></textarea>
+        </div>
+      </div>
+      <!-- comments -->
+      <div class="appointment-info-block">
+        <div class="appointment-info-title">
+          <p>Description</p>
+        </div>
+        <div class="appointment-info-input comments-height" [ngClass]="{'view-info': mode === 'view'}">
+          <textarea class="info-input comments-input" placeholder="Enter Comments" [(ngModel)]="appointment.comments"
+            [ngClass]="{'disable': mode === 'view'}"></textarea>
+        </div>
+      </div>
+      <!-- save button -->
+    </div>
+    <div class="save-btn-wrapper" *ngIf="mode !== 'view'">
+      <div class="save-btn" (click)="makeAnAppointment()" *ngIf="!editEvent">
+        <!-- <div class="save-btn" (click)='goToAppiontment()' *ngIf='!editEvent'> -->
+        <p>Save Changes</p>
+      </div>
+      <div class="save-btn" (click)="updateEvent(appointment)" *ngIf="editEvent">
+        <p>Save Changes</p>
+      </div>
+    </div>
+  </div>
+</ion-content>

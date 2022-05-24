@@ -1,0 +1,317 @@
+<ion-content>
+  <div class='create-memo-wrapper'>
+    <div class="follow-up-memo-title">
+      <div class="row">
+        <div class="modal-title col-10">
+          <h4>Create Memo</h4>
+        </div>
+        <div class="col-2 right-text">
+          <ion-icon class="close-modal" (click)="dismiss('')" name="close"></ion-icon>
+        </div>
+      </div>
+    </div>
+    <div class="follow-up-memo-container">
+      <div class="if">
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Type</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <div class="follow-up-memo-info-input" (click)="openTypeDropdown()">
+              <p class="dropdown-title">{{selectedType}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showTypeDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search type"
+                  (input)="types = dataService.searchFromDropdownList(types, nameToSearch, 'type')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let type of types; let j = index">
+                <li *ngIf="type.show" (click)="selectType(type)">{{type.type}}</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <!-- No of consultation -->
+        <div class="follow-up-memo-info-block" *ngIf='selectedType=="Consultation"'>
+          <div class="follow-up-memo-input-label">
+            <p class='dropdown-title'> No of Consultation</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <input type="text" class="follow-up-memo-info-input" [(ngModel)]="consultationMemo.consultationNo"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+          </div>
+        </div>
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Doctor</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <div class="follow-up-memo-info-input" (click)="openDoctorDropdown()">
+              <p class="dropdown-title">{{selectedDoctor}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showDoctorDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search doctor name"
+                  (input)="doctors = dataService.searchFromDropdownList(doctors, nameToSearch, 'doctorName')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let doctor of doctors">
+                <li *ngIf="doctor.show" (click)="selectDoctor(doctor)">{{doctor.doctorName}}</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Memo</p>
+          </div>
+          <div class="follow-up-memo-input-box follow-up-memo-remark-area">
+            <textarea class="follow-up-memo-info-input" name="remark" id="remark" cols="30" rows="6"
+              [(ngModel)]="consultationMemo.memoDesc"></textarea>
+          </div>
+        </div>
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Instruction</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <div class="follow-up-memo-info-input" (click)="openInstructionDropdown()">
+              <p class="dropdown-title">{{selectedInstruction}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showInstructionDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search instruction"
+                  (input)="instructions = dataService.searchFromDropdownList(instructions, nameToSearch, 'instruction')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let instruction of instructions">
+                <li *ngIf="instruction.show" (click)="selectInstruction(instruction.instruction)">
+                  {{instruction.instruction}}</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Facilities / Clinic</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <div class="follow-up-memo-info-input" (click)="openClinicDropdown()">
+              <p class="dropdown-title">{{selectedClinic}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showClinicDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search facilities / clinic"
+                  (input)="clinics = dataService.searchFromDropdownList(clinics, nameToSearch, 'code')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let clinic of clinics">
+                <li *ngIf="clinic.show" (click)="selectClinic(clinic.code)">{{clinic.code}}</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="follow-up-memo-info-block">
+          <div class="follow-up-memo-input-label">
+            <p>Revision</p>
+          </div>
+          <div class="follow-up-memo-input-box">
+            <div class="follow-up-memo-info-input" (click)="openRevisionDropdown()">
+              <p class="dropdown-title">{{selectedRevision}}</p>
+              <div class="dropdown-arrow-wrapper">
+                <span class="dropdown-arrow"></span>
+              </div>
+            </div>
+            <ul class="case-type-dropdown" *ngIf="showRevisionDropdown">
+              <li class="dropdown-input">
+                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search revision"
+                  (input)="revisions = dataService.searchFromDropdownList(revisions, nameToSearch, 'revision')"
+                  (click)="dataService.enterValue($event)">
+              </li>
+              <ng-container *ngFor="let revision of revisions">
+                <li *ngIf="revision.show" (click)="selectRevision(revision.revision)">{{revision.revision}}</li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <!-- <div class="save-btn-wrapper" (click)="saveChanges()"> -->
+      </div>
+    </div>
+    <div class="save-btn-wrapper" (click)='exportPdf()'>
+      <button class="save-btn">Save Changes</button>
+    </div>
+  </div>
+  <div class="pdf-wrapper" hidden>
+    <div class="export-pdf-wrap" id='memo-pdf-wrap' *ngIf="clientName">
+      <div class="pdf-title">
+        <h5>Consultation Memo</h5>
+      </div>
+      <div class="pdf-content">
+        <div class="pdf-block">
+          <!-- name -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Full Name</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{clientName}}</label>
+            </div>
+          </div>
+          <!-- NRIC/FIN -->
+          <div class="pdf-row" *ngIf='clientNric.length!==0'>
+            <div class="pdf-row-title">
+              <label>NRIC/FIN</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{clientNric}}</label>
+            </div>
+          </div>
+          <div class="pdf-row" *ngIf='clientForeignId.length!==0'>
+            <div class="pdf-row-title">
+              <label>Foreign ID</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{clientForeignId}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-block">
+          <!-- Type -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Type</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{consultationMemo.type}}</label>
+            </div>
+          </div>
+          <!-- Doctor -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Doctor</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{consultationMemo.doctor}}</label>
+            </div>
+          </div>
+          <!-- Memo -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Memo</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <p style="white-space: pre-wrap;">
+                {{consultationMemo.memoDesc}}
+              </p>
+            </div>
+          </div>
+          <!-- Instruction -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Instruction</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{consultationMemo.instruction}}</label>
+            </div>
+          </div>
+          <!-- Facilities / Clinic -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Facilities / Clinic</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{consultationMemo.clinic}}</label>
+            </div>
+          </div>
+          <!-- Revision -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Revision</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{consultationMemo.revision}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-block">
+          <!-- Entered By -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Entered By</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{loggedInUser.name}}</label>
+            </div>
+          </div>
+          <!-- Date -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Date</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{pdfDate}}</label>
+            </div>
+          </div>
+          <!-- Time -->
+          <div class="pdf-row">
+            <div class="pdf-row-title">
+              <label>Time</label>
+            </div>
+            <div class="pdf-colon">
+              <label>:</label>
+            </div>
+            <div class="pdf-row-value">
+              <label>{{pdfTime}}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

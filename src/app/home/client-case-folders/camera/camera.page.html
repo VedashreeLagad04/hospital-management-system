@@ -1,0 +1,85 @@
+<ion-content>
+  <!-- <div class="progress-bar-container" *ngIf="showProgressBar">
+    <div class="progress-bar">
+      <ion-progress-bar [value]="uploadProgress"></ion-progress-bar>
+      <span class="upload-percent">Uploading...{{uploadPercent}} %</span>
+    </div>
+  </div> -->
+
+  <section class="page-wrap">
+    <div class="page">
+      <div class="header">
+        <ion-grid class="primary-header ion-no-padding">
+
+          <ion-row class="ion-no-padding">
+            <ion-col size="3" class="ion-no-padding align-left">
+              <img (click)="closeAndback()" class="img-close" src="../../../../assets/images/close.png"
+                alt="close button">
+            </ion-col>
+
+            <ion-col class="align-center" size="6" size="6">
+
+              <!-- <input *ngIf = "mode == 'edit'" class="filename" name="filename" type="text" 
+                [(ngModel)] = "selectedImages[currentImageIndex].fileName"
+                (keyup)="this.imageNameUpdate.next($event)"> -->
+
+            </ion-col>
+
+
+            <ion-col size="3" class="ion-no-padding align-right">
+              <img *ngIf="mode == 'capture'" (click)="switchCamera()" src="../../../../assets/images/refresh.png"
+                alt="change-camera">
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </div>
+      <div class="camera-preview-area">
+        <img *ngIf="currentImage" [src]="currentImage.newURL" alt="" class="current-selected-image">
+      </div>
+      <div class="footer-wrapper" *ngIf="showFooter">
+        <div class="footer-content">
+          <div *ngIf="mode == 'edit'" [ngClass]="{'padding-top-footer': (mode == 'edit'),'primary-footer' : true}">
+            <div class="a-selected-image inline-block" *ngFor="let image of selectedImages;let in = index">
+              <img class="actual-image" [src]="image.newURL" alt="" (click)="showSelectedImage(image,in)">
+              <div class="selected-image-delete-icon inline-block">
+                <img src="../../../../assets/images/white-close.svg" alt="" (click)="removeSelectedImage(image,in)">
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mode == 'edit'" class="footer-seperator"></div>
+          <div class="secondary-footer"
+            [ngClass]="{'secondary-footer': true , 'padding-top-footer' : (mode == 'capture')}">
+            <ion-grid class="ion-no-padding">
+              <ion-row class="ion-no-padding align-items-center ">
+                <ion-col size="3" class="ion-no-padding">
+                  <!--                   <div class="gallery-selector">
+                    <img (click)="openPhoneGallery()" src="assets/images/defects/gallery3.png" class="vertical-align-middle"
+                      alt="">
+                  </div> -->
+                </ion-col>
+                <ion-col size="6" class="ion-no-padding align-center">
+                  <div class="capture-image-wrap inline-block" (click)="captureImage()" *ngIf="mode == 'capture'">
+                    <!-- <img src="assets/images/defects/capture-image.svg" alt="capture-image"> -->
+                  </div>
+                  <div class="capture-image-wrap inline-block" (click)="captureImage()" *ngIf="mode == 'edit'">
+                    <ion-icon name="add" class="add-img"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col size="3" class="ion-no-padding align-right">
+                  <div class="forward-wrap inline-block" (click)="next()"
+                    *ngIf="selectedImages && selectedImages.length > 0">
+                  <!-- <div class="forward-wrap inline-block" (click)="openFileModal()"> -->
+                    <img src="../../../../assets/images/white-forward.svg" alt="capture-image"
+                      class="vertical-align-middle">
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</ion-content>

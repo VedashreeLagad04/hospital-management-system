@@ -1,0 +1,383 @@
+<ion-content (click)="closeDropdown()">
+    <div id="pre-extg-container" class="pre-extg-container">
+        <div class="button"
+            *ngIf="mode=='preview' && loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management')">
+            <div class="edit-btn-wrapper" (click)="edit()">
+                <button class="edit-btn">Edit</button>
+            </div>
+        </div>
+        <div class="addition" *ngFor="let obj of prexisting.preExistingCondition ; let i=index">
+            <div class="sub-container" *ngIf="i==0">
+                <div class="pre-extg-info-block">
+                    <div class="pre-extg-input-label">
+                        <p>High Blood Pressure:</p>
+                    </div>
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="bloodPressureYes{{i}}" name="bloodPressureYes{{i}}" value="Yes"
+                            class="radio1" [(ngModel)]="obj.bloodPressure">
+                        <label class="radio-label" for="bloodPressureYes{{i}}">Yes</label>
+                        <input type="radio" id="bloodPressureNo{{i}}" name="bloodPressureNo{{i}}" value="No"
+                            class="radio" [(ngModel)]="obj.bloodPressure">
+                        <label class="radio-label" for="bloodPressureNo{{i}}">No</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1" *ngIf="obj.bloodPressure == 'Yes'">
+                    <div class="pre-extg-input-label">
+                        <p>Medication:</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                            [(ngModel)]="obj.bloodPressureMedication">
+                        <p class="pre-extg-info-input" *ngIf="obj.bloodPressureMedication !== '' && mode === 'preview'">
+                            {{obj.bloodPressureMedication}}</p>
+                        <p class="pre-extg-info-input" *ngIf="obj.bloodPressureMedication === '' && mode === 'preview'">
+                            -</p>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block">
+                    <div class="pre-extg-input-label">
+                        <p>Diabetes:</p>
+                    </div>
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="diabetesYes{{i}}" name="diabetesYes{{i}}" value="Yes" class="radio1"
+                            [(ngModel)]="obj.diabetes">
+                        <label class="radio-label" for="diabetesYes{{i}}">Yes</label>
+                        <input type="radio" id="diabetesNo{{i}}" name="diabetesNo{{i}}" value="No" class="radio"
+                            [(ngModel)]="obj.diabetes">
+                        <label class="radio-label" for="diabetesNo{{i}}">No</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1" *ngIf="obj.diabetes == 'Yes'">
+                    <div class="pre-extg-input-label">
+                        <p>Medication:</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                            [(ngModel)]="obj.diabetesMedication">
+                        <p class="pre-extg-info-input" *ngIf="obj.diabetesMedication !== '' && mode === 'preview'">
+                            {{obj.diabetesMedication}}</p>
+                        <p class="pre-extg-info-input" *ngIf="obj.diabetesMedication === '' && mode === 'preview'">-</p>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block">
+                    <div class="pre-extg-input-label">
+                        <p>High Cholesterol:</p>
+                    </div>
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="cholesterolYes{{i}}" name="cholesterolYes{{i}}" value="Yes"
+                            class="radio1" [(ngModel)]="obj.highCholesterol">
+                        <label class="radio-label" for="cholesterolYes{{i}}">Yes</label>
+                        <input type="radio" id="cholesterolNo{{i}}" name="cholesterolNo{{i}}" value="No" class="radio"
+                            [(ngModel)]="obj.highCholesterol">
+                        <label class="radio-label" for="cholesterolNo{{i}}">No</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1" *ngIf="obj.highCholesterol == 'Yes'">
+                    <div class="pre-extg-input-label">
+                        <p>Medication:</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                            [(ngModel)]="obj.cholesterolMedication">
+                        <p class="pre-extg-info-input" *ngIf="obj.cholesterolMedication !== '' && mode === 'preview'">
+                            {{obj.cholesterolMedication}}</p>
+                        <p class="pre-extg-info-input" *ngIf="obj.cholesterolMedication === '' && mode === 'preview'">-
+                        </p>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Other Supplement or Medication:</p>
+                    </div>
+                    <!-- <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                            [(ngModel)]="obj.otherMedication ">
+                        <p class="pre-extg-info-input" *ngIf="obj.otherMedication !== '' && mode === 'preview'">
+                            {{obj.otherMedication }}</p>
+                        <p class="pre-extg-info-input" *ngIf="obj.otherMedication === '' && mode === 'preview'">-
+                        </p>
+                    </div> -->
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="otherMedicationYes{{i}}" name="otherMedicationYes{{i}}" value="Yes"
+                            class="radio1" [(ngModel)]="obj.otherMedicationAnswer">
+                        <label class="radio-label" for="otherMedicationYes{{i}}">Yes</label>
+                        <input type="radio" id="otherMedicationNo{{i}}" name="otherMedicationNo{{i}}" value="No"
+                            class="radio" [(ngModel)]="obj.otherMedicationAnswer">
+                        <label class="radio-label" for="otherMedicationNo{{i}}">No</label>
+                    </div>
+                </div>
+                <ng-container *ngIf="obj.otherMedicationAnswer == 'Yes'">
+                    <div class="pre-extg-info-block1" *ngFor="let otherMed of obj.otherMedicationsArr; let m = index">
+                        <div class="pre-extg-input-label">
+                            <p *ngIf="m === 0">Medication:</p>
+                        </div>
+                        <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                            <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                                [(ngModel)]="otherMed.medication">
+                            <p class="pre-extg-info-input" *ngIf="otherMed.medication !== '' && mode === 'preview'">
+                                {{otherMed.medication}}</p>
+                            <p class="pre-extg-info-input" *ngIf="otherMed.medication === '' && mode === 'preview'">-
+                            </p>
+                        </div>
+                        <button (click)="addInputs('other-medication', obj)" class="plus-button plus-button--small"
+                            *ngIf="m === 0 && mode === 'edit' && (loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management'))"></button>
+                        <button (click)="removeInputs('other-medication', obj, m)" class="close-button"
+                            *ngIf="m > 0 && mode === 'edit' && (loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management'))"></button>
+                    </div>
+                </ng-container>
+                <div class="pre-extg-info-block"
+                    *ngIf="prexisting && prexisting.profile && (prexisting.profile.gender === 'female' || prexisting.profile.gender === 'Female')">
+                    <div class="pre-extg-input-label">
+                        <p>Pregnant:</p>
+                    </div>
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="pregnantYes{{i}}" name="pregnantYes{{i}}" value="Yes" class="radio1"
+                            [(ngModel)]="obj.pregnant">
+                        <label class="radio-label" for="pregnantYes{{i}}">Yes</label>
+                        <input type="radio" id="pregnantNo{{i}}" name="pregnantNo{{i}}" value="No" class="radio"
+                            [(ngModel)]="obj.pregnant">
+                        <label class="radio-label" for="pregnantNo{{i}}">No</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1"
+                    *ngIf="obj.pregnant == 'Yes' && prexisting && prexisting.profile && (prexisting.profile.gender === 'female' || prexisting.profile.gender === 'Female')">
+                    <div class="pre-extg-input-label">
+                        <p>Months</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'input-disable1' : 'pre-extg-input-box1'">
+                        <input type="text" class="pre-extg-info-input1" placeholder="3" [(ngModel)]="obj.months">
+                    </div>
+                    <div class="pre-extg-input-label1">
+                        <p>as of date</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'date-disable1' : 'pre-extg-date-box1'">
+                        <!-- <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.pregnantDate"> -->
+                        <ion-datetime style="padding: 0.8rem;" id="inceptionDate" aria-placeholder="29/06/2020"
+                            displayFormat="DD MMM YYYY" [(ngModel)]="obj.pregnantDate"
+                            [ngClass]="{'blue': mode === 'preview'}">
+                        </ion-datetime>
+                        <ion-icon name="calendar" class="calendar1"
+                            onclick="document.getElementById('inceptionDate').click()">
+                        </ion-icon>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block">
+                    <div class="pre-extg-input-label">
+                        <p>AIDS, HIV or STD:</p>
+                    </div>
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="aidsHivStdYes{{i}}" name="aidsHivStdYes{{i}}" value="Yes" class="radio1"
+                            [(ngModel)]="obj.aidsHivStd">
+                        <label class="radio-label" for="aidsHivStdYes{{i}}">Yes</label>
+                        <input type="radio" id="aidsHivStdNo{{i}}" name="aidsHivStdNo{{i}}" value="No" class="radio"
+                            [(ngModel)]="obj.aidsHivStd">
+                        <label class="radio-label" for="aidsHivStdNo{{i}}">No</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1" *ngIf="obj.aidsHivStd == 'Yes'">
+                    <div class="pre-extg-input-label">
+                        <p>If yes, remarks</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.hivRemarks">
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Family history</p>
+                    </div>
+                    <!-- <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.familyHistory">
+                    </div> -->
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="familyHistoryYes{{i}}" name="familyHistoryYes{{i}}" value="Yes"
+                            class="radio1" [(ngModel)]="obj.familyHistoryAnswer">
+                        <label class="radio-label" for="familyHistoryYes{{i}}">Yes</label>
+                        <input type="radio" id="familyHistoryNo{{i}}" name="familyHistoryNo{{i}}" value="No"
+                            class="radio" [(ngModel)]="obj.familyHistoryAnswer">
+                        <label class="radio-label" for="familyHistoryNo{{i}}">No</label>
+                    </div>
+                </div>
+                <ng-container *ngIf="obj.familyHistoryAnswer == 'Yes'">
+                    <div class="pre-extg-info-block1" *ngFor="let history of obj.familyHistoryArr; let m = index">
+                        <div class="pre-extg-input-label">
+                            <p *ngIf="m === 0">History:</p>
+                        </div>
+                        <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                            <input type="text" class="pre-extg-info-input" *ngIf="mode === 'edit'"
+                                [(ngModel)]="history.history">
+                            <p class="pre-extg-info-input" *ngIf="history.history !== '' && mode === 'preview'">
+                                {{history.history}}</p>
+                            <p class="pre-extg-info-input" *ngIf="history.history === '' && mode === 'preview'">
+                                -
+                            </p>
+                        </div>
+                        <button (click)="addInputs('family-history', obj)" class="plus-button plus-button--small"
+                            *ngIf="m === 0 && mode === 'edit' && (loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management'))"></button>
+                        <button (click)="removeInputs('family-history', obj, m)" class="close-button"
+                            *ngIf="m > 0 && mode === 'edit' && (loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management'))"></button>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="pre-extg-info-block1" *ngIf="i === 0">
+                <div class="pre-extg-input-label">
+                    <p>Medical History</p>
+                </div>
+                <!-- <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                    <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.familyHistory">
+                </div> -->
+                <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                    <input type="radio" id="showFamilyHistoryYes{{i}}" name="showFamilyHistoryYes{{i}}" value="Yes"
+                        class="radio1" [(ngModel)]="obj.showHistory" (click)="showMedicalHistory('Yes')">
+                    <label class="radio-label" for="showFamilyHistoryYes{{i}}">Yes</label>
+                    <input type="radio" id="showFamilyHistoryNo{{i}}" name="showFamilyHistoryNo{{i}}" value="No"
+                        class="radio" [(ngModel)]="obj.showHistory" (click)="showMedicalHistory('No')">
+                    <label class="radio-label" for="showFamilyHistoryNo{{i}}">No</label>
+                </div>
+            </div>
+            <div class="sub-container" *ngIf="obj.showHistory === 'Yes'">
+                <p><b>{{i+1}}. Medical History</b></p>
+                <hr>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Condition</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.condition">
+                        <!-- <div class="pre-extg-dropdown-input" (click)="openConditionDropdown(obj)">
+                            <p class="dropdown-title">{{obj.condition}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="case-type-dropdown" *ngIf="obj.showConditionDropdown">
+                            <li *ngFor="let condition of conditions" (click)="selectCondition(condition,obj)">
+                                {{condition}}</li>
+                        </ul> -->
+                    </div>
+                    <button (click)="delete(i)" class="close-button" *ngIf="i>0 && mode=='edit'"></button>
+                </div>
+
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Date</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'date-disable' : 'pre-extg-date-box'">
+                        <!-- <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.date"> -->
+                        <ion-datetime style="padding: 1rem; width: 90%;" [id]="'date-'+i" displayFormat="DD MMM YYYY"
+                            [ngClass]="{'blue': mode === 'preview'}" [(ngModel)]="obj.date">
+                        </ion-datetime>
+                        <ion-icon name="calendar" class="calendar" (click)="openDatePicker(i)">
+                        </ion-icon>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Type of Institution</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <div class="pre-extg-dropdown-input" (click)="openInstitutionDropdown($event , obj)">
+                            <p class="dropdown-title">{{obj.institutionType}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="case-type-dropdown" *ngIf="obj.showInstitutionDropdown">
+                            <li class="dropdown-input">
+                                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search type"
+                                    (input)="institutions = dataService.searchFromDropdownList(institutions, nameToSearch, 'institution')"
+                                    (click)="dataService.enterValue($event)">
+                            </li>
+                            <ng-container *ngFor="let institution of institutions">
+                                <li *ngIf="institution.show" (click)="selectInstitution(institution.institution,obj)">
+                                    {{institution.institution}}</li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>Name of Institution</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' || obj.institutionType === '' ? 'disable' : 'pre-extg-input-box'"
+                        *ngIf="hospitalType === 'Private' || hospitalType === 'Public' || hospitalType === 'Polyclinic'">
+                        <div class="pre-extg-dropdown-input" (click)="openInstitutionNameDropdown($event , obj)">
+                            <p class="dropdown-title">{{obj.nameOfInstitution}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="case-type-dropdown" *ngIf="obj.showInstitutionNameDropdown">
+                            <li class="dropdown-input">
+                                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search institution"
+                                    (input)="hospitals = dataService.searchFromDropdownList(hospitals, nameToSearch, 'name')"
+                                    (click)="dataService.enterValue($event)">
+                            </li>
+                            <ng-container *ngFor="let name of hospitals">
+                                <li *ngIf="name.show" (click)="selectInstitutionName(name.name,obj)">
+                                    {{name.name}}</li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'"
+                        *ngIf="hospitalType === 'GP' || hospitalType === 'Others'">
+                        <input type="text" class="pre-extg-info-input" [(ngModel)]="obj.nameOfInstitution">
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-input-label">
+                        <p>History</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box'">
+                        <div class="pre-extg-dropdown-input" (click)="openHistoryDropdown($event , obj)">
+                            <p class="dropdown-title">{{obj.history}}</p>
+                            <div class="dropdown-arrow-wrapper">
+                                <span class="dropdown-arrow"></span>
+                            </div>
+                        </div>
+                        <ul class="case-type-dropdown" *ngIf="obj.showHistoryDropdown">
+                            <li class="dropdown-input">
+                                <input type="text" [(ngModel)]="nameToSearch" placeholder="Search institution"
+                                    (input)="histories = dataService.searchFromDropdownList(histories, nameToSearch, 'history')"
+                                    (click)="dataService.enterValue($event)">
+                            </li>
+                            <ng-container *ngFor="let history of histories">
+                                <li *ngIf="history.show" (click)="selectHistory(history.history,obj)">
+                                    {{history.history}}</li>
+                            </ng-container>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block" *ngIf="obj.showDeclared">
+                    <div class="radio-div" [ngClass]="{'blue': mode === 'preview'}">
+                        <input type="radio" id="declared{{i}}" name="declared{{i}}" value="Yes" class="radio1"
+                            [(ngModel)]="obj.declared">
+                        <label class="radio-label" for="declared{{i}}">Declared</label>
+                        <input type="radio" id="notDeclared{{i}}" name="notDeclared{{i}}" value="No" class="radio2"
+                            [(ngModel)]="obj.declared">
+                        <label class="radio-label" for="notDeclared{{i}}">Not-Declared</label>
+                    </div>
+                </div>
+                <div class="pre-extg-info-block1">
+                    <div class="pre-extg-remarks-label">
+                        <p>Remarks</p>
+                    </div>
+                    <div [ngClass]="mode === 'preview' ? 'disable' : 'pre-extg-input-box pre-extg-remark-area'">
+                        <textarea class="pre-extg-info-input" name="remark" id="remark" cols="30" rows="4"
+                            [(ngModel)]="obj.remarks"
+                            placeholder="Please elaborate of this pre-existing condition"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="new-btn-wrapper" (click)="add()"
+            *ngIf="mode=='edit' && prexisting.preExistingCondition[0].showHistory === 'Yes'">
+            <button class="new-btn">Add new condition</button>
+        </div>
+        <div class="save-button">
+            <div class="save-btn-wrapper" (click)="saveChanges()" *ngIf="mode=='edit'">
+                <button class="save-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,209 @@
+<ion-content>
+    <div [ngClass]="mode == 'preview' ? 'pre-adm-checklist-preview-container' : 'pre-adm-checklist-container' ">
+        <div class="button" *ngIf="mode === 'preview' && loggedInuser && (loggedInuser.type === 'agent' || loggedInuser.type === 'Claims Manager' || loggedInuser.type === 'Finance Manager' || loggedInuser.type === 'Management')">
+            <div class="save-btn-wrapper" (click)="signForm()">
+                <button class="save-btn">Sign Form</button>
+            </div>
+        </div>
+        <div
+            [ngClass]="mode == 'preview' ? 'pre-adm-checklist-sub-preview-container' : 'pre-adm-checklist-sub-container' ">
+            <div id="pre-adm-pdf-wrap">
+                <div class="title" [ngClass]="{'preview-title': mode === 'preview'}">
+                    <h2>Pre-Admission Checklist</h2>
+                </div>
+                <div [ngClass]="mode == 'preview' ? 'preview-info' : 'info' ">
+                    <div class="first" [ngClass]="{'preview-first': mode === 'preview'}">
+                        I, <div class='guardian-nric' *ngIf='ehealth && ehealth.profile && ehealth.profile.guardian && mode === "edit"'>
+                            <input class='guardian-details' [(ngModel)]='ehealth.profile.consentDetails.name'
+                                placeholder='Parent/Guardian Name' />,
+                            <input class='guardian-details' [(ngModel)]='ehealth.profile.consentDetails.nric'
+                                placeholder="NRIC/FIN/Foreign ID" />
+                        </div>
+                        <p class='guardian-nric' *ngIf='ehealth && ehealth.profile && ehealth.profile.guardian'>
+                            <span class="guardian-details" *ngIf='mode === "preview"'>
+                                {{ehealth.profile.consentDetails.name}}, {{ehealth.profile.consentDetails.nric}}
+                            </span>
+                            am the <span *ngIf='ehealth && ehealth.profile && ehealth.profile.consentDetails.relation!=="Guardian"'>parent </span>
+                            <span *ngIf='ehealth.profile.consentDetails.relation==="Guardian"'> guardian
+                                <span
+                                    *ngIf='ehealth && ehealth.profile && ehealth.profile.consentDetails.guardianRelation && ehealth.profile.consentDetails.guardianRelation.length!==0 '>
+                                    ({{ehealth.profile.consentDetails.guardianRelation}})
+                                </span>
+                            </span>of
+                            <span style="font-weight: bold;text-transform: capitalize;">
+                                {{history.name}}, </span>
+                            <span style="font-weight: bold;" *ngIf="history.nationality !== 'foreigner'">
+                                {{history.nric}}
+                            </span>
+                            <span style="font-weight: bold;" *ngIf="history.nationality === 'foreigner'">
+                                {{history.foreignId}} </span> hereby acknowledge that I have been
+                            informed by my Premium Care SG Pte. Ltd. (PCARE) Consultant the following:
+                        </p>
+                        <p class='guardian-nric' *ngIf='!history.guardian'>
+                            <span style="font-weight: bold;text-transform: capitalize;"> {{history.name}}, </span>
+                            <span style="font-weight: bold;" *ngIf="history.nationality !== 'foreigner'">
+                                {{history.nric}}
+                            </span>
+                            <span style="font-weight: bold;" *ngIf="history.nationality === 'foreigner'">
+                                {{history.foreignId}} </span>
+                            acknowledge that I have been informed by my Premium Care SG Pte.
+                            Ltd.
+                            (PCARE) Consultant the following:
+                        </p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>1.</p>
+                        </div>
+                        <p class="rest">Pre-hospitalisation, Post-hospitalisation and Outpatient bills will be based on
+                            pay-first and seek reimbursement later.</p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>2.</p>
+                        </div>
+                        <p class="rest">Accordingly per doctor’s advice, I need to stop blood thinning medication and/or
+                            other (Chinese) medications (e.g. Cordyceps) if any.</p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>3.</p>
+                        </div>
+                        <p class="rest">Smoking is not permitted within Hospital/Day Surgery Centre premises.</p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>4.</p>
+                        </div>
+                        <p class="rest">PCARE Consultant(s) may visit me during my stay at the Hospital/ Day Surgery
+                            Centre.
+                        </p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>5.</p>
+                        </div>
+                        <p class="rest">PCARE Claims Department may contact me for my claims related matter and I will
+                            provide claims update whenever I receive it from the Insurer.</p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>6.</p>
+                        </div>
+                        <p class="rest">PCARE Consultant may contact me for post service feedback.</p>
+                    </div>
+                    <div class="statement">
+                        <div class="number">
+                            <p>7.</p>
+                        </div>
+                        <div class="rest">
+                            <p style="margin-bottom: 2rem;">For better case and claim management,</p>
+                            <div class="sub-statement">
+                                <div class="sub-number">
+                                    <p>a.</p>
+                                </div>
+                                <p class="rest1">Upon receiving discharge notice, I will inform my PCARE Consultant that
+                                    I can be discharged and I will provide all the discharge documents and medical
+                                    reports.
+                                </p>
+                            </div>
+                            <div class="sub-statement">
+                                <div class="sub-number">
+                                    <p>b.</p>
+                                </div>
+                                <p class="rest1">I will inform my PCARE Consultant on my follow up dates and timing for
+                                    the ease of claiming insurance.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="signature-box" [ngClass]="mode == 'preview' ? 'signature-box-disable' : '' " (click)="openSignatureModal()" >
+                        <div class="signature-label-box">
+                            <div class="signature-label">
+                                <p
+                                    *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === false">
+                                    Client's Signature</p>
+                                <p
+                                    *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === true">
+                                    Parent/Guardian Signature</p>
+                            </div>
+                        </div>
+                        <div class="signature-img-wrap">
+                            <div class="signature-img" *ngIf="latestPreAdmChecklist">
+                                <img [src]="latestPreAdmChecklist.signature" alt="signature"
+                                    *ngIf="latestPreAdmChecklist.signature != '' && latestPreAdmChecklist.signature != null">
+                            </div>
+                            <div class="empty-signature-preview"
+                                *ngIf="(latestPreAdmChecklist == undefined) || (latestPreAdmChecklist.signature == '') || (latestPreAdmChecklist.signature == null)">
+                            </div>
+                            <div class="cross-button">
+                                <button class="cross"></button>
+                                <div class="line">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pre-info-block"
+                        *ngIf="mode == 'preview' && latestPreAdmChecklist &&  ehealth && ehealth.profile && latestPreAdmChecklist.signature != ''">
+                        <div class="pre-input-label">
+                            <p *ngIf="ehealth.profile.guardian === false">Client Name</p>
+                            <p *ngIf="ehealth.profile.guardian === true">Parent/Guardian Name</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="pre-input-label1 capitalize-text"
+                            *ngIf="latestPreAdmChecklist.signature!='' && ehealth && ehealth.profile && ehealth.profile.guardian === false">
+                            {{ehealth.profile.name }}
+                        </div>
+                        <div class="pre-input-label1 capitalize-text"
+                            *ngIf="latestPreAdmChecklist.signature!='' && ehealth && ehealth.profile &&  ehealth.profile.guardian === true">
+                            {{ehealth.profile.consentDetails.name }}
+                        </div>
+                    </div>
+                    <div class="pre-info-block"
+                        *ngIf="mode == 'preview' && latestPreAdmChecklist && ehealth && ehealth.profile &&  ehealth.profile.guardian === true && latestPreAdmChecklist.signature != ''">
+                        <div class="pre-input-label">
+                            <p>Relationship</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="pre-input-label1" *ngIf="latestPreAdmChecklist.signature!=''">
+                            {{ehealth.profile.consentDetails.relation }}
+                        </div>
+                    </div>
+                    <div class="pre-info-block" *ngIf="mode == 'preview' && latestPreAdmChecklist && latestPreAdmChecklist.signature != ''">
+                        <div class="pre-input-label">
+                            <p>Date</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="pre-input-label1">
+                            {{latestPreAdmChecklist.date }}
+                        </div>
+                    </div>
+                    <div class="pre-info-block" *ngIf="mode == 'preview' && latestPreAdmChecklist && latestPreAdmChecklist.signature != ''">
+                        <div class="pre-input-label">
+                            <p>Time</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="pre-input-label1">
+                            {{latestPreAdmChecklist.time }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit-button" *ngIf="mode === 'edit'">
+                <div class="submit-btn-wrapper" [ngClass]="((!clientType || (clientType && clientType === 'new')) && (latestPreAdmChecklist=== undefined || !latestPreAdmChecklist.signature || (latestPreAdmChecklist && (latestPreAdmChecklist.signature === '' || latestPreAdmChecklist.signature === null)))) ? 'submit-btn-wrapper-disable' : '' "
+                    (click)="submit()" *ngIf="mode == 'edit'">
+                    <button class="submit-btn" [ngClass]="((!clientType || (clientType && clientType === 'new')) && (latestPreAdmChecklist=== undefined || !latestPreAdmChecklist.signature || (latestPreAdmChecklist && (latestPreAdmChecklist.signature === '' || latestPreAdmChecklist.signature === null)))) ? 'submit-btn-wrapper-disable' : '' ">
+                        Submit Form</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</ion-content>

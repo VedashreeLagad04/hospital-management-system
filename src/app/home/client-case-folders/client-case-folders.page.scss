@@ -1,0 +1,459 @@
+.case-folder-wrapper {
+    width: 100%;
+    height: calc(100vh - 5rem);
+    padding: 5rem 5rem 5rem 4rem;
+}
+
+.case-folder-left-container {
+    position: relative;
+    display: inline-block;
+    width: calc(28.976% - 3.5rem);
+    height: 85vh;
+    padding: 2rem;
+    margin-right: 3.5rem;
+    background: #fbfbfb;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    vertical-align: top;
+    line-height: 2.2rem;
+    // overflow-y: auto;
+}
+
+.case-folder-right-container {
+    display: inline-block;
+    // width: 67.82%;
+    width: 71%;
+    height: 85vh;
+    background: #fbfbfb;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 2rem;
+}
+
+.tab-sub-blk {
+    display: inline-block;
+    width: 33.33%;
+    text-align: center;
+}
+
+.tab-icon-blk {
+    display: inline-block;
+    width: 100%;
+}
+
+.tab-icon {
+    // width: 1.6rem;
+    // height: 2rem;
+    width: 2.6rem;
+    height: 3rem;
+}
+
+.tab-icon1 {
+    // width: 1.6rem;
+    // height: 2rem;
+    width: 2.6rem;
+    height: 3rem;
+    vertical-align: middle;
+}
+
+.tab-lable {
+    display: inline-block;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+}
+
+.disabled {
+    color: #aeaeb2;
+    cursor: initial;
+    pointer-events: none;
+}
+
+.active {
+    color: #007aff;
+    cursor: pointer;
+    pointer-events: auto;
+    // box-shadow: 0 3px 6px #00000029;
+}
+
+.dropdown-arrow-wrapper {
+    display: inline-block;
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    // padding-left: 0.7rem;
+}
+
+.dropdown-icon {
+    margin: 0;
+    vertical-align: middle;
+    transform: rotate(90deg);
+    display: inline-block;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.dropdown-arrow {
+    border: solid #aeaeb2;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.case-folder-text {
+    font-size: 1.2rem;
+    letter-spacing: -0.29px;
+    color: #aeaeb2;
+    margin-left: 0.5rem;
+    display: inline-block;
+    line-height: 2.2rem;
+    cursor: pointer;
+}
+
+.case-folder-search-bar {
+    display: inline-block;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.case-folder-search-bar input {
+    padding: 0.8rem 0.6rem 0.8rem 3rem;
+    border: 1px solid #d4d4d4;
+    font-family: "sf-pro", sans-serif;
+    vertical-align: middle;
+    font-size: 1.7rem;
+    outline: none;
+}
+
+.case-folder-search-bar input::placeholder {
+    color: #3c3c4399;
+    font-size: 1.7rem;
+    letter-spacing: -0.41px;
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    left: 0.6rem;
+    top: 25%;
+    font-size: 2rem;
+    color: #3c3c4399;
+}
+
+.searchInput {
+    border-radius: 1rem;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+.case-folders-sub-blk {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    padding: 1.6rem 0 0rem 0;
+    cursor: pointer;
+    border-bottom: 1px solid #7e7e7e;
+}
+
+.file-icon-name {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.file-names-wrap {
+    display: inline-block;
+    width: 100%;
+    height: 50vh;
+    overflow-y: auto;
+}
+
+.folder-icon {
+    // width: 2rem;
+    // height: 1.7rem;
+    width: 3rem;
+    height: 2rem;
+    color: #656565;
+    vertical-align: middle;
+}
+
+.folder-name {
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+    color: #3e3e3e;
+    // padding-left: 0.8rem;
+    vertical-align: middle;
+}
+
+.preview {
+    font-size: 2.6rem;
+    line-height: 1.9rem;
+    color: #3e3e3e;
+    opacity: 0.7;
+}
+
+.file-icon,
+.file-name {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.file-icon {
+    width: 3rem;
+}
+
+.file-name {
+    width: calc(100% - 3rem);
+    padding-left: 0.5rem;
+}
+
+.file-name1 {
+    width: calc(100% - 3rem);
+    padding: 1rem;
+}
+
+.file-date-wrap {
+    display: inline-block;
+    width: 100%;
+    text-align: end;
+    vertical-align: bottom;
+}
+
+.folder-date {
+    /*position: absolute; */
+    /* right: 0; */
+    /* bottom: 0.6rem; */
+    display: inline-block;
+    width: 100%;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    color: #76767a;
+}
+
+.btn-wrap {
+    display: inline-block;
+    width: 100%;
+    // margin: 9.6rem 0 7.4rem 0;
+}
+
+.discharge-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 0.8rem 2rem;
+    background: #ffffff;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #007aff;
+}
+
+.pdf-header-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem 0;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem 1rem 0 0;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+.page-text,
+.of-text {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 1.4rem;
+    line-height: 1.3rem;
+}
+
+.margin-right {
+    margin-right: 1rem;
+}
+
+.of-text {
+    margin: 0 0.5rem;
+}
+
+.number-blk {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    background: #e5e5e5;
+    border: 0.5px solid #7e7e7e;
+    text-align: center;
+}
+
+.back-next-btn-blk {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0.8rem 1rem;
+    border: 0.5px solid #7e7e7e;
+    background: #fbfbfb;
+    border-radius: 0.5rem;
+    margin-left: 1rem;
+}
+
+.back-arrow-wrapper,
+.next-arrow-wrapper {
+    display: inline-block;
+    vertical-align: middle;
+    width: 0.8rem;
+    height: 1.4rem;
+}
+
+.arrow {
+    border: solid #aeaeb2;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px;
+}
+
+.back-arrow {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.next-arrow {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.preview-container {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.display-pdf,
+.display-docx,
+.display-image {
+    display: inline-block;
+    width: 100%;
+    height: calc(95% - 6rem);
+    overflow-y: auto;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+.display-image {
+    text-align: center;
+}
+.doc-image {
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+}
+.galleryImg {
+    width: 3rem;
+    height: 2.5rem;
+    object-fit: fill;
+}
+
+.btn {
+    padding: 0.8rem 2.2rem;
+    background: #ffffff;
+    border: 1px solid #d4d4d4;
+    border-radius: 1rem;
+    line-height: 2.2rem;
+    color: #007aff;
+    margin: 2rem 2rem 0rem 2rem;
+}
+
+.export-btn {
+    float: right;
+    width: 17.248%;
+}
+
+// ::ng-deep .pdfViewer.removePageBorders .page {
+//     margin: 0 !important;
+// }
+.change-height {
+    height: 59vh;
+}
+@media (max-width: 769px) {
+    .case-folder-left-container {
+        padding: 2rem 1rem;
+    }
+    .change-height {
+        height: 67vh;
+    }
+    .discharge-btn {
+        padding: 0.8rem;
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+    }
+    .dropdown-arrow-wrapper {
+        width: 1.4rem;
+        height: 1.5rem;
+    }
+    .case-folder-text {
+        font-size: 1rem;
+        line-height: 1.2rem;
+    }
+    .folder-name {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+    }
+}
+
+@media screen and (min-width: 834px) and (max-width: 1140px) {
+    .case-folder-left-container {
+        padding: 1rem;
+    }
+    .dropdown-arrow-wrapper {
+        width: 1.4rem;
+        height: 1.5rem;
+    }
+    .case-folder-text {
+        font-size: 1.1rem;
+        line-height: 1.2rem;
+    }
+    .folder-name {
+        font-size: 1.4rem;
+        line-height: 1.7rem;
+    }
+    .discharge-btn {
+        padding: 0.7rem;
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+    }
+}
+
+@media (min-width: 1280px) and (max-height: 950px) {
+    .case-folder-wrapper {
+        width: 70%;
+        margin: 2rem auto;
+        padding: 0rem;
+        height: auto;
+    }
+    .case-folder-left-container {
+        width: calc(27% - 3.5rem);
+        margin-right: 3.5rem;
+    }
+    .case-folder-right-container {
+        width: 73%;
+    }
+}
+
+@media (min-width: 1441px) {
+    .case-folder-wrapper {
+        width: 70%;
+        margin: 2rem auto;
+        padding: 0rem;
+        height: auto;
+    }
+    .case-folder-left-container {
+        width: calc(23% - 3.5rem);
+        margin-right: 3.5rem;
+    }
+    .case-folder-right-container {
+        width: 77%;
+    }
+}

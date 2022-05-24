@@ -1,0 +1,20 @@
+<ion-content>
+  <div class="caseResubmission-wrapper">
+    <div class="row">
+      <div class="col-2 close-modal-wrap">
+        <ion-icon class="close-modal" (click)="dismiss(newCaseResubmission.comments)" name="close"></ion-icon>
+      </div>
+      <div class="modal-title col-10">
+        <i>
+          <h4>Resubmission</h4>
+        </i>
+      </div>
+    </div>
+    <div class="caseResubmission-main-blk">
+      <label class="remark-label">Remarks</label>
+      <textarea class="remark-textarea" [(ngModel)]="newCaseResubmission.comments"></textarea>
+      <button class="resubmit-btn" (click)="caseResubmit(newCaseResubmission.comments)"
+        [disabled]="newCaseResubmission.comments === ''" [ngClass]="newCaseResubmission.comments === '' ? 'disable': ''">Resubmit</button>
+    </div>
+  </div>
+</ion-content>

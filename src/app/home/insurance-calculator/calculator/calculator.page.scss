@@ -1,0 +1,167 @@
+.calculator-wrapper {
+    background-color: #cdcdcd;
+    padding: 3rem 4rem 4rem 4rem;
+    height: 100%;
+}
+
+.modal-title {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+
+.row {
+    position: relative;
+}
+
+.close-modal-wrap {
+    position: absolute;
+    right: -2.4rem;
+    top: -1.5rem;
+    text-align: right;
+}
+
+.close-modal {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #8e8e93;
+    border: none;
+    background: transparent;
+}
+
+.calculator-main-blk {
+    margin-top: 2.5rem;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 2.2rem 3.2rem 2.2rem 3.2rem;
+}
+
+.radio-main-blk {
+    display: inline-block;
+    width: 100%;
+}
+
+.radio-sub-blk {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.radio-sub-blk input[type="radio"] {
+    width: 2rem;
+    height: 2rem;
+    vertical-align: middle;
+}
+
+.radio-label {
+    vertical-align: middle;
+    margin-right: 2rem;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+}
+
+.input-wrapper {
+    display: inline-block;
+    width: 100%;
+    margin-top: 2.5rem;
+}
+
+.input-wrapper:last-child {
+    margin-top: 0rem;
+}
+
+.input-blk-label {
+    display: block;
+}
+
+.input-blk {
+    display: inline-block;
+    width: 100%;
+    margin-top: 0.4rem;
+    background-color: #fbfbfb;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    padding: 0.65rem 0.5rem;
+    outline: none;
+}
+
+.table-main-blk {
+    display: inline-block;
+    width: 100%;
+    margin: 1.5rem 0;
+}
+
+.table-title {
+    margin-bottom: 1rem;
+}
+
+.table-wrapper {
+    display: inline-block;
+    height: 30rem;
+    border-radius: 0.5rem;
+    overflow: scroll;
+}
+
+.table-container {
+    border: 0.5px solid #707070;
+    margin-bottom: 1.5rem;
+    border-radius: 0.5rem;
+}
+
+.table-header-wrap,
+.table-content-wrap {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 0.5px solid #707070;
+}
+
+.table-content-wrap:last-child {
+    border-bottom: none;
+}
+
+.table-header-cell-blk {
+    padding: 1rem 2rem;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.table-content-cell-blk {
+    padding: 0.6rem 2rem;
+}
+
+.table-header-cell-blk:last-child,
+.table-content-cell-blk:last-child {
+    border-right: none;
+}
+
+.table-header-cell-blk,
+.table-content-cell-blk {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    border-right: 0.5px solid #707070;
+    padding: 0.4rem;
+}
+
+.hide {
+    visibility: hidden;
+}
+
+.disabled {
+    background-color: #e5e5e5;
+    pointer-events: none;
+}
+
+.blueBackground {
+    background: #007aff;
+}
+
+span.tip {
+    width: 50%;
+    display: inline-block;
+    text-align: right;
+    font-style: italic;
+    color: #707070;
+    font-size: 1.4rem;
+}

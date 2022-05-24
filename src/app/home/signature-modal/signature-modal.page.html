@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="signature-wrapper">
+    <div class="signature-modal-header">
+      <div class="close-icon-wrap" (click)="closeModal()">
+        <!-- <ion-icon name="close"></ion-icon> -->
+        <span class="close-btn"></span>
+      </div>
+      <div class="title-wrap">
+        <h3>Draw Signature</h3>
+      </div>
+      <div class="checkbox-wrap">
+        <input type="checkbox" [checked]="true" [disabled]="isDrawing" (click)="saveSignature()">
+      </div>
+    </div>
+    <div class="signature-modal-body">
+      <div class="signature-pad-wrap" id="sign-pad-wrap">
+        <signature-pad #sigpad class="signature-area" [options]="signaturePadOptions" (onBeginEvent)="drawStart()"
+          (onEndEvent)="drawComplete()"></signature-pad>
+      </div>
+      <div class="close-lines-wrap">
+        <div class="close-icon2">
+          <ion-icon name="close"></ion-icon>
+        </div>
+        <div class="hr-lines-wrap">
+          <ion-icon name="remove" *ngFor="let line of horizontalLines"></ion-icon>
+          <!-- <div class="lines-wrap"></div> -->
+        </div>
+      </div>
+      <div class="clear-btn-wrap">
+        <button (click)="clearPad()">Clear</button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

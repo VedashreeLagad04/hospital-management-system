@@ -1,0 +1,56 @@
+<ion-content>
+    <div class="memo-wrapper">
+        <div class="memo-container">
+            <div class="row" *ngIf='ehealth && ehealth.consultationMemo && ehealth.consultationMemo.length!==0'>
+                <p class='sort-list'>
+                    <ion-icon class='arrow' name="arrow-up" (click)="sortByDate('desc')" *ngIf="sortFlag=='asc'">
+                    </ion-icon>
+                    <ion-icon class='arrow' name="arrow-down" (click)="sortByDate('asc')" *ngIf="sortFlag=='desc'">
+                    </ion-icon>
+                    Sort by Date
+                </p>
+            </div>
+            <div class="row no-memos" *ngIf='ehealth.consultationMemo && ehealth.consultationMemo.length===0'>
+                <p>You have no Memos </p>
+            </div>
+            <div class="memo-list">
+                <div *ngFor='let file of ehealth.consultationMemo;'>
+                    <div class="memo" (click)='openPdf(file.pdfFile)'>
+                        <div class="row">
+                            <p class='memoName'>{{file.pdfFile.filename}}</p>
+                            <p class='appointmentTitle' *ngIf='file.appointment_title'>Appointment :  {{file.appointment_title}}</p>
+                            <div class="col-6">
+                                <div class="memo-info">
+                                    <div class="info-label">Type</div>
+                                    <div class="info"><span class='colon'>: </span> {{file.type}}</div>
+                                </div>
+                                <div class="memo-info">
+                                    <div class="info-label">Doctor</div>
+                                    <div class="info"><span class='colon'>: </span> {{file.doctor}}</div>
+                                </div>
+                                <div class="memo-info">
+                                    <div class="info-label">Instruction</div>
+                                    <div class="info"><span class='colon'>: </span> {{file.instruction}}</div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="memo-info">
+                                    <div class="info-label"> Facilities / Clinic </div>
+                                    <div class="info"><span class='colon'>: </span> {{file.clinic}}</div>
+                                </div>
+                                <div class="memo-info">
+                                    <div class="info-label">Date</div>
+                                    <div class="info"><span class='colon'>: </span>{{file.pdfFile.fulldate}}</div>
+                                </div>
+                                <div class="memo-info">
+                                    <div class="info-label">Time</div>
+                                    <div class="info"><span class='colon'>: </span>{{file.pdfFile.time}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-content>
+  <div class="confirmation-wrapper">
+    <div class="row">
+      <div class="modal-title col-10">
+      </div>
+      <div class="col-2 right-text">
+        <ion-icon class="close-modal" (click)="dismiss('')" name="close"></ion-icon>
+      </div>
+    </div>
+    <div class="content-data">
+      <div class="file-upload" (click)="file.click()">
+        <div class='info-text'>
+          click here to upload Admission Document
+        </div>
+      </div>
+      <input hidden type="file" #file (change)="uploadFiles($event)" (click)="fileClick()" accept="application/pdf" multiple />
+    </div>
+    <div class="container-small">
+      <div class="save-button">
+        <button class="submit-button reg-button">Next</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

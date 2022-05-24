@@ -1,0 +1,227 @@
+<ion-content>
+    <div class="preview-container">
+        <div class="box">
+            <div class="preview-sub-container" id="preview-client-info-pdf-wrap">
+                <div class="title">
+                    <p>Client Profile </p>
+                </div>
+                <div class="statement">
+                    <p>By signing this form, you have agreed to the Privacy Policy and certify that the information
+                        submitted true and correct to the best of your knowledge.</p>
+                </div>
+                <div class="sub-title">
+                    <p>Client Information</p>
+                </div>
+                <div class="info">
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Full Name <span class='sub-label'>(as in NRIC/FIN/Foreign ID)</span></p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.name}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block" *ngIf="user.nationality !== 'foreigner'">
+                        <div class="left-label">
+                            <p>NRIC/FIN</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.nric}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block" *ngIf="user.nationality === 'foreigner'">
+                        <div class="left-label">
+                            <p>Foreign ID</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.foreignId}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block" *ngIf="user.nationality === 'foreigner'">
+                        <div class="left-label">
+                            <p>Passport Number</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p *ngIf="user.passportNumber && user.passportNumber !== ''">{{user.passportNumber}}</p>
+                            <p *ngIf="!user.passportNumber || user.passportNumber === ''">-</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Gender</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p *ngIf='user.gender !== ""'>{{user.gender}}</p>
+                            <p *ngIf='user.gender === ""'> - </p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Date of Birth</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.dateOfBirth}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Email</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label email-label">
+                            <p>{{user.email}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Contact Number (Mobile)</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>+65 {{user.contactNo}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Contact Number (Home)</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p *ngIf='user.homeContactNo !== ""'>+65 {{user.homeContactNo}}</p>
+                            <p *ngIf='user.homeContactNo === ""'> - </p>
+                        </div>
+                    </div>
+                    <div class="info-block" *ngIf="user.nationality !== 'foreigner'">
+                        <div class="left-label">
+                            <p>Nationality</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.nationality}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block" *ngIf="user.nationality === 'foreigner'">
+                        <div class="left-label">
+                            <p>Nationality</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p>{{user.country}}</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="left-label">
+                            <p>Address</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="right-label">
+                            <p *ngIf='user.address !== ""'>{{user.address}}</p>
+                            <p *ngIf='user.address === ""'>-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="signature-box avoid" *ngIf="user.consentDetails.signature != ''">
+                    <div class="signature-label-box avoid">
+                        <div class="signature-label avoid">
+                            <p class="avoid" *ngIf='!user.guardian'>Client Signature</p>
+                            <p class="avoid" *ngIf='user.guardian'>Parent/Guardian Signature</p>
+                        </div>
+                    </div>
+                    <div class="signature-img-wrap avoid">
+                        <div class="signature-img">
+                            <img [src]="user.consentDetails.signature" alt="signature"
+                                *ngIf="user.consentDetails.signature != ''">
+                        </div>
+                        <div class="cross-button">
+                            <button class="cross"></button>
+                            <div class="line">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-block" *ngIf="user.consentDetails.signature != ''">
+                    <div class="left-label1 avoid">
+                        <p class="avoid" *ngIf='!user.guardian'>Client Name</p>
+                        <p class="avoid" *ngIf='user.guardian'>Parent/Guardian Name</p>
+                    </div>
+                    <div class="colon avoid">
+                        <p class="avoid">:</p>
+                    </div>
+                    <div class="right-label avoid">
+                        <p class="avoid">{{user.consentDetails.name}}</p>
+                    </div>
+                </div>
+                <div class="info-block" *ngIf='user.guardian && user.consentDetails.signature != ""'>
+                    <div class="left-label1 avoid">
+                        <p class="avoid">Relationship</p>
+                    </div>
+                    <div class="colon avoid">
+                        <p class="avoid">:</p>
+                    </div>
+                    <div class="right-label avoid">
+                        <p class="avoid">{{user.consentDetails.relation}} <span
+                                *ngIf='user.consentDetails.guardianRelation.length!==0'>({{user.consentDetails.guardianRelation}})</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="info-block" *ngIf="user.consentDetails.signature != ''">
+                    <div class="left-label1 avoid">
+                        <p class="avoid">Date</p>
+                    </div>
+                    <div class="colon avoid">
+                        <p class="avoid">:</p>
+                    </div>
+                    <div class="right-label avoid">
+                        <p class="avoid">{{user.consentDetails.date}}</p>
+                    </div>
+                </div>
+                <div class="info-block" *ngIf="user.consentDetails.signature != ''">
+                    <div class="left-label1 avoid">
+                        <p class="avoid">Time</p>
+                    </div>
+                    <div class="colon avoid">
+                        <p class="avoid">:</p>
+                    </div>
+                    <div class="right-label avoid">
+                        <p class="avoid">{{user.consentDetails.time}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button" *ngIf="isNextBtnClicked === false">
+            <button class=" save-btn-wrapper" (click)='submitRegistration()'>Next</button>
+        </div>
+    </div>
+
+</ion-content>

@@ -1,0 +1,214 @@
+<ion-content>
+  <div class="client-info-wrapper">
+    <div class="client-info-container">
+      <div class="client-details">
+        <p class='client-info-title'>Client Information</p>
+        <div class="row">
+          <div class="col-6">
+            <div class="info-row">
+              <div class="info-label">Full Name
+                <span class='small-text'>(as in NRIC/FIN/Foreign ID)</span>
+              </div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText'>{{client.name}}</div>
+              </div>
+            </div>
+            <div class="info-row" *ngIf="client.nationality !== 'foreigner'">
+              <div class="info-label">NRIC/FIN</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf="client.nric">{{client.nric}}</div>
+                <div class='contentText' *ngIf="!client.nric">-</div>
+              </div>
+            </div>
+            <div class="info-row" *ngIf="client.nationality === 'foreigner'">
+              <div class="info-label">Foreign ID</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf="client.foreignId">{{client.foreignId}}</div>
+                <div class='contentText' *ngIf="!client.foreignId">-</div>
+              </div>
+            </div>
+            <div class="info-row" *ngIf="client.nationality === 'foreigner'">
+              <div class="info-label">Passport Number</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf="client.passportNumber && client.passportNumber.length !== 0">
+                  {{client.passportNumber}}
+                </div>
+                <div class='contentText' *ngIf="!client.passportNumber || client.passportNumber.length === 0">-</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Gender</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' style="text-transform: capitalize;">{{client.gender}}</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Date of Birth</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf="client.dateOfBirth">{{client.dateOfBirth}}</div>
+                <div class='contentText' *ngIf="!client.dateOfBirth">-</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Email</div>
+              <div class="emailText"><span class='info-separator'>:</span>
+                <div class='contentText '>{{client.email}}</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Contact Number (Mobile)</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.contactNo && client.contactNo.length !==0'>
+                  <span>+65 </span>
+                  {{client.contactNo}}
+                </div>
+                <div class='contentText' *ngIf='!client.contactNo || client.contactNo.length ===0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Contact Number (Home)</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.homeContactNo && client.homeContactNo.length !==0 '>
+                  <span *ngIf='client.homeContactNo !=="-"'>+65 </span> {{client.homeContactNo}}
+                </div>
+                <div class='contentText' *ngIf='!client.homeContactNo || client.homeContactNo.length ===0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Nationality</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf="client.nationality !== 'foreigner'">
+                  <span
+                    *ngIf="client.nationality !== 'singapore-PR' && client.nationality !== 'Long-term pass' && client.nationality !== 'Long-term Pass'">
+                    Singaporean / Singapore PR
+                  </span>
+                  <span
+                    *ngIf="client.nationality === 'singapore-PR' || client.nationality === 'Long-term pass' || client.nationality === 'Long-term Pass'">
+                    Long-term pass</span>
+                </div>
+                <div class='contentText' *ngIf="client.nationality === 'foreigner'">{{client.country}}</div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Address</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.address && client.address.length!==0'>{{client.address}}</div>
+                <div class='contentText' *ngIf='!client.address || client.address.length==0'> - </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="info-row">
+              <div class="info-label">Weight</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.weight && client.weight.length !== 0'>{{client.weight}} kg</div>
+                <div class='contentText' *ngIf='!client.weight || client.weight.length == 0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Height</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.height && client.height.length !==0'>{{client.height}} cm</div>
+                <div class='contentText' *ngIf='!client.height || client.height.length ===0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">BMI</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.bmi && client.bmi.length !==0'>{{client.bmi}}</div>
+                <div class='contentText' *ngIf='!client.bmi || client.bmi.length ==0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Next-of-Kin (NOK)</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.nok && client.nok.length !==0'>{{client.nok}}</div>
+                <div class='contentText' *ngIf='!client.nok || client.nok.length ==0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">NOK Relationship</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.nokRelationship && client.nokRelationship.length !==0'>
+                  {{client.nokRelationship}}
+                </div>
+                <div class='contentText' *ngIf='!client.nokRelationship || client.nokRelationship.length ==0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">NOK Contact Number</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class='contentText' *ngIf='client.nokContact && client.nokContact.length !==0'>
+                  <span *ngIf='client.nokContact !=="-"'>+65 </span> {{client.nokContact}}
+                </div>
+                <div class='contentText' *ngIf='!client.nokContact || client.nokContact.length ==0'> - </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Drug Allergy</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class="contentText" *ngIf="client.drugAllergy && client.drugAllergy.length > 0">
+                  <ng-container *ngFor="let drug of client.drugAllergy;let i=index">
+                    <span class="client-info-allergy-value"
+                      *ngIf="client.drugAllergyAnswer === 'Yes' && drug.allergy!== ''">
+                      {{drug.allergy}}
+                    </span>
+                    <span class="client-info-allergy-value "
+                      *ngIf="client.drugAllergyAnswer === 'Yes' && drug.allergy === ''">
+                      Yes
+                    </span>
+                    <span class="client-info-allergy-value"
+                      *ngIf="(client.drugAllergyAnswer === undefined || client.drugAllergyAnswer === null) && drug.allergy === ''">
+                      -
+                    </span>
+                    <!-- <span class="client-info-allergy-value text-transform"
+									*ngIf="drug.allergy!== '' && i < client.drugAllergy.length - 1">,</span> -->
+                    <span *ngIf="client.drugAllergyAnswer=== 'No'"> No </span>
+                  </ng-container>
+                </div>
+                <div class='contentText' *ngIf='!client.drugAllergy || client.drugAllergy.length === 0'>
+                  <span>-</span>
+                </div>
+              </div>
+            </div>
+            <div class="info-row">
+              <div class="info-label">Food Allergy</div>
+              <div class="info-content"><span class='info-separator'>:</span>
+                <div class="contentText" *ngIf="client.foodAllergy && client.foodAllergy.length > 0">
+                  <ng-container *ngFor="let food of client.foodAllergy;let i=index">
+                    <span class="client-info-allergy-value"
+                      *ngIf="client.foodAllergyAnswer === 'Yes' && food.allergy!== ''">
+                      {{food.allergy}}
+                    </span>
+                    <span class="client-info-allergy-value "
+                      *ngIf="client.foodAllergyAnswer === 'Yes' && food.allergy === ''">
+                      Yes
+                    </span>
+                    <span class="client-info-allergy-value "
+                      *ngIf="(client.foodAllergyAnswer === undefined || client.foodAllergyAnswer === null) && food.allergy === ''">
+                      -
+                    </span>
+                    <!-- <span class="client-info-allergy-value text-transform"
+                      *ngIf="food.allergy!== '' && i < client.foodAllergy.length - 1">,</span> -->
+                    <span *ngIf="client.foodAllergyAnswer === 'No'"> No </span>
+                  </ng-container>
+                </div>
+                <div class='contentText' *ngIf='!client.foodAllergy || client.foodAllergy === 0'>
+                  <span>-</span>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="row">
+            <div class="info-label"></div>
+            <div class="info-content"><span class='info-separator'>:</span><div class='contentText'>{{client}}</div></div>
+          </div> -->
+          </div>
+        </div>
+      </div>
+      <div class="row meta-data">
+        <div class="data-label">Last updated: {{client.lastUpdatedAt}}</div>
+        <div class="data-agent">Last edited by: <span>{{agentName}}</span></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

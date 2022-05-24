@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86.832" height="88.758" viewBox="0 0 86.832 88.758">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.5" cy="0.456" r="0.828" gradientTransform="matrix(0, -1, 0.908, 0, 0.086, 0.956)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#1597c7"/>
+      <stop offset="0.297" stop-color="#28a0cd"/>
+      <stop offset="1" stop-color="#a9dff3"/>
+    </radialGradient>
+    <filter id="Path_165" x="0" y="8.28" width="86.832" height="80.478" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <radialGradient id="radial-gradient-3" cx="0.5" cy="0.456" r="1.301" gradientTransform="matrix(0.015, -1, 0.908, 0.013, 0.079, 0.95)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#28a0cd"/>
+      <stop offset="0.297" stop-color="#28a0cd"/>
+      <stop offset="1" stop-color="#55c7f2"/>
+    </radialGradient>
+    <filter id="Union_3" x="18.7" y="18" width="49" height="49" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Logo" transform="translate(0.7)">
+    <g id="Layer_1" transform="translate(-9.5 -12.12)">
+      <g transform="matrix(1, 0, 0, 1, 8.8, 12.12)" filter="url(#Path_165)">
+        <path id="Path_165-2" data-name="Path 165" d="M25.5,27.5a24.683,24.683,0,0,0-2.4,4.9,27.751,27.751,0,0,0-.6,18,42.579,42.579,0,0,0,6.4,12.1,70.539,70.539,0,0,0,8.3,9.8,45.06,45.06,0,0,0,10.4,8c1.3.7,2.7,1.2,4.1,1.8a1.41,1.41,0,0,0,1.4-.1,55,55,0,0,0,10.4-7.5A72.823,72.823,0,0,0,73.8,63.3,49.7,49.7,0,0,0,81.2,51c3.3-8.6,1.9-16.3-4-23.3a6.885,6.885,0,0,1-1.1-1.3,17.658,17.658,0,0,1,4.7,3.4,18.994,18.994,0,0,1,5.8,15.3,31.915,31.915,0,0,1-3.9,13.5A59.032,59.032,0,0,1,71.8,73.4,101.2,101.2,0,0,1,53.9,88.3a2.554,2.554,0,0,1-3.1.1c-2.1-1.4-4.3-2.6-6.4-4a74.55,74.55,0,0,1-12.5-9.9A50.045,50.045,0,0,1,21.2,59.8a34.209,34.209,0,0,1-3.4-14.4c.1-6.7,2.2-12.7,7.1-17.5A.575.575,0,0,1,25.5,27.5Z" transform="translate(-8.8 -12.12)" fill="url(#radial-gradient)"/>
+      </g>
+      <path id="Path_166" data-name="Path 166" d="M81.3,12.2a18.7,18.7,0,0,1-2,4,35.959,35.959,0,0,1-9.2,10.6,25.2,25.2,0,0,1-12.3,5.3,49.48,49.48,0,0,1-20.6-1.9,24.3,24.3,0,0,1-8-4.1,2.178,2.178,0,0,1-.7-.9c.9.2,1.8.5,2.6.7a31.364,31.364,0,0,0,6.1,1.2c.2,0,.6.2.7-.2.1-.3-.2-.4-.4-.6A116.108,116.108,0,0,0,22.1,15.8,24.146,24.146,0,0,0,9.5,12.6c.4-.1.9-.2,1.3-.3a6.6,6.6,0,0,1,1.4-.1,24.555,24.555,0,0,1,14.3,3.2c4,2.2,7.8,4.8,11.8,7.2a39.313,39.313,0,0,0,12.3,5.2,21.643,21.643,0,0,0,11-.7,35.868,35.868,0,0,0,13.2-7.7,34.571,34.571,0,0,0,6.2-7C81.1,12.3,81.2,12.2,81.3,12.2Z" fill="url(#radial-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, -0.7, 0)" filter="url(#Union_3)">
+      <path id="Union_3-2" data-name="Union 3" d="M-132-149.5V-160h-10.5a2.5,2.5,0,0,1-2.5-2.5,2.5,2.5,0,0,1,2.5-2.5H-132v-10.5a2.5,2.5,0,0,1,2.5-2.5,2.5,2.5,0,0,1,2.5,2.5V-165h10.5a2.5,2.5,0,0,1,2.5,2.5,2.5,2.5,0,0,1-2.5,2.5H-127v10.5a2.5,2.5,0,0,1-2.5,2.5A2.5,2.5,0,0,1-132-149.5Z" transform="translate(172.7 205)" fill="url(#radial-gradient-3)"/>
+    </g>
+  </g>
+</svg>

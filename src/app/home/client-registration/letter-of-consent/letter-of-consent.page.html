@@ -1,0 +1,196 @@
+<ion-content>
+  <div class="consent-wrapper">
+    <div class="consent-container"
+      [ngClass]=" consentAccepted==true?'consent-container-reload':'consent-container-first'">
+      <p class="consent-title">Consent for Release of Medical Information</p>
+      <div class="consent-content">
+        <p class='consent-point'> 1) This form must be fully complete and signed by the patient. If the patient is below
+          21 years old, the form
+          should be signed by the patient’s parent/guardian and NRIC of the patient's parent/guardian is required.
+        </p>
+        <p class='consent-point'> 2) If the patient is mentally incompetent, consent is required from the authorised
+          representative, relevant
+          documents
+          are to be attached as proof of relationship to patient if applicable.
+        </p>
+      </div>
+      <div class="row" [ngClass]="{'consent-form': consentAccepted==true}">
+        <p *ngIf='consentAccepted' class='form-title'>PARTICULARS AND CONSENT</p>
+        <div class='consent'>
+          <div *ngIf='!consentAccepted'>
+            <div class='user-info row'>
+              <div class="col-5">Patient Name</div>
+              <div class="col-7">
+                <input type='text' class='patient-name' disabled [ngModel]='user.name' />
+              </div>
+            </div>
+            <div class='user-info row'>
+              <div class="col-5">NRIC/FIN/Passport No.</div>
+              <div class="col-7">
+                <input class='patient-nric' type='text' [ngModel]='user.nric' disabled />
+              </div>
+            </div>
+          </div>
+          <!-- <div>I,<input type='text' class='patient-name' [(ngModel)]='consentDetails.name' /> of NRIC/FIN/Passport No.:
+            <input class='patient-nric' type='text' [(ngModel)]='consentDetails.nric' />, am the abovenamed -->
+          <div class="consent-check" *ngIf='!consentAccepted'>
+            <div class="radio-relation-item">
+              <input class="form-radio-input" type="radio" name="consentPerson" #authoriser="ngModel"
+                [(ngModel)]="consentDetails.authoriser" value="patient"
+                [checked]='consentDetails.authoriser ==="patient"'>
+              <label class="radio-label">I am the Patient</label><br>
+            </div>
+            <div class="radio-relation-item">
+              <input class="form-radio-input" type="radio" name="consentPerson" #authoriser="ngModel"
+                [(ngModel)]="consentDetails.authoriser" value="other" [checked]='consentDetails.authoriser ==="other"'>
+              <label class="radio-label">I am the Parent, Next of Kin or Guardian of Patient</label><br>
+            </div>
+            <div class='relation' *ngIf='consentDetails.authoriser==="other"'>
+              <div class="radio-relation">
+                <input class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                  [(ngModel)]="consentDetails.relation" value="parent" [checked]='consentDetails.relation ==="parent"'>
+                <label class="radio-label">Parent</label><br>
+              </div>
+              <div class="radio-relation">
+                <input class="form-radio-input" type="radio" id="Kin" name="relation" #relation="ngModel"
+                  [(ngModel)]="consentDetails.relation" value="kin" [checked]='consentDetails.relation ==="kin"'>
+                <label class="radio-label">Next of Kin</label><br>
+              </div>
+              <div class="radio-relation">
+                <input class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                  [(ngModel)]="consentDetails.relation" value="guardian"
+                  [checked]='consentDetails.relation ==="guardian"'>
+                <label class="radio-label">Guardian</label><br>
+              </div>
+
+              <div class="radio-relation">
+                <input class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                  [(ngModel)]="consentDetails.relation" value="other" [checked]='consentDetails.relation ==="other"'>
+                <label class="radio-label">Administrator of</label><br>
+              </div>
+              <select class='consent-select' [(ngModel)]='other'>
+                <option>Estate</option>
+              </select>
+            </div>
+            <div class='authoriser-info' *ngIf='consentDetails.authoriser==="other"'>
+              <div class='user-parent-info row'>
+                <div class="col-5">Name of Authoriser</div>
+                <div class="col-7">
+                  <input type='text' class='patient-name' [(ngModel)]='consentDetails.authoriserName' />
+                </div>
+              </div>
+              <div class='user-parent-info row'>
+                <div class="col-5">NRIC/FIN/Passport of Authoriser</div>
+                <div class="col-7">
+                  <input class='patient-nric' type='text' [(ngModel)]='consentDetails.authoriserNric' />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <p>of the abovenamed Patient. I hereby authorise _____________________________________ to furnish and
+              release the below stated information:</p> -->
+          <!-- </div> -->
+          <div class="consent-to" *ngIf='consentAccepted'>
+            <div class='row'>
+              <div class="col-6">
+                <p>Patient Name: <b>{{consentDetails.name}}</b></p>
+
+              </div>
+              <div class="col-6">
+                <p>NRIC/FIN/Passport No.: <b>{{consentDetails.nric}}</b></p>
+              </div>
+            </div>
+            <p class='new-address' *ngIf='consentDetails.authoriser==="patient"'>I,<b> {{consentDetails.name}}</b> of
+              NRIC/FIN/Passport No.:
+              <b>{{consentDetails.nric}}</b> , am the Patient. I hereby
+              authorise Premium Care SG
+              Pte. Ltd. to furnish and release the below stated information:
+            </p>
+            <p class='new-address' *ngIf='consentDetails.authoriser==="other"'>
+              I, <b>{{consentDetails.authoriserName}}</b> of NRIC/FIN/Passport No.:
+              <b>{{consentDetails.authoriserNric}}</b> , am the
+              <b> {{consentDetails.relation}}</b> of the abovenamed Patient. I hereby
+              authorise Premium Care SG Pte. Ltd. to furnish and release the below stated information:
+            </p>
+            <p class='new-address'>To:</p>
+            <p class='new-address'> Name of Company or Person: </p>
+            <h6>Premium Care SG Pte. Ltd</h6>
+
+            <p class='new-address'>Address of Company or Person:</p>
+            <h6> 73 Upper Paya Lebar
+              Road #06-01E Singapore 534818</h6>
+          </div>
+          <div class="consent-details">
+            <p>Requested Information</p>
+            <div class='consent-checkbox'>
+              <input type="checkbox" [(ngModel)]="consentDetails.request.discharge">
+              <label for=''>Discharge Summary</label>
+            </div>
+            <div class='consent-checkbox'>
+              <input type="checkbox" [(ngModel)]="consentDetails.request.labrResult">
+              <label for=''>Lab Result / X-Ray Result</label>
+            </div>
+            <div class='consent-checkbox'>
+              <input type="checkbox" [(ngModel)]="consentDetails.request.certificate">
+              <label for=''>Medical Certificate</label>
+            </div>
+            <div class='consent-checkbox'>
+              <input type="checkbox" [(ngModel)]="consentDetails.request.others">
+              <label for=''>Others: <div class='other-option'>All medical reports & bills</div></label>
+            </div>
+          </div>
+          <div class="consent-details">
+            <p>Purpose of Request</p>
+            <div class='consent-checkbox'> <input type="checkbox" [(ngModel)]="consentDetails.purpose.care">
+              <label for=''>Continuity of Care</label>
+            </div>
+            <div class='consent-checkbox'><input type="checkbox" [(ngModel)]="consentDetails.purpose.insurance">
+              <label for=''>Insurance Claims</label>
+            </div>
+            <div class='consent-checkbox'><input type="checkbox" [(ngModel)]="consentDetails.purpose.legal">
+              <label for=''>Legal Proceedings</label>
+            </div>
+            <div class='consent-checkbox'>
+              <input type="checkbox" [(ngModel)]="consentDetails.purpose.others" checked>
+              <label for=''>Others: <div class='other-option'>For Reference</div></label>
+            </div>
+          </div>
+          <div class="consent-agreed" *ngIf='consentAccepted'>
+            <div class="row">
+              <div class="col-6">
+                <div class="agreed-details">
+                  <p class="agreed-title"> Agreed By: </p>
+                  <div class="row">
+                    <div class="col-5">Name</div>
+                    <div class="col-7">: {{consentDetails.name}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-5">Nric</div>
+                    <div class="col-7">: {{consentDetails.nric}}</div>
+                  </div>
+                  <div class="row" *ngIf='consentDetails.signingPerson!=="patient"'>
+                    <div class="col-5">Relationship</div>
+                    <div class="col-7">: {{consentDetails.signingPerson}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="consent-sign">
+                  <img src="{{consentDetails.sign}}" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="registration-container">
+        <button id="next1" class="button reg-button" type="button" *ngIf='!consentAccepted'
+          (click)="goToConfirm()">Next</button>
+        <button id="next1" class="button reg-button" type="button" *ngIf='consentAccepted && consentType==="client"'
+          (click)="submitRegistration()">Save</button>
+        <button id="next1" class="button reg-button" type="button" *ngIf='consentAccepted && consentType==="case"'
+          (click)="createCase()">Save</button>
+      </div>
+    </div>
+  </div>
+</ion-content>

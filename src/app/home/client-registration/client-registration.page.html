@@ -1,0 +1,544 @@
+<ion-content>
+  <div class="registration-wrapper" [ngClass]="!previewDetails ? 'padding' : ''">
+    <div class="reg-inputDiv" *ngIf="basicDetails">
+      <div class="registration-container">
+        <!-- form -->
+        <div class="registration-name regFormInput" ngClass="{'has-warning': !form.fullname.isValid}">
+          <!-- name -->
+          <label class="input-label">Full Name
+            <span class="specific-details"> (as in NRIC/FIN/Foreign ID) </span>
+            <span class="compulsory">*</span>
+          </label>
+          <input type="text" class="reg-input" placeholder="FullName" [(ngModel)]="user.name" #fullname="ngModel"
+            name="fullname" oninput="this.value = this.value.replace(/[^a-zA-Z @ -]/g, '').replace(/(\..*)\./g, '$1');"
+            (focusout)="validateName()" required />
+          <div *ngIf="errorNameMsg" class="errmsg">
+            <span>{{errorNameMsg}}</span>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <!-- gender -->
+          <label class="input-label">Gender
+            <span class="compulsory">*</span>
+          </label>
+          <div class="row">
+            <div class="radio-gender-item">
+              <input class="form-radio-input" type="radio" id="male" name="gender" #gender="ngModel"
+                [(ngModel)]="user.gender" value="male" [checked]='user.gender ==="male"' (change)="validateGender()" />
+              <label for="male" class="radio-label">Male</label><br />
+            </div>
+            <div class="radio-gender-item">
+              <input class="form-radio-input" type="radio" id="female" name="gender" #gender="ngModel"
+                [(ngModel)]="user.gender" value="female" [checked]='user.gender ==="female"'
+                (change)="validateGender()" />
+              <label for="female" class="radio-label">Female</label><br />
+            </div>
+          </div>
+          <div *ngIf="errorGenderMsg.length !== 0" class="errmsg">
+            <span>{{errorGenderMsg}}</span>
+          </div>
+        </div>
+        <div class="registration-dob regFormInput">
+          <!-- dob -->
+          <label class="input-label">Date of Birth
+            <span class="compulsory">*</span>
+          </label>
+          <div class="registration-input-div">
+            <ion-datetime id="dobDatepicker" (ionChange)="changeDateFormat();validateDate()" [(ngModel)]="dateOfBirth"
+              displayFormat="DD/MMM/YYYY" [hidden]="true" [ngModelOptions]="{standalone: true}" mode="ios">
+            </ion-datetime>
+            <input type="text" class="reg-input" id="dob" value="{{user.dateOfBirth}}" placeholder="Date of birth"
+              name="dateOfBirth" (mouseleave)="(this.type='text')" max="date" class="reg-input"
+              onclick="document.getElementById('dobDatepicker').click()" />
+            <ion-icon name="calendar" class="calendar" onclick="document.getElementById('dobDatepicker').click()">
+            </ion-icon>
+          </div>
+          <div *ngIf="errordobMsg" class="errmsg">
+            <span>{{errordobMsg}}</span>
+          </div>
+        </div>
+        <div class="registration-email regFormInput">
+          <!-- email -->
+          <label class="input-label">Email Address
+            <span class="compulsory">*</span>
+          </label>
+          <input type="email" class="reg-input" placeholder="Email" [(ngModel)]="user.email" name="email"
+            #email="ngModel" (focusout)="validateEmail()" required />
+          <div *ngIf="errorEmailMsg" class="errmsg">
+            <span>{{errorEmailMsg}}</span>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <!-- contact mobile -->
+          <label class="input-label">Contact Number (Mobile)
+            <span class="compulsory">*</span>
+          </label>
+          <div class="registration-contact">
+            <img src="./assets/images/800px-National_Flag_of_Singapore.svg.png" />
+            <label name="contact">+65 </label>
+            <input type="text" class="reg-input" placeholder="Contact No" [(ngModel)]="user.contactNo"
+              #contactNo="ngModel" name="contactNo" maxlength="8" (focusout)="validateMobileNo()"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+          </div>
+          <div *ngIf="errorContactMsg" class="errmsg">
+            <span>{{errorContactMsg}}</span>
+          </div>
+        </div>
+        <div class="regFormInput">
+          <!-- contact home -->
+          <label class="input-label">Contact Number (Home)
+            <span class="specific-details"> Optional </span>
+          </label>
+          <div class="registration-contact">
+            <img src="./assets/images/800px-National_Flag_of_Singapore.svg.png" />
+            <label name="contact">+65 </label>
+            <input type="text" class="reg-input" placeholder="Contact No" [(ngModel)]="user.homeContactNo"
+              #homeContactNo="ngModel" name="homeContactNo" maxlength="8" (focusout)="validateHomeMobileNo()"
+              oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+          </div>
+          <div *ngIf="homeContactNo.touched && errorHomeContactMsg" class="errmsg">
+            <span>{{errorHomeContactMsg}}</span>
+          </div>
+        </div>
+        <!-- form-end -->
+        <div class="regFormInput">
+          <!-- guardian required -->
+          <div class="registration-input-div">
+            <input class="form-radio-input" type="checkbox" id="guardian" name="guardian"
+              [ngClass]="{'guardianCheckbox': age < 21}" #guardian="ngModel" [(ngModel)]="user.guardian"
+              [checked]='user.guardian ==="true"' />
+            <label for="guardian" class="radio-label" [ngClass]="{'guardianCheckbox': age < 21}">Require Parent/Guardian
+              signature for all forms</label>
+            <div class="exclaim" (click)="openPopover()" (focusout)="closePopover()">
+              <button class="exclaim-button exclaim-button--small">
+                <div class="popover-wrapper" *ngIf="isExclaimOpen">
+                  <span>By default, patient below the age of 21, will require
+                    parent/guardian signature for all forms. Ticking this box
+                    will require parent/guardian signature regardless of
+                    age.</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reg-inputDiv" [hidden]="!addressDetails" (click)="closeAllDropdown()">
+      <div class="registration-container">
+        <div class="regFormInput">
+          <label class="input-label">Nationality
+            <span class="compulsory">*</span>
+          </label>
+          <div class="radio-item">
+            <label class="radio-label" for="singaporean" (click)='changeRadio("Singaporean / Singapore PR")'>
+              <input class="form-radio-input" type="radio" id="singaporean" #nationality="ngModel"
+                [(ngModel)]="user.nationality" [checked]='user.nationality ==="Singaporean / Singapore PR"'
+                value="Singaporean / Singapore PR" (change)="changeNationality()" />
+              Singaporean / Singapore PR</label>
+            <br />
+          </div>
+          <div class="radio-item">
+            <label for="singapore-PR" class="radio-label" (click)='changeRadio("Long-term pass")'>
+              <input class="form-radio-input" type="radio" id="Long-term pass" #nationality="ngModel"
+                [(ngModel)]="user.nationality" value="Long-term pass" [checked]='user.nationality ==="Long-term pass"'
+                (change)="changeNationality()" />
+              Long-term pass</label><br />
+          </div>
+          <div class="radio-item">
+            <label for="foreigner" class="radio-label" (click)='changeRadio("foreigner")'>
+              <input class="form-radio-input" type="radio" id="foreigner" #nationality="ngModel"
+                [(ngModel)]="user.nationality" value="foreigner" (change)="changeNationality()" />
+              Foreigner</label><br />
+          </div>
+          <div *ngIf="errorNationalityMsg" class="errmsg">
+            <span>{{errorNationalityMsg}}</span>
+          </div>
+        </div>
+        <!-- <div [hidden]="user.nationality !== 'foreigner'"> -->
+        <div *ngIf="user.nationality === 'foreigner'">
+          <div class="reg-inputDiv">
+            <div class="regFormInput">
+              <label class="input-label">Country
+                <span class="compulsory">*</span>
+              </label>
+              <!-- <div class="country-content">
+                  <span class="country-selection"></span>
+                  <ion-icon class='country-dropdown' name="ios-arrow-down"></ion-icon>
+                </div> -->
+              <div class="dropdown-input-box">
+                <div class="dropdown-input" (click)="openCountryDropdown($event)">
+                  <p class="dropdown-title text-transform">{{user.country}}</p>
+                  <div class="dropdown-arrow-wrapper">
+                    <span class="dropdown-arrow"></span>
+                  </div>
+                </div>
+                <ul class="case-type-dropdown" *ngIf="showDropdownCountry">
+                  <li class="dropdown-input">
+                    <input type="text" [(ngModel)]="nameToSearch" placeholder="Search country"
+                      (input)="countries = dataService.searchFromDropdownList(countries, nameToSearch, 'country')"
+                      (click)="dataService.enterValue($event)">
+                  </li>
+                  <ng-container *ngFor="let country of countries;">
+                    <li *ngIf="country.show" (click)="selectCountry(country.country)">
+                      {{country.country}}
+                    </li>
+                  </ng-container>
+                </ul>
+              </div>
+              <div *ngIf="countryMsg" class="errmsg">
+                <span>{{countryMsg}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="reg-inputDiv">
+            <div class="regFormInput">
+              <!-- Foreign Id -->
+              <label class="input-label">Foreign ID
+                <span class="compulsory">*</span>
+              </label>
+              <input type="text" class="reg-input" placeholder="Foreign ID" [(ngModel)]="user.foreignId"
+                #foreignId="ngModel" name="foreignId" (focusout)='checkIfPresent("foreignId")' />
+              <div *ngIf="foreignIdMsg" class="errmsg">
+                <span>{{foreignIdMsg}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="reg-inputDiv">
+            <div class="regFormInput">
+              <!-- Passport Number -->
+              <label class="input-label">Passport Number</label>
+              <input type="text" class="reg-input" placeholder="Passport Number" [(ngModel)]="user.passportNumber"
+                #passportNumber="ngModel" name="passportNumber" (focusout)='checkIfPresent("passportNumber")' />
+              <div *ngIf="passportMsg" class="errmsg">
+                <span>{{passportMsg}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="reg-inputDiv">
+            <div class="regFormInput">
+              <!-- Passport Number -->
+              <label class="input-label">Residential Address</label>
+              <textarea class="reg-input textarea" #address="ngModel" [(ngModel)]="user.address" name="address" id=""
+                cols="30" rows="3" placeholder="address"></textarea>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="user.nationality !== 'foreigner'">
+          <div class="registration-nric regFormInput" ngClass="{'has-warning': !form.nric.isValid}">
+            <label class="input-label">NRIC/FIN
+              <span class="compulsory">*</span>
+            </label>
+            <input type="text" class="reg-input" placeholder="NRIC/FIN" [(ngModel)]="user.nric" id="nric"
+              #nric="ngModel" name="nric" (focusout)="validateNric()" required />
+            <div *ngIf="nric.touched && errorNricMsg" class="errmsg">
+              <span>{{errorNricMsg}}</span>
+            </div>
+          </div>
+          <div class="reg-address">
+            <label class="input-main-label"> Residential Address </label>
+            <div class="postal-code">
+              <label class="input-label">Postal Code <span class="compulsory">*</span></label>
+              <input type="text" class="reg-input" placeholder="" [(ngModel)]="user.postalCode" #postalCode="ngModel"
+                name="postalCode" (focusout)="validatepostalCode()" maxlength="6"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required />
+            </div>
+            <div class="postal-code unit-code">
+              <label class="unit-label input-label">Unit No </label>
+              <span class="unit-label">#</span>
+              <input type="text" class="reg-input unit-input" placeholder="Unit No" [(ngModel)]="user.unitNo"
+                #unitNo="ngModel" name="unitNo" (input)="makeAddress()" required />
+              <!-- oninput="this.value = this.value.replace(/[^0-9_./,-]/g, '').replace(/(\..*)\./g, '$1');" -->
+            </div>
+            <div *ngIf="postalCode.touched && errorPostalMsg" class="errmsg">
+              <span>{{errorPostalMsg}}</span>
+            </div>
+            <div class="reg-inputDiv">
+              <div class="regFormInput">
+                <!-- Building Name -->
+                <label class="input-label">Building Name
+                  <span class="specific-details">(Optional)</span></label>
+                <input type="text" class="reg-input" placeholder="Building Name" [(ngModel)]="user.buildingName"
+                  #buildingName="ngModel" name="buildingName" *ngIf="!user.addressExist" (input)="makeAddress()" />
+                <div class="dropdown-input-box" *ngIf="user.addressExist">
+                  <div class="dropdown-input" (click)="openDropdown($event)">
+                    <p class="dropdown-title text-transform">
+                      {{user.buildingName}}
+                    </p>
+                    <div class="dropdown-arrow-wrapper">
+                      <span class="dropdown-arrow"></span>
+                    </div>
+                  </div>
+                  <ul class="case-type-dropdown" *ngIf="showBuildingDropdown">
+                    <li *ngFor="let building of addressList;" (click)="selectBuilding(building)">
+                      <span *ngIf="building.BUILDING !== 'NIL'">{{building.BUILDING}}</span>
+                      <span *ngIf="building.BUILDING === 'NIL'">No building name available for this postal code</span>
+                    </li>
+                    <li></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="regFormInput" *ngIf="!user.addressExist">
+                <label class="input-label">Block No
+                  <span class="specific-details">(Optional)</span></label>
+                <input type="text" class="reg-input" placeholder="Block No" [(ngModel)]="blockNo"
+                  [ngModelOptions]="{standalone: true}" #buildingName="ngModel" name="blockNo"
+                  (input)="makeAddress()" />
+              </div>
+            </div>
+            <div class="regFormInput">
+              <label class="input-label">Address</label>
+              <textarea class="reg-input textarea" #address="ngModel" [(ngModel)]="user.address" name="address" id=""
+                cols="30" rows="3" placeholder="address"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reg-inputDiv" *ngIf="previewDetails">
+      <div class="preview-container">
+        <div class="previewDetails">
+          <div class="preview-field">
+            <label class="input-label">Client Information</label>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Full Name
+                <div>
+                  <span class="specific-details">
+                    (as in NRIC/FIN/Foreign ID)
+                  </span>
+                </div>
+              </label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.name.length !== 0">
+                {{user.name}}
+              </div>
+              <div class="user-info" *ngIf="user.name.length === 0">-</div>
+            </div>
+          </div>
+          <div *ngIf="user.nationality !== 'foreigner'">
+            <div class="row preview-field">
+              <div class="col-5 vertical-top">
+                <label class="input-label">NRIC/FIN</label>
+              </div>
+              <div class="col-7">
+                <span class="colon"> : </span>
+                <div class="user-info" *ngIf="user.nric.length !== 0">
+                  {{user.nric}}
+                </div>
+                <div class="user-info" *ngIf="user.nric.length === 0">-</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="user.nationality === 'foreigner'">
+            <div class="row preview-field">
+              <div class="col-5 vertical-top">
+                <label class="input-label">Foreign ID</label>
+              </div>
+              <div class="col-7">
+                <span class="colon"> : </span>
+                <div class="user-info" *ngIf="user.foreignId.length !== 0">
+                  {{user.foreignId}}
+                </div>
+                <div class="user-info" *ngIf="user.foreignId.length === 0">
+                  -
+                </div>
+              </div>
+            </div>
+            <div class="row preview-field">
+              <div class="col-5 vertical-top">
+                <label class="input-label"> Passport Number</label>
+              </div>
+              <div class="col-7">
+                <span class="colon"> : </span>
+                <div class="user-info" *ngIf="user.passportNumber && user.passportNumber.length !== 0">
+                  {{user.passportNumber}}
+                </div>
+                <div class="user-info"
+                  *ngIf='!user.passportNumber || user.passportNumber.length === 0 || user.passportNumber=== ""'>
+                  -
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Gender</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.gender.length !== 0">
+                {{user.gender}}
+              </div>
+              <div class="user-info" *ngIf="user.gender.length === 0">-</div>
+            </div>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Date of Birth</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.dateOfBirth.length !== 0">
+                {{user.dateOfBirth}}
+              </div>
+              <div class="user-info" *ngIf="user.dateOfBirth.length === 0">
+                -
+              </div>
+            </div>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Email</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info email-preview" *ngIf="user.email.length !== 0">
+                {{user.email}}
+              </div>
+              <div class="user-info" *ngIf="user.email.length === 0">-</div>
+            </div>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Contact Number (Mobile)</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.contactNo.length !== 0">
+                +65 {{user.contactNo}}
+              </div>
+              <div class="user-info" *ngIf="user.contactNo.length === 0">-</div>
+            </div>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Contact Number (Home)</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.homeContactNo.length !== 0">
+                +65 {{user.homeContactNo}}
+              </div>
+              <div class="user-info" *ngIf="user.homeContactNo.length === 0">
+                -
+              </div>
+            </div>
+          </div>
+          <div *ngIf="user.nationality !== 'foreigner'">
+            <div class="row preview-field">
+              <div class="col-5 vertical-top">
+                <label class="input-label">Nationality</label>
+              </div>
+              <div class="col-7">
+                <span class="colon"> : </span>
+                <div class="user-info" *ngIf="user.nationality.length !== 0">
+                  <span *ngIf="user.nationality !== 'Long-term pass'">
+                    Singaporean / Singapore PR
+                  </span>
+                  <span *ngIf="user.nationality === 'Long-term pass'">
+                    Long-term pass</span>
+                </div>
+                <div class="user-info" *ngIf="user.nationality.length === 0">
+                  -
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="user.nationality === 'foreigner'">
+            <div class="row preview-field">
+              <div class="col-5 vertical-top">
+                <label class="input-label">Nationality</label>
+              </div>
+              <div class="col-7">
+                <span class="colon"> : </span>
+                <div class="user-info" *ngIf="user.country.length !== 0">
+                  {{user.country}}
+                </div>
+                <div class="user-info" *ngIf="user.country.length === 0">-</div>
+              </div>
+            </div>
+          </div>
+          <div class="row preview-field">
+            <div class="col-5 vertical-top">
+              <label class="input-label">Address</label>
+            </div>
+            <div class="col-7">
+              <span class="colon"> : </span>
+              <div class="user-info" *ngIf="user.address.length !== 0">
+                {{user.address}}
+              </div>
+              <div class="user-info" *ngIf="user.address.length === 0">-</div>
+            </div>
+          </div>
+        </div>
+        <p class="preview-note">
+          By signing this form, you have agreed to the Privacy Policy and
+          certify that the information submitted is true and correct to the best
+          of your knowledge.
+        </p>
+        <div class="row">
+          <div class="col-6">
+            <div class="signature-box" (click)="takeConsent()">
+              <div class="signature-label-box">
+                <div class="signature-label">
+                  <p *ngIf="!user.guardian">Client's Signature</p>
+                  <p *ngIf="user.guardian">Parent/Guardian Signature</p>
+                </div>
+              </div>
+              <div class="signature-img-wrap">
+                <div class="signature-img">
+                  <img [src]="consentDetails.signature" alt="signature" *ngIf="consentDetails.signature != ''" />
+                </div>
+                <div class="cross-button">
+                  <button class="cross"></button>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class='col-6' *ngIf='user.guardian'>
+            <div class="row preview-field">
+              <div class="col-6 vertical-top">
+                <label class="input-label">Parent/Guardian Name</label>
+              </div>
+              <div class="col-6"><span class='colon'>:</span>
+                <div class='user-info'>{{consentDetails.name}}</div>
+              </div>
+            </div>
+            <div class="row preview-field">
+              <div class="col-6 vertical-top">
+                <label class="input-label">Relationship</label>
+              </div>
+              <div class="col-6"><span class='colon'>:</span>
+                <div class='user-info'>{{consentDetails.relation}}</div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="registration-container">
+      <!-- <div class="registration-check1 row" *ngIf="part1">
+        <label><input type="checkbox" class="reg-checkbox1" [(ngModel)]="checkbox1"
+            [ngModelOptions]="{standalone: true}" required>
+          <span>I have agreed to Premium Care Privacy Policy</span></label>
+      </div> -->
+      <div class="registration-button">
+        <button id="next1" class="button reg-button" type="button" *ngIf="basicDetails" (click)="openNext('basic')">
+          Next
+        </button>
+        <button id="next1" class="button reg-button" type="button" *ngIf="addressDetails" (click)="openNext('address')">
+          Next
+        </button>
+        <button id="next1" class="button reg-button" type="button" *ngIf="previewDetails"
+          (click)="openTermsConditions()" [ngClass]="{'disableBtn':!previewTab}">
+          Next
+        </button>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,326 @@
+.pre-adm-checklist-preview-container {
+    width: 84.75%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    // margin: 1rem 6rem;
+}
+
+.pre-adm-checklist-container {
+    width: 92.6%;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    margin: 0 auto;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 5px;
+    opacity: 1;
+    margin-top: 2.6rem;
+    margin-bottom: 2.6rem;
+}
+
+.pre-adm-checklist-sub-preview-container {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    margin: 6rem 0rem 2rem 0rem;
+    display: inline-block;
+    width: 100%;
+    padding: 2rem 5.1rem;
+}
+#pre-adm-pdf-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 2rem 3rem;
+}
+.pre-adm-checklist-sub-container {
+    margin: 0 2rem;
+    padding: 3rem 0;
+}
+
+.preview-first {
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    width: 90%;
+}
+.guardian-nric {
+    display: inline-block;
+    width: 97%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+}
+span.guardian-details {
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+}
+input.guardian-details {
+    display: inline-block;
+    max-width: 44%;
+    width: 30rem;
+    vertical-align: top;
+    outline: none;
+    border: 0.5px solid #7e7e7e;
+    background: #fbfbfb;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    margin-right: 2rem;
+    vertical-align: middle;
+}
+input.guardian-details::placeholder {
+    font-style: italic;
+    color: #aeaeb2;
+    font-size: 1.6rem;
+}
+h2 {
+    text-decoration: underline;
+    font-size: 2.4rem;
+}
+
+.button {
+    text-align: right;
+    width: 90%;
+    background: white;
+    // position: fixed;
+    position: absolute;
+    // display: inline-block;
+    // height: 6rem;
+    // height: 100px;
+    right: 5.7rem;
+    z-index: 1;
+    top: 0;
+    // transform: translate(0%, -3%);
+    padding: 1rem;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+}
+
+.first {
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    width: 100%;
+}
+
+.statement {
+    margin-bottom: 2rem;
+}
+
+.sub-statement {
+    margin-bottom: 2rem;
+}
+
+.rest {
+    width: 92%;
+    display: inline-block;
+    font-size: 1.6rem;
+}
+
+.rest1 {
+    width: 92%;
+    display: inline-block;
+    font-size: 1.6rem;
+}
+
+.number {
+    vertical-align: top;
+    width: 8%;
+    display: inline-block;
+}
+
+.sub-number {
+    vertical-align: top;
+    width: 8%;
+    display: inline-block;
+}
+
+.preview-info {
+    width: 95%;
+}
+
+.info {
+    width: 100%;
+    padding: 0rem 1rem;
+}
+
+.preview-info {
+    width: 100%;
+    // padding: 0 8.1rem 0 8.1rem;
+}
+
+.preview-title {
+    text-align: center;
+    // margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.signature-box {
+    margin-bottom: 2rem;
+    width: 40%;
+    // height: 13rem;
+    border: 1px solid grey;
+    border-radius: 1rem;
+}
+.signature-box-disable {
+    pointer-events: none;
+}
+.signature-label-box {
+    width: 100%;
+    height: 4rem;
+    background-color: #eeeef0;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.signature-label {
+    text-align: center;
+    padding: 0.6rem;
+}
+.signature-img-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+}
+
+.signature-img {
+    // height: 4rem;
+    width: 100%;
+    display: inline-block;
+}
+
+.line {
+    width: 75%;
+    margin-left: 0.5rem;
+    border: 1px solid #aeaeb2;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.save-btn-wrapper {
+    width: 25%;
+    background: #eeeef0;
+    border-radius: 1.2rem;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    display: inline-block;
+}
+
+.save-btn {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-size: 1.9rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+
+.pre-info-block {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.pre-input-label {
+    width: 23%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.pre-input-label1 {
+    width: 50%;
+    margin-left: 1rem;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.colon {
+    display: inline-block;
+}
+
+.submit-button {
+    text-align: center;
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.submit-btn-wrapper {
+    display: inline-block;
+    width: 45%;
+    background: #eeeef0;
+    border-radius: 1.8rem;
+    padding: 0.8rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+}
+
+.submit-btn {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.submit-btn-wrapper-disable {
+    pointer-events: none !important;
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.cross-button {
+    display: inline-block;
+    width: 100%;
+}
+
+.cross {
+    display: inline-block;
+    width: 15px;
+    height: 8px;
+    background: -webkit-linear-gradient(
+            -45deg,
+            transparent 0%,
+            transparent 46%,
+            #8e8e93 46%,
+            #8e8e93 56%,
+            transparent 56%,
+            transparent 100%
+        ),
+        -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent
+                    100%);
+    background-color: white;
+    margin-left: 0.7rem;
+    vertical-align: middle;
+}
+.line {
+    width: 75%;
+    margin-left: 0.5rem;
+    border: 1px solid #aeaeb2;
+    display: inline-block;
+    vertical-align: middle;
+}
+.empty-signature-preview {
+    display: inline-block;
+    width: 100%;
+    height: 5rem;
+}
+@media (max-width: 769px) {
+    .signature-box {
+        width: 60%;
+    }
+    .pre-adm-checklist-sub-preview-container {
+        padding: 0;
+    }
+    #pre-adm-pdf-wrap {
+        padding: 2rem;
+    }
+}

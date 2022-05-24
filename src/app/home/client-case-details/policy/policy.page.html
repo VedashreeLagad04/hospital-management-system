@@ -1,0 +1,135 @@
+<ion-content (click)="closeAllDropdown(null)">
+  <div class="policy-wrapper">
+    <div class="edit-wrap" *ngIf="mode == 'preview'">
+      <button class="add-edit-btn" (click)="editInfo()">
+        Edit
+      </button>
+    </div>
+    <!-- <div appDomChange (domChanged)="resetDropdown()"> -->
+    <div class="all-policy-wrap" [id]="'policy-'+i" *ngFor="let data of admission.policy; let i = index">
+      <div class="policy-title">
+        Policy {{i+1}}
+      </div>
+      <div class="policy-info-wrap">
+        <!-- checkboxes -->
+        <div class="info-row">
+          <div class="checkbox-wrap" *ngFor="let type of data.paymentMode;let j = index">
+            <div class="radio-btn">
+              <!-- <ion-checkbox color="light" type="checkbox" name="patientType" id="" class="patient-radio"
+                (click)="selectCheckbox($event, type)"></ion-checkbox> -->
+              <input type="checkbox" name="patientType" [id]="'payment-'+i+'-'+j" class="patient-radio" [checked]="type.selected"
+                (click)="selectCheckbox($event,data, type)" [ngClass]="{'edit-input': mode == 'edit'}">
+                <label [for]="'payment-'+i+'-'+j" class="checkbox-label" [ngClass]="{'edit-input': mode == 'edit'}">{{type.key}}</label>
+            </div>
+            <!-- <div class="checkbox-label" (click)="selectCheckbox($event,data, type)"> -->
+              <!-- <p>{{type.key}}</p> -->
+            <!-- </div> -->
+          </div>
+        </div>
+        <!-- Name of Policy Activated -->
+        <div class="info-row">
+          <div class="info-title">
+            Name of Policy Activated
+          </div>
+          <div class="info-input">
+            <div class="selected-label" (click)="openDropdown($event, data)" [ngClass]="{'edit-input': mode == 'edit'}">
+              {{data.nameOfPolicy}}</div>
+            <span class="dropdown-icon"></span>
+            <div class="dropdown-list" *ngIf="data.showPolicyNameDropdown">
+              <ul>
+                <li class="dropdown-input">
+                  <input type="text" [(ngModel)]="nameToSearch" placeholder="Search plan type" (input)="searchPolicyName()" (click)="enterValue($event)">
+                </li>
+                <ng-container *ngFor="let name of allPolicyNames; let j = index">
+                  <li *ngIf="name.show" (click)="selectDoc(name, j, i)"
+                    [ngClass]="{'selected':name.isSelected, 'disabled': name.isSelected && data.selectedRowIndex !== j}">
+                    <!-- {{name.name}} -->
+                    {{name.planType}}
+                  </li>
+                </ng-container>
+
+              </ul>
+            </div>
+
+
+            <!-- <span [id]="'policy-name-selection'+i" class="policy-name-selection"
+                [ngClass]="{'edit-input':mode=='edit'}" (change)="upDatePrevDropdownList()"></span> -->
+
+          </div>
+        </div>
+        <!-- Insurer-->
+        <div class="info-row">
+          <div class="info-title">
+            Insurer
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.insurer">
+          </div>
+        </div>
+        <!-- Name of Basic -->
+        <div class="info-row" *ngIf="i === 0">
+          <div class="info-title">
+            Name of Basic
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.nameOfBasic">
+          </div>
+        </div>
+        <!-- Basic Inception Date -->
+        <div class="info-row" *ngIf="i === 0">
+          <div class="info-title">
+            Basic Inception Date
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.basicInceptionDate">
+          </div>
+        </div>
+        <!--  Name of Rider -->
+        <div class="info-row" *ngIf="i === 0">
+          <div class="info-title">
+            Name of Rider
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.nameOfRider">
+          </div>
+        </div>
+        <!-- Rider Inception Date -->
+        <div class="info-row" *ngIf="i === 0">
+          <div class="info-title">
+            Rider Inception Date
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.riderInceptionDate">
+          </div>
+        </div>
+        <!-- Type of policy -->
+        <div class="info-row" *ngIf="i > 0">
+          <div class="info-title">
+            Type Of Policy
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.typeOfPolicy">
+          </div>
+        </div>
+        <!-- Policy Inception Date -->
+        <div class="info-row" *ngIf="i > 0">
+          <div class="info-title">
+            Policy Inception Date
+          </div>
+          <div class="info-input">
+            <input type="text" [(ngModel)]="data.policyInceptionDate">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+    <!-- add button -->
+    <div class="add-btn-wrap" *ngIf="(mode == 'edit') && (admission.policy.length < allPolicyNames.length)">
+      <button class="add-edit-btn" (click)="addNewPolicy()">Add New</button>
+    </div>
+    <!-- save button -->
+    <div class="save-btn-wrap" *ngIf="mode == 'edit'">
+      <button class="save-btn" (click)='saveChanges()'>Save Changes</button>
+    </div>
+  </div>
+</ion-content>

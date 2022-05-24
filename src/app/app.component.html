@@ -1,0 +1,157 @@
+<ion-app>
+  <!-- ! cancel loader button -->
+  <div class="loader-cancel-btn" *ngIf="showLoaderCancelBtn" (click)="dismissLoader()">
+    <button>Cancel</button>
+  </div>
+  <ion-header *ngIf='showHeader'>
+    <div class="newheader-row ">
+      <div class="col-1 menu-icon-container left-text header-height" slot="start">
+        <ion-menu-button menu="main" menuToggle autoHide="false" (click)='openFirst()'>
+          <ion-icon class="newheader-row-menu" name="menu">
+          </ion-icon>
+        </ion-menu-button>
+      </div>
+      <div class="col-3 header-height">
+        <!-- <img class="header-title-img" src="/assets/images/Logo.svg" (click)="goToHome()"> -->
+        <!-- ! Premium care logo -->
+        <!-- <img class="header-title-img" src="../assets/images/new-logo.png" (click)="goToHome()"> -->
+        <!-- <p class="header-title-text" (click)="goToHome()">PREMIUMCARE</p> -->
+
+        <!-- ! Demo logo -->
+        <img class="header-title-img" src="../assets/images/demo-logo.png" (click)="goToHome()">
+        <p class="header-title-text" (click)="goToHome()">HEALTHCARE</p>
+      </div>
+      <div class="col-1 right-text back-arrow header-height">
+        <!-- <ion-icon class="back-arrow-icon" *ngIf='headerBackPage' (click)="routePage(headerBackPage)"
+          name="ios-arrow-back"></ion-icon> -->
+        <ion-icon name="chevron-back" class="back-arrow-icon" *ngIf='headerBackPage'
+          (click)="routePage(headerBackPage, null)"></ion-icon>
+      </div>
+      <div class="col-3 header-title header-height">
+        <h1 class="title-text">
+          {{headerTitle}}
+        </h1>
+      </div>
+      <div class="col-2 right-text header-height nav-btn-wrap" [ngClass]="hideDirectNavButtons ? 'hide': ''">
+        <div class="nav-btn" (click)="directNavTo('/client-profile')">
+          <span class="nav-btn-icon">
+            <ion-icon name="person"></ion-icon>
+          </span>
+          <span class="nav-btn-label">
+            Client
+          </span>
+        </div>
+        <div class="nav-btn" (click)="directNavTo('/client-case-list')">
+          <span class="nav-btn-icon">
+            <ion-icon name="folder" mode="md"></ion-icon>
+          </span>
+          <span class="nav-btn-label">
+            Case
+          </span>
+        </div>
+      </div>
+      <div class="col-1 right-text header-height" (click)='logout()'>
+        <p class="account-name" *ngIf='loggedInuser'>{{loggedInuser.name}}</p>
+        <span class="account-type" *ngIf='loggedInuser'>{{loggedInuser.type}}</span>
+      </div>
+      <div class="col-1 center-text header-height" (click)='logout()'>
+        <!-- <img class='account-img' src="/assets/images/portrait.png" /> -->
+        <!-- <ion-icon name="contact" mode="ios" class='account-img'></ion-icon> -->
+        <ion-icon name="person-circle-outline" class='account-img'></ion-icon>
+      </div>
+    </div>
+  </ion-header>
+  <ion-content>
+    <!--  our side menu  -->
+    <ion-menu content-id="mainContent" menuId="main" *ngIf='showHeader' side="start" class="my-menu" type="overlay">
+      <ion-content>
+        <ion-list class="menu-list" lines='none'>
+          <ion-menu-toggle auto-hide="false" disabled="false">
+            <ion-item detail="false" button class="menu-item" menuClose='main'
+              (click)='routePage("/client-list/"+loggedInuser.id, "new")'
+              *ngIf="loggedInuser && loggedInuser.type !== 'agent'">
+              <ion-label>Client</ion-label>
+              <div class="client-img" slot='end'>
+                <div class="client-head"></div>
+                <div class="client-body"></div>
+              </div>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" menuClose='main'
+              (click)='routePage("/client-list/"+loggedInuser.id, "new")'
+              *ngIf="loggedInuser && loggedInuser.type=='agent'">
+              <ion-label>Add New Case</ion-label>
+              <div class="client-img" slot='end'>
+                <div class="client-head"></div>
+                <div class="client-body"></div>
+              </div>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" menuClose='main'
+              (click)='routePage("/client-list/"+loggedInuser.id, "offline")'
+              *ngIf="loggedInuser && loggedInuser.hasRights">
+              <ion-label>Offline Client</ion-label>
+              <div class="client-img" slot='end'>
+                <div class="client-head"></div>
+                <div class="client-body"></div>
+              </div>
+            </ion-item>
+            <!-- <ion-item detail="false" button class="menu-item" (click)="routePage('/case-management')"
+              *ngIf="loggedInuser && (loggedInuser.type=='agent' || loggedInuser.type== 'Management' || loggedInuser.type== 'Claims Manager')"> -->
+            <ion-item detail="false" button class="menu-item" (click)="routePage('/case-management', null)">
+              <div class="menu-icon" slot='end'>
+                <img class="case-img" src="/assets/images/file.svg">
+              </div>
+              <ion-label>Case</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)="routePage('/claims-management', null)"
+              *ngIf="loggedInuser && (loggedInuser.type == 'Claims Manager' || loggedInuser.type == 'Claims User' || loggedInuser.type == 'Finance Manager' || loggedInuser.type === 'Management')">
+              <div class="menu-icon" slot='end'>
+                <img class="case-img" src="./assets/images/folder-svgrepocase-com.svg">
+              </div>
+              <ion-label>Claims Management</ion-label>
+            </ion-item>
+            <!-- <ion-item detail="false" button class="menu-item">
+              <div class="menu-icon" slot='end'>
+                <img class="rotate-img" src="/assets/images/004-notification-1.svg">
+              </div>
+              <ion-label>Notification</ion-label>
+            </ion-item> -->
+            <!-- <ion-item detail="false" button class="menu-item">
+              <div class="menu-icon calendar-img" slot='end'>
+                <img src="/assets/images/calendar.svg">
+              </div>
+              <ion-label>Appointment</ion-label>
+            </ion-item> -->
+            <ion-item detail="false" button class="menu-item" (click)="routePage('/current-admission', null)">
+              <div class="menu-icon" slot='end'>
+                <img src="/assets/images/hospital.svg">
+              </div>
+              <ion-label>Current Admission</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)="routePage('/isp-calculation', null)">
+              <ion-label>ISP Calculation</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)='routePage("/insurance-calculator", null)'>
+              <ion-label>Insurance Calculator</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)="routePage('/invoices', null)"
+              *ngIf="loggedInuser && ((loggedInuser.type == 'Finance Manager')|| (loggedInuser.type == 'Finance User' || loggedInuser.type === 'Management'))">
+              <ion-label>Invoices</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)='routePage("/generate-report", null)'
+              *ngIf="loggedInuser && ((loggedInuser.type == 'Finance Manager') || (loggedInuser.type == 'Management'))">
+
+              <ion-label>Generate Report</ion-label>
+            </ion-item>
+            <ion-item detail="false" button class="menu-item" (click)='logout()'>
+              <div class="menu-icon logout-wrap" slot='end'>
+                <img src="/assets/images/log-out-outline.svg">
+              </div>
+              <ion-label>Logout</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet class='ion-page' main id="mainContent"></ion-router-outlet>
+  </ion-content>
+</ion-app>

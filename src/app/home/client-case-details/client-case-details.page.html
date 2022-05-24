@@ -1,0 +1,35 @@
+<ion-content>
+  <!-- <div class="details-wrapper"> -->
+  <div class="container-1074">
+    <div class="breadcrumbs-wrapper">
+      <app-breadcrumbs [clientDetails]="clientDetails" [caseDetails]="case"></app-breadcrumbs>
+    </div>
+    <div class="data-wrapper">
+      <div class="side-menu">
+        <div class="menu-list">
+          <p class='menu-item' (click)='routeTo("case")' [ngClass]="{'active' : activeTab === 'case'}">
+            Case
+          </p>
+          <p class='menu-item' (click)='routeTo("policy")' [ngClass]="{'active' : activeTab === 'policy'}">
+            Policy Activation
+          </p>
+          <p class='menu-item' (click)='routeTo("claims")' [ngClass]="{'active' : activeTab === 'claims'}"
+            *ngIf="loggedInUser && (loggedInUser.type == 'admin' || loggedInUser.type == 'Claims Manager' || loggedInUser.type == 'Claims User' || loggedInUser.type == 'Management')">
+            Claims
+          </p>
+          <p class='menu-item' (click)='routeTo("revenue")' [ngClass]="{'active' : activeTab === 'revenue'}"
+            *ngIf="loggedInUser && (loggedInUser.type == 'admin' || loggedInUser.type == 'Finance Manager' || loggedInUser.type == 'Finance User' || loggedInUser.type == 'Management')">
+            Finance
+          </p>
+          <!-- <p class='menu-item' (click)='routeTo("export-info")' [ngClass]="{'active' : activeTab === 'export-info'}">
+            Export Info
+          </p> -->
+        </div>
+      </div>
+      <div class="e-health-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <!-- </div> -->
+</ion-content>

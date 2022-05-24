@@ -1,0 +1,106 @@
+<ion-content>
+  <div class="policy-wrapper">
+    <div class="policy-container">
+      <div class="content" id='contentDiv' (scroll)='checkScroll($event)'>
+        <div class='policy-content'>
+          <p class="policy-content-line">
+            Personal Data Privacy Policy
+          </p>
+        </div>
+        <div class='policy-content'>
+          <p class='policy-content-line'>1. I hereby authorise Premium Care SG Pte. Ltd. (“PCARE”) to access, collect,
+            use,
+            disclose, process or otherwise handle all my personal data for the following “Purposes”:
+          </p>
+          <p class='policy-content-line'>(a) To assist me to
+            audit and determine the scope and extent of my current medical and healthcare insurance coverage by
+            working
+            with
+            such licensed financial advisers as it is required to do so;
+          </p>
+          <p class='policy-content-line'> (b) To identify my healthcare and medical needs;
+          </p>
+          <p class='policy-content-line'> (c) To assist me to procure the advice and expertise of licensed financial
+            advisers to restructure my
+            existing
+            insurance coverage and/or propose further or other cost-effective insurance coverage as may be necessary;
+          </p>
+          <p class='policy-content-line'> (d)
+            To
+            manage and process all healthcare or medical and healthcare insurance applications and/or claims on my
+            behalf;
+          </p>
+          <p class='policy-content-line'> (e) To identify and secure consultations with relevant medical specialists or
+            consultants and allied
+            healthcare
+            professionals;
+          </p>
+          <p class='policy-content-line'> (f) To co-ordinate any specialty care arrangements, including travel,
+            transport and lodging
+            requirements as may be required to facilitate the procurement of medical/health-check consultation and/or
+            treatment;
+          </p>
+          <p class='policy-content-line'> (g) To facilitate the provision of medical care and treatment from relevant
+            medical specialists or
+            consultants and allied healthcare professionals; and
+          </p>
+          <p class='policy-content-line'>(h) Any other purpose as may be reasonably required for
+            the
+            provision of the Services.</p>
+        </div>
+        <div class='policy-content'>
+          <p class='policy-content-line'>2. I hereby authorise and consent to the disclosure and/or sharing of my
+            personal
+            data to all such relevant persons, including but not limited to PCARE’s healthcare Administrative
+            managers,
+            specialist clinics, hospitals, allied healthcare professionals, financial advisers and my employer for the
+            above
+            mentioned Purposes only.</p>
+        </div>
+        <div class='policy-content'>
+          <p class='policy-content-line'> 3. I hereby declare that any personal data I may provide to PCARE is
+            complete,
+            accurate
+            and up to date at all times, and I shall promptly notify PCARE of any changes or updates, if any, to
+            such
+            personal data.</p>
+        </div>
+        <div class='policy-content'>
+          <p class='policy-content-line'>4. For the avoidance of doubt, “personal data” shall have the same meaning
+            as ascribed
+            and
+            defined in the Protection of Personal Data Act 2012 (No. 26 of 2012) (“PDPA”). I hereby acknowledge
+            that my
+            consent is granted to PCARE to use my personal data for the provision of the Services, and/or for the
+            Purposes,
+            pursuant to the PDPA.</p>
+        </div>
+        <div class='policy-content'>
+          <p class='policy-content-line'>5. I further acknowledge and confirm that to facilitate the provision of
+            the
+            Services, and
+            for the Purposes, PCARE may work with such licensed financial advisors as it shall deem fit and
+            proper on my
+            behalf or with me in order to assist me to determine the adequacy of my current medical and
+            healthcare
+            insurance
+            coverage, and/or to restructure the same if need be. Towards that end, I acknowledge that PCARE
+            shall not at
+            any
+            time be acting as a financial adviser to me, nor shall PCARE be providing me with any financial
+            advisory
+            services as prescribed under the Financial Advisers Act (Cap. 110) in so doing.</p>
+        </div>
+      </div>
+    </div>
+    <div class="registration-container">
+      <div class="registration-check1 row">
+        <label><input type="checkbox" class="reg-checkbox1" [(ngModel)]="privacyPolicy" required
+          [disabled]='!focusInFlag'>
+          <span>I have read and agree to Premium Care SG Pte. Ltd. Privacy Policy</span></label>
+      </div>
+      <button id="next1" class="button reg-button" type="button" *ngIf="!editPage && !editMode" (click)="goToAddPage()"
+        [ngClass]='{"disableNext":!privacyPolicy}'>Next</button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,393 @@
+<ion-content (click)="closeDropdowns()">
+  <div class="consent-wrapper" [ngClass]="consentAccepted==false ? 'extra-padding':''">
+    <div class="sign-in-button-wrapper"
+      *ngIf='consentAccepted && loggedinUser && (loggedinUser.type === "agent" || loggedinUser.type === "Claims Manager" || loggedinUser.type === "Finance Manager" || loggedinUser.type === "Management")'>
+      <button id="next1" class="button sign-in-button" type="button" (click)="signForm()">
+        Sign Document
+      </button>
+    </div>
+    <div class="consent-container"
+      [ngClass]="consentAccepted==true?'consent-container-reload':'consent-container-first'">
+      <div id="loc-pdf-wrap">
+        <p class="consent-title">
+          <u>Consent for Release of Medical Information</u>
+        </p>
+        <div class="consent-content">
+          <p class="consent-point">
+            1) This form must be fully complete and signed by the patient. If
+            the patient is below 21 years old, the form should be signed by the
+            patient’s parent/guardian and NRIC of the patient's parent/guardian
+            is required.
+          </p>
+          <p class="consent-point">
+            2) If the patient is mentally incompetent, consent is required from
+            the authorised representative, relevant documents are to be attached
+            as proof of relationship to patient if applicable.
+          </p>
+        </div>
+        <div class="row" [ngClass]="{'consent-form': consentAccepted==true}">
+          <p *ngIf="consentAccepted" class="form-title">
+            PARTICULARS AND CONSENT
+          </p>
+          <div class="consent">
+            <div *ngIf="!consentAccepted">
+              <div class="user-info row">
+                <div class="user-info-label">Patient Name</div>
+                <div class="user-info-label-input">
+                  <input type="text" class="patient-name font-bold" disabled [ngModel]="ehealth.profile.name"
+                    *ngIf="ehealth && ehealth.profile" />
+                </div>
+              </div>
+              <div class="user-info row">
+                <div class="user-info-label" *ngIf="ehealth.profile.nationality !== 'foreigner'">
+                  NRIC/FIN
+                </div>
+                <div class="user-info-label" *ngIf="ehealth.profile.nationality === 'foreigner'">
+                  Foreign ID
+                </div>
+                <div class="user-info-label-input">
+                  <input class="patient-nric font-bold" type="text" [ngModel]="ehealth.profile.nric" disabled
+                    *ngIf="ehealth && ehealth.profile && ehealth.profile.nationality !== 'foreigner'" />
+                  <input class="patient-nric font-bold" type="text" [ngModel]="ehealth.profile.foreignId" disabled
+                    *ngIf="ehealth && ehealth.profile && ehealth.profile.nationality === 'foreigner'" />
+                </div>
+              </div>
+            </div>
+            <!-- <div>I,<input type='text' class='patient-name' [(ngModel)]='letterOfConsent.name' /> of NRIC/FIN/Passport No.:
+            <input class='patient-nric' type='text' [(ngModel)]='letterOfConsent.nric' />, am the abovenamed -->
+            <div class="consent-check" *ngIf="!consentAccepted">
+              <div class="radio-relation-item margin-right">
+                <input id="patient-radio" class="form-radio-input" type="radio" name="consentPerson"
+                  #authoriser="ngModel" [(ngModel)]="letterOfConsent.authoriser" value="patient"
+                  [checked]='letterOfConsent.authoriser ==="patient"' />
+                <label class="radio-label" for="patient-radio">I am the Patient</label><br />
+              </div>
+              <div class="radio-relation-item">
+                <input id="parent-radio" class="form-radio-input" type="radio" name="consentPerson"
+                  #authoriser="ngModel" [(ngModel)]="letterOfConsent.authoriser" value="other"
+                  [checked]='letterOfConsent.authoriser ==="other"' />
+                <label class="radio-label" for="parent-radio">I am the Parent, Next of Kin or Guardian of
+                  Patient</label><br />
+              </div>
+              <div class="relation" *ngIf='letterOfConsent.authoriser==="other"'>
+                <div class="radio-relation parent-width">
+                  <input id="parent" class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                    [(ngModel)]="letterOfConsent.relation" value="parent"
+                    [checked]='letterOfConsent.relation ==="parent"' />
+                  <label class="radio-label" for="parent">Parent</label><br />
+                </div>
+                <div class="radio-relation">
+                  <input class="form-radio-input" type="radio" id="Kin" name="relation" #relation="ngModel"
+                    [(ngModel)]="letterOfConsent.relation" value="kin" [checked]='letterOfConsent.relation ==="kin"' />
+                  <label class="radio-label" for="Kin">Next of Kin</label><br />
+                </div>
+                <div class="radio-relation">
+                  <input id="guardian" class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                    [(ngModel)]="letterOfConsent.relation" value="guardian"
+                    [checked]='letterOfConsent.relation ==="guardian"' />
+                  <label class="radio-label" for="guardian">Guardian</label><br />
+                </div>
+                <div class="radio-relation admin-width">
+                  <input id="administrator" class="form-radio-input" type="radio" name="relation" #relation="ngModel"
+                    [(ngModel)]="letterOfConsent.relation" value="administrator"
+                    [checked]='letterOfConsent.relation ==="administrator"' />
+                  <label class="radio-label" for="administrator">Administrator of</label><br />
+                </div>
+                <!-- <select class='consent-select' [(ngModel)]='other'>
+                <option>Estate</option>
+              </select> -->
+                <div class="consent-select" [ngClass]="letterOfConsent.relation === 'administrator' ? '' : 'disabled'">
+                  <div class="letter-of-consent-info-input" (click)="openCloseDropdown('Administrator', null, $event)">
+                    <!-- <div class="letter-of-consent-info-input"> -->
+                    <div class="dropdown-label">
+                      <p class="dropdown-title">
+                        {{letterOfConsent.administratorOf}}
+                      </p>
+                      <!-- <p class="dropdown-title">Estate</p> -->
+                    </div>
+                    <!-- <div class="dropdown-arrow-wrapper">
+                      <span class="dropdown-arrow"></span>
+                    </div> -->
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <ul class="consent-select-dropdown" *ngIf="showAdministratorDropdown">
+                    <li *ngFor="let admin of allAdministrators" (click)="selectAdmin(admin)">
+                      {{admin}}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="authorizer-info" *ngIf='letterOfConsent.authoriser==="other"'>
+                <div class="user-parent-info row">
+                  <div class="authorizer-info-lable">Name of Authoriser</div>
+                  <div class="user-info-label-input">
+                    <input type="text" class="patient-name" [(ngModel)]="letterOfConsent.authoriserName" />
+                  </div>
+                </div>
+                <div class="user-parent-info row">
+                  <div class="authorizer-info-lable">
+                    NRIC/FIN/Foreign ID of Authoriser
+                  </div>
+                  <div class="user-info-label-input">
+                    <input class="patient-nric" type="text" [(ngModel)]="letterOfConsent.authoriserNric" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <p>of the abovenamed Patient. I hereby authorise _____________________________________ to furnish and
+              release the below stated information:</p> -->
+            <!-- </div> -->
+            <div class="consent-to" *ngIf="consentAccepted">
+              <div class="row">
+                <div class="col-6">
+                  <p>
+                    Patient Name:
+                    <span class="title-value" *ngIf="ehealth && ehealth.profile">{{ehealth.profile.name}}</span>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p>
+                    NRIC/FIN/Foreign ID:
+                    <span class="title-value" *ngIf="ehealth && ehealth.profile">{{ehealth.profile.nric ||
+                      this.ehealth.profile.foreignId}}</span>
+                  </p>
+                </div>
+              </div>
+              <p class="new-address" *ngIf='letterOfConsent.authoriser==="patient"'>
+                I,<span class="value font-bold"> {{letterOfConsent.name}}</span>
+                of NRIC/FIN/Passport No.:
+                <span class="value font-bold">{{letterOfConsent.nric}}</span> ,
+                am the <span class="value font-bold">Patient</span>. I hereby
+                authorise
+                <span class="value font-bold"
+                  *ngFor="let obj of letterOfConsent.authorizedClinic; let i=index">{{obj.clinic}}<span
+                    *ngIf="i<letterOfConsent.authorizedClinic.length-2">
+                    ,
+                  </span>
+                  <span *ngIf="i === (letterOfConsent.authorizedClinic.length-2)">
+                    and
+                  </span></span>
+                to furnish and release the below stated information:
+              </p>
+              <p class="new-address" *ngIf='letterOfConsent.authoriser==="other"'>
+                I,
+                <span class="value font-bold">{{letterOfConsent.authoriserName}}</span>
+                of NRIC/FIN/Passport No.:
+                <span class="value font-bold">{{letterOfConsent.authoriserNric}}</span>
+                , am the
+                <span class="value font-bold">
+                  {{letterOfConsent.relation}}</span>
+                of the above named Patient. I hereby authorise
+                <span class="value font-bold"
+                  *ngFor="let obj of letterOfConsent.authorizedClinic; let i=index">{{obj.clinic}}<span
+                    *ngIf="i<letterOfConsent.authorizedClinic.length-2">
+                    ,
+                  </span>
+                  <span *ngIf="i === (letterOfConsent.authorizedClinic.length-2)">
+                    and
+                  </span></span> to
+                furnish and release the below stated information:
+              </p>
+              <p class="new-address">To:</p>
+              <p class="new-address">Name of Company or Person:</p>
+              <h6>
+                <span class="value font-bold">Premium Care SG Pte. Ltd</span>
+              </h6>
+
+              <p class="new-address">Address of Company or Person:</p>
+              <h6>
+                <span class="value font-bold">883 North Bridge Road #02-01 Southbank Singapore 198785</span>
+              </h6>
+            </div>
+            <div class="consent-details">
+              <p [ngClass]="{'consent-checkbox-label': consentAccepted==true}">
+                <span class="title">Requested Information</span>
+              </p>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox1" [(ngModel)]="letterOfConsent.request.discharge" />
+                <label for="checkbox1">Discharge Summary</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox2" [(ngModel)]="letterOfConsent.request.labrResult" />
+                <label for="checkbox2">Lab Result / X-Ray Result</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox3" [(ngModel)]="letterOfConsent.request.certificate" />
+                <label for="checkbox3">Medical Certificate</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox4" [(ngModel)]="letterOfConsent.request.others" />
+                <label for="checkbox4">Others: </label>
+                <div class="other-option" [ngClass]="{'other-option-for-consentAccepted': consentAccepted==true}">
+                  <input class="letter-of-consent-info-input" value="All medical reports & bills" />
+                </div>
+              </div>
+            </div>
+            <div class="consent-details">
+              <p [ngClass]="{'consent-checkbox-label': consentAccepted==true}">
+                <span class="title">Purpose of Request</span>
+              </p>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox5" [(ngModel)]="letterOfConsent.purpose.care" />
+                <label for="checkbox5">Continuity of Care</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox6" [(ngModel)]="letterOfConsent.purpose.insurance" />
+                <label for="checkbox6">Insurance Claims</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox7" [(ngModel)]="letterOfConsent.purpose.legal" />
+                <label for="checkbox7">Legal Proceedings</label>
+              </div>
+              <div class="consent-checkbox"
+                [ngClass]="{'consent-checkbox-small-font disabledCheckbox': consentAccepted==true}">
+                <input type="checkbox" id="checkbox8" [(ngModel)]="letterOfConsent.purpose.others" checked />
+                <label for="checkbox8">Others: </label>
+                <div class="other-option" [ngClass]="{'other-option-for-consentAccepted': consentAccepted==true}">
+                  <input class="letter-of-consent-info-input" value="For Reference" />
+                </div>
+              </div>
+            </div>
+            <div class="consent-details" *ngIf="consentAccepted && ehealth && ehealth.letterOfConsent">
+              <p><span class="title">Authorized Clinic</span></p>
+              <div *ngFor="let obj of letterOfConsent.authorizedClinic; let i=index;">
+                <div class="letter-of-consent-input-box">
+                  <!-- <input type="text" class="letter-of-consent-info-input" [(ngModel)]="obj.clinic"> -->
+                  <div class="letter-of-consent-info-input">
+                    <div class="dropdown-label avoid">
+                      <p class="dropdown-title avoid">{{obj.clinic}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="consent-details" *ngIf="!consentAccepted">
+              <p><span class="title">Authorized Clinic</span></p>
+              <div *ngFor="let obj of authorizedClinic; let i=index;">
+                <div class="letter-of-consent-input-box">
+                  <!-- <input type="text" class="letter-of-consent-info-input" [(ngModel)]="obj.clinic"> -->
+                  <div class="letter-of-consent-info-input"
+                    (click)="openCloseDropdown('Authorized Clinic', obj, $event)">
+                    <div class="dropdown-label">
+                      <p class="dropdown-title">{{obj.clinic}}</p>
+                    </div>
+                    <!-- <div class="dropdown-arrow-wrapper">
+                      <span class="dropdown-arrow"></span>
+                    </div> -->
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <ul class="authorized-clinic-dropdown" *ngIf="obj.showDropdown">
+                    <li class="dropdown-input">
+                      <input type="text" [(ngModel)]="nameToSearch" placeholder="Search source"
+                        (input)="allClinic = dataService.searchFromDropdownList(allClinic, nameToSearch, 'name')"
+                        (click)="dataService.enterValue($event)">
+                    </li>
+                    <ng-container *ngFor="let clinic of allClinic; let j=index;">
+                      <li *ngIf="clinic.show" (click)="selectClinic(obj, clinic, j)"
+                        [ngClass]="{'selected':clinic.isSelected, 'disabled': clinic.isSelected && obj.selectedRowIndex !== j}">
+                        {{clinic.name}} ({{clinic.code}})
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+                <button (click)="addClinic()" class="plus-button plus-button--small"
+                  *ngIf="i==0 && authorizedClinic.length < allClinic.length"></button>
+                <button (click)="removeClinic(i, obj)" class="close-button" *ngIf="i>0"></button>
+              </div>
+            </div>
+
+            <div class="avoid" [ngClass]="{'consentAccepted': 'consent-agreed' , '!consentAccepted':'sign-wrapper'}">
+              <div class="signature-box avoid" (click)="openSignatureModal()">
+                <div class="signature-label-box avoid">
+                  <div class="signature-label">
+                    <span *ngIf="letterOfConsent.authoriser != 'other'">Client Signature</span>
+                    <span *ngIf="letterOfConsent.authoriser == 'other'">Authorizer Signature</span>
+                  </div>
+                </div>
+                <div class="signature-img-wrap avoid">
+                  <div class="signature-img" *ngIf="latestLetterOfConsentPdf">
+                    <img [src]="latestLetterOfConsentPdf.signature" alt="signature"
+                      *ngIf="(latestLetterOfConsentPdf.signature != undefined) && (latestLetterOfConsentPdf.signature != null) && (latestLetterOfConsentPdf.signature != '')" />
+                  </div>
+                  <div class="empty-signature-preview"
+                    *ngIf="(latestLetterOfConsentPdf.signature == undefined) || (latestLetterOfConsentPdf.signature == null) || (latestLetterOfConsentPdf.signature == '')">
+                  </div>
+                  <div class="cross-button">
+                    <button class="cross"></button>
+                    <div class="line"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="agreed-details"
+                *ngIf="consentAccepted && (latestLetterOfConsentPdf.signature != undefined) && (latestLetterOfConsentPdf.signature != null) && (latestLetterOfConsentPdf.signature != '')">
+                <p class="agreed-title">Agreed By:</p>
+                <div class="row">
+                  <div class="col-5">Name</div>
+                  <div class="col-7">
+                    :
+                    <span
+                      *ngIf="latestLetterOfConsentPdf && latestLetterOfConsentPdf.name!=''">{{latestLetterOfConsentPdf.name}}</span>
+                  </div>
+                </div>
+                <div class="row" *ngIf="letterOfConsent.authoriser !== 'patient'">
+                  <div class="col-5">Relationship</div>
+                  <div class="col-7">
+                    :
+                    <span
+                      *ngIf="latestLetterOfConsentPdf && latestLetterOfConsentPdf.relation!=''">{{latestLetterOfConsentPdf.relation}}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-5"
+                    *ngIf="ehealth && ehealth.profile && letterOfConsent.authoriser === 'patient' && ehealth.profile.nationality !== 'foreigner'">
+                    NRIC/FIN
+                  </div>
+                  <div class="col-5"
+                    *ngIf="ehealth && ehealth.profile && letterOfConsent.authoriser === 'patient' && ehealth.profile.nationality === 'foreigner'">
+                    Foreign ID
+                  </div>
+                  <div class="col-5" *ngIf="letterOfConsent.authoriser !== 'patient'">
+                    NRIC/FIN/Foreign ID
+                  </div>
+                  <div class="col-7">
+                    :
+                    <span
+                      *ngIf="latestLetterOfConsentPdf && latestLetterOfConsentPdf.nric!=''">{{latestLetterOfConsentPdf.nric}}</span>
+                  </div>
+                </div>
+                <!-- <div class="row" *ngIf='letterOfConsent.signingPerson!=="patient"'>
+                <div class="col-5">Relationship</div>
+                <div class="col-7">: {{letterOfConsent.signingPerson}}</div>
+              </div> -->
+              </div>
+              <!-- <div class="col-6">
+              <div class="consent-sign">
+                <img src="{{letterOfConsent.sign}}" alt="">
+              </div>
+            </div> -->
+            </div>
+          </div>
+        </div>
+        <div class="registration-container" *ngIf="!consentAccepted">
+          <!-- <button id="next1" class="button reg-button" type="button" *ngIf='!consentAccepted'
+          (click)="goToConfirm()">Next</button> -->
+          <button id="next1" class="button reg-button" type="button" (click)="exportPdf()"
+            [disabled]="(!clientType || (clientType && clientType === 'new')) && (latestLetterOfConsentPdf === undefined || !latestLetterOfConsentPdf.signature)">
+            Submit Form
+          </button>
+          <!-- <button id="next1" class="button reg-button" type="button" *ngIf='consentAccepted && consentType==="client"'
+          (click)="submitRegistration()">Save</button>
+        <button id="next1" class="button reg-button" type="button" *ngIf='consentAccepted && consentType==="case"'
+          (click)="createCase()">Save</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

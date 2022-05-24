@@ -1,0 +1,89 @@
+.client-info-wrapper {
+    padding: 4rem 0;
+}
+.client-info-container {
+    max-width: 920px;
+    margin: 0 auto;
+}
+.client-details {
+    border: 0.5px solid #7e7e7e;
+    background: #fbfbfb;
+    border-radius: 0.5rem;
+    padding: 3rem;
+}
+.client-details .col-6 {
+    vertical-align: top;
+}
+.client-info-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    margin-bottom: 2rem;
+}
+.info-row {
+    margin-bottom: 2rem;
+    display: block;
+    vertical-align: top;
+}
+.info-label,
+.info-content {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    display: inline-block;
+}
+.emailText {
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+    display: inline-block;
+    width: 60%;
+}
+.info-label {
+    width: 40%;
+    vertical-align: top;
+}
+.info-content {
+    width: 60%;
+    // text-transform: capitalize;
+}
+.info-separator {
+    margin-right: 1rem;
+    width: 2%;
+    display: inline-block;
+    vertical-align: top;
+}
+.contentText {
+    display: inline-block;
+    width: 90%;
+    vertical-align: top;
+}
+.meta-data {
+    font-size: 1.4rem;
+    // line-height: 2.2rem;
+    color: #3e3e3e;
+    margin: 1rem 0;
+}
+.data-label {
+    margin-bottom: 1rem;
+    line-height: 2.2rem;
+}
+.data-agent span {
+    text-transform: capitalize;
+}
+.small-text {
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+    width: 100%;
+    display: inline-block;
+}
+@media screen and (min-width: 750px) and (max-width: 1023px) {
+    .client-info-container {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
+@media screen and (min-width: 1250px) and (max-width: 1366px) {
+    .client-info-container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+}

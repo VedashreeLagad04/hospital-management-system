@@ -1,0 +1,66 @@
+<ion-content>
+  <div class="personal-particular-wrapper">
+    <div class="personal-particular-left-container">
+      <button class="upload-btn" (click)="file.click()">Upload Document</button>
+      <input hidden type="file" #file (click)="fileClick()" (change)="uploadFiles($event)" accept="application/pdf"
+        multiple />
+      <div class="row personal-particular-search-bar">
+        <ion-icon name="search" class="search-icon"></ion-icon>
+        <input type="text" class="searchInput" placeholder="Search" [(ngModel)]="nameToSearch" (input)="searchPdf()" />
+      </div>
+      <div class="pdf-files-wrap">
+        <ng-container *ngFor="let file of fileNames" style="overflow-y: auto">
+          <div class="row" *ngIf="file.show">
+            <div class="personal-particular-sub-blk" (click)="openFile(file)">
+              <div class="filename-wrap">
+                <!-- <img class="folder-icon" src="../../../assets/images/folder.svg" /> -->
+                <!-- <ion-icon name="folder" class="folder-icon"></ion-icon> -->
+                <ion-icon name="document" class="folder-icon"></ion-icon>
+                <span class="folder-name"
+                  [ngClass]="{'active-file' : currentFileObj && currentFileObj.fileName.includes(file.actualFilename)}">{{file.fileName}}</span>
+              </div>
+              <div class="filedate-wrap">
+                <span class="folder-date">{{file.fileDate}}</span>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="personal-particular-right-container">
+      <!--<div class="pdf-header-wrap" *ngIf="isPdfOpen">
+         <span class="page-text margin-right">Page</span>
+        <div class="number-blk">1</div>
+        <span class="of-text">of</span>
+        <div class="number-blk margin-right">5</div>
+        <div class="back-next-btn-blk">
+          <div class="back-arrow-wrapper">
+            <span class="back-arrow arrow"></span>
+          </div>
+        </div>
+        <div class="back-next-btn-blk">
+          <div class="next-arrow-wrapper">
+            <span class="next-arrow arrow"></span>
+          </div>
+        </div> 
+      </div> -->
+
+      <div class="preview-container">
+        <button class="btn export-btn" *ngIf="isWeb === false && isPdfOpen"
+          (click)="shareToWhatsapp(currentFileObj.fileName)">
+          Export
+        </button>
+        <button class="btn export-btn" *ngIf="isWeb === true && isPdfOpen" (click)="downloadFile()">
+          Download
+        </button>
+        <div class="display-pdf" *ngIf="currentFileObj && currentFileObj.fileType === 'pdf'">
+          <!-- <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" (on-progress)="onProgress($event)"
+              (after-load-complete)="afterLoadComplete($event)"> -->
+          <pdf-viewer [src]="currentFileObj.fileName" [original-size]="false" (on-progress)="onProgress($event)"
+            (after-load-complete)="afterLoadComplete()" (error)="afterLoadComplete()">
+          </pdf-viewer>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

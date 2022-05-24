@@ -1,0 +1,253 @@
+.terms-wrapper {
+  background-color: #cdcdcd;
+  padding: 3rem 4rem;
+  padding-bottom: 2.1rem;
+  min-height: 100%;
+}
+.terms-container {
+  margin: 0 auto;
+  max-width: 686px;
+}
+.terms-header-title {
+  font-style: italic;
+}
+.terms-header-title .col-10 {
+  vertical-align: top;
+}
+.close-modal {
+  font-size: 4rem;
+  line-height: 3rem;
+  color: #8e8e93;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+.agreed {
+  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  color: #000000;
+}
+.letter-content .letter-label {
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2.2rem;
+  color: #000000;
+  vertical-align: top;
+}
+.letter-content {
+  margin: 1.5rem 0;
+}
+.letter-input {
+  outline: none;
+  width: 64.7%;
+  text-transform: capitalize;
+  padding: 0.7rem 0.8rem;
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  border: 0.5px solid #7e7e7e;
+  margin-bottom: 1.2rem;
+}
+.letter-input-optional {
+  outline: none;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 0.5rem;
+  background: #fff;
+  width: 70%;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+.letter-label {
+  width: 35%;
+  display: inline-block;
+}
+.letter-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.signature-textarea-wrapper {
+  display: inline-block;
+  width: 100%;
+  padding-top: 0.4rem;
+  padding-bottom: 0.6rem;
+  position: relative;
+  background-color: #ffffff;
+  border-radius: 1rem;
+}
+.signature-area {
+  display: inline-block;
+  width: 100%;
+  background: #fcfcfc;
+  border: none;
+  height: 11rem;
+  resize: none;
+}
+.signature-wrapper {
+  max-width: 335px;
+  height: 16.5rem;
+  margin: 0 auto;
+  color: #000000;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.8rem;
+  text-align: left;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  background-color: #ffffff;
+}
+.expand-icon {
+  width: 29rem;
+  margin-left: 2.5rem;
+  border-bottom: 0.5px solid #76767a;
+  height: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+.expand-icon span {
+  padding: 0.4rem 0.6rem;
+  background-color: #ffffff;
+}
+.expand-icon i {
+  font-size: 1.2rem;
+  font-weight: 100;
+}
+.signature-text {
+  background-color: #eeeef0;
+  text-align: center;
+  padding: 0.05rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.signature-text p {
+  font-size: 1.2rem;
+  color: #000000;
+  line-height: 2.2rem;
+}
+.conditions-content {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #eeeef0;
+  height: 45.3rem;
+  overflow-y: scroll;
+  margin-top: 1.5rem;
+}
+.conditions-content p {
+  text-align: left;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  letter-spacing: -0.29px;
+  color: #000000;
+  margin-bottom: 1.5rem;
+}
+.registration-check1 {
+  display: block;
+  // margin: 9rem 0rem 4rem 3.2rem;
+  margin: 2.4rem 0rem;
+}
+.registration-check1 .reg-checkbox1,
+.registration-check1 span {
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.registration-check1 input {
+  height: 1.9rem;
+  width: 1.9rem;
+}
+.registration-check1 span {
+  width: 86%;
+  margin-left: 1.7rem;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+}
+.reg-button {
+  background-color: #eeeef0;
+  color: #007aff;
+  padding: 0.7rem;
+  width: 100%;
+  border-radius: 1.8rem;
+  bottom: 6rem;
+  line-height: 2.2rem;
+  font-size: 1.6rem;
+  // margin-bottom: 2.2rem;
+}
+.submit-button {
+  margin-bottom: 1.3rem !important;
+}
+.disableButton {
+  color: #76767a;
+  background-color: #b9b9b9;
+}
+.registration-button {
+  width: 46.2rem;
+  margin: 2.5rem 0 auto;
+}
+select.letter-input-optional {
+  padding: 0.3rem;
+}
+.clear-button {
+  width: 10%;
+}
+.hidePart {
+  display: none;
+}
+.presentPart {
+  display: block;
+}
+// new css
+.dropdown-input-box {
+  display: inline-block;
+  width: 64.7%;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 0.5rem;
+  opacity: 1;
+  padding: 0.6rem 0.8rem;
+  position: relative;
+  vertical-align: top;
+  font-size: 1.6rem;
+  line-height: 1.6rem;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+}
+.dropdown-input {
+  border: none;
+  background: transparent;
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  padding: 0.15rem;
+}
+.dropdown-title {
+  display: inline-block;
+  width: 90%;
+}
+.dropdown-arrow-wrapper {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+  vertical-align: text-bottom;
+}
+.dropdown-arrow {
+  border: solid #a4afb7;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  vertical-align: top;
+  padding: 4px;
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+ul.case-type-dropdown {
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  background: #fbfbfb 0% 0% no-repeat padding-box;
+  border: 0.5px solid #7e7e7e;
+  border-radius: 0.5rem;
+  left: 0;
+  padding: 1rem 0.8rem;
+  top: 3rem;
+  z-index: 10;
+}
+ul.case-type-dropdown li {
+  padding: 0.5rem;
+}

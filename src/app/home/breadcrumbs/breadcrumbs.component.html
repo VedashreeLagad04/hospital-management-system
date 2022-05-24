@@ -1,0 +1,11 @@
+<div class="breadcrumb-wrap">
+  <h1 class="clientdetail-title" *ngIf="clientDetails">
+    <span (click)="goToAllCases()"> Patient</span>
+    <ion-icon name="chevron-forward-outline" id="right-arrow"></ion-icon>
+    <span (click)="goToAllCases()">{{clientDetails.name}}</span>
+    <ng-container *ngIf="caseDetails">
+      <ion-icon name="chevron-forward-outline" id="right-arrow"></ion-icon>
+      <span  (click)="goToCaseProfile()">{{caseDetails.name}}</span>
+    </ng-container>
+  </h1>
+</div>

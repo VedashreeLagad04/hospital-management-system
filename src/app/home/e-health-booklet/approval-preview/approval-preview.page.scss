@@ -1,0 +1,999 @@
+.preview-container {
+    width: 85.57%;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    // padding: 1rem 0rem 2rem 0rem;
+}
+.pdf-container {
+    display: inline-block;
+    width: 100%;
+}
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+#preview-pdf-wrap {
+    padding: 1rem 2rem;
+    display: inline-block;
+    width: 100%;
+}
+.preview-sub-container {
+    display: inline-block;
+    width: 100%;
+    margin: 2rem 0;
+    background: #ffffff;
+    // box-shadow: 0px 3px 0px #00000029;
+    border: 1px solid #00000029;
+    padding: 2rem;
+    opacity: 1;
+    pointer-events: none;
+}
+.preview-sub-container1 {
+    display: inline-block;
+    width: 100%;
+    // margin-top: 6rem;
+    margin: 2rem 0;
+    background: #ffffff;
+    // box-shadow: 0px 3px 0px #00000029;
+    border: 1px solid #00000029;
+    padding: 2rem;
+    opacity: 1;
+    pointer-events: none;
+}
+.preview-sub1-container,
+p,
+h5,
+h2 {
+    display: inline-block;
+    width: 100%;
+}
+.images-div {
+    width: 70%;
+    margin: 2rem auto;
+}
+.preview-info-block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.preview-input-label {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+.heading-input-label {
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    width: 45%;
+    display: inline-block;
+    vertical-align: top;
+}
+.radio-input-wrap {
+    display: inline-block;
+    width: 50%;
+}
+.radio-input-wrap:last-child {
+    margin-top: 1rem;
+}
+.preview-input-label1 {
+    width: 50%;
+    margin-left: 1rem;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+.preview-input-title {
+    width: 100%;
+    margin-bottom: 0.7rem;
+}
+.colon {
+    display: inline-block;
+}
+.signature-box {
+    width: 40%;
+    // height: 18rem;
+    border: 1px solid grey;
+    border-radius: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+.signature-label-box {
+    width: 100%;
+    height: 4rem;
+    background-color: #eeeef0;
+    border-radius: 1rem 1rem 0 0;
+}
+.signature-label {
+    text-align: center;
+    padding: 0.6rem;
+}
+.pre-signature-box {
+    display: inline-block;
+    width: 35%;
+    // height: 18rem;
+    border: 1px solid grey;
+    border-radius: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+.disable {
+    pointer-events: none;
+}
+.pre-signature-label-box {
+    display: inline-block;
+    width: 100%;
+    height: 4rem;
+    background-color: #eeeef0;
+    border-radius: 1rem 1rem 0 0;
+}
+.pre-signature-label {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 0.6rem;
+}
+.line {
+    width: 70%;
+    margin-left: 0.5rem;
+    border: 1px solid #aeaeb2;
+    display: inline-block;
+    vertical-align: middle;
+}
+.save-btn-wrapper {
+    display: inline-block;
+    width: 45%;
+    background: #eeeef0;
+    border-radius: 1rem;
+    padding: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+}
+.view-btn-wrapper {
+    display: inline-block;
+    width: 45%;
+    background: #eeeef0;
+    border-radius: 1rem;
+    padding: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    margin-left: 5rem;
+}
+.sign-btn {
+    text-align: center;
+    font-size: 1.9rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.sign-btn-disabled {
+    text-align: center;
+    font-size: 1.9rem;
+    color: #aeaeb2;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.sign-btn-wrapper {
+    display: inline-block;
+    width: 25%;
+    background: #eeeef0;
+    border-radius: 1.2rem;
+    padding: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    margin-left: 1rem;
+}
+.save-btn {
+    text-align: center;
+    font-size: 1.9rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.button {
+    text-align: right;
+    width: 100%;
+}
+.cross-button {
+    display: inline-block;
+    width: 15%;
+    text-align: right;
+}
+.cross {
+    display: inline-block;
+    width: 15px;
+    height: 8px;
+    background: -webkit-linear-gradient( -45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%);
+    background-color: white;
+    margin-left: 0.7rem;
+    vertical-align: -webkit-baseline-middle;
+}
+//---------------------------------------CHECKLIST_CSS--------------------------------------------------------------------//
+.preview-first {
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    width: 90%;
+}
+h2 {
+    text-decoration: underline;
+    font-size: 2.4rem;
+}
+.button {
+    text-align: right;
+    width: 100%;
+    display: inline-block;
+    background: white;
+    /* position: absolute; */
+    /* height: 6rem; */
+    /* right: 5.5rem; */
+    z-index: 1;
+    // -webkit-transform: translate(0%, -8%);
+    /* transform: translate(0%, -8%); */
+    padding: 1rem 0;
+}
+.first {
+    margin-bottom: 3rem;
+    font-size: 1.6rem;
+    width: 100%;
+}
+.statement {
+    margin-bottom: 2rem;
+}
+.sub-statement {
+    margin-bottom: 2rem;
+}
+.rest {
+    width: 92%;
+    display: inline-block;
+    font-size: 1.6rem;
+}
+.rest1 {
+    width: 92%;
+    display: inline-block;
+    font-size: 1.6rem;
+}
+.number {
+    vertical-align: top;
+    width: 8%;
+    display: inline-block;
+}
+.sub-number {
+    vertical-align: top;
+    width: 8%;
+    display: inline-block;
+}
+.preview-info {
+    width: 95%;
+    padding: 0 0 0 10rem;
+}
+.preview-info {
+    width: 100%;
+    padding: 0 8.1rem 0 8.1rem;
+}
+.preview-title {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+}
+.title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.checklist-signature-box {
+    width: 45%;
+    height: 14rem;
+    border: 1px solid grey;
+    border-radius: 0.7rem;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+.checklist-signature-label-box {
+    width: 100%;
+    height: 40px;
+    background-color: #eeeef0;
+    border-radius: 1rem 1rem 0 0;
+}
+.checklist-signature-label {
+    text-align: center;
+    padding: 0.6rem;
+}
+.checklist-line {
+    width: 70%;
+    margin-left: 0.5rem;
+    border: 1px solid #aeaeb2;
+    display: inline-block;
+    vertical-align: -webkit-baseline-middle;
+}
+.checklist-image {
+    height: 6.5rem;
+}
+.pre-info-block {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+.pre-input-label {
+    width: 20%;
+    display: inline-block;
+}
+.pre-input-label1 {
+    width: 50%;
+    margin-left: 1rem;
+    display: inline-block;
+}
+.colon {
+    display: inline-block;
+}
+.checklist-cross-button {
+    display: inline-block;
+    width: 15%;
+    text-align: right;
+}
+.checklist-cross {
+    display: inline-block;
+    width: 15px;
+    height: 8px;
+    background: -webkit-linear-gradient( -45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%);
+    background-color: white;
+    margin-left: 0.7rem;
+    vertical-align: -webkit-baseline-middle;
+}
+//--------------------------------------MEDICAL CONDITION-----------------------------------------------//
+.ent-container {
+    max-width: 871px;
+    margin: 0 auto;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    padding: 2rem 2rem 0rem 2rem;
+}
+.ortho-container {
+    width: 93.28%;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: #000000;
+    font-weight: 400;
+    border: 1px solid #e5e5e5;
+    padding: 2rem;
+    margin: 2rem;
+    box-shadow: 1px 1px 1px 1px #e5e5e5;
+    background-color: #fbfbfb;
+}
+.upload-btn {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.upload-btn-wrapper {
+    display: inline-block;
+    width: 22%;
+    margin-left: 2.6rem;
+    vertical-align: top;
+    background: #eeeef0;
+    border-radius: 1.2rem;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+}
+.ent-info-block {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.ent-info-block1 {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.title {
+    // color: #004080;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+.sub-title {
+    color: #007aff;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+.ent-input-checkbox {
+    /* position: absolute; */
+    vertical-align: top;
+    width: 20%;
+    margin-bottom: 1rem;
+    display: inline-block;
+    pointer-events: none;
+}
+.ortho-input-checkbox1 {
+    position: absolute;
+    margin-bottom: 1rem;
+    display: inline-block;
+    pointer-events: none;
+}
+.ent-input-checkbox1 {
+    display: inline-block;
+    pointer-events: none;
+}
+.checkbox-div {
+    display: inline-block;
+    width: 80%;
+    pointer-events: none;
+}
+.ortho-checkbox {
+    width: 2rem;
+    height: 2rem;
+    pointer-events: none;
+}
+.ortho-checkbox2 {
+    height: 2rem;
+    width: 2rem;
+    pointer-events: none;
+}
+.checkbox1 {
+    margin-left: 1rem;
+    pointer-events: none;
+}
+.ortho-checkbox1 {
+    // margin-left: 3rem;
+    width: 2rem;
+    height: 2rem;
+    pointer-events: none;
+}
+label {
+    padding: 0rem 0.5rem 0 0.5rem;
+    vertical-align: top;
+}
+.ent-input-label {
+    display: inline-block;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+.ortho-input-label {
+    display: inline-block;
+    margin-bottom: 1rem;
+    width: 76%;
+}
+.medical-input-box {
+    display: inline-block;
+    width: 100%;
+    background: #fbfbfb 0% 0% no-repeat padding-box;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: relative;
+    vertical-align: -webkit-baseline-middle;
+    margin-bottom: 2rem;
+}
+.ent-input-label2 {
+    display: inline-block;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 60%;
+}
+.ent-input-label1 {
+    display: inline-block;
+    margin-bottom: 1rem;
+    width: 15%;
+}
+.extension {
+    margin-left: 0.5rem;
+    display: inline-block;
+}
+.gastro-textarea {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    width: calc(100% - 1.5rem) !important;
+    margin-bottom: 0 !important;
+}
+.ortho-textarea {
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    width: calc(60% - 1.5rem) !important;
+    margin-bottom: 0 !important;
+}
+.vaccination {
+    display: inline-block;
+    width: 20%;
+    background: #FBFBFB;
+    border: 0.5px solid #7E7E7E;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: relative;
+    vertical-align: -webkit-baseline-middle;
+    margin-bottom: 1rem;
+    margin-left: 2.5rem;
+    pointer-events: none;
+}
+.medication {
+    width: 50%;
+}
+.vaccination1 {
+    display: inline-block;
+    width: 6%;
+    background: #fbfbfb;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: relative;
+    vertical-align: -webkit-baseline-middle;
+    margin-bottom: 1rem;
+    margin-left: 2.6rem;
+    pointer-events: none;
+}
+.colour {
+    background: transparent;
+    display: inline-block;
+    width: 15%;
+    outline: none;
+    border-top-style: hidden;
+    border-left-style: hidden;
+    border-right-style: hidden;
+    border-bottom-style: groove;
+    border-color: white;
+    pointer-events: none;
+}
+.ent-input-box {
+    display: inline-block;
+    width: 100%;
+    background: #fbfbfb;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: relative;
+    pointer-events: none;
+}
+.ent-info-input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 100%;
+    outline: none;
+}
+.col-3 {
+    width: 35%;
+    display: inline-block;
+    padding: 0.5rem;
+    vertical-align: top;
+}
+.col-4 {
+    width: 33.33%;
+    vertical-align: top;
+    display: inline-block;
+}
+.col-4 label {
+    display: block;
+    padding-right: 10px;
+    // padding-left: 22px;
+    // text-indent: -18px;
+}
+.col-4 label span {
+    margin: 0.5rem;
+    vertical-align: top;
+}
+.radio-div {
+    display: inline-block;
+    width: calc(40% - 2.6rem);
+    vertical-align: top;
+    margin-left: 2.6rem;
+    pointer-events: none;
+}
+.radio-div1 {
+    display: inline-block;
+    width: calc(40% - 1rem);
+    vertical-align: top;
+    margin-left: 1rem;
+    pointer-events: none;
+}
+.question {
+    font-size: 1.4rem;
+    width: 60%;
+    display: inline-block;
+}
+.question1 {
+    font-size: 1.4rem;
+    width: 60%;
+    display: inline-block;
+}
+.sub-ortho-container {
+    padding: 1rem;
+}
+.discharge {
+    width: 2%;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 6rem;
+}
+.ortho-info-block {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+.ortho-info-input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 100%;
+    outline: none;
+}
+.ortho-input-box {
+    display: inline-block;
+    width: 76%;
+    background: #fbfbfb;
+    border: 0.5px solid #7e7e7e;
+    border-radius: 0.5rem;
+    opacity: 1;
+    padding: 0.5rem;
+    position: relative;
+    vertical-align: -webkit-baseline-middle;
+    margin-bottom: 2rem;
+    pointer-events: none;
+}
+.ortho-save-btn-wrapper {
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+    background: #eeeef0;
+    border-radius: 1.2rem;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    pointer-events: none;
+}
+.ortho-save-btn {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #007aff;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.buttons {
+    position: fixed;
+    width: 80%;
+    background: #fbfbfb;
+    height: 5rem;
+}
+.margin {
+    margin-top: 2rem;
+}
+.ortho-check {
+    height: 2rem;
+    width: 2rem;
+    pointer-events: none;
+}
+.ortho-btn-wrapper {
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+    background: #fbfbfb;
+    border-radius: 1rem;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #007aff;
+    line-height: 2.1rem;
+}
+.ortho-btn-wrapper-onclick {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+    padding: 0.8rem 0rem 0.8rem 0rem;
+    text-align: center;
+    font-size: 1.5rem;
+    line-height: 2.1rem;
+    background: #007aff;
+    border-radius: 0.5rem;
+    opacity: 1;
+}
+.ortho-btn {
+    text-align: center;
+    font-size: 1.6rem;
+    color: black;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.ortho-btn-onclick {
+    text-align: center;
+    font-size: 1.6rem;
+    color: white;
+    line-height: 2.1rem;
+    background: transparent;
+}
+.signature-img,
+.signature-img>img {
+    display: inline-block;
+    width: 100%;
+    // height: 10rem;
+}
+.signature-img-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+}
+.signature-img {
+    height: 3.8rem;
+    width: 100%;
+    display: inline-block;
+}
+.pre-signature-img,
+.pre-signature-img>img {
+    display: inline-block;
+    width: 100%;
+    // height: 10rem;
+}
+.pre-signature-img-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+}
+.pre-signature-img {
+    height: 6rem;
+    width: 100%;
+    display: inline-block;
+}
+h2,
+h5,
+p {
+    font-size: 1.6rem;
+    line-height: 1.9rem;
+}
+.signature-img-wrap {
+    display: inline-block;
+    width: 100%;
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+}
+.signature-img {
+    height: 3.8rem;
+    width: 100%;
+    display: inline-block;
+}
+.cross-button {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+.cross {
+    display: inline-block;
+    width: 1.5rem;
+    height: 0.8rem;
+    background: -webkit-linear-gradient( -45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%), -webkit-linear-gradient(45deg, transparent 0%, transparent 46%, #8e8e93 46%, #8e8e93 56%, transparent 56%, transparent 100%);
+    background-color: white;
+    margin-left: 1.2rem;
+    vertical-align: middle;
+    text-align: left;
+}
+.line {
+    width: 75%;
+    margin-left: 0.5rem;
+    border: 1px solid #aeaeb2;
+    display: inline-block;
+    vertical-align: middle;
+}
+input[type="checkbox"] {
+    vertical-align: top;
+}
+.smoker-value {
+    display: inline-block;
+}
+.col-4 label {
+    display: inline-block;
+    padding-right: 0;
+    width: 80%;
+    vertical-align: top;
+    /* padding-left: 22px; */
+    /* text-indent: -18px;*/
+}
+.ent-question-container {
+    padding: 2rem;
+}
+.ent-question {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+    width: 59%;
+}
+.ent-radio-div {
+    display: inline-block;
+    width: 30%;
+    margin-left: 5rem;
+    vertical-align: top;
+}
+.ent-header {
+    margin-bottom: 2rem;
+    color: #007aff;
+}
+.medical-type {
+    margin-bottom: 2rem;
+}
+.ent-checkbox {
+    height: 2rem;
+    width: 2rem;
+}
+.ent-checkbox1 {
+    height: 2rem;
+    width: 2rem;
+    margin-left: 3rem;
+}
+.category-container {
+    margin-bottom: 2rem;
+}
+.berlin-answer {
+    margin-bottom: 0.5rem;
+}
+.berlin-question {
+    margin-bottom: 0.5rem;
+}
+.berlin-question-wrapper {
+    margin-bottom: 2rem;
+    display: inline-block;
+    width: 96%;
+}
+.berlin-radio-div {
+    margin-bottom: 0.5rem;
+}
+.number {
+    width: 4%;
+    display: inline-block;
+    vertical-align: top;
+}
+.remark {
+    width: 16%;
+    display: inline-block;
+}
+.high-risk {
+    width: 70%;
+    display: inline-block;
+    color: red;
+    font-family: 'sf-pro-bold';
+}
+.berlin-high-risk {
+    width: 17%;
+    display: inline-block;
+    color: red;
+    font-family: 'sf-pro-bold';
+}
+.intermediate {
+    width: 60%;
+    display: inline-block;
+    color: orange;
+    font-family: 'sf-pro-bold';
+}
+.low-risk {
+    width: 70%;
+    display: inline-block;
+    color: green;
+    font-family: 'sf-pro-bold';
+}
+.berlin-low-risk {
+    width: 14%;
+    display: inline-block;
+    color: green;
+    font-family: 'sf-pro-bold';
+}
+.input-box {
+    display: inline-block;
+}
+.info {
+    margin-top: 2rem;
+}
+.ortho-button {
+    text-align: center;
+}
+.input {
+    border: none;
+    background: transparent;
+    display: inline-block;
+    width: 100%;
+    outline: none;
+}
+.input-label {
+    display: inline-block;
+    width: 26%;
+}
+.age-input-label {
+    display: inline-block;
+    width: 21%;
+}
+.height {
+    display: inline-block;
+    width: 50%;
+}
+.input-div {
+    margin: 2rem 0;
+}
+.category3-score {
+    margin-bottom: 4rem;
+}
+.left {
+    display: inline-block;
+    width: 17%;
+}
+.colon {
+    display: inline-block;
+    width: 2%;
+}
+.total-score {
+    display: inline-block;
+    width: 5%;
+}
+.right {
+    display: inline-block;
+    font-family: 'sf-pro-bold';
+    width: 20%;
+}
+.exclaim-button {
+    border: 2px solid #aeaeb2;
+    background-color: #aeaeb2;
+    font-size: 16px;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 999px;
+    position: relative;
+    vertical-align: text-bottom;
+    &:before {
+        content: "";
+        display: block;
+        background-color: white;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:after {
+        content: "";
+        display: block;
+        background-color: white;
+        position: absolute;
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    &:before {
+        height: 0.7rem;
+        width: 0.3rem;
+    }
+    &:after {
+        height: 0.3rem;
+        width: 0.3rem;
+    }
+}
+.exclaim-button--small {
+    font-size: 0.8rem;
+}
+.margin-bottom {
+    margin-bottom: 1rem;
+}
+@media (max-width: 834px) {
+    .sign-btn-wrapper {
+        width: 30%;
+    }
+    .button {
+        right: 4rem;
+    }
+    .preview-input-label {
+        width: 30%;
+    }
+}

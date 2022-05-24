@@ -1,0 +1,41 @@
+<div class="modal-wrap">
+    <div class="button" [ngClass]="{'text-align-right': mode === 'list'}">
+        <div class="back-icon" (click)="showList()" *ngIf="mode === 'preview'">
+            <ion-icon name="chevron-back-outline"></ion-icon>
+            <span>Back to file list</span>
+        </div>
+        <!-- <button (click)="closePreviewModal()" class="close-button"></button> -->
+        <ion-icon class="close-modal" (click)="closePreviewModal()" name="close"></ion-icon>
+    </div>
+    <div class="preview-modal-wrapper">
+        <div class="preview">
+            <div class="preview-sub-container overflow" *ngIf="mode === 'list'">
+                <ul>
+                    <li *ngFor="let file of fileList" (click)="showPreview(file)">
+                        <img class="file-icon" src="../../../../assets/images/document.svg" alt="File" />
+                        <div>{{file.name}}</div>
+                    </li>
+                </ul>
+            </div>
+            <div class="preview-sub-container" *ngIf="mode === 'preview'">
+                <div class="display-pdf" *ngIf="latestCaseSubmissionFile?.fileUploadType === 'application/pdf'">
+                    <pdf-viewer [src]="latestCaseSubmissionFile.src" [original-size]="false"
+                        (on-progress)="onProgress($event)" (after-load-complete)="afterLoadComplete($event)">
+                    </pdf-viewer>
+                </div>
+
+                <!-- <div class="display-image" *ngIf="latestCaseSubmissionFile.fileUploadType === 'image/*'"> -->
+                <div class="display-image" *ngIf="latestCaseSubmissionFile?.fileUploadType.includes('image/')">
+                    <img class="doc-image" [src]="getImageUrl(latestCaseSubmissionFile.fileUploadKey)" alt=""
+                        (load)="onImgLoad()">
+                </div>
+
+                <div class="display-docx" *ngIf="latestCaseSubmissionFile?.fileUploadType === 'doc'">
+                    <ngx-doc-viewer [url]="getImageUrl(latestCaseSubmissionFile.fileUploadKey)" viewer="google"
+                        style="width:100%;height:74vh;">
+                    </ngx-doc-viewer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

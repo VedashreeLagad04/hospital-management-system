@@ -1,0 +1,2984 @@
+<ion-content>
+    <div id="approval-preview-container" class="preview-container">
+        <div id="approval-preview-pdf-wrap">
+            <div class="preview-sub-container1">
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <h5 style="font-weight: bold">Profile</h5>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Full Name</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.name !== ''">
+                        {{ehealth.preview.profile.name }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.name === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nationality !== 'foreigner'">
+                    <div class="preview-input-label">
+                        <p>NRIC/FIN</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nric != ''">
+                        {{ehealth.preview.profile.nric }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nric === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nationality === 'foreigner'">
+                    <div class="preview-input-label">
+                        <p>Foreign Id</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">
+                        {{ehealth.preview.profile.foreignId }}
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nationality == 'foreigner'">
+                    <div class="preview-input-label">
+                        <p>Passport Number</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">
+                        {{ehealth.preview.profile.passportNumber }}
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Gender</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.gender !== ''">
+                        {{ehealth.preview.profile.gender }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.gender === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Date of Birth</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.dateOfBirth !== ''">
+                        {{ehealth.preview.profile.dateOfBirth }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.dateOfBirth === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Email Address</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" style="text-transform: lowercase" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.email !== ''">
+                        {{ehealth.preview.profile.email }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.email === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Contact Number(M)</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.contactNo !== ''">
+                        <div class="extension">
+                            <p>+65</p>
+                        </div>
+                        {{ehealth.preview.profile.contactNo }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.contactNo === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Contact Number(H)</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.homeContactNo !== ''">
+                        <div class="extension">
+                            <p>+65</p>
+                        </div>
+                        {{ehealth.preview.profile.homeContactNo }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.homeContactNo === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Nationality</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nationality != 'foreigner'">
+                        {{ehealth.preview.profile.nationality }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.profile.nationality === 'foreigner'">
+                        {{ehealth.preview.profile.country }}
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Residential Address</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.address !== ''">
+                        {{ehealth.preview.profile.address }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.address === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Weight</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.weight !== undefined && ehealth.preview.profile.weight !== ''">
+                        {{ehealth.preview.profile.weight }} Kg
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && (ehealth.preview.profile.weight === undefined || ehealth.preview.profile.weight === '')">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Height</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.height !== undefined && ehealth.preview.profile.height !== ''">
+                        {{ehealth.preview.profile.height }} cm
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && (ehealth.preview.profile.height === undefined || ehealth.preview.profile.height === '')">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>BMI</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.bmi && ehealth.preview.profile.bmi !== ''">
+                        {{ehealth.preview.profile.bmi }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && (ehealth.preview.profile.bmi === undefined || ehealth.preview.profile.bmi === '')">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Drug Allergy</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.drugAllergy">
+                        <ng-container *ngFor="let drug of ehealth.preview.profile.drugAllergy; let i = index">
+                            <span class="client-info-allergy-value text-transform" *ngIf="ehealth.preview.profile.drugAllergyAnswer === 'Yes' && drug.allergy!== ''">
+                {{drug.allergy}}
+              </span>
+                            <span class="client-info-allergy-value text-transform" *ngIf="ehealth.preview.profile.drugAllergyAnswer === 'Yes' && drug.allergy === ''">
+                Yes
+              </span>
+                            <span class="client-info-allergy-value text-transform" *ngIf="(ehealth.preview.profile.drugAllergyAnswer === undefined || ehealth.preview.profile.drugAllergyAnswer === null) && drug.allergy === ''">
+                -
+              </span>
+                            <!-- <span class="client-info-allergy-value text-transform"
+                      *ngIf="drug.allergy!== '' && i < user.drugAllergy.length - 1">,</span> -->
+                            <span *ngIf="ehealth.preview.profile.drugAllergyAnswer=== 'No'">
+                No
+              </span>
+                        </ng-container>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && !ehealth.preview.profile.drugAllergy">
+                        -
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Food Allergy</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.foodAllergy">
+                        <ng-container *ngFor="let food of ehealth.profile.foodAllergy; let i = index">
+                            <span class="client-info-allergy-value text-transform" *ngIf="ehealth.preview.profile.foodAllergyAnswer === 'Yes' && food.allergy!== ''">
+                {{food.allergy}}
+              </span>
+                            <span class="client-info-allergy-value text-transform" *ngIf="ehealth.preview.profile.foodAllergyAnswer === 'Yes' && food.allergy === ''">
+                Yes
+              </span>
+                            <span class="client-info-allergy-value text-transform" *ngIf="(ehealth.preview.profile.foodAllergyAnswer === undefined || ehealth.preview.profile.foodAllergyAnswer === null) && food.allergy === ''">
+                -
+              </span>
+                            <!-- <span class="client-info-allergy-value text-transform"
+          *ngIf="food.allergy!== '' && i < user.foodAllergy.length - 1">,</span> -->
+                            <span *ngIf="ehealth.preview.profile.foodAllergyAnswer === 'No'">
+                No
+              </span>
+                        </ng-container>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && !ehealth.preview.profile.foodAllergy">
+                        -
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Smoker</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.smoker">
+                        <div class="answer" *ngIf="ehealth.preview.profile.smoker === true">
+                            <p class="smoker-value">
+                                Yes, {{ehealth.preview.profile.smokerValue}}
+                            </p>
+                        </div>
+                        <div class="answer" *ngIf="ehealth.preview.profile.smoker === false">
+                            <p>No</p>
+                        </div>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && !ehealth.preview.profile.smoker">
+                        -
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Drinker</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.drinker">
+                        <div class="answer" *ngIf="ehealth.preview.profile.drinker === true">
+                            <p class="smoker-value">
+                                Yes, {{ehealth.preview.profile.drinkerValue}}
+                            </p>
+                        </div>
+                        <div class="answer" *ngIf="ehealth.preview.profile.drinker === false">
+                            <p>No</p>
+                        </div>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && !ehealth.preview.profile.drinker">
+                        -
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <div class="preview-sub-container">
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <h5 style="font-weight: bold">Case</h5>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Referrer</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.referrer !== ''">
+                        {{ehealth.preview.case.referrer }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.referrer === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Case Number</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.caseNumber !== ''">
+                        {{ehealth.preview.case.caseNumber }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.caseNumber === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Case Type</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.type !== ''">
+                        {{ehealth.preview.case.type }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.type === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Case Name</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.name !== ''">
+                        {{ehealth.preview.case.name }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.name === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Current Symptoms and Complaints</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && ehealth.preview.case.currentComplaints && ehealth.preview.case.currentComplaints !== ''">
+                        {{ehealth.preview.case.currentComplaints }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.case && (!ehealth.preview.case.currentComplaints || ehealth.preview.case.currentComplaints === '')">
+                        <p>-</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <div class="preview-sub-container" *ngIf="ehealth.preview && ehealth.preview.activePolicies && ehealth.preview.activePolicies.length > 0">
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <h5 style="font-weight: bold">Active Policies</h5>
+                    </div>
+                </div>
+                <div class="info" *ngFor="let policy of ehealth.preview.activePolicies;let i=index">
+                    <div class="active-policies-line" *ngIf="i>0"></div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Type of Plan</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.planType !== ''">
+                            {{policy.planType }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.planType === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Insurer</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.insurer !== ''">
+                            {{policy.insurer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.insurer === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Main Plan Name</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPlanName !== ''">
+                            {{policy.mainPlanName }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPlanName === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Inception Date</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainInceptionDate !== ''">
+                            {{policy.mainInceptionDate }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainInceptionDate === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Paid To Date</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPaidDate !== ''">
+                            {{policy.mainPaidDate }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPaidDate === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Frequency of Payment</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainFrequencyOfPayment !== ''">
+                            {{policy.mainFrequencyOfPayment }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainFrequencyOfPayment === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Mode of Payment</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainModeOfPayment !== ''">
+                            {{policy.mainModeOfPayment }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainModeOfPayment === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Change of Insurer</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainChangeOfInsurer !== ''">
+                            {{policy.mainChangeOfInsurer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainChangeOfInsurer === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Reason</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainChangeOfInsurerReason !== ''">
+                            {{policy.mainChangeOfInsurerReason }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainChangeOfInsurerReason === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Upgrade of Plan</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainUpgradeOfPlan !== ''">
+                            {{policy.mainUpgradeOfPlan }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainUpgradeOfPlan === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Reason</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainUpgradeOfPlanReason !== ''">
+                            {{policy.mainUpgradeOfPlanReason }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainUpgradeOfPlanReason === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block avoid">
+                        <div class="preview-input-label">
+                            <p>Pending Claim</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPendingClaimAnswer !== ''">
+                            {{policy.mainPendingClaimAnswer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainPendingClaimAnswer === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="policy.mainPendingClaimAnswer === 'Yes'">
+                        <div class="preview-info-block avoid" *ngFor="let claim of policy.mainPendingClaimsArr">
+                            <div class="preview-input-label"></div>
+                            <div class="colon"></div>
+                            <div class="preview-input-label1" *ngIf="claim.claim !== ''">
+                                {{claim.claim }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="claim.claim === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="preview-info-block avoid">
+                        <div class="preview-input-label">
+                            <p>Exclusion/Moratorium</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainExclusionAnswer !== ''">
+                            {{policy.mainExclusionAnswer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainExclusionAnswer === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="policy.mainExclusionAnswer === 'Yes'">
+                        <div class="preview-info-block avoid" *ngFor="let excl of policy.mainExclusionArr">
+                            <div class="preview-input-label"></div>
+                            <div class="colon"></div>
+                            <div class="preview-input-label1" *ngIf="excl.exclusion !== ''">
+                                {{excl.exclusion }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="excl.exclusion === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <div class="preview-info-block">
+                        <div class="preview-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainRemarks !== ''">
+                            {{policy.mainRemarks }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.mainRemarks === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="active-policies-line" *ngIf="i == 0"></div>
+                    <div class="rider" *ngIf=" i === 0">
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Rider Plan Name</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPlanName !== ''">
+                                {{policy.riderPlanName }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPlanName === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Inception Date</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderInceptionDate !== ''">
+                                {{policy.riderInceptionDate }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderInceptionDate === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Paid To Date</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPaidDate !== ''">
+                                {{policy.riderPaidDate }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPaidDate === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Frequency of Payment</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderFrequencyOfPayment !== ''">
+                                {{policy.riderFrequencyOfPayment }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderFrequencyOfPayment === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Mode of Payment</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderModeOfPayment !== ''">
+                                {{policy.riderModeOfPayment }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderModeOfPayment === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Copy of Policy Given</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderCopyOfPolicy !== ''">
+                                {{policy.riderCopyOfPolicy }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderCopyOfPolicy === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Reason</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderCopyOfPolicyReason !== ''">
+                                {{policy.riderCopyOfPolicyReason }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderCopyOfPolicyReason === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block avoid">
+                            <div class="preview-input-label">
+                                <p>Pending Claim</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPendingClaimAnswer !== ''">
+                                {{policy.riderPendingClaimAnswer }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderPendingClaimAnswer === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="policy.riderPendingClaimAnswer === 'Yes'">
+                            <div class="preview-info-block avoid" *ngFor="let claim of policy.riderPendingClaimArr">
+                                <div class="preview-input-label"></div>
+                                <div class="colon"></div>
+                                <div class="preview-input-label1" *ngIf="claim.claim !== ''">
+                                    {{claim.claim }}
+                                </div>
+                                <div class="preview-input-label1" *ngIf="claim.claim === ''">
+                                    <p>-</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="preview-info-block avoid">
+                            <div class="preview-input-label">
+                                <p>Exclusion/Moratorium</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderExclusionAnswer !== ''">
+                                {{policy.riderExclusionAnswer }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderExclusionAnswer === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="policy.riderExclusionAnswer === 'Yes'">
+                            <div class="preview-info-block avoid" *ngFor="let excl of policy.riderExclusionArr">
+                                <div class="preview-input-label"></div>
+                                <div class="colon"></div>
+                                <div class="preview-input-label1" *ngIf="excl.exclusion !== ''">
+                                    {{excl.exclusion }}
+                                </div>
+                                <div class="preview-input-label1" *ngIf="excl.exclusion === ''">
+                                    <p>-</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Change of Insurer</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderChangeOfInsurer !== ''">
+                                {{policy.riderChangeOfInsurer }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderChangeOfInsurer === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Reason</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderChangeOfInsurerReason !== ''">
+                                {{policy.riderChangeOfInsurerReason }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderChangeOfInsurerReason === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Upgrade of Plan</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderUpgradeOfPlan !== ''">
+                                {{policy.riderUpgradeOfPlan }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderUpgradeOfPlan === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Reason</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderUpgradeOfPlanReason !== ''">
+                                {{policy.riderUpgradeOfPlanReason }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderUpgradeOfPlanReason === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Remarks</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderRemarks !== ''">
+                                {{policy.riderRemarks }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.riderRemarks === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <div class="preview-sub-container" *ngIf="ehealth.preview && ehealth.preview.preExistingCondition && ehealth.preExistingCondition.length >0">
+                <div class="preview-info-block">
+                    <div class="preview-input-title">
+                        <h5 style="font-weight: bold">Medical History</h5>
+                    </div>
+                </div>
+                <div class="policy" *ngFor="let policy of ehealth.preview.preExistingCondition ; let i=index">
+                    <div class="preview-info-block" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>High Blood pressure</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.bloodPressure !== ''">
+                            {{policy.bloodPressure }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.bloodPressure === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="policy.bloodPressure === 'Yes'">
+                        <div class="preview-input-label">
+                            <p>Medication</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.bloodPressureMedication !== ''">
+                            {{policy.bloodPressureMedication }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.bloodPressureMedication === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>Diabetes</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.diabetes !== ''">
+                            {{policy.diabetes }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.diabetes === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="policy.diabetes === 'Yes'">
+                        <div class="preview-input-label">
+                            <p>Medication</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.diabetesMedication !== ''">
+                            {{policy.diabetesMedication }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.diabetesMedication === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>High Cholesterol</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.highCholesterol !== ''">
+                            {{policy.highCholesterol }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.highCholesterol === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="policy.highCholesterol === 'Yes'">
+                        <div class="preview-input-label">
+                            <p>Medication</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.cholesterolMedication !== ''">
+                            {{policy.cholesterolMedication }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.cholesterolMedication === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block avoid" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>Other Medication</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.otherMedicationAnswer !== ''">
+                            {{policy.otherMedicationAnswer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.otherMedicationAnswer === ''">
+                            <p>-</p>
+                        </div>
+                        <ng-container *ngIf="policy.otherMedicationAnswer === 'Yes'">
+                            <div class="preview-info-block avoid" *ngFor="let med of policy.otherMedicationsArr">
+                                <div class="preview-input-label"></div>
+                                <div class="colon"></div>
+                                <div class="preview-input-label1" *ngIf="med.medication !== ''">
+                                    {{med.medication }}
+                                </div>
+                                <div class="preview-input-label1" *ngIf="med.medication === ''">
+                                    <p>-</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="preview-info-block" *ngIf="(ehealth.profile.gender === 'Female' || ehealth.profile.gender === 'female') && i===0">
+                        <div class="preview-input-label">
+                            <p>Pregnant</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.pregnant !== ''">
+                            {{policy.pregnant }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.pregnant === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="(ehealth.profile.gender === 'Female' || ehealth.profile.gender === 'female') && i===0 && policy.pregnant === 'Yes'">
+                        <div class="preview-input-label">
+                            <p>Months</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.months !== ''">
+                            {{policy.months }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.months === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="(ehealth.profile.gender === 'Female' || ehealth.profile.gender === 'female') && i===0 && policy.pregnant === 'Yes'">
+                        <div class="preview-input-label">
+                            <p>Date</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.pregnantDate !== ''">
+                            {{policy.pregnantDate }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.pregnantDate === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>AIDS , HIV or STD</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.aidsHivStd !== ''">
+                            {{policy.aidsHivStd }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.aidsHivStd === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block" *ngIf="policy.aidsHivStd === 'Yes' && i===0">
+                        <div class="preview-input-label">
+                            <p>if yes ,Remarks</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.hivRemarks !== ''">
+                            {{policy.hivRemarks }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.hivRemarks === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="preview-info-block avoid" *ngIf="i===0">
+                        <div class="preview-input-label">
+                            <p>Family History</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.familyHistoryAnswer !== ''">
+                            {{policy.familyHistoryAnswer }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.familyHistoryAnswer === ''">
+                            <p>-</p>
+                        </div>
+                        <ng-container *ngIf="policy.familyHistoryAnswer === 'Yes'">
+                            <div class="preview-info-block avoid" *ngFor="let history of policy.familyHistoryArr">
+                                <div class="preview-input-label"></div>
+                                <div class="colon"></div>
+                                <div class="preview-input-label1" *ngIf="history.history !== ''">
+                                    {{history.history }}
+                                </div>
+                                <div class="preview-input-label1" *ngIf="history.history === ''">
+                                    <p>-</p>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                    <div class="preview-info-block avoid" *ngIf="i === 0">
+                        <div class="preview-input-label">
+                            <p>Medical History</p>
+                        </div>
+                        <div class="colon">
+                            <p>:</p>
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.showHistory !== ''">
+                            {{policy.showHistory }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="policy.showHistory === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <ng-container *ngIf="policy.showHistory === 'Yes'">
+                        <p class="medical-history"><b>{{i+1}}. Medical History</b></p>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Condition</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.condition !== ''">
+                                {{policy.condition }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.condition === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Date</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.date !== ''">
+                                {{policy.date }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.date === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Type Of Institution</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.institutionType !== ''">
+                                {{policy.institutionType }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.institutionType === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Name Of Institution</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.nameOfInstitution !== ''">
+                                {{policy.nameOfInstitution }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.nameOfInstitution === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>History</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.history !== ''">
+                                {{policy.history }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.history === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block" *ngIf="policy.history !== 'Past Medical'">
+                            <div class="preview-input-label">
+                                <p>Declared</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.declared !== ''">
+                                {{policy.declared }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.declared === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="preview-info-block">
+                            <div class="preview-input-label">
+                                <p>Remarks</p>
+                            </div>
+                            <div class="colon">
+                                <p>:</p>
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.remarks !== ''">
+                                {{policy.remarks }}
+                            </div>
+                            <div class="preview-input-label1" *ngIf="policy.remarks === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.gastroTab && MedicalConditions && MedicalConditions.gastroenterology">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 class="avoid" style="font-weight: bold">Gastrointestinal</h5>
+                    </div>
+                </div>
+                <div class="ent-container">
+                    <p class="title avoid">Checklist For Gastrointestinal/Colorectal</p>
+                    <div class="ent-info-block">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro1" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.gastricPain" />
+                                <label for="Gastro1">Gastric pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro2" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.bloodInStool" />
+                                <label for="Gastro2"> Blood in stool</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro3" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.gastroenterology.bloating" />
+                                <label for="Gastro3"> Bloating</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro4" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.vomitting" /><label for="Gastro4"> Vomitting</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro5" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.weightLoss" /><label for="Gastro5"> Weight
+                  loss</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro6" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.changeOfStool" /><label for="Gastro6"> Change of stool
+                  habits</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro7" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.stomachPain" /><label for="Gastro7"> Stomach
+                  discomfort / pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro8" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.heartBurning" /><label for="Gastro8"> Heart burning
+                  sensation</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="Gastro9" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gastroenterology.sourTaste" /><label for="Gastro9"> Sour taste in
+                  throat / mouth</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="gastroFirstTime" value="firstTime" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.symptom" />
+                            <label for="gastroFirstTime">First time</label> or
+                            <input type="radio" id="gastroRecurring" value="recurring" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.symptom" />
+                            <label for="gastroRecurring">Recurring</label> of above-mentioned symptoms?
+                        </p>
+                        <p class="avoid">
+                            &nbsp; &nbsp; &nbsp;If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.gastroenterology.elaboration && ehealth.preview.MedicalConditions.gastroenterology.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.gastroenterology.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.gastroenterology.elaboration || ehealth.preview.MedicalConditions.gastroenterology.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                3) Are you above 50 years old
+                                <input type="radio" id="fiftyYes" value="yes" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.aboveFifty" />
+                                <label for="fiftyYes">Yes</label>
+                                <input type="radio" id="fiftyNo" value="no" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.aboveFifty" />
+                                <label for="fiftyNo">No</label>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>4) Do you prefer to do the Bowel preparation at
+                                <input type="radio" id="bowelYes" value="home" class="checkbox1 avoid"
+                                    [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.bowelPreparation">
+                                <label for="bowelYes">Home</label> or at
+                                <input type="radio" id="bowelNo" value="daySurgeryCenter" class="checkbox1 avoid"
+                                    [(ngModel)]="ehealth.preview.MedicalConditions.gastroenterology.bowelPreparation">
+                                <label for="bowelNo">Day Surgery-center</label>
+                            </p>
+                        </div>
+                    </div> -->
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title avoid">Bowel Preparation</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                4) Foods/Fluids fasting will be required
+                                <b> at least 8 hours before procedure.</b>
+                            </p>
+                        </div>
+
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                5) Avoid milk products, fibre-rich food (eg. Fruits, Vegetables, Nuts, Wholegrain, Brown rice), red-coloured liquid (eg. Red wine, Ribena), <b> 3 days before procedure.</b>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title avoid">Additional Information</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                6) It is not advisable for you to drive after the procedure.
+                            </p>
+                        </div>
+
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                7) Vitamins and Supplements (eg. Probiotics) are not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{ehealth.preview.MedicalConditions.gastroenterology.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- gastro image -->
+                <div class="preview-sub-container after" *ngIf="ehealth && ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.gastroenterology && ehealth.preview.MedicalConditions.gastroenterology.anatomyImage && ehealth.preview.MedicalConditions.gastroenterology.anatomyImage.fileUploadKey !== ''">
+                    <div class="images-div avoid">
+                        <img [src]="getImageUrl(ehealth.preview.MedicalConditions.gastroenterology.anatomyImage.fileUploadKey)" crossorigin="anonymous" *ngIf="ehealth.preview.MedicalConditions.gastroenterology.anatomyImage.fileUploadKey !== ''" />
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.cardiology && ehealth.preview.MedicalConditions.cardiology.symptom "> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.cardioTab && MedicalConditions && MedicalConditions.cardiology">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 class="avoid" style="font-weight: bold">Cardiology</h5>
+                    </div>
+                </div>
+                <div class="ent-container avoid">
+                    <p class="title avoid">Checklist For Cardiology</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div avoid">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio1" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.fatigue" /><label for="cardio1"> Fatigue</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio2" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.Giddiness" /><label for="cardio2"> Giddiness</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio3" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.shortnessOfBreath" /><label for="cardio3"> Shortness of
+                  breath</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio4" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.fainting" /><label for="cardio4"> Fainting spells</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio5" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.chestPain" /><label for="cardio5"> Chest pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio6" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.painArmsAndLegs" /><label for="cardio6"> Pain in arms &
+                  legs</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio7" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.palpitation" /><label for="cardio7"> Palpitation</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio8" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.heartBurn" /><label for="cardio8"> Heart burn</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio9" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.swelling" /><label for="cardio9"> Swelling in lower
+                  legs</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio10" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.irregularHeartbeat" /><label for="cardio10"> Irregular
+                  heartbeat</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="cardio11" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.cardiology.numbness" /><label for="cardio11"> Numbness in arms &
+                  legs</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="firstTime" value="firstTime" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.cardiology.symptom" />
+                            <label for="firstTime">First time</label> or
+                            <input type="radio" id="recurring" value="recurring" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.cardiology.symptom" />
+                            <label for="recurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.cardiology.elaboration && ehealth.preview.MedicalConditions.cardiology.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.cardiology.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.cardiology.elaboration || ehealth.preview.MedicalConditions.cardiology.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title avoid">Additional Information</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                3) Vitamins and Supplements (e.g Omega 3) is not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{ehealth.preview.MedicalConditions.cardiology.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.gynaecology.symptom "> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.gynoTab && MedicalConditions && MedicalConditions.gynaecology && (ehealth.profile.gender === 'female' || ehealth.profile.gender === 'Female')">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 style="font-weight: bold">Gynaecology</h5>
+                    </div>
+                </div>
+                <div class="ent-container avoid">
+                    <p class="title avoid">Checklist For Gynaecology</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div avoid">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno1" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.lowerAbdominalPain" /><label for="gyno1"> Lower abdominal
+                  pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno2" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.severeAbdominalPain" /><label for="gyno2">
+                  Severe lower abdominal pain during mensuration</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno3" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.abnormalDischarge" /><label for="gyno3"> Abnormal
+                  discharge</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno4" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.breastPain" /><label for="gyno4"> Breast pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno5" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.itchiness" /><label for="gyno5"> Itchiness in
+                  breasts/genital areas</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno6" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.abnormalBleeding" /><label for="gyno6"> Abnormal
+                  bleeding</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno7" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.irregularCycles" /><label for="gyno7"> Irregular
+                  mensuration cycles</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno8" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.burningSensation" /><label for="gyno8"> Burning sensation
+                  during urination</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno9" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.lumps" /><label for="gyno9">
+                  Unusual lump(s) in breasts/genital areas</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno10" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.painDuringSexualActivities" /><label for="gyno10"> Pain
+                  during sexual actvities</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="gyno11" value="value1" class="checkbox avoid" [(ngModel)]="MedicalConditions.gynaecology.lowerBackPain" /><label for="gyno11"> Lower back
+                  pain</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="gynaeFirstTime" value="firstTime" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.symptom" />
+                            <label for="gynaeFirstTime">First time</label> or
+                            <input type="radio" id="gynaeRecurring" value="recurring" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.symptom" />
+                            <label for="gynaeRecurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.gynaecology.elaboration && ehealth.preview.MedicalConditions.gynaecology.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.gynaecology.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.gynaecology.elaboration || ehealth.preview.MedicalConditions.gynaecology.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-input-label2 avoid">
+                        <p>3) Kindly adivse what is the pain score (least 1 -- most 10)</p>
+                    </div>
+                    <input type="number" class="vaccination avoid" [(ngModel)]="MedicalConditions.gynaecology.painScore" /><br />
+                    <div class="ent-input-label2 avoid">
+                        <p>4) When was your last menstruation cycle</p>
+                    </div>
+                    <input type="text" class="vaccination avoid" [(ngModel)]="MedicalConditions.gynaecology.lastCycle" /><br />
+                    <div class="ent-input-label2">
+                        <p>5) When was your last Pap Smear</p>
+                    </div>
+                    <input type="text" class="vaccination avoid" [(ngModel)]="MedicalConditions.gynaecology.lastPapSmear" /><br />
+                    <div class="ent-input-label2">
+                        <p>6) When was your last Mammogram</p>
+                    </div>
+                    <input type="text" class="vaccination avoid" [(ngModel)]="MedicalConditions.gynaecology.lastMammogram" />
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                7) Are you sexually active?
+                                <input type="radio" id="gynoActiveYes" value="yes" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.sexuallyActive" />
+                                <label for="gynoActiveYes">Yes</label>
+                                <input type="radio" id="gynoActiveNo" value="no" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.sexuallyActive" />
+                                <label for="gynoActiveNo">No</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                8) Are you currently taking any form of hormonal/birth control pills?
+                                <input type="radio" id="pillsYes" name="pillsYes" value="yes" class="checkbox1" [(ngModel)]="MedicalConditions.gynaecology.medication" />
+                                <label for="pillsYes">Yes</label>
+                                <input type="radio" id="pillsNo" name="pillsNo" value="no" class="checkbox1" [(ngModel)]="MedicalConditions.gynaecology.medication" />
+                                <label for="pillsNo">No</label><br /> &nbsp; &nbsp;
+                            </p>
+                            <p>
+                                If Yes, kindly state the medication
+                                <input type="text" class="vaccination" [(ngModel)]="MedicalConditions.gynaecology.vaccination" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                9) Do you prefer
+                                <input type="radio" id="gynoMale" value="male" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.Gyno" />
+                                <label for="gynoMale">Male</label> or
+                                <input type="radio" id="gynoFemale" value="female" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.Gyno" />
+                                <label for="gynoFemale">Female</label> urologist.
+                            </p>
+
+                            <p class="avoid">
+                                In the event your prefered gender of urologist is not available, will you be able to accept another urologists.
+                                <input type="radio" id="gynoChangeYes" value="yes" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.otherGyno" />
+                                <label for="gynoChangeYes">Yes</label>
+                                <input type="radio" id="gynoChangeNo" value="no" class="checkbox1 avoid" [(ngModel)]="MedicalConditions.gynaecology.otherGyno" />
+                                <label for="gynoChangeNo">No</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title avoid">Additional Information</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p class="avoid">
+                                10) Vitamins, Supplements, Birth control pills, Vaccines are not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{MedicalConditions.gynaecology.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="html2pdf__page-break"></div> -->
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.urology && ehealth.preview.MedicalConditions.urology.symptom "> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.uroTab && MedicalConditions && MedicalConditions.urology">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label">
+                        <h5 style="font-weight: bold">Urology</h5>
+                    </div>
+                </div>
+                <div class="ent-container">
+                    <p class="title">Checklist For Urology</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro1" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.lowerAbdominalPain" /><label for="uro1"> Lower abdominal
+                  pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro2" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.abnormalDischarge" /><label for="uro2"> Abnormal
+                  discharge</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro3" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.breastPain" /><label for="uro3"> Breast pain</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro4" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.ichiness" /><label for="uro4"> Itchiness in breasts/genital
+                  areas</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro5" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.abnormalBleeding" /><label for="uro5"> Abnormal
+                  bleeding</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro6" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.irregularCycles" /><label for="uro6"> Irregular mensuration
+                  cycles</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro7" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.burningSensation" /><label for="uro7"> Burning sensation during
+                  urination</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro8" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.lumps" /><label for="uro8">
+                  Unusual lump(s) in breasts/genital areas</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro9" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.pain" /><label for="uro9"> Pain during sexual actvities</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="uro10" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.urology.lowerBackPain" /><label for="uro10"> Lower back pain</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="uroFirstTime" value="firstTime" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.symptom" />
+                            <label for="uroFirstTime">First time</label> or
+                            <input type="radio" id="uroRecurring" value="recurring" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.symptom" />
+                            <label for="uroRecurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.urology.elaboration && ehealth.preview.MedicalConditions.urology.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.urology.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.urology.elaboration || ehealth.preview.MedicalConditions.urology.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-input-label2 avoid">
+                        <p>3) Kindly adivse what is the pain score (least 1 -- most 10)</p>
+                    </div>
+                    <input type="number" class="vaccination avoid" [(ngModel)]="ehealth.preview.MedicalConditions.urology.painScore" />
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                4) Are you sexually active?
+                                <input type="radio" id="uroActiveYes" value="yes" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.sexuallyActive" />
+                                <label for="uroActiveYes">Yes</label>
+                                <input type="radio" id="uroActiveNo" value="no" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.sexuallyActive" />
+                                <label for="uroActiveNo">No</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                5) Are you currently taking any form of hormonal?
+                                <input type="radio" id="uroMedicationYes" name="uroMedicationYes" value="yes" class="checkbox1" [(ngModel)]="MedicalConditions.urology.medication" />
+                                <label for="uroMedicationYes">Yes</label>
+                                <input type="radio" id="uroMedicationNo" name="uroMedicationNo" value="no" class="checkbox1" [(ngModel)]="MedicalConditions.urology.medication" />
+                                <label for="uroMedicationNo">No</label><br /> &nbsp; &nbsp;
+                            </p>
+                            <p>
+                                If Yes, kindly state the medication
+                                <input type="text" class="vaccination medication" [(ngModel)]="MedicalConditions.urology.vaccination" />
+                            </p>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                6) Do you prefer
+                                <input type="radio" id="uroMale" value="male" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.Gyno" />
+                                <label for="uroMale">Male</label> or
+                                <input type="radio" id="uroFemale" value="female" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.Gyno" />
+                                <label for="uroFemale">Female</label> urologist.
+                            </p>
+
+                            <p>
+                                In the event your prefered gender of urologist is not available, will you be able to accept another urologists.
+                                <input type="radio" id="otherYes" value="yes" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.otherGyno" />
+                                <label for="otherYes">Yes</label>
+                                <input type="radio" id="otherNo" value="no" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.urology.otherGyno" />
+                                <label for="otherNo">No</label>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title">Additional Information</p>
+                        <div class="active-policies-line"></div>
+                        <div class="ent-input-label">
+                            <p>
+                                7) Vitamins, Supplements, Birth control pills, Vaccines are not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{MedicalConditions.urology.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.ent && ehealth.preview.MedicalConditions.ent.checklist.symptom "> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.entTab && MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.checklist">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 style="font-weight: bold">Ear,Nose,Throat</h5>
+                    </div>
+                </div>
+                <div class="ent-container">
+                    <p class="title avoid">Checklist For Ear,Nose,Throat</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent1" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.lossOfHearing" /><label for="ent1"> Loss of
+                  hearing</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent2" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.ringingEars" /><label for="ent2"> Ringing in ears</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent3" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.painInEars" /><label for="ent3"> Pain in ears</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>2)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div avoid">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent4" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.runnyNose" /><label for="ent4"> Runny nose</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent5" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.bleedingNose" /><label for="ent5"> Nose bleed</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent6" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.blockedNose" /><label for="ent6"> Blocked nose</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent7" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.lossOfSmell" /><label for="ent7"> Loss of smell</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent8" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.difficultyInBreathing" /><label for="ent8"> Difficulty in
+                  breathing</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>3)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div avoid">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent9" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.lossOfTaste" /><label for="ent9"> Loss of taste</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent10" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.lossOfVoice" /><label for="ent10"> Loss of voice</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent11" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.soreThroat" /><label for="ent11"> Sore throat</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent12" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.dizziness" /><label for="ent12"> Dizziness</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="ent13" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.ent.checklist.insomnia" /><label for="ent13"> Insomnia</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p>
+                            4) Is this the
+                            <input type="radio" id="entFirstTime" value="firstTime" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.ent.checklist.symptom" />
+                            <label for="entFirstTime">First time</label> or
+                            <input type="radio" id="entRecurring" value="recurring" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.ent.checklist.symptom" />
+                            <label for="entRecurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.ent.elaboration && ehealth.preview.MedicalConditions.ent.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.ent.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.ent.elaboration || ehealth.preview.MedicalConditions.ent.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title avoid">Additional Information</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                5) Medical appliances (e.g. CPAP machine), Vitamins, Supplements, Vaccines, Alergy test(s) are not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{ehealth.preview.MedicalConditions.ent.checklist.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.entTab && MedicalConditions && MedicalConditions.ent && ehealth.preview.MedicalConditions.ent.stopBang &&  ehealth.preview.MedicalConditions.ent.stopBang.totalScore">
+                <div class="input-div">
+                    <div class="preview-info-block avoid">
+                        <div class="heading-input-label avoid">
+                            <h5 style="font-weight: bold">ENT StopBang Questionnaire</h5>
+                        </div>
+                    </div>
+                    <div class="height">
+                        <div class="age-input-label">
+                            <p>Name :</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.name !== ''">
+                            <p>{{ehealth.preview.profile.name}}</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.name === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="height">
+                        <div class="input-label">
+                            <p>Height :</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.height !== ''">
+                            <p>{{ehealth.preview.profile.height}} cm</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.height === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="height">
+                        <div class="input-label">
+                            <p>Weight :</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.weight !== ''">
+                            <p>{{ehealth.preview.profile.weight}} Kg</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.weight === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                    <div class="height">
+                        <div class="age-input-label">
+                            <p>Age :</p>
+                        </div>
+                        <div class="input-box">
+                            <p>{{age}}</p>
+                        </div>
+                    </div>
+                    <div class="height">
+                        <div class="input-label">
+                            <p>Gender :</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.gender !== ''">
+                            <p>{{ehealth.preview.profile.gender}}</p>
+                        </div>
+                        <div class="input-box" *ngIf="ehealth.preview.profile.gender === ''">
+                            <p>-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stop-container">
+                    <div class="ent-header">
+                        <h6>STOP</h6>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>
+                                Do you SNORE loudly (louder than talking or loud enough to be heard through closed doors)?
+                            </p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="snoreYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.snore === 'yes'" />
+                            <label for="snoreYes" class="avoid">Yes</label>
+                            <input type="radio" id="snoreNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.snore === 'no'" />
+                            <label for="snoreNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>
+                                Do you often feel TIRED, fatigued, or sleepy during daytime?
+                            </p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="tiredYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.tired === 'yes'" />
+                            <label for="tiredYes" class="avoid">Yes</label>
+                            <input type="radio" id="tiredNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.tired === 'no'" />
+                            <label for="tiredNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>Has anyone OBSERVED you stop breathing during your sleep?</p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="observeYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.observed === 'yes'" />
+                            <label for="observeYes" class="avoid">Yes</label>
+                            <input type="radio" id="observeNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.observed === 'no'" />
+                            <label for="observeNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>
+                                Do you have or are you being treated for high blood PRESSURE?
+                            </p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="pressureYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.pressure === 'yes'" />
+                            <label for="pressureYes" class="avoid">Yes</label>
+                            <input type="radio" id="pressureNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.pressure === 'no'" />
+                            <label for="pressureNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="bang-container">
+                    <div class="ent-header">
+                        <h6>BANG</h6>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>BMI more than 35kg/m2?</p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="bmiYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.bmi === 'yes'" />
+                            <label for="bmiYes" class="avoid">Yes</label>
+                            <input type="radio" id="bmiNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.bmi === 'no'" />
+                            <label for="bmiNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>AGE over 50 years old?</p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="ageYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.age === 'yes'" />
+                            <label for="ageYes" class="avoid">Yes</label>
+                            <input type="radio" id="ageNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.age === 'no'" />
+                            <label for="ageNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>NECK circumference > 16 inches (40cm)?</p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="neckYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.neck === 'yes'" />
+                            <label for="neckYes" class="avoid">Yes</label>
+                            <input type="radio" id="neckNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.neck === 'no'" />
+                            <label for="neckNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="ent-question-wrapper">
+                        <div class="ent-question">
+                            <p>GENDER: Male?</p>
+                        </div>
+                        <div class="ent-radio-div">
+                            <input type="radio" id="genderYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.gender === 'yes'" />
+                            <label for="genderYes" class="avoid">Yes</label>
+                            <input type="radio" id="genderNo" value="no" class="ent-checkbox1 avoid" [checked]="ehealth.preview.MedicalConditions.ent.stopBang.gender === 'no'" />
+                            <label for="genderNo" class="avoid">No</label>
+                        </div>
+                    </div>
+                    <div class="score">
+                        <p class="left">Total Score</p>
+                        <p class="colon">:</p>
+                        <p class="total-score">
+                            {{ehealth.preview.MedicalConditions.ent.stopBang.totalScore}}
+                        </p>
+                        <p class="high-risk" *ngIf="this.ehealth.preview.MedicalConditions.ent.stopBang.risk === 'High risk of OSA'">
+                            {{this.ehealth.preview.MedicalConditions.ent.stopBang.risk}}
+                        </p>
+                        <p class="intermediate" *ngIf="this.ehealth.preview.MedicalConditions.ent.stopBang.risk === 'Intermediate risk of OSA'">
+                            {{this.ehealth.preview.MedicalConditions.ent.stopBang.risk}}
+                        </p>
+                        <p class="low-risk" *ngIf="this.ehealth.preview.MedicalConditions.ent.stopBang.risk === 'Low risk of OSA'">
+                            {{this.ehealth.preview.MedicalConditions.ent.stopBang.risk}}
+                        </p>
+                    </div>
+                    <div class="info">
+                        <p>High risk of OSA: Yes 5 - 8</p>
+                        <p>Intermediate risk of OSA: Yes 3 - 4</p>
+                        <p>Low risk of OSA: Yes 0 - 2</p>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.entTab && MedicalConditions && MedicalConditions.ent && MedicalConditions.ent.berlin &&  MedicalConditions.ent.berlin.remark">
+                <div class="category-container">
+                    <div class="preview-info-block avoid">
+                        <div class="heading-input-label avoid">
+                            <h5 style="font-weight: bold">ENT Berlin Questionnaire</h5>
+                        </div>
+                    </div>
+                    <div class="ent-header">
+                        <h6>CATEGORY 1</h6>
+                    </div>
+                    <div class="number">
+                        <p>1.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>Do you snore?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="snoreYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snore === 'yes'" />
+                                <label for="snoreYes" class="avoid">Yes</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="snoreNo" value="no" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snore === 'no'" />
+                                <label for="snoreNo claimable avoid">No</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="snoreDn" value="dont know" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snore === 'dont know'" />
+                                <label for="snoreDn" class="avoid">Don't Know</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number" *ngIf="MedicalConditions && ehealth.preview.MedicalConditions.ent.berlin.snore === 'yes'">
+                        <p>1A.</p>
+                    </div>
+                    <div class="berlin-question-wrapper" *ngIf="MedicalConditions && ehealth.preview.MedicalConditions.ent.berlin.snore === 'yes'">
+                        <div class="berlin-question">
+                            <p>You snoring is:</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="type1" value="Slightly louder than breathing" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoreType === 'Slightly louder than breathing'" />
+                                <label for="type1" class="avoid">Slightly louder than breathing</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="type2" value="As loud as talking" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoreType === 'As loud as talking'" />
+                                <label for="type2" class="avoid">As loud as talking</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="type3" value="Louder than talking" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoreType === 'Louder than talking'" />
+                                <label for="type3" class="avoid">Louder than talking</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <p>2.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>How often do you snore?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="frequency1" value="Almost every day" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringFrequency === 'Almost every day'" />
+                                <label for="frequency1" class="avoid">Almost every day</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="frequency2" value="3-4 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringFrequency === '3-4 times per week'" />
+                                <label for="frequency2" class="avoid">3-4 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="frequency3" value="1-2 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringFrequency === '1-2 times per week'" />
+                                <label for="frequency3" class="avoid">1-2 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="frequency4" value="1-2 times per month" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringFrequency === '1-2 times per month'" />
+                                <label for="frequency4" class="avoid">1-2 times per month</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="frequency5" value="Rarely or never" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringFrequency === 'Rarely or never'" />
+                                <label for="frequency5" class="avoid">Rarely or never</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <p>3.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>Has your snoring ever bothered other people?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="botheredYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringBothered === 'yes'" />
+                                <label for="botheredYes" class="avoid">Yes</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="botheredNo" value="no" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringBothered === 'no'" />
+                                <label for="botheredNo" class="avoid">No</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="botheredDn" value="dont know" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.snoringBothered === 'dont know'" />
+                                <label for="botheredDn" class="avoid">Don't Know</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <p>4.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>
+                                Has anyone noticed that you stop breathing during your sleep?
+                            </p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="breathing1" value="Almost every day" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.stopBreathing === 'Almost every day'" />
+                                <label for="breathing1" class="avoid">Almost every day</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="breathing2" value="3-4 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.stopBreathing === '3-4 times per week'" />
+                                <label for="breathing2" class="avoid">3-4 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="breathing3" value="1-2 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.stopBreathing === '1-2 times per week'" />
+                                <label for="breathing3" class="avoid">1-2 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="breathing4" value="1-2 times per month" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.stopBreathing === '1-2 times per month'" />
+                                <label for="breathing4" class="avoid">1-2 times per month</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="breathing5" value="Rarely or never" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.stopBreathing === 'Rarely or never'" />
+                                <label for="breathing5" class="avoid">Rarely or never</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="score">
+                        <p class="left">Score</p>
+                        <p class="colon">:</p>
+                        <p class="right">
+                            {{ehealth.preview.MedicalConditions.ent.berlin.category1Score}}
+                        </p>
+                    </div>
+                    <div class="score">
+                        <p class="left">Category 1</p>
+                        <p class="colon">:</p>
+                        <p class="right">
+                            {{ehealth.preview.MedicalConditions.ent.berlin.category1}}
+                        </p>
+                    </div>
+                </div>
+                <div class="category-container">
+                    <div class="ent-header">
+                        <h6>CATEGORY 2</h6>
+                    </div>
+                    <div class="number">
+                        <p>5.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>How often do you feel tired or fatigued after your sleep?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleep1" value="Almost every day" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredAfterSleeping === 'Almost every day'" />
+                                <label for="sleep1" class="avoid">Almost every day</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleep2" value="3-4 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredAfterSleeping === '3-4 times per week'" />
+                                <label for="sleep2" class="avoid">3-4 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleep3" value="1-2 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredAfterSleeping === '1-2 times per week'" />
+                                <label for="sleep3" class="avoid">1-2 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleep4" value="1-2 times per month" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredAfterSleeping === '1-2 times per month'" />
+                                <label for="sleep4" class="avoid">1-2 times per month</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleep5" value="Rarely or never" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredAfterSleeping === 'Rarely or never'" />
+                                <label for="sleep5" class="avoid">Rarely or never</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <p>6.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>
+                                During your waking time, do you feel tired, fatigued or not up to par?
+                            </p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="waking1" value="Almost every day" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredDuringWaking === 'Almost every day'" />
+                                <label for="waking1" class="avoid">Almost every day</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="waking2" value="3-4 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredDuringWaking === '3-4 times per week'" />
+                                <label for="waking2" class="avoid">3-4 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="waking3" value="1-2 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredDuringWaking === '1-2 times per week'" />
+                                <label for="waking3" class="avoid">1-2 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="waking4" value="1-2 times per month" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredDuringWaking === '1-2 times per month'" />
+                                <label for="waking4" class="avoid">1-2 times per month</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="waking5" value="Rarely or never" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.tiredDuringWaking === 'Rarely or never'" />
+                                <label for="waking5" class="avoid">Rarely or never</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number">
+                        <p>7.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>
+                                Have you ever nodded off or fallen asleep while driving a vehicle?
+                            </p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="fallenAsleepYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleep === 'yes'" />
+                                <label for="fallenAsleepYes" class="avoid">Yes</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="fallenAsleepNo" value="no" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleep === 'no'" />
+                                <label for="fallenAsleepNo" class="avoid">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="number" *ngIf="MedicalConditions && ehealth.preview.MedicalConditions.ent.berlin.fallenAsleep === 'yes'">
+                        <p>7A.</p>
+                    </div>
+                    <div class="berlin-question-wrapper" *ngIf="MedicalConditions && ehealth.preview.MedicalConditions.ent.berlin.fallenAsleep === 'yes'">
+                        <div class="berlin-question">
+                            <p>How often does this occur?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleepFrequency1" value="Almost every day" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleepFrequency === 'Almost every day'" />
+                                <label for="sleepFrequency1" class="avoid">Almost every day</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleepFrequency2" value="3-4 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleepFrequency === '3-4 times per week'" />
+                                <label for="sleepFrequency2" class="avoid">3-4 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleepFrequency3" value="1-2 times per week" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleepFrequency === '1-2 times per week'" />
+                                <label for="sleepFrequency3" class="avoid">1-2 times per week</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleepFrequency4" value="1-2 times per month" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleepFrequency === '1-2 times per month'" />
+                                <label for="sleepFrequency4" class="avoid">1-2 times per month</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="sleepFrequency5" value="Rarely or never" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.fallenAsleepFrequency === 'Rarely or never'" />
+                                <label for="sleepFrequency5" class="avoid">Rarely or never</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="score">
+                        <p class="left">Score</p>
+                        <p class="colon">:</p>
+                        <p class="right">
+                            {{ehealth.preview.MedicalConditions.ent.berlin.category2Score}}
+                        </p>
+                    </div>
+                    <div class="score">
+                        <p class="left">Category 2</p>
+                        <p class="colon">:</p>
+                        <p class="right">
+                            {{ehealth.preview.MedicalConditions.ent.berlin.category2}}
+                        </p>
+                    </div>
+                </div>
+                <div class="category-container">
+                    <div class="ent-header">
+                        <h6>CATEGORY 3</h6>
+                    </div>
+                    <div class="number">
+                        <p>8.</p>
+                    </div>
+                    <div class="berlin-question-wrapper">
+                        <div class="berlin-question">
+                            <p>Do you have high blood pressure?</p>
+                        </div>
+                        <div class="berlin-answer">
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="highBloodPressureYes" value="yes" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.highBloodPressure === 'yes'" />
+                                <label for="highBloodPressureYes" class="avoid">Yes</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="highBloodPressureNo" value="no" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.highBloodPressure === 'no'" />
+                                <label for="highBloodPressureNo" class="avoid">No</label>
+                            </div>
+                            <div class="berlin-radio-div">
+                                <input type="radio" id="highBloodPressureDn" value="dont know" class="ent-checkbox avoid" [checked]="ehealth.preview.MedicalConditions.ent.berlin.highBloodPressure === 'dont know'" />
+                                <label for="highBloodPressureDn" class="avoid">Don't Know</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <div class="height">
+                            <div class="input-label">
+                                <p>Height :</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.height !== ''">
+                                <p>{{ehealth.preview.profile.height}} cm</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.height === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="height">
+                            <div class="input-label">
+                                <p>Weight :</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.weight !== ''">
+                                <p>{{ehealth.preview.profile.weight}} kg</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.weight === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="height">
+                            <div class="age-input-label">
+                                <p>Age :</p>
+                            </div>
+                            <div class="input-box">
+                                <p>{{age}}</p>
+                            </div>
+                        </div>
+                        <div class="height">
+                            <div class="input-label">
+                                <p>Gender :</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.gender !== ''">
+                                <p>{{ehealth.preview.profile.gender}}</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.gender === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                        <div class="height">
+                            <div class="age-input-label">
+                                <p>BMI :</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.bmi !== ''">
+                                <p>{{ehealth.preview.profile.bmi}}</p>
+                            </div>
+                            <div class="input-box" *ngIf="ehealth.preview.profile.bmi === ''">
+                                <p>-</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="category3-score">
+                        <p class="left">Category 3</p>
+                        <p class="colon">:</p>
+                        <p class="right">
+                            {{ehealth.preview.MedicalConditions.ent.berlin.category3}}
+                        </p>
+                    </div>
+                </div>
+                <div class="ent-remark">
+                    <p class="remark">Remarks :-</p>
+                    <p class="berlin-high-risk" *ngIf="ehealth && ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.ent && ehealth.preview.MedicalConditions.ent.berlin && ehealth.preview.MedicalConditions.ent.berlin.remark === 'High Risk'">
+                        {{ehealth.preview.MedicalConditions.ent.berlin.remark}}
+                    </p>
+                    <p class="berlin-low-risk" *ngIf="ehealth && ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.ent && ehealth.preview.MedicalConditions.ent.berlin && ehealth.preview.MedicalConditions.ent.berlin.remark === 'Low Risk'">
+                        {{ehealth.preview.MedicalConditions.ent.berlin.remark}}
+                    </p>
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.respiratory && ehealth.preview.MedicalConditions.respiratory.symptom "> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.respiratoryTab && MedicalConditions && MedicalConditions.respiratory">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 style="font-weight: bold">Respiratory</h5>
+                    </div>
+                </div>
+                <div class="ent-container avoid">
+                    <p class="title avoid">Checklist For Respiratory</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-checkbox avoid">
+                            <p>1)Any Symptoms:</p>
+                        </div>
+                        <div class="checkbox-div avoid">
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory1" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.difficultyInBreathing" />
+                                <label for="respiratory1"> Difficulty in breathing</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory2" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.shortnessOfBreath" /><label for="respiratory2"> Shortness
+                  of breath</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory3" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.fever" /><label for="respiratory3"> Fever</label>
+                            </div>
+                            <div class="col-4">
+                                <input type="checkbox" id="respiratory4" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.flu" /><label for="respiratory4"> Flu</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory5" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.chronicCough" /><label for="respiratory5">
+                  Chronic cough(more than 2 weeks)</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory6" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.wheezes" /><label for="respiratory6"> Wheezes</label>
+                            </div>
+                            <div class="col-4 avoid">
+                                <input type="checkbox" id="respiratory7" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.chestPain" /><label for="respiratory7"> Chest pains</label>
+                            </div>
+                            <div class="col-4 nested-input avoid">
+                                <input type="checkbox" id="respiratory8" value="value1" class="checkbox" [(ngModel)]="MedicalConditions.respiratory.phlegm" /><label for="respiratory8">
+                  Phlegm (Colour:<input type="text" class="colour"
+                    [(ngModel)]="MedicalConditions.respiratory.phlegmColour" />)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="respiFirstTime" value="firstTime" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.respiratory.symptom" />
+                            <label for="respiFirstTime">First time</label> or
+                            <input type="radio" id="respiRecurring" value="recurring" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.respiratory.symptom" />
+                            <label for="respiRecurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.respiratory.elaboration && ehealth.preview.MedicalConditions.respiratory.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.respiratory.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.respiratory.elaboration || ehealth.preview.MedicalConditions.respiratory.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                3) Have you done influenza A,B or C vaccination?
+                                <input type="radio" id="influenzaYes" value="yes" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.respiratory.influenza" />
+                                <label for="influenzaYes">Yes</label> or
+                                <input type="radio" id="influenzaNo" value="no" class="checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.respiratory.influenza" />
+                                <label for="influenzaNo">No</label>
+                            </p>
+                            <div class="ent-input-label1 avoid">
+                                <p>If yes, on</p>
+                            </div>
+                            <input type="text" class="vaccination medication avoid" [(ngModel)]="ehealth.preview.MedicalConditions.respiratory.vaccination" />
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block avoid">
+                        <p class="sub-title">Additional Information</p>
+                        <div class="active-policies-line avoid"></div>
+                        <div class="ent-input-label avoid">
+                            <p>
+                                3) Vitamins,Supplements,Vaccines are not claimable, a separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{ehealth.preview.MedicalConditions.respiratory.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container"
+            *ngIf="ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.general && ehealth.preview.MedicalConditions.general.symptom  "> -->
+            <div class="preview-sub-container before" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.generalTab && ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.general">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 style="font-weight: bold">General</h5>
+                    </div>
+                </div>
+                <div class="ent-container">
+                    <p class="title avoid">Checklist For General Condition</p>
+                    <div class="ent-info-block avoid">
+                        <div class="ent-input-label avoid">
+                            <p>1) Kindly state symptoms experienced:</p>
+                        </div>
+                        <div class="ent-input-box administration-comment-area avoid">
+                            <div class="ent-info-input avoid">
+                                {{ehealth.preview.MedicalConditions.general.symptoms}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <p class="avoid margin-bottom">
+                            2) Is this the
+                            <input type="radio" id="generalFirstTime" value="firstTime" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.general.symptom" />
+                            <label class="avoid" for="generalFirstTime">First time</label> or
+                            <input type="radio" id="generalRecurring" value="recurring" class="checkbox1 avoid" [(ngModel)]="ehealth.preview.MedicalConditions.general.symptom" />
+                            <label class="avoid" for="generalRecurring">Recurring</label> of above-mentioned symptoms? <br /> &nbsp; &nbsp; If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                        <div class="medical-input-box ortho-remark-area avoid">
+                            <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.general.elaboration && ehealth.preview.MedicalConditions.general.elaboration !== ''">
+                                {{ehealth.preview.MedicalConditions.general.elaboration}}
+                            </div>
+                            <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.general.elaboration || ehealth.preview.MedicalConditions.general.elaboration === ''">
+                                -
+                            </div>
+                        </div>
+                    </div>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                3) If Physiotherapy is required, kindly refer to "Checklist for Physiotherapy"
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ent-info-block1 avoid">
+                        <div class="ent-input-checkbox1 avoid">
+                            <p>
+                                4) Vitamins,Supplements(eg. Omega 3,Pro biotics), Birth control pills, Vaccines, Allergy test(s), Medical applainces - (eg. CPAP machine, wheelchair, walking frame, crutches, any form of guard support, supplements, heat pack and scar creams) are NOT claimable.
+                                A separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ortho-info-block">
+                        <div class="ortho-input-label">
+                            <p>Remarks</p>
+                        </div>
+                        <div class="medical-input-box ortho-remark-area">
+                            <div class="ortho-info-input">
+                                {{ehealth.preview.MedicalConditions.general.remarks}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.orthoTab">
+                <div class="preview-info-block avoid">
+                    <div class="preview-input-label avoid">
+                        <h5 style="font-weight: bold">Orthopaedic</h5>
+                    </div>
+                </div>
+                <div class="margin avoid">
+                    <p class="sub-title avoid" style="font-weight: bold">
+                        Medical Condition Checklist
+                    </p>
+                    <p class="sub-title avoid">
+                        please answer the following questions to the best of your knowledge
+                    </p>
+                </div>
+                <div class="ent-input-label2 avoid">
+                    <p>Body part: Kindly Circle</p>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question1 avoid">
+                        <p>
+                            Is this the First time or Recurring pain of the same area? If recurring, kindly elaborate on first date of symptoms and frequency
+                        </p>
+                    </div>
+                    <div class="radio-div1 avoid">
+                        <div class="radio-input-wrap avoid">
+                            <input type="radio" id="orthoFirstTime" value="firstTime" class="ortho-checkbox2" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.symptom" />
+                            <label for="orthoFirstTime">First Time</label>
+                        </div>
+                        <div class="radio-input-wrap avoid">
+                            <input type="radio" id="orthoRecurring" value="recurring" class="ortho-checkbox2" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.symptom" />
+                            <label for="orthoRecurring">Recurring</label>
+                        </div>
+                    </div>
+                    <div class="medical-input-box ortho-remark-area ortho-textarea avoid">
+                        <div class="ortho-info-input avoid" *ngIf="ehealth.preview.MedicalConditions.orthopaedic.elaboration && ehealth.preview.MedicalConditions.orthopaedic.elaboration !== ''">
+                            {{ehealth.preview.MedicalConditions.orthopaedic.elaboration}}
+                        </div>
+                        <div class="ortho-info-input avoid" *ngIf="!ehealth.preview.MedicalConditions.orthopaedic.elaboration || ehealth.preview.MedicalConditions.orthopaedic.elaboration === ''">
+                            -
+                        </div>
+                    </div>
+                </div>
+                <div class="ent-input-label2 avoid">
+                    <p>Kindly adivse what is the pain score (least 1 -- most 10)</p>
+                </div>
+                <input type="number" class="vaccination avoid" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.painScore" /><br />
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>Is there any movement restriction?</p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="restrictionYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.movementRestriction" />
+                        <label for="restrictionYes">Yes</label>
+                        <input type="radio" id="restrictionNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.movementRestriction" />
+                        <label for="restrictionNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>Is there any swelling at the affected area?</p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="swellingYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.swelling" />
+                        <label for="swellingYes">Yes</label>
+                        <input type="radio" id="swellingNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.swelling" />
+                        <label for="swellingNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>
+                            Is there any pain at the affected area during rainy/cold weather?
+                        </p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="painYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.pain" />
+                        <label for="painYes">Yes</label>
+                        <input type="radio" id="painNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.pain" />
+                        <label for="painNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>Is this a sport injury?</p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="sportYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.sportInjury" />
+                        <label for="sportYes">Yes</label>
+                        <input type="radio" id="sportNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.sportInjury" />
+                        <label for="sportNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>
+                            Where you involved in any accident? Kindly indicate Date, Time, Location, Witness(if any), details of accident
+                        </p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="accidentYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.accident" />
+                        <label for="accidentYes">Yes</label>
+                        <input type="radio" id="accidentNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.accident" />
+                        <label for="accidentNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>
+                            Was the accident reported to relevant authorities? If Yes, kindly provide the report
+                        </p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="reportingYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.reporting" />
+                        <label for="reportingYes">Yes</label>
+                        <input type="radio" id="reportingNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.reporting" />
+                        <label for="reportingNo">No</label>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>
+                            Kindly provide pictures of the following: location of the accident and/or body injury.
+                        </p>
+                    </div>
+                </div>
+                <div class="ent-info-block1 avoid">
+                    <div class="question avoid">
+                        <p>11) Any third party was involved in the accident?</p>
+                    </div>
+                    <div class="radio-div avoid">
+                        <input type="radio" id="thirdPartyYes" value="yes" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.thirdParty" />
+                        <label for="thirdPartyYes">Yes</label>
+                        <input type="radio" id="thirdPartyNo" value="no" class="ortho-checkbox1" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.thirdParty" />
+                        <label for="thirdPartyNo">No</label>
+                    </div>
+                </div>
+                <div class="active-policies-line avoid"></div>
+                <div class="active-policies-line avoid"></div>
+                <div class="ent-info-block">
+                    <p class="sub-title avoid" style="font-weight: bold">
+                        Additional Information
+                    </p>
+                    <p class="sub-title avoid">Please tick the checkbox to acknowledge</p>
+                    <div class="active-policies-line avoid"></div>
+                    <div class="ortho-input-label avoid">
+                        <p>
+                            Medical appliances- wheelchair, walking frame, crutches, any form of guard support, supplements, heat pack and scar creams are NOT claimable. A separate invoice will be issued from consultation and related medication for outpatient/follow-up consultations.
+                        </p>
+                    </div>
+
+                    <div class="discharge avoid">
+                        <input type="checkbox" id="cardioDischarge" value="ok" class="ortho-checkbox" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.cardioDischarge" />
+                    </div>
+                    <div class="ortho-input-label avoid">
+                        <p>Physiotherapy may be provided/given</p>
+                    </div>
+                    <div class="discharge avoid">
+                        <input type="checkbox" id="Physiotherapy" value="ok" class="ortho-checkbox" [(ngModel)]="ehealth.preview.MedicalConditions.orthopaedic.PhysiotherapyProvided" />
+                    </div>
+                </div>
+                <div class="ortho-info-block avoid">
+                    <div class="ortho-input-label avoid">
+                        <p class="avoid">Remarks / Claims Strategy</p>
+                    </div>
+                    <div class="ortho-input-box ortho-remark-area avoid">
+                        <div class="ortho-info-input avoid">
+                            {{ehealth.preview.MedicalConditions.orthopaedic.remarks}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="preview-sub-container after" *ngIf="ehealth && ehealth.preview && ehealth.preview.MedicalConditions && ehealth.preview.MedicalConditions.orthopaedic && ehealth.preview.MedicalConditions.orthopaedic.uploadedImages && ehealth.preview.MedicalConditions.orthopaedic.uploadedImages.length > 0
+                && (ehealth.preview.MedicalConditions.orthopaedic.uploadedImages[0].fileUploadKey !== '' || (ehealth.preview.MedicalConditions.orthopaedic.uploadedImages[1] && ehealth.preview.MedicalConditions.orthopaedic.uploadedImages[1].fileUploadKey !== ''))">
+                <div class="images-div avoid" *ngFor="let img of ehealth.preview.MedicalConditions.orthopaedic.uploadedImages">
+                    <img [src]="getImageUrl(img.fileUploadKey)" crossorigin="anonymous" *ngIf="img.fileUploadKey !== ''" />
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container" *ngIf="ehealth && ehealth.preview && ehealth.preview.caseSubmission"> -->
+            <div class="preview-sub-container" *ngIf="ehealth && ehealth.checkboxValue && ehealth.checkboxValue.caseSubmissionTab" (click)="change()">
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <h5 style="font-weight: bold">For Case Approval</h5>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>CC</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">
+                        <div class="output-label" *ngFor="let obj of ehealth.caseSubmission.cc ; let i=index">
+                            <p *ngIf="obj.CC !== ''">{{i+1}}. {{obj.CC }}</p>
+                            <p *ngIf="obj.CC === ''">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>MC</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">
+                        <div class="output-label" *ngFor="let obj of ehealth.caseSubmission.mc ; let i=index">
+                            <p *ngIf="obj.MC !== ''">{{i+1}}. {{obj.MC }}</p>
+                            <p *ngIf="obj.MC === ''">-</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>AOL</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth.caseSubmission.aolPercent!== ''">
+                        {{ehealth.caseSubmission.aolPercent }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth.caseSubmission.aolPercent === ''">
+                        <p>-</p>
+                    </div>
+                    <ng-container *ngFor="let obj of ehealth.caseSubmission.aol ; let i=index">
+                        <div class="preview-input-label">
+                        </div>
+                        <div class="colon">
+                        </div>
+                        <div class="preview-input-label1" *ngIf="obj.AOL !== ''">
+                            {{i+1}}. {{obj.AOL}}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="obj.AOL === ''">
+                            <p>-</p>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>AOQ</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth.caseSubmission.aoqPercent!== ''">
+                        {{ehealth.caseSubmission.aoqPercent}}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth.caseSubmission.aoqPercent === ''">
+                        <p>-</p>
+                    </div>
+                    <ng-container *ngFor="let obj of ehealth.caseSubmission.aoq ; let i=index">
+                        <div class="preview-input-label">
+                        </div>
+                        <div class="colon">
+                        </div>
+                        <div class="preview-input-label1" *ngIf="obj.AOQ !== ''">
+                            {{i+1}}. {{obj.AOQ }}
+                        </div>
+                        <div class="preview-input-label1" *ngIf="obj.AOQ === ''">
+                            <p>-</p>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Case Management Plan</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.caseSubmission.plan !== ''">
+                        {{ehealth.caseSubmission.plan }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.caseSubmission.plan === ''">
+                        <p>-</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="preview-sub-container" *ngIf="latestCaseSubmissionFile && latestCaseSubmissionFile.src">
+                <div class="display-pdf" *ngIf="latestCaseSubmissionFile.fileUploadType === 'application/pdf'">
+                    <pdf-viewer [src]="latestCaseSubmissionFile.src" [original-size]="false">
+                    </pdf-viewer>
+                </div>
+
+                <div class="display-image" *ngIf="latestCaseSubmissionFile.fileUploadType === 'image/png'">
+                    <img class="doc-image" [src]="getImageUrl(latestCaseSubmissionFile.fileUploadKey)" alt="">
+                </div>
+
+                <div class="display-docx" *ngIf="latestCaseSubmissionFile.fileUploadType === 'doc'">
+                    <ngx-doc-viewer [url]="getImageUrl(latestCaseSubmissionFile.fileUploadKey)" viewer="google" style="width:100%;height:74vh;">
+                    </ngx-doc-viewer>
+                </div>
+            </div> -->
+            <div class="preview-sub1-container">
+                <p>Please ensure all of the information is correct.</p>
+                <div class="pre-signature-box" [ngClass]="mode == 'preview' ? 'disable' : '' ">
+                    <div class="pre-signature-label-box">
+                        <div class="pre-signature-label">
+                            <p *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === false">
+                                Client's Signature
+                            </p>
+                            <p *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === true">
+                                Parent/Guardian Signature
+                            </p>
+                        </div>
+                    </div>
+                    <div class="signature-img-wrap" *ngIf="ehealth && ehealth.preview && ehealth.preview.pdfFiles">
+                        <div class="pre-signature-img">
+                            <img [src]="pdf.signature" alt="signature" *ngIf="pdf && pdf.signature && pdf.signature != ''" />
+                        </div>
+                        <div class="cross-button">
+                            <button class="cross"></button>
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-info-block">
+                    <div class="preview-input-label">
+                        <p>Verified By:</p>
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile">
+                    <div class="preview-input-label">
+                        <p *ngIf="ehealth.preview.profile.guardian === false">
+                            Client Name
+                        </p>
+                        <p *ngIf="ehealth.preview.profile.guardian === true">
+                            Parent/Guardian Name
+                        </p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview && ehealth.preview.profile.consentDetails && mode == 'preview' && ehealth.preview.profile.guardian === false">
+                        {{ehealth.preview.profile.name }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="mode == 'preview' && ehealth.preview.profile.guardian === true && pdf.name !== ''">
+                        {{pdf.name }}
+                    </div>
+                    <div class="preview-input-label1" *ngIf="mode == 'preview' && ehealth.preview.profile.guardian === true && pdf.name === ''">
+                        -
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="mode == 'preview' && ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === false">
+                    <div class="preview-input-label">
+                        <p *ngIf="ehealth.preview.profile.nationality !== 'foreigner'">
+                            NRIC/FIN
+                        </p>
+                        <p *ngIf="ehealth.preview.profile.nationality === 'foreigner'">
+                            Foreign Id
+                        </p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1" *ngIf="mode == 'preview' && ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === false">
+                        <span *ngIf="ehealth.preview.profile.nationality !== 'foreigner'">
+              {{ehealth.preview.profile.nric }}
+            </span>
+                        <span *ngIf="ehealth.preview.profile.nationality === 'foreigner'">
+              {{ehealth.preview.profile.foreignId }}
+            </span>
+                    </div>
+                </div>
+                <div class="preview-info-block" *ngIf="mode == 'preview' && ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === true">
+                    <div class="preview-input-label">
+                        <p>NRIC/FIN/Foreign ID</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">
+                        <span *ngIf="pdf.nric !== ''"> {{pdf.nric }} </span>
+                        <span *ngIf="pdf.nric === ''">-</span>
+                    </div>
+                </div>
+                <!-- <div class="preview-info-block"
+                    *ngIf="mode == 'preview' && ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview.profile.guardian === true">
+                    <div class="preview-input-label">
+                        <p>Relationship</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1"
+                        *ngIf="mode == 'preview' && ehealth && ehealth.preview && ehealth.preview.profile && ehealth.preview && ehealth.preview.profile.consentDetails && ehealth.preview.profile.guardian === true">
+                        {{ehealth.preview.profile.consentDetails.relation }}
+                    </div>
+                </div> -->
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.pdfFiles">
+                    <div class="preview-input-label">
+                        <p>Date</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">{{pdf.date}}</div>
+                </div>
+                <div class="preview-info-block" *ngIf="ehealth && ehealth.preview && ehealth.preview.pdfFiles">
+                    <div class="preview-input-label">
+                        <p>Time</p>
+                    </div>
+                    <div class="colon">
+                        <p>:</p>
+                    </div>
+                    <div class="preview-input-label1">{{pdf.time}}</div>
+                </div>
+            </div>
+            <div class="save-btn-wrapper" (click)="changeRoute()">
+                <button class="save-btn">View Pre-Admission Checklist</button>
+            </div>
+            <div class="view-btn-wrapper" (click)="openPreviewModal()">
+                <button class="save-btn">View Upload Calculation File</button>
+            </div>
+        </div>
+    </div>
+</ion-content>
